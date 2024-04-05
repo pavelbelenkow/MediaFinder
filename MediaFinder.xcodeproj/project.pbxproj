@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591A086D2BC0032C009B1741 /* MediaModel.swift */; };
 		5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */; };
 		5976B1B62BBF546200DB8CBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5976B1B52BBF546200DB8CBA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		591A086D2BC0032C009B1741 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		5976B1A92BBF546100DB8CBA /* MediaFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5976B1B52BBF546200DB8CBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -29,6 +31,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		591A086C2BC00314009B1741 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				591A086D2BC0032C009B1741 /* MediaModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		5976B1A02BBF546100DB8CBA = {
 			isa = PBXGroup;
 			children = (
@@ -49,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */,
+				591A086C2BC00314009B1741 /* Model */,
 				5976B1B52BBF546200DB8CBA /* Assets.xcassets */,
 				5976B1BA2BBF546200DB8CBA /* Info.plist */,
 			);
@@ -125,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */,
+				591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
