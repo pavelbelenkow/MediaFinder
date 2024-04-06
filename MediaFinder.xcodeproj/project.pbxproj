@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591A086D2BC0032C009B1741 /* MediaModel.swift */; };
+		5934770E2BC05BBF004BE3AF /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5934770D2BC05BBF004BE3AF /* NetworkClient.swift */; };
+		593477102BC05BF1004BE3AF /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5934770F2BC05BF1004BE3AF /* NetworkRequest.swift */; };
+		593477132BC08644004BE3AF /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593477122BC08644004BE3AF /* Const.swift */; };
+		5949D0AA2BC1AE9A00A860C8 /* NetworkClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0A92BC1AE9A00A860C8 /* NetworkClientError.swift */; };
 		5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */; };
 		5976B1B62BBF546200DB8CBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5976B1B52BBF546200DB8CBA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		591A086D2BC0032C009B1741 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
+		5934770D2BC05BBF004BE3AF /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		5934770F2BC05BF1004BE3AF /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		593477122BC08644004BE3AF /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		5949D0A92BC1AE9A00A860C8 /* NetworkClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientError.swift; sourceTree = "<group>"; };
 		5976B1A92BBF546100DB8CBA /* MediaFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5976B1B52BBF546200DB8CBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -39,6 +47,32 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		5934770C2BC05BB1004BE3AF /* NetworkClient */ = {
+			isa = PBXGroup;
+			children = (
+				5934770D2BC05BBF004BE3AF /* NetworkClient.swift */,
+				5934770F2BC05BF1004BE3AF /* NetworkRequest.swift */,
+				5949D0A92BC1AE9A00A860C8 /* NetworkClientError.swift */,
+			);
+			path = NetworkClient;
+			sourceTree = "<group>";
+		};
+		593477112BC08636004BE3AF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				593477122BC08644004BE3AF /* Const.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		593477152BC086F9004BE3AF /* SearchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				591A086C2BC00314009B1741 /* Model */,
+			);
+			path = SearchScreen;
+			sourceTree = "<group>";
+		};
 		5976B1A02BBF546100DB8CBA = {
 			isa = PBXGroup;
 			children = (
@@ -59,7 +93,9 @@
 			isa = PBXGroup;
 			children = (
 				5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */,
-				591A086C2BC00314009B1741 /* Model */,
+				593477152BC086F9004BE3AF /* SearchScreen */,
+				5934770C2BC05BB1004BE3AF /* NetworkClient */,
+				593477112BC08636004BE3AF /* Helpers */,
 				5976B1B52BBF546200DB8CBA /* Assets.xcassets */,
 				5976B1BA2BBF546200DB8CBA /* Info.plist */,
 			);
@@ -137,6 +173,10 @@
 			files = (
 				5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */,
 				591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */,
+				593477102BC05BF1004BE3AF /* NetworkRequest.swift in Sources */,
+				5934770E2BC05BBF004BE3AF /* NetworkClient.swift in Sources */,
+				5949D0AA2BC1AE9A00A860C8 /* NetworkClientError.swift in Sources */,
+				593477132BC08644004BE3AF /* Const.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
