@@ -10,7 +10,6 @@ struct Media: Decodable {
     let artistId: Int?
     let artist: String?
     let name: String?
-    let artistView: String?
     let trackView: String?
     let artwork60: String?
     let artwork100: String?
@@ -24,7 +23,6 @@ struct Media: Decodable {
         case artistId
         case artist = "artistName"
         case name = "trackName"
-        case artistView = "artistViewUrl"
         case trackView = "trackViewUrl"
         case artwork60 = "artworkUrl60"
         case artwork100 = "artworkUrl100"
