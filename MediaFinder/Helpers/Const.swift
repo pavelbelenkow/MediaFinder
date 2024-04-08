@@ -8,7 +8,7 @@ enum Const {
     static let urlSessionErrorDebug = "URLSession Error: "
     static let noInternetConnectionDebug = "No Internet Connection"
     
-    static let noInternetConnection = "You're Offline"
+    static let noInternetConnection = "You're Offline\nTurn off Airplane Mode or connect to Wi-Fi."
     static let unknownError = "Unknown Error"
     
     // MARK: - MediaListSearchServiceError Constants
