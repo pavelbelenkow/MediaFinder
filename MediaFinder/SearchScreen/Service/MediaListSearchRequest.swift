@@ -4,9 +4,9 @@ import Foundation
 
 struct MediaListSearchRequest: NetworkRequest {
     let term: String
-    var entity: EntityType = .all
-    var limit: Int = Const.defaultLimit
-    var page: Int = .zero
+    var entity: EntityType
+    var limit: Int
+    var page: Int
     
     var path: String { Const.searchPath }
     var parameters: [String: Any] {
