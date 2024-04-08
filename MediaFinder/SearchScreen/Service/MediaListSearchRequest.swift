@@ -15,7 +15,9 @@ struct MediaListSearchRequest: NetworkRequest {
         var params: [String: Any] = [:]
         
         params[Const.termKey] = term
-        params[Const.entityKey] = entity
+        if entity != .all {
+            params[Const.entityKey] = entity
+        }
         params[Const.limitKey] = limit
         params[Const.offsetKey] = offset
         
