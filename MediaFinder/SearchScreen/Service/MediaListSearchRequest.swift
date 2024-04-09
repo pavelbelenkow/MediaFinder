@@ -9,17 +9,17 @@ struct MediaListSearchRequest: NetworkRequest {
     var page: Int
     
     var path: String { Const.searchPath }
-    var parameters: [String: Any] {
+    var parameters: [(String, Any)] {
         let offset = page * limit
         
-        var params: [String: Any] = [:]
+        var params: [(String, Any)] = []
         
-        params[Const.termKey] = term
+        params.append((Const.termKey, term))
         if entity != .all {
-            params[Const.entityKey] = entity
+            params.append((Const.entityKey, entity))
         }
-        params[Const.limitKey] = limit
-        params[Const.offsetKey] = offset
+        params.append((Const.limitKey, limit))
+        params.append((Const.offsetKey, offset))
         
         return params
     }

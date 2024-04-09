@@ -11,7 +11,7 @@ enum HttpMethod: String {
 protocol NetworkRequest {
     var baseEndpoint: String { get }
     var path: String { get }
-    var parameters: [String: Any] { get }
+    var parameters: [(String, Any)] { get }
     var httpMethod: HttpMethod { get }
 }
 
@@ -25,7 +25,7 @@ extension NetworkRequest {
         var components = URLComponents(string: baseEndpoint + path)
         
         components?.queryItems = parameters.map {
-            URLQueryItem(name: $0.key, value: String(describing: $0.value))
+            URLQueryItem(name: $0.0, value: String(describing: $0.1))
         }
         
         return components?.url
