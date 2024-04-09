@@ -49,14 +49,14 @@ extension MediaListSearchService: MediaListSearchServiceProtocol {
         page: Int
     ) -> AnyPublisher<[Media], Error> {
         
-        let requestModel = MediaListSearchRequest(
+        let request = MediaListSearchRequest(
             term: term,
             entity: type,
             limit: limit,
             page: page
         )
         
-        guard let urlRequest = create(request: requestModel) else {
+        guard let urlRequest = create(request: request) else {
             return Fail(error: MediaListSearchServiceError.invalidRequest).eraseToAnyPublisher()
         }
         
