@@ -13,15 +13,18 @@ protocol MediaListSearchViewModelProtocol: ObservableObject {
     var stateSubject: CurrentValueSubject<State, Never> { get }
     var errorMessageSubject: CurrentValueSubject<String?, Never> { get }
     var searchListSubject: CurrentValueSubject<[Media], Never> { get }
-    var searchTermSubject: CurrentValueSubject<String, Never> { get }
-    var mediaTypeSubject: CurrentValueSubject<EntityType, Never> { get }
+    var recentSearchesSubject: CurrentValueSubject<[String], Never> { get }
+    var searchBarPlaceholderSubject: CurrentValueSubject<String, Never> { get }
     var limitSubject: CurrentValueSubject<Int, Never> { get }
     
     var cancellables: Set<AnyCancellable> { get set }
     
-    func getSearchList()
-    func setMediaType(_ type: EntityType)
-    func setSearchTerm(for term: String)
+    func fetchSearchList()
+    func fetchSearchListForMediaType(by index: Int)
+    func setSearchTerm(for text: String)
+    func setResultsLimit(for limit: Int)
+    func filterSuggestions(for text: String?)
+    func didSelectRecentSearch(at index: Int)
 }
 
 final class MediaListSearchViewModel: MediaListSearchViewModelProtocol {
