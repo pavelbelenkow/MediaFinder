@@ -6,6 +6,12 @@ final class MediaListSearchViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     
+    private lazy var mediaListSearchView: MediaListSearchView = {
+        let view = MediaListSearchView()
+        view.delegate = self
+        return view
+    }()
+    
     private let viewModel: any MediaListSearchViewModelProtocol
     
     // MARK: - Initialisers
@@ -20,6 +26,10 @@ final class MediaListSearchViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
+    
+    override func loadView() {
+        view = mediaListSearchView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
