@@ -73,16 +73,16 @@ final class MediaListSearchViewModel: MediaListSearchViewModelProtocol {
 
 extension MediaListSearchViewModel {
     
-    func getSearchList() {
+    func fetchSearchList() {
         currentPage += 1
         stateSubject.send(.loading)
         
         mediaListSearchService
             .fetchMediaList(
-                for: searchTermSubject.value,
-                type: mediaTypeSubject.value,
+                for: searchTerm,
+                type: entityType,
                 limit: limitSubject.value,
-                page: 0
+                page: .zero
             )
             .sink(
                 receiveCompletion: { [weak self] completion in
