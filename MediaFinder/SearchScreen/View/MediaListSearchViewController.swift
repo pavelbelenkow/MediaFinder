@@ -173,7 +173,16 @@ extension MediaListSearchViewController: UISearchBarDelegate {
             return
         }
         
+        mediaListSearchView.updateCollectionsVisibility(true)
         viewModel.setSearchTerm(for: text)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        mediaListSearchView.updateCollectionsVisibility(false)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        mediaListSearchView.updateCollectionsVisibility(true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
