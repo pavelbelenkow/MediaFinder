@@ -129,4 +129,8 @@ extension MediaListSearchViewModel {
         searchHistoryStorage.addSearchTerm(text)
         fetchSearchList()
     }
+    
+    func setResultsLimit(for limit: Int) {
+        limitSubject.send(limit)
+    }
 }
