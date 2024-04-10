@@ -194,3 +194,24 @@ extension MediaListSearchViewController: UISearchBarDelegate {
         return true
     }
 }
+
+// MARK: - MediaListSearchViewDelegate Methods
+
+extension MediaListSearchViewController: MediaListSearchViewDelegate {
+    
+    func getSearchList() -> [Media] {
+        viewModel.searchListSubject.value
+    }
+    
+    func getRecentSearches() -> [String] {
+        viewModel.recentSearchesSubject.value
+    }
+    
+    func didSelectMediaType(for index: Int) {
+        viewModel.fetchSearchListForMediaType(by: index)
+    }
+    
+    func didTapRepeatButton() {
+        viewModel.fetchSearchList()
+    }
+}
