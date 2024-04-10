@@ -123,3 +123,28 @@ private extension MediaListSearchViewController {
         }
     }
 }
+
+// MARK: - UISearchBarDelegate Methods
+
+extension MediaListSearchViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard
+            let text = searchBar.text,
+            !text.isEmpty
+        else {
+            return
+        }
+        
+        viewModel.setSearchTerm(for: text)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.filterSuggestions(for: searchText)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        viewModel.filterSuggestions(for: text)
+        return true
+    }
+}
