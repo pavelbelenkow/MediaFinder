@@ -97,6 +97,33 @@ private extension MediaListSearchViewController {
 private extension MediaListSearchViewController {
     
     func bindViewModel() {
+        viewModel.stateSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
+                self?.mediaListSearchView.updateUI(for: state)
+            }
+            .store(in: &viewModel.cancellables)
+        
+        viewModel.errorMessageSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] message in
+                self?.mediaListSearchView.updateStackView(with: message)
+            }
+            .store(in: &viewModel.cancellables)
+        
+        viewModel.searchListSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] mediaList in
+                self?.mediaListSearchView.reloadCollectionView()
+            }
+            .store(in: &viewModel.cancellables)
+        
+        viewModel.recentSearchesSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] recentSearches in
+                self?.mediaListSearchView.reloadTableView()
+            }
+            .store(in: &viewModel.cancellables)
         
         viewModel.searchBarPlaceholderSubject
             .receive(on: DispatchQueue.main)
