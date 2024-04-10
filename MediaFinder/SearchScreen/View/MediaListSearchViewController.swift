@@ -87,6 +87,14 @@ private extension MediaListSearchViewController {
 private extension MediaListSearchViewController {
     
     func bindViewModel() {
+        
+        viewModel.searchBarPlaceholderSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] placeholder in
+                self?.searchController.searchBar.placeholder = placeholder
+            }
+            .store(in: &viewModel.cancellables)
+        
         viewModel.limitSubject
             .receive(on: DispatchQueue.main)
             .sink { [weak self] limit in
