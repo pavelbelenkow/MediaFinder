@@ -34,14 +34,17 @@ final class MediaListSearchViewModel: MediaListSearchViewModelProtocol {
     private(set) var stateSubject = CurrentValueSubject<State, Never>(.idle)
     private(set) var errorMessageSubject = CurrentValueSubject<String?, Never>(nil)
     private(set) var searchListSubject = CurrentValueSubject<[Media], Never>([])
-    private(set) var searchTermSubject = CurrentValueSubject<String, Never>("")
-    private(set) var mediaTypeSubject = CurrentValueSubject<EntityType, Never>(.all)
-    private(set) var limitSubject = CurrentValueSubject<Int, Never>(30)
+    private(set) var recentSearchesSubject = CurrentValueSubject<[String], Never>([])
+    private(set) var searchBarPlaceholderSubject = CurrentValueSubject<String, Never>(Const.songsAndMoviesPlaceholder)
+    private(set) var limitSubject = CurrentValueSubject<Int, Never>(Const.limitThirty)
     
     // MARK: - Private Properties
     
     private let mediaListSearchService: MediaListSearchServiceProtocol
+    private let searchHistoryStorage: SearchHistoryStorageProtocol
     private var currentPage: Int
+    private var searchTerm = ""
+    private var entityType: EntityType = .all
     
     // MARK: - Properties
     
@@ -49,9 +52,14 @@ final class MediaListSearchViewModel: MediaListSearchViewModelProtocol {
     
     // MARK: - Initialisers
     
-    init(service: MediaListSearchServiceProtocol = MediaListSearchService()) {
+    init(
+        service: MediaListSearchServiceProtocol = MediaListSearchService(),
+        storage: SearchHistoryStorageProtocol = SearchHistoryStorage.shared
+    ) {
         self.mediaListSearchService = service
-        self.currentPage = 0
+        self.searchHistoryStorage = storage
+        self.recentSearchesSubject.send(searchHistoryStorage.recentSearches)
+        self.currentPage = .zero
     }
     
     // MARK: - Deinitialisers
