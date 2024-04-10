@@ -22,6 +22,7 @@ final class MediaListSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        bindViewModel()
     }
 }
 
@@ -35,6 +36,7 @@ private extension MediaListSearchViewController {
         navigationBar?.standardAppearance.backgroundColor = .mediaBackground
         
         setupTitle(for: navigationBar)
+        setupRightBarButtonItem()
     }
     
     func setupTitle(for navigationBar: UINavigationBar?) {
@@ -43,5 +45,60 @@ private extension MediaListSearchViewController {
         navigationBar?.prefersLargeTitles = true
         navigationBar?.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationBar?.standardAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+    }
+    
+    func setupRightBarButtonItem() {
+        let limits = [Const.limitTen, Const.limitThirty, Const.limitFifty]
+        let menu = UIMenu(
+            children: limits.map {
+                UICommand(
+                    title: String($0),
+                    action: #selector(limitButtonTapped),
+                    propertyList: $0,
+                    state: $0 == Const.limitThirty ? .on : .off
+                )
+            }
+        )
+        
+        let rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "line.horizontal.3.decrease.circle"),
+            menu: menu
+        )
+        
+        navigationItem.setRightBarButton(rightBarButtonItem, animated: true)
+    }
+}
+
+// MARK: - Private Methods
+
+private extension MediaListSearchViewController {
+    
+    func bindViewModel() {
+        viewModel.limitSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] limit in
+                self?.updateMenuState(limit)
+            }
+            .store(in: &viewModel.cancellables)
+    }
+    
+    func updateMenuState(_ selectedLimit: Int) {
+        guard
+            let rightBarButtonItem = navigationItem.rightBarButtonItem,
+            let menu = rightBarButtonItem.menu
+        else { return }
+        
+        for case let menuItem in menu.children {
+            if let command = menuItem as? UICommand {
+                command.state = (command.propertyList as? Int == selectedLimit) ? .on : .off
+            }
+        }
+    }
+    
+    @objc func limitButtonTapped(_ sender: UICommand) {
+        if let limit = sender.propertyList as? Int {
+            print("Limit \(limit) Button Tapped")
+            viewModel.setResultsLimit(for: limit)
+        }
     }
 }
