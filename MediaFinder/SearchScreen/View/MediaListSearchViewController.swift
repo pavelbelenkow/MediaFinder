@@ -4,6 +4,8 @@ final class MediaListSearchViewController: UIViewController {
     
     // MARK: - Private Properties
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     private let viewModel: any MediaListSearchViewModelProtocol
     
     // MARK: - Initialisers
@@ -37,6 +39,7 @@ private extension MediaListSearchViewController {
         
         setupTitle(for: navigationBar)
         setupRightBarButtonItem()
+        setupSearchController()
     }
     
     func setupTitle(for navigationBar: UINavigationBar?) {
@@ -66,6 +69,16 @@ private extension MediaListSearchViewController {
         )
         
         navigationItem.setRightBarButton(rightBarButtonItem, animated: true)
+    }
+    
+    func setupSearchController() {
+        searchController.searchBar.placeholder = Const.songsAndMoviesPlaceholder
+        searchController.searchBar.tintColor = .black
+        searchController.searchBar.searchTextField.backgroundColor = .white
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        
+        navigationItem.searchController = searchController
     }
 }
 
