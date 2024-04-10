@@ -102,13 +102,24 @@ extension MediaListSearchViewModel {
             .store(in: &cancellables)
     }
     
-    func setSearchTerm(for term: String) {
-        searchTermSubject.send(term)
-        getSearchList()
-    }
-    
-    func setMediaType(_ type: EntityType) {
-        mediaTypeSubject.send(type)
-        getSearchList()
+    func fetchSearchListForMediaType(by index: Int) {
+        
+        switch index {
+        case 0:
+            searchBarPlaceholderSubject.send(Const.songsAndMoviesPlaceholder)
+            entityType = .all
+        case 1:
+            searchBarPlaceholderSubject.send(Const.moviesPlaceholder)
+            entityType = .movie
+        case 2:
+            searchBarPlaceholderSubject.send(Const.songsPlaceholder)
+            entityType = .song
+        default:
+            break
+        }
+        
+        guard !searchTerm.isEmpty else { return }
+        
+        fetchSearchList()
     }
 }
