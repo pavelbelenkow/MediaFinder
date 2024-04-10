@@ -24,6 +24,7 @@
 		5949D0B82BC1BEDA00A860C8 /* MediaListSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0B72BC1BEDA00A860C8 /* MediaListSearchViewModel.swift */; };
 		5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */; };
 		5976B1B62BBF546200DB8CBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5976B1B52BBF546200DB8CBA /* Assets.xcassets */; };
+		59AE8B242BC737F400B2C79C /* SearchHistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5976B1B52BBF546200DB8CBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5976B1BA2BBF546200DB8CBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,11 +143,20 @@
 				5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */,
 				593477152BC086F9004BE3AF /* SearchScreen */,
 				5934770C2BC05BB1004BE3AF /* NetworkClient */,
+				59AE8B222BC737DA00B2C79C /* Storage */,
 				593477112BC08636004BE3AF /* Helpers */,
 				5976B1B52BBF546200DB8CBA /* Assets.xcassets */,
 				5976B1BA2BBF546200DB8CBA /* Info.plist */,
 			);
 			path = MediaFinder;
+			sourceTree = "<group>";
+		};
+		59AE8B222BC737DA00B2C79C /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
