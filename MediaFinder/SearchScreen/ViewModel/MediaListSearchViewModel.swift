@@ -133,4 +133,24 @@ extension MediaListSearchViewModel {
     func setResultsLimit(for limit: Int) {
         limitSubject.send(limit)
     }
+    
+    func filterSuggestions(for searchText: String?) {
+        guard
+            let searchText,
+            !searchText.isEmpty
+        else {
+            recentSearchesSubject.send(searchHistoryStorage.recentSearches)
+            return
+        }
+        
+        let filteredSuggestions = recentSearchesSubject.value.filter {
+            $0.localizedCaseInsensitiveContains(searchText)
+        }
+        
+        recentSearchesSubject.send(filteredSuggestions)
+    }
+    
+    func didSelectRecentSearch(at index: Int) {
+        // TODO: - impl fetch media list by selected recent search
+    }
 }
