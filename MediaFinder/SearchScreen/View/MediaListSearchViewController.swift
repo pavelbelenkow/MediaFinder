@@ -132,12 +132,29 @@ private extension MediaListSearchViewController {
             }
             .store(in: &viewModel.cancellables)
         
+        viewModel.searchBarTextSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] text in
+                self?.updateSearchBarTerm(with: text)
+            }
+            .store(in: &viewModel.cancellables)
+        
         viewModel.limitSubject
             .receive(on: DispatchQueue.main)
             .sink { [weak self] limit in
                 self?.updateMenuState(limit)
             }
             .store(in: &viewModel.cancellables)
+    }
+    
+    func updateSearchBarTerm(with text: String?) {
+        let searchBar = searchController.searchBar
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self else { return }
+            searchBar.text = text
+            searchBar.resignFirstResponder()
+            searchBarSearchButtonClicked(searchBar)
+        }
     }
     
     func updateMenuState(_ selectedLimit: Int) {
@@ -155,7 +172,6 @@ private extension MediaListSearchViewController {
     
     @objc func limitButtonTapped(_ sender: UICommand) {
         if let limit = sender.propertyList as? Int {
-            print("Limit \(limit) Button Tapped")
             viewModel.setResultsLimit(for: limit)
         }
     }
@@ -189,7 +205,11 @@ extension MediaListSearchViewController: UISearchBarDelegate {
         viewModel.filterSuggestions(for: searchText)
     }
     
-    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    func searchBar(
+        _ searchBar: UISearchBar,
+        shouldChangeTextIn range: NSRange,
+        replacementText text: String
+    ) -> Bool {
         viewModel.filterSuggestions(for: text)
         return true
     }
@@ -205,6 +225,10 @@ extension MediaListSearchViewController: MediaListSearchViewDelegate {
     
     func getRecentSearches() -> [String] {
         viewModel.recentSearchesSubject.value
+    }
+    
+    func didTapRecentTerm(at index: Int) {
+        viewModel.didSelectRecentSearch(at: index)
     }
     
     func didSelectMediaType(for index: Int) {
