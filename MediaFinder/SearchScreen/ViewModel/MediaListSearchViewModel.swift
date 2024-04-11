@@ -124,7 +124,9 @@ extension MediaListSearchViewModel {
     }
     
     func setSearchTerm(for text: String) {
-        self.searchTerm = text
+        guard !text.isEmpty else { return }
+        
+        searchTerm = text
         recentSearchesSubject.value.append(text)
         searchHistoryStorage.addSearchTerm(text)
         fetchSearchList()
