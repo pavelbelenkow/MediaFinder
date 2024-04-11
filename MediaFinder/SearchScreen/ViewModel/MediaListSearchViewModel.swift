@@ -129,8 +129,8 @@ extension MediaListSearchViewModel {
         guard !text.isEmpty else { return }
         
         searchTerm = text
-        recentSearchesSubject.value.append(text)
         searchHistoryStorage.addSearchTerm(text)
+        recentSearchesSubject.send(searchHistoryStorage.recentSearches)
         fetchSearchList()
     }
     
