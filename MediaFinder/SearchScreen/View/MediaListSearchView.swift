@@ -5,6 +5,7 @@ import UIKit
 protocol MediaListSearchViewDelegate: AnyObject {
     func getSearchList() -> [Media]
     func getRecentSearches() -> [String]
+    func didTapRecentTerm(at index: Int)
     func didSelectMediaType(for index: Int)
     func didTapRepeatButton()
 }
@@ -184,8 +185,8 @@ extension MediaListSearchView: MediaListRecentSearchTableViewDelegate {
         delegate?.getRecentSearches() ?? []
     }
     
-    func didTapRecentTerm(for index: Int) {
-        // TODO: - impl fetch media list by selected recent term
+    func didTapRecentTerm(at index: Int) {
+        delegate?.didTapRecentTerm(at: index)
     }
 }
 
