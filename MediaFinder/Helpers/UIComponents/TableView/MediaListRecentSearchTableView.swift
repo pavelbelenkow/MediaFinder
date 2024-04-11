@@ -4,7 +4,7 @@ import UIKit
 
 protocol MediaListRecentSearchTableViewDelegate: AnyObject {
     func getRecentSearches() -> [String]
-    func didTapRecentTerm(for index: Int)
+    func didTapRecentTerm(at index: Int)
 }
 
 final class MediaListRecentSearchTableView: UITableView {
@@ -70,9 +70,6 @@ extension MediaListRecentSearchTableView: UITableViewDataSource {
 extension MediaListRecentSearchTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellData = interactionDelegate?.getRecentSearches()
-        guard let selectedSearch = cellData?[indexPath.row] else { return }
-        print("Selected search: \(selectedSearch)")
-        interactionDelegate?.didTapRecentTerm(for: indexPath.row)
+        interactionDelegate?.didTapRecentTerm(at: indexPath.row)
     }
 }
