@@ -15,6 +15,7 @@ protocol MediaListSearchViewModelProtocol: ObservableObject {
     var searchListSubject: CurrentValueSubject<[Media], Never> { get }
     var recentSearchesSubject: CurrentValueSubject<[String], Never> { get }
     var searchBarPlaceholderSubject: CurrentValueSubject<String, Never> { get }
+    var searchBarTextSubject: CurrentValueSubject<String?, Never> { get }
     var limitSubject: CurrentValueSubject<Int, Never> { get }
     
     var cancellables: Set<AnyCancellable> { get set }
@@ -36,6 +37,7 @@ final class MediaListSearchViewModel: MediaListSearchViewModelProtocol {
     private(set) var searchListSubject = CurrentValueSubject<[Media], Never>([])
     private(set) var recentSearchesSubject = CurrentValueSubject<[String], Never>([])
     private(set) var searchBarPlaceholderSubject = CurrentValueSubject<String, Never>(Const.songsAndMoviesPlaceholder)
+    private(set) var searchBarTextSubject = CurrentValueSubject<String?, Never>(nil)
     private(set) var limitSubject = CurrentValueSubject<Int, Never>(Const.limitThirty)
     
     // MARK: - Private Properties
@@ -153,6 +155,7 @@ extension MediaListSearchViewModel {
     }
     
     func didSelectRecentSearch(at index: Int) {
-        // TODO: - impl fetch media list by selected recent search
+        let selectedRecentSearch = recentSearchesSubject.value[index]
+        searchBarTextSubject.send(selectedRecentSearch)
     }
 }
