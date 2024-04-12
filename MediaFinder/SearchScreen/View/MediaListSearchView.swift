@@ -6,6 +6,7 @@ protocol MediaListSearchViewDelegate: AnyObject {
     func getSearchList() -> [Media]
     func getRecentSearches() -> [String]
     func didTapRecentTerm(at index: Int)
+    func didTapMedia(at index: Int)
     func didSelectMediaType(for index: Int)
     func didTapRepeatButton()
 }
@@ -174,6 +175,10 @@ extension MediaListSearchView: MediaListSearchCollectionViewDelegate {
     
     func getMediaSearchList() -> [Media] {
         delegate?.getSearchList() ?? []
+    }
+    
+    func didTapMedia(at index: Int) {
+        delegate?.didTapMedia(at: index)
     }
 }
 
