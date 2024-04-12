@@ -170,6 +170,12 @@ private extension MediaListSearchViewController {
         }
     }
     
+    func presentDetailedMediaViewController(with selectedMedia: Media) {
+        let viewModel = DetailedMediaViewModel(mediaModel: selectedMedia)
+        let viewController = DetailedMediaViewController(viewModel: viewModel)
+        present(viewController, animated: true)
+    }
+    
     @objc func limitButtonTapped(_ sender: UICommand) {
         if let limit = sender.propertyList as? Int {
             viewModel.setResultsLimit(for: limit)
@@ -229,6 +235,10 @@ extension MediaListSearchViewController: MediaListSearchViewDelegate {
     
     func didTapRecentTerm(at index: Int) {
         viewModel.didSelectRecentSearch(at: index)
+    }
+    
+    func didTapMedia(at index: Int) {
+        viewModel.didSelectMedia(at: index)
     }
     
     func didSelectMediaType(for index: Int) {
