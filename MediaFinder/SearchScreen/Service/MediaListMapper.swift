@@ -16,7 +16,8 @@ struct MediaListMapper {
         case 200:
             do {
                 let mediaModel = try decoder.decode(MediaModel.self, from: data)
-                return mediaModel.results
+                let songsAndMovies = mediaModel.results.filter { $0.isSong() || $0.isMovie() }
+                return songsAndMovies
             } catch {
                 try mapDecodingError(error)
             }
