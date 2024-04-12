@@ -10,9 +10,9 @@ extension Int {
         
         if hours > .zero {
             if minutes > .zero {
-                return String(format: "%dh %dmin", hours, minutes)
+                return String(format: "%dhr %dmin", hours, minutes)
             } else {
-                return String(format: "%dh", hours)
+                return String(format: "%dhr", hours)
             }
         } else if minutes > .zero {
             if seconds > .zero {
