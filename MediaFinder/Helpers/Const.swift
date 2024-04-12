@@ -26,11 +26,25 @@ enum Const {
     
     static let baseEndpoint = "https://itunes.apple.com"
     static let searchPath = "/search"
+    static let lookupPath = "/lookup"
+    static let idKey = "id"
     static let termKey = "term"
     static let entityKey = "entity"
     static let limitKey = "limit"
     static let offsetKey = "offset"
     static let offset = 0
+    
+    // MARK: - Model Constants
+    
+    static let songKind = "song"
+    static let movieKind = "feature-movie"
+    static let artistKind = "Artist"
+    static let listenInAppleMusic = "Listen in Apple Music"
+    static let watchOnAppleTV = "Watch on Apple TV"
+    static let productionBy = "Production by "
+    static let distributedBy = "Distributed by "
+    static let moreAboutArtist = "More about the artist"
+    static let moreAboutDistributor = "More about the distributor"
     
     // MARK: - MediaListSearch Screen Constants
     
@@ -61,4 +75,10 @@ enum Const {
     static let mediaImageViewHeight: CGFloat = 80
     static let repeatButtonBorderWidth: CGFloat = 1
     static let repeatButtonCornerRadius: CGFloat = 10
+    
+    // MARK: - DetailedMedia Screen Constants
+    
+    static let createdBy = "by\n"
+    static let aboutArtist = "About "
+    static let artistGenre = "Genre: "
 }
