@@ -4,6 +4,7 @@ import UIKit
 
 protocol MediaListSearchCollectionViewDelegate: AnyObject {
     func getMediaSearchList() -> [Media]
+    func didTapMedia(at index: Int)
 }
 
 final class MediaListSearchCollectionView: UICollectionView {
@@ -104,5 +105,9 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
             bottom: params.insets,
             right: params.insets
         )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        sourceDelegate?.didTapMedia(at: indexPath.row)
     }
 }
