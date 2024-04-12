@@ -30,7 +30,7 @@ struct Media: Decodable {
         case artwork100 = "artworkUrl100"
         case price = "trackPrice"
         case releaseDate
-        case description = "shortDescription"
+        case description = "longDescription"
         case duration = "trackTimeMillis"
     }
 }
