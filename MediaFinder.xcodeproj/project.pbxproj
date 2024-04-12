@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		590D06172BC7EE02002D5688 /* DetailedMediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590D06162BC7EE02002D5688 /* DetailedMediaViewModel.swift */; };
+		590D061B2BC7FF5C002D5688 /* ArtistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590D061A2BC7FF5C002D5688 /* ArtistModel.swift */; };
+		590D061F2BC80598002D5688 /* ArtistLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590D061E2BC80598002D5688 /* ArtistLookupService.swift */; };
+		590D06212BC8064C002D5688 /* ArtistLookupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590D06202BC8064C002D5688 /* ArtistLookupRequest.swift */; };
+		590D06232BC810F6002D5688 /* DetailedMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590D06222BC810F6002D5688 /* DetailedMediaViewController.swift */; };
 		591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591A086D2BC0032C009B1741 /* MediaModel.swift */; };
 		592A15072BC57E3B00322135 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15062BC57E3B00322135 /* Int+Extensions.swift */; };
 		592A15092BC57F0E00322135 /* NumberFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15082BC57F0E00322135 /* NumberFormatter+Extensions.swift */; };
@@ -29,12 +34,24 @@
 		5949D0B32BC1B9E700A860C8 /* MediaListSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0B22BC1B9E700A860C8 /* MediaListSearchRequest.swift */; };
 		5949D0B52BC1BA4B00A860C8 /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0B42BC1BA4B00A860C8 /* EntityType.swift */; };
 		5949D0B82BC1BEDA00A860C8 /* MediaListSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0B72BC1BEDA00A860C8 /* MediaListSearchViewModel.swift */; };
+		595EFE6E2BC95FF500F7E353 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE6D2BC95FF500F7E353 /* NSAttributedString+Extensions.swift */; };
+		595EFE702BC9603F00F7E353 /* DetailedMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE6F2BC9603F00F7E353 /* DetailedMediaView.swift */; };
+		595EFE722BC960FE00F7E353 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE712BC960FE00F7E353 /* CustomLabel.swift */; };
+		595EFE742BC9612E00F7E353 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE732BC9612E00F7E353 /* CustomTextView.swift */; };
+		595EFE762BC9619100F7E353 /* MediaInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE752BC9619100F7E353 /* MediaInfoView.swift */; };
+		595EFE782BC9629900F7E353 /* ArtistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE772BC9629900F7E353 /* ArtistInfoView.swift */; };
+		595EFE7A2BC9743200F7E353 /* ArtistMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE792BC9743200F7E353 /* ArtistMapper.swift */; };
 		5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */; };
 		5976B1B62BBF546200DB8CBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5976B1B52BBF546200DB8CBA /* Assets.xcassets */; };
 		59AE8B242BC737F400B2C79C /* SearchHistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		590D06162BC7EE02002D5688 /* DetailedMediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedMediaViewModel.swift; sourceTree = "<group>"; };
+		590D061A2BC7FF5C002D5688 /* ArtistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistModel.swift; sourceTree = "<group>"; };
+		590D061E2BC80598002D5688 /* ArtistLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistLookupService.swift; sourceTree = "<group>"; };
+		590D06202BC8064C002D5688 /* ArtistLookupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistLookupRequest.swift; sourceTree = "<group>"; };
+		590D06222BC810F6002D5688 /* DetailedMediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedMediaViewController.swift; sourceTree = "<group>"; };
 		591A086D2BC0032C009B1741 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		592A15062BC57E3B00322135 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		592A15082BC57F0E00322135 /* NumberFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extensions.swift"; sourceTree = "<group>"; };
@@ -57,6 +74,13 @@
 		5949D0B22BC1B9E700A860C8 /* MediaListSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchRequest.swift; sourceTree = "<group>"; };
 		5949D0B42BC1BA4B00A860C8 /* EntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
 		5949D0B72BC1BEDA00A860C8 /* MediaListSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchViewModel.swift; sourceTree = "<group>"; };
+		595EFE6D2BC95FF500F7E353 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
+		595EFE6F2BC9603F00F7E353 /* DetailedMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedMediaView.swift; sourceTree = "<group>"; };
+		595EFE712BC960FE00F7E353 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		595EFE732BC9612E00F7E353 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		595EFE752BC9619100F7E353 /* MediaInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaInfoView.swift; sourceTree = "<group>"; };
+		595EFE772BC9629900F7E353 /* ArtistInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistInfoView.swift; sourceTree = "<group>"; };
+		595EFE792BC9743200F7E353 /* ArtistMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMapper.swift; sourceTree = "<group>"; };
 		5976B1A92BBF546100DB8CBA /* MediaFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5976B1B52BBF546200DB8CBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +99,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		590D06142BC7ED57002D5688 /* DetailedMediaScreen */ = {
+			isa = PBXGroup;
+			children = (
+				590D06192BC7FF38002D5688 /* Model */,
+				590D06242BC810FE002D5688 /* View */,
+				590D06152BC7ED94002D5688 /* ViewModel */,
+				590D06182BC7EED6002D5688 /* Service */,
+			);
+			path = DetailedMediaScreen;
+			sourceTree = "<group>";
+		};
+		590D06152BC7ED94002D5688 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				590D06162BC7EE02002D5688 /* DetailedMediaViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		590D06182BC7EED6002D5688 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				590D061E2BC80598002D5688 /* ArtistLookupService.swift */,
+				590D06202BC8064C002D5688 /* ArtistLookupRequest.swift */,
+				595EFE792BC9743200F7E353 /* ArtistMapper.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		590D06192BC7FF38002D5688 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				590D061A2BC7FF5C002D5688 /* ArtistModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		590D06242BC810FE002D5688 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				590D06222BC810F6002D5688 /* DetailedMediaViewController.swift */,
+				595EFE6F2BC9603F00F7E353 /* DetailedMediaView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		591A086C2BC00314009B1741 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +170,10 @@
 				592A151D2BC5F79800322135 /* TableView */,
 				592A15162BC5F42F00322135 /* MediaTypePageControl.swift */,
 				592A15142BC5F1C700322135 /* StatefulStackView.swift */,
+				595EFE712BC960FE00F7E353 /* CustomLabel.swift */,
+				595EFE732BC9612E00F7E353 /* CustomTextView.swift */,
+				595EFE752BC9619100F7E353 /* MediaInfoView.swift */,
+				595EFE772BC9629900F7E353 /* ArtistInfoView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -140,6 +214,7 @@
 				592A150C2BC5816500322135 /* ImageLoader.swift */,
 				592A15062BC57E3B00322135 /* Int+Extensions.swift */,
 				592A15082BC57F0E00322135 /* NumberFormatter+Extensions.swift */,
+				595EFE6D2BC95FF500F7E353 /* NSAttributedString+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -195,6 +270,7 @@
 			children = (
 				5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */,
 				593477152BC086F9004BE3AF /* SearchScreen */,
+				590D06142BC7ED57002D5688 /* DetailedMediaScreen */,
 				5934770C2BC05BB1004BE3AF /* NetworkClient */,
 				59AE8B222BC737DA00B2C79C /* Storage */,
 				593477112BC08636004BE3AF /* Helpers */,
@@ -282,29 +358,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				5949D0AD2BC1B58400A860C8 /* MediaListSearchService.swift in Sources */,
+				590D06172BC7EE02002D5688 /* DetailedMediaViewModel.swift in Sources */,
 				5949D0B52BC1BA4B00A860C8 /* EntityType.swift in Sources */,
 				592A15092BC57F0E00322135 /* NumberFormatter+Extensions.swift in Sources */,
 				5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */,
+				595EFE742BC9612E00F7E353 /* CustomTextView.swift in Sources */,
 				592A151F2BC5F7B300322135 /* MediaListRecentSearchTableView.swift in Sources */,
 				591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */,
+				595EFE722BC960FE00F7E353 /* CustomLabel.swift in Sources */,
+				595EFE7A2BC9743200F7E353 /* ArtistMapper.swift in Sources */,
 				592A15172BC5F42F00322135 /* MediaTypePageControl.swift in Sources */,
 				592A15192BC5F52E00322135 /* MediaListSearchCollectionView.swift in Sources */,
 				5949D0AF2BC1B63F00A860C8 /* MediaListSearchServiceError.swift in Sources */,
+				595EFE702BC9603F00F7E353 /* DetailedMediaView.swift in Sources */,
 				592A150D2BC5816500322135 /* ImageLoader.swift in Sources */,
 				59AE8B242BC737F400B2C79C /* SearchHistoryStorage.swift in Sources */,
 				592A15122BC5B80500322135 /* MediaListSearchView.swift in Sources */,
+				595EFE6E2BC95FF500F7E353 /* NSAttributedString+Extensions.swift in Sources */,
+				595EFE762BC9619100F7E353 /* MediaInfoView.swift in Sources */,
 				592A15072BC57E3B00322135 /* Int+Extensions.swift in Sources */,
 				5949D0B82BC1BEDA00A860C8 /* MediaListSearchViewModel.swift in Sources */,
 				593477102BC05BF1004BE3AF /* NetworkRequest.swift in Sources */,
 				5934770E2BC05BBF004BE3AF /* NetworkClient.swift in Sources */,
+				590D061F2BC80598002D5688 /* ArtistLookupService.swift in Sources */,
 				592A15102BC588B200322135 /* MediaListSearchViewController.swift in Sources */,
 				592A15152BC5F1C700322135 /* StatefulStackView.swift in Sources */,
 				5949D0B12BC1B68700A860C8 /* MediaListMapper.swift in Sources */,
+				590D061B2BC7FF5C002D5688 /* ArtistModel.swift in Sources */,
+				595EFE782BC9629900F7E353 /* ArtistInfoView.swift in Sources */,
+				590D06212BC8064C002D5688 /* ArtistLookupRequest.swift in Sources */,
 				5949D0AA2BC1AE9A00A860C8 /* NetworkClientError.swift in Sources */,
 				592A150B2BC5807400322135 /* GeometricParams.swift in Sources */,
 				5949D0B32BC1B9E700A860C8 /* MediaListSearchRequest.swift in Sources */,
 				592A151C2BC5F5DC00322135 /* MediaListSearchCell.swift in Sources */,
 				593477132BC08644004BE3AF /* Const.swift in Sources */,
+				590D06232BC810F6002D5688 /* DetailedMediaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
