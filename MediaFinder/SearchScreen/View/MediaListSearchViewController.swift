@@ -145,6 +145,14 @@ private extension MediaListSearchViewController {
                 self?.updateMenuState(limit)
             }
             .store(in: &viewModel.cancellables)
+        
+        viewModel.selectedMediaSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] selectedMedia in
+                guard let self, let selectedMedia else { return }
+                self.presentDetailedMediaViewController(with: selectedMedia)
+            }
+            .store(in: &viewModel.cancellables)
     }
     
     func updateSearchBarTerm(with text: String?) {
