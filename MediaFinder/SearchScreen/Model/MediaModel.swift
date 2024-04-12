@@ -34,3 +34,19 @@ struct Media: Decodable {
         case duration = "trackTimeMillis"
     }
 }
+
+extension Media {
+    
+    func isSong() -> Bool {
+        kind == Const.songKind
+    }
+    
+    func isMovie() -> Bool {
+        kind == Const.movieKind
+    }
+    
+    func attributedLinkText() -> NSAttributedString {
+        let placeholder = isSong() ? Const.listenInAppleMusic : Const.watchOnAppleTV
+        return NSAttributedString.attributedLinkText(placeholder: placeholder, link: trackView ?? "")
+    }
+}
