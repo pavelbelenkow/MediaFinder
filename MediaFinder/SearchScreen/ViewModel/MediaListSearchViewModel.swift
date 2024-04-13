@@ -1,10 +1,10 @@
 import Combine
 
-enum State {
+enum State: Equatable {
     case idle
     case loading
     case loaded
-    case error
+    case error(String)
 }
 
 // MARK: - Protocols
