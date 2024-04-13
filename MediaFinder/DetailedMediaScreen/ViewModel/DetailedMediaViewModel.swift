@@ -4,7 +4,6 @@ import Combine
 
 protocol DetailedMediaViewModelProtocol: ObservableObject {
     var stateSubject: CurrentValueSubject<State, Never> { get }
-    var errorMessageSubject: CurrentValueSubject<String?, Never> { get }
     var mediaSubject: CurrentValueSubject<Media?, Never> { get }
     var artistSubject: CurrentValueSubject<[Artist], Never> { get }
     
@@ -18,7 +17,6 @@ final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
     // MARK: - Subject Properties
     
     private(set) var stateSubject = CurrentValueSubject<State, Never>(.idle)
-    private(set) var errorMessageSubject = CurrentValueSubject<String?, Never>(nil)
     private(set) var mediaSubject = CurrentValueSubject<Media?, Never>(nil)
     private(set) var artistSubject = CurrentValueSubject<[Artist], Never>([])
     
@@ -75,8 +73,7 @@ extension DetailedMediaViewModel {
                     
                     switch completion {
                     case .failure(let failure):
-                        stateSubject.send(.error)
-                        errorMessageSubject.send(failure.localizedDescription)
+                        stateSubject.send(.error(failure.localizedDescription))
                     case .finished:
                         stateSubject.send(.loaded)
                     }
