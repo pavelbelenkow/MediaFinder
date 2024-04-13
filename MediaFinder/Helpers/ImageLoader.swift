@@ -1,27 +1,53 @@
 import UIKit
+import Combine
 
 final class ImageLoader {
     
-    static func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
+    // MARK: - Static Properties
+    
+    static let shared = ImageLoader()
+    
+    // MARK: - Private Properties
+    
+    private let cache = NSCache<NSString, UIImage>()
+    private var cancellables: Set<AnyCancellable> = []
+    
+    private let networkClient: NetworkClient
+    
+    // MARK: - Private Initialisers
+    
+    private init(networkClient: NetworkClient = URLSession.shared) {
+        self.networkClient = networkClient
+    }
+    
+    // MARK: - Methods
+    
+    func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
+        
+        if let cachedImage = cache.object(forKey: NSString(string: urlString)) {
+            completion(cachedImage)
+            return
+        }
+        
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data, error == nil else {
-                completion(nil)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                if let image = UIImage(data: data) {
-                    completion(image)
-                } else {
-                    completion(nil)
+        let request = URLRequest(url: url)
+        
+        networkClient.publisher(request: request)
+            .map { data, _ in UIImage(data: data) }
+            .replaceError(with: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] image in
+                
+                if let image {
+                    self?.cache.setObject(image, forKey: NSString(string: urlString))
                 }
+                
+                completion(image)
             }
-        }
-        .resume()
+            .store(in: &cancellables)
     }
 }
