@@ -9,6 +9,13 @@ protocol MediaListSearchCollectionViewDelegate: AnyObject {
 
 final class MediaListSearchCollectionView: UICollectionView {
     
+    enum Section {
+        case main
+    }
+    
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, Media>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Media>
+    
     // MARK: - Private Properties
     
     private let params = GeometricParams(
@@ -17,9 +24,11 @@ final class MediaListSearchCollectionView: UICollectionView {
         cellSpacing: Const.spacingMedium
     )
     
+    private var diffableDataSource: DataSource?
+    
     // MARK: - Properties
     
-    weak var sourceDelegate: MediaListSearchCollectionViewDelegate?
+    weak var interactionDelegate: MediaListSearchCollectionViewDelegate?
     
     // MARK: - Initialisers
     
@@ -28,14 +37,15 @@ final class MediaListSearchCollectionView: UICollectionView {
         
         backgroundColor = .clear
         
-        dataSource = self
-        delegate = self
-        
         register(MediaListSearchCell.self, forCellWithReuseIdentifier: Const.collectionViewReuseIdentifier)
         
         allowsMultipleSelection = false
         showsVerticalScrollIndicator = false
         translatesAutoresizingMaskIntoConstraints = false
+        
+        delegate = self
+        
+        makeDataSource()
     }
     
     required init?(coder: NSCoder) {
@@ -43,38 +53,36 @@ final class MediaListSearchCollectionView: UICollectionView {
     }
 }
 
-// MARK: - DataSource Methods
+// MARK: - Private Methods
 
-extension MediaListSearchCollectionView: UICollectionViewDataSource {
+private extension MediaListSearchCollectionView {
     
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        sourceDelegate?.getMediaSearchList().count ?? .zero
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        
-        let cellData = sourceDelegate?.getMediaSearchList()
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Const.collectionViewReuseIdentifier,
-            for: indexPath
+    func makeDataSource() {
+        diffableDataSource = DataSource(
+            collectionView: self,
+            cellProvider: { collectionView, indexPath, media in
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: Const.collectionViewReuseIdentifier,
+                    for: indexPath
+                ) as? MediaListSearchCell
+                
+                cell?.configure(with: media)
+                
+                return cell
+            }
         )
-        
-        guard
-            let media = cellData?[indexPath.row],
-            let mediaCell = cell as? MediaListSearchCell
-        else {
-            return UICollectionViewCell()
-        }
-        
-        mediaCell.configure(with: media)
-        
-        return mediaCell
+    }
+}
+
+// MARK: - Methods
+
+extension MediaListSearchCollectionView {
+    
+    func applySnapshot(for mediaList: [Media]) {
+        var snapshot = Snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(mediaList)
+        diffableDataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
@@ -108,6 +116,6 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        sourceDelegate?.didTapMedia(at: indexPath.row)
+        interactionDelegate?.didTapMedia(at: indexPath.row)
     }
 }
