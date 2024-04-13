@@ -8,7 +8,7 @@ struct Artist: Decodable {
     let kind: String
     let name: String
     let link: String
-    let genre: String
+    let genre: String?
     
     private enum CodingKeys: String, CodingKey {
         case kind = "artistType"
