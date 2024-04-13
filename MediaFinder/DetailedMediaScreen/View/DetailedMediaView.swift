@@ -96,10 +96,6 @@ extension DetailedMediaView {
         detailedMediaStackView.isHidden = !(state == .loaded)
     }
     
-    func updateStackView(with message: String?) {
-        statefulStackView.updateDescriptionLabel(with: message)
-    }
-    
     func updateUI(for media: Media?) {
         guard let media else { return }
         mediaInfoView.update(for: media)
