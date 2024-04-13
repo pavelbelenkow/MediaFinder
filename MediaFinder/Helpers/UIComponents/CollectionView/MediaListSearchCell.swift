@@ -111,7 +111,7 @@ extension MediaListSearchCell {
             return
         }
         
-        ImageLoader.loadImage(from: image) { [weak self] image in
+        ImageLoader.shared.loadImage(from: image) { [weak self] image in
             self?.mediaImageView.image = image
         }
         
