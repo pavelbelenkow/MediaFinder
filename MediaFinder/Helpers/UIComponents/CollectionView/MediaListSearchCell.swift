@@ -69,8 +69,11 @@ final class MediaListSearchCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
     override func prepareForReuse() {
         super.prepareForReuse()
+        mediaImageView.image = nil
     }
 }
 
