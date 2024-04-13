@@ -82,25 +82,41 @@ private extension StatefulStackView {
     }
     
     func updateDescriptionLabel(for state: State, isEmptyResults: Bool) {
-        descriptionLabel.isHidden = !(state == .loading || state == .loaded && isEmptyResults || state == .error)
+        
+        descriptionLabel.isHidden = {
+            switch state {
+            case .loading,
+                    .loaded where isEmptyResults,
+                    .error: false
+            default: true
+            }
+        }()
         
         descriptionLabel.text = {
-            if state == .loading { return Const.loadingDescription } else { return Const.noResultsDescription }
+            switch state {
+            case .loading : Const.loadingDescription
+            case .loaded where isEmptyResults: Const.noResultsDescription
+            case .error(let errorMessage): errorMessage
+            default: nil
+            }
         }()
         
         descriptionLabel.textColor = {
-            if state == .loading {
-                return .white
-            } else if state == .loaded && isEmptyResults {
-                return .darkGray
-            } else {
-                return .black
+            switch state {
+            case .loading: .white
+            case .loaded where isEmptyResults: .darkGray
+            default: .black
             }
         }()
     }
     
     func updateRepeatButton(for state: State) {
-        repeatButton.isHidden = !(state == .error)
+        repeatButton.isHidden = {
+            switch state {
+            case .error: false
+            default: true
+            }
+        }()
     }
 }
 
@@ -122,9 +138,5 @@ extension StatefulStackView {
         updateTitleLabel(for: state, isEmptyResults: isEmptyResults)
         updateDescriptionLabel(for: state, isEmptyResults: isEmptyResults)
         updateRepeatButton(for: state)
-    }
-    
-    func updateDescriptionLabel(with text: String?) {
-        descriptionLabel.text = text
     }
 }
