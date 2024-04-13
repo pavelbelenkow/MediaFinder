@@ -8,7 +8,7 @@ enum Const {
     static let urlSessionErrorDebug = "URLSession Error: "
     static let noInternetConnectionDebug = "No Internet Connection"
     
-    static let noInternetConnection = "You're Offline\nTurn off Airplane Mode or connect to Wi-Fi."
+    static let noInternetConnection = "You're Offline.\nTurn off Airplane Mode or connect to Wi-Fi."
     static let unknownError = "Unknown Error"
     
     // MARK: - MediaListSearchServiceError Constants
@@ -56,7 +56,7 @@ enum Const {
     static let collectionViewReuseIdentifier = "mediaCell"
     static let tableViewReuseIdentifier = "recentSearchCell"
     static let noResultsTitle = "No Results"
-    static let noResultsDescription = "Loading"
+    static let noResultsDescription = "Try a new search."
     static let loadingDescription = "Loading"
     static let repeatButtonTitle = "Try Again"
     
