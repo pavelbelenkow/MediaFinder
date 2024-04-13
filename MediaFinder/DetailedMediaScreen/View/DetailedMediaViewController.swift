@@ -47,13 +47,6 @@ private extension DetailedMediaViewController {
             }
             .store(in: &viewModel.cancellables)
         
-        viewModel.errorMessageSubject
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] message in
-                self?.detailedMediaView.updateStackView(with: message)
-            }
-            .store(in: &viewModel.cancellables)
-        
         viewModel.mediaSubject
             .receive(on: DispatchQueue.main)
             .sink { [weak self] media in
