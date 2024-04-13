@@ -100,14 +100,8 @@ private extension MediaListSearchViewController {
         viewModel.stateSubject
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
-                self?.mediaListSearchView.updateUI(for: state)
-            }
-            .store(in: &viewModel.cancellables)
-        
-        viewModel.errorMessageSubject
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] message in
-                self?.mediaListSearchView.updateStackView(with: message)
+                let isEmpty = self?.viewModel.searchListSubject.value.isEmpty ?? true
+                self?.mediaListSearchView.updateUI(for: state, isEmptyResults: isEmpty)
             }
             .store(in: &viewModel.cancellables)
         
