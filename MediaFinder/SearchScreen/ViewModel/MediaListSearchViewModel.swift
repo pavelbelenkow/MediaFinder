@@ -11,7 +11,6 @@ enum State: Equatable {
 
 protocol MediaListSearchViewModelProtocol: ObservableObject {
     var stateSubject: CurrentValueSubject<State, Never> { get }
-    var errorMessageSubject: CurrentValueSubject<String?, Never> { get }
     var searchListSubject: CurrentValueSubject<[Media], Never> { get }
     var recentSearchesSubject: CurrentValueSubject<[String], Never> { get }
     var searchBarPlaceholderSubject: CurrentValueSubject<String, Never> { get }
@@ -35,7 +34,6 @@ final class MediaListSearchViewModel: MediaListSearchViewModelProtocol {
     // MARK: - Subject Properties
     
     private(set) var stateSubject = CurrentValueSubject<State, Never>(.idle)
-    private(set) var errorMessageSubject = CurrentValueSubject<String?, Never>(nil)
     private(set) var searchListSubject = CurrentValueSubject<[Media], Never>([])
     private(set) var recentSearchesSubject = CurrentValueSubject<[String], Never>([])
     private(set) var searchBarPlaceholderSubject = CurrentValueSubject<String, Never>(Const.songsAndMoviesPlaceholder)
@@ -93,12 +91,8 @@ extension MediaListSearchViewModel {
                 receiveCompletion: { [weak self] completion in
                     guard let self else { return }
                     
-                    switch completion {
-                    case .failure(let failure):
-                        stateSubject.send(.error)
-                        errorMessageSubject.send(failure.localizedDescription)
-                    case .finished:
-                        stateSubject.send(.loaded)
+                    if case .failure(let failure) = completion {
+                        stateSubject.send(.error(failure.localizedDescription))
                     }
                 },
                 receiveValue: { mediaList in
