@@ -93,10 +93,8 @@ extension MediaInfoView {
             let _ = media.trackView
         else { return }
         
-        ImageLoader.loadImage(from: image) { [weak self] image in
-            DispatchQueue.main.async {
-                self?.imageView.image = image
-            }
+        ImageLoader.shared.loadImage(from: image) { [weak self] image in
+            self?.imageView.image = image
         }
         
         kindLabel.text = kind
