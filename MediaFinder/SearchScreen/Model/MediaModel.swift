@@ -6,6 +6,7 @@ struct MediaModel: Decodable {
 }
 
 struct Media: Decodable {
+    let id = UUID()
     let kind: String?
     let artistId: Int?
     let artist: String?
@@ -32,6 +33,13 @@ struct Media: Decodable {
         case releaseDate
         case description = "longDescription"
         case duration = "trackTimeMillis"
+    }
+}
+
+extension Media: Hashable {
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 
