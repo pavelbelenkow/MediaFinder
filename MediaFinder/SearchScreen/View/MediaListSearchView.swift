@@ -137,17 +137,16 @@ private extension MediaListSearchView {
 
 extension MediaListSearchView {
     
-    func reloadCollectionView() {
-        mediaListCollectionView.reloadData()
+    func reloadCollectionView(with data: [Media]) {
+        mediaListCollectionView.applySnapshot(for: data)
     }
     
     func reloadTableView() {
         recentSearchTableView.reloadData()
     }
     
-    func updateUI(for state: State) {
-        mediaListCollectionView.isHidden = state != .loaded
-        statefulStackView.update(for: state, isEmptyResults: getMediaSearchList().isEmpty)
+    func updateUI(for state: State, isEmptyResults: Bool) {
+        statefulStackView.update(for: state, isEmptyResults: isEmptyResults)
     }
     
     func updateCollectionsVisibility(_ state: Bool) {
