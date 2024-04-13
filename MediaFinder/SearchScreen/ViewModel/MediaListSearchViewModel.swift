@@ -85,7 +85,7 @@ extension MediaListSearchViewModel {
                 for: searchTerm,
                 type: entityType,
                 limit: limitSubject.value,
-                page: .zero
+                page: currentPage
             )
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -95,8 +95,18 @@ extension MediaListSearchViewModel {
                         stateSubject.send(.error(failure.localizedDescription))
                     }
                 },
-                receiveValue: { mediaList in
-                    self.searchListSubject.send(mediaList)
+                receiveValue: { [weak self] mediaList in
+                    guard let self else { return }
+                    
+                    if currentPage == .zero {
+                        searchListSubject.send(mediaList)
+                    } else {
+                        let currentMediaList = searchListSubject.value
+                        let updatedMediaList = currentMediaList + mediaList
+                        searchListSubject.send(updatedMediaList)
+                    }
+                    
+                    stateSubject.send(.loaded)
                 })
             .store(in: &cancellables)
     }
