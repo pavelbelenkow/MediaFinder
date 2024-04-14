@@ -16,21 +16,11 @@ extension NetworkClientError: LocalizedError {
         
         switch self {
         case .invalidResponse:
-            Const.invalidResponseDebug
+            Const.unknownError
         case .urlSessionError(let error):
-            Const.urlSessionErrorDebug.appending(error.debugDescription)
-        case .noInternetConnection:
-            Const.noInternetConnectionDebug
-        }
-    }
-    
-    var localizedDescription: String {
-        
-        switch self {
+            Const.urlSessionErrorDebug.appending(error?.localizedDescription ?? "")
         case .noInternetConnection:
             Const.noInternetConnection
-        case .invalidResponse, .urlSessionError:
-            Const.unknownError
         }
     }
 }
