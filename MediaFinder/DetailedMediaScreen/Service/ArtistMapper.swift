@@ -23,15 +23,15 @@ struct ArtistMapper {
         case 204:
             return []
         case 400:
-            throw MediaListSearchServiceError.invalidRequest
+            throw SearchServiceError.invalidRequest
         case 404:
-            throw MediaListSearchServiceError.notFound
+            throw SearchServiceError.notFound
         case 429:
-            throw MediaListSearchServiceError.tooManyRequests
+            throw SearchServiceError.tooManyRequests
         case 500:
-            throw MediaListSearchServiceError.internalServerError
+            throw SearchServiceError.internalServerError
         default:
-            throw MediaListSearchServiceError.unknown
+            throw SearchServiceError.unknown
         }
         
         return []
@@ -48,12 +48,12 @@ private extension ArtistMapper {
             
             switch decodingError {
             case .dataCorrupted, .keyNotFound, .typeMismatch, .valueNotFound:
-                throw MediaListSearchServiceError.decodingError(decodingError)
+                throw SearchServiceError.decodingError(decodingError)
             @unknown default:
-                throw MediaListSearchServiceError.unknown
+                throw SearchServiceError.unknown
             }
         } else {
-            throw MediaListSearchServiceError.unknown
+            throw SearchServiceError.unknown
         }
     }
 }

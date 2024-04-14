@@ -57,7 +57,7 @@ extension MediaListSearchService: MediaListSearchServiceProtocol {
         )
         
         guard let urlRequest = create(request: request) else {
-            return Fail(error: MediaListSearchServiceError.invalidRequest).eraseToAnyPublisher()
+            return Fail(error: SearchServiceError.invalidRequest).eraseToAnyPublisher()
         }
         
         return networkClient

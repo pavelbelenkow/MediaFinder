@@ -11,7 +11,7 @@ enum Const {
     static let noInternetConnection = "You're Offline.\nTurn off Airplane Mode or connect to Wi-Fi."
     static let unknownError = "Unknown Error"
     
-    // MARK: - MediaListSearchServiceError Constants
+    // MARK: - SearchServiceError Constants
     
     static let invalidRequestDebug = "Invalid Request"
     static let notFoundDebug = "Not Found"
@@ -69,6 +69,7 @@ enum Const {
     static let spacingExtraSmall: CGFloat = 4
     static let spacingSmall: CGFloat = 8
     static let spacingMedium: CGFloat = 16
+    static let spacingLarge: CGFloat = 60
     static let spacingOneHundred: CGFloat = 100
     static let collectionViewCellHeight: CGFloat = 200
     static let collectionCellCornerRadius: CGFloat = 15
