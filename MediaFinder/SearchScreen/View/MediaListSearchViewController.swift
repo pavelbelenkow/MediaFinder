@@ -74,7 +74,7 @@ private extension MediaListSearchViewController {
         )
         
         let rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "line.horizontal.3.decrease.circle"),
+            image: UIImage(systemName: Const.limitIcon),
             menu: menu
         )
         

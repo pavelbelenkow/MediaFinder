@@ -59,6 +59,7 @@ enum Const {
     static let noResultsDescription = "Try a new search."
     static let loadingDescription = "Loading"
     static let repeatButtonTitle = "Try Again"
+    static let limitIcon = "line.horizontal.3.decrease.circle"
     
     static let limitTen = 10
     static let limitThirty = 30
