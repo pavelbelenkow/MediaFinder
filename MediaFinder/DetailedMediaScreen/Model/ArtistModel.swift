@@ -4,7 +4,7 @@ struct ArtistModel: Decodable {
     let results: [Artist]
 }
 
-struct Artist: Decodable {
+struct Artist: Decodable, Equatable {
     let kind: String
     let name: String
     let link: String
