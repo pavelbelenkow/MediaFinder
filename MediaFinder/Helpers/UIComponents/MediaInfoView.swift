@@ -82,7 +82,7 @@ extension MediaInfoView {
     
     func update(for media: Media) {
         guard
-            let image = media.artwork100,
+            let image = media.highQualityImage(),
             let kind = media.kind,
             let name = media.name,
             let artist = media.artist,

@@ -53,6 +53,10 @@ extension Media {
         kind == Const.movieKind
     }
     
+    func highQualityImage() -> String? {
+        artwork100?.replacingOccurrences(of: Const.oneHundredSize, with: Const.fiveHundredSize)
+    }
+    
     func attributedLinkText() -> NSAttributedString {
         let placeholder = isSong() ? Const.listenInAppleMusic : Const.watchOnAppleTV
         return NSAttributedString.attributedLinkText(placeholder: placeholder, link: trackView ?? "")
