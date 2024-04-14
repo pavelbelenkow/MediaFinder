@@ -49,6 +49,7 @@
 		59A0E40B2BCC28600012C628 /* ArtistLookupServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0E40A2BCC28600012C628 /* ArtistLookupServiceTests.swift */; };
 		59A0E4102BCC29740012C628 /* MediaListSearchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0E40F2BCC29740012C628 /* MediaListSearchViewModelTests.swift */; };
 		59A0E4122BCC2B320012C628 /* DetailedMediaViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0E4112BCC2B320012C628 /* DetailedMediaViewModelTests.swift */; };
+		59A0E4142BCC6D9F0012C628 /* ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0E4132BCC6D9F0012C628 /* ViewAnimator.swift */; };
 		59AE8B242BC737F400B2C79C /* SearchHistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,7 @@
 		59A0E40A2BCC28600012C628 /* ArtistLookupServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistLookupServiceTests.swift; sourceTree = "<group>"; };
 		59A0E40F2BCC29740012C628 /* MediaListSearchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchViewModelTests.swift; sourceTree = "<group>"; };
 		59A0E4112BCC2B320012C628 /* DetailedMediaViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedMediaViewModelTests.swift; sourceTree = "<group>"; };
+		59A0E4132BCC6D9F0012C628 /* ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimator.swift; sourceTree = "<group>"; };
 		59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -241,6 +243,7 @@
 				592A15132BC5F15400322135 /* UIComponents */,
 				593477122BC08644004BE3AF /* Const.swift */,
 				592A150A2BC5807400322135 /* GeometricParams.swift */,
+				59A0E4132BCC6D9F0012C628 /* ViewAnimator.swift */,
 				592A150C2BC5816500322135 /* ImageLoader.swift */,
 				592A15062BC57E3B00322135 /* Int+Extensions.swift */,
 				592A15082BC57F0E00322135 /* NumberFormatter+Extensions.swift */,
@@ -475,6 +478,7 @@
 				590D061F2BC80598002D5688 /* ArtistLookupService.swift in Sources */,
 				592A15102BC588B200322135 /* MediaListSearchViewController.swift in Sources */,
 				592A15152BC5F1C700322135 /* StatefulStackView.swift in Sources */,
+				59A0E4142BCC6D9F0012C628 /* ViewAnimator.swift in Sources */,
 				5949D0B12BC1B68700A860C8 /* MediaListMapper.swift in Sources */,
 				590D061B2BC7FF5C002D5688 /* ArtistModel.swift in Sources */,
 				595EFE782BC9629900F7E353 /* ArtistInfoView.swift in Sources */,
