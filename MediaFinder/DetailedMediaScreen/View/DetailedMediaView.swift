@@ -6,7 +6,7 @@ protocol DetailedMediaViewDelegate: AnyObject {
     func didTapRepeatButton()
 }
 
-final class DetailedMediaView: UIView {
+final class DetailedMediaView: UIScrollView {
     
     // MARK: - Private Properties
     
@@ -29,7 +29,7 @@ final class DetailedMediaView: UIView {
     
     // MARK: - Properties
     
-    weak var delegate: DetailedMediaViewDelegate?
+    weak var interactionDelegate: DetailedMediaViewDelegate?
     
     // MARK: - Initialisers
     
@@ -48,14 +48,11 @@ final class DetailedMediaView: UIView {
 private extension DetailedMediaView {
     
     func setupAppearance() {
-        setupBackgroundColor()
-        setupDetailedMediaStackView()
-        setupMediaImageViewConstraints()
-        setupStatefulStackView()
-    }
-    
-    func setupBackgroundColor() {
         backgroundColor = .mediaBackground
+        showsVerticalScrollIndicator = false
+        
+        setupDetailedMediaStackView()
+        setupStatefulStackView()
     }
     
     func setupDetailedMediaStackView() {
@@ -66,12 +63,11 @@ private extension DetailedMediaView {
                                                     constant: Const.spacingMedium),
             detailedMediaStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
                                                      constant: -Const.spacingMedium),
-            detailedMediaStackView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor)
+            detailedMediaStackView.topAnchor.constraint(equalTo: topAnchor,
+                                                     constant: Const.spacingMedium),
+            detailedMediaStackView.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                                     constant: -Const.spacingMedium)
         ])
-    }
-    
-    func setupMediaImageViewConstraints() {
-        mediaInfoView.setupImageViewConstraints(from: safeAreaLayoutGuide)
     }
     
     func setupStatefulStackView() {
@@ -112,6 +108,6 @@ extension DetailedMediaView {
 extension DetailedMediaView: StatefulStackViewDelegate {
     
     func didTapRepeatButton() {
-        delegate?.didTapRepeatButton()
+        interactionDelegate?.didTapRepeatButton()
     }
 }
