@@ -6,7 +6,7 @@ final class DetailedMediaViewController: UIViewController {
     
     private lazy var detailedMediaView: DetailedMediaView = {
         let view = DetailedMediaView()
-        view.delegate = self
+        view.interactionDelegate = self
         return view
     }()
     
