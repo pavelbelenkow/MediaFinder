@@ -45,6 +45,8 @@ enum Const {
     static let distributedBy = "Distributed by "
     static let moreAboutArtist = "More about the artist"
     static let moreAboutDistributor = "More about the distributor"
+    static let oneHundredSize = "100"
+    static let fiveHundredSize = "500"
     
     // MARK: - MediaListSearch Screen Constants
     
@@ -74,6 +76,8 @@ enum Const {
     static let spacingOneHundred: CGFloat = 100
     static let collectionViewCellHeight: CGFloat = 200
     static let collectionCellCornerRadius: CGFloat = 15
+    static let imageViewCornerRadius: CGFloat = 20
+    static let linkCornerRadius: CGFloat = 16
     static let mediaImageViewHeight: CGFloat = 80
     static let repeatButtonBorderWidth: CGFloat = 1
     static let repeatButtonCornerRadius: CGFloat = 10
