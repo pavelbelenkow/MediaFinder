@@ -1,12 +1,5 @@
 import Combine
 
-enum State: Equatable {
-    case idle
-    case loading
-    case loaded
-    case error(String)
-}
-
 // MARK: - Protocols
 
 protocol MediaListSearchViewModelProtocol: ObservableObject {

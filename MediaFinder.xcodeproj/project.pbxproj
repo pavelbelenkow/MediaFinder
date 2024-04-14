@@ -43,6 +43,7 @@
 		595EFE7A2BC9743200F7E353 /* ArtistMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE792BC9743200F7E353 /* ArtistMapper.swift */; };
 		5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */; };
 		5976B1B62BBF546200DB8CBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5976B1B52BBF546200DB8CBA /* Assets.xcassets */; };
+		59A0E3FA2BCB7B9C0012C628 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0E3F92BCB7B9C0012C628 /* State.swift */; };
 		59AE8B242BC737F400B2C79C /* SearchHistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5976B1B52BBF546200DB8CBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5976B1BA2BBF546200DB8CBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		59A0E3F92BCB7B9C0012C628 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */,
+				59A0E3F92BCB7B9C0012C628 /* State.swift */,
 				593477152BC086F9004BE3AF /* SearchScreen */,
 				590D06142BC7ED57002D5688 /* DetailedMediaScreen */,
 				5934770C2BC05BB1004BE3AF /* NetworkClient */,
@@ -363,6 +366,7 @@
 				592A15092BC57F0E00322135 /* NumberFormatter+Extensions.swift in Sources */,
 				5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */,
 				595EFE742BC9612E00F7E353 /* CustomTextView.swift in Sources */,
+				59A0E3FA2BCB7B9C0012C628 /* State.swift in Sources */,
 				592A151F2BC5F7B300322135 /* MediaListRecentSearchTableView.swift in Sources */,
 				591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */,
 				595EFE722BC960FE00F7E353 /* CustomLabel.swift in Sources */,
