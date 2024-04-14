@@ -21,6 +21,7 @@ protocol MediaListSearchViewModelProtocol: ObservableObject {
     var cancellables: Set<AnyCancellable> { get set }
     
     func fetchSearchList()
+    func loadNextPageIfNeeded()
     func fetchSearchListForMediaType(by index: Int)
     func setSearchTerm(for text: String)
     func setResultsLimit(for limit: Int)
@@ -77,7 +78,9 @@ final class MediaListSearchViewModel: MediaListSearchViewModelProtocol {
 extension MediaListSearchViewModel {
     
     func fetchSearchList() {
-        currentPage += 1
+        
+        guard !(stateSubject.value == .loading) else { return }
+        
         stateSubject.send(.loading)
         
         mediaListSearchService
@@ -111,6 +114,11 @@ extension MediaListSearchViewModel {
             .store(in: &cancellables)
     }
     
+    func loadNextPageIfNeeded() {
+        currentPage += 1
+        fetchSearchList()
+    }
+    
     func fetchSearchListForMediaType(by index: Int) {
         
         switch index {
@@ -128,16 +136,17 @@ extension MediaListSearchViewModel {
         }
         
         guard !searchTerm.isEmpty else { return }
-        
+        currentPage = .zero
         fetchSearchList()
     }
     
     func setSearchTerm(for text: String) {
-        guard !text.isEmpty else { return }
+        guard !text.isEmpty, text != searchTerm else { return }
         
         searchTerm = text
         searchHistoryStorage.addSearchTerm(text)
         recentSearchesSubject.send(searchHistoryStorage.recentSearches)
+        currentPage = .zero
         fetchSearchList()
     }
     
