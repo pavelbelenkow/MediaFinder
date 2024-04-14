@@ -151,12 +151,9 @@ private extension MediaListSearchViewController {
     
     func updateSearchBarTerm(with text: String?) {
         let searchBar = searchController.searchBar
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            guard let self else { return }
-            searchBar.text = text
-            searchBar.resignFirstResponder()
-            searchBarSearchButtonClicked(searchBar)
-        }
+        searchBar.text = text
+        searchBar.resignFirstResponder()
+        searchBarSearchButtonClicked(searchBar)
     }
     
     func updateMenuState(_ selectedLimit: Int) {
