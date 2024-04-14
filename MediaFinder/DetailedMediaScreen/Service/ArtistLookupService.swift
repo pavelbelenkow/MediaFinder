@@ -47,7 +47,7 @@ extension ArtistLookupService: ArtistLookupServiceProtocol {
         let request = ArtistLookupRequest(id: id)
         
         guard let urlRequest = create(request: request) else {
-            return Fail(error: MediaListSearchServiceError.invalidRequest).eraseToAnyPublisher()
+            return Fail(error: SearchServiceError.invalidRequest).eraseToAnyPublisher()
         }
         
         return networkClient
