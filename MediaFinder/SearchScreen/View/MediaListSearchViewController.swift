@@ -54,7 +54,7 @@ private extension MediaListSearchViewController {
     
     func setupTitle(for navigationBar: UINavigationBar?) {
         title = Const.navigationBarTitle
-        navigationBar?.tintColor = .black
+        navigationBar?.tintColor = .white
         navigationBar?.prefersLargeTitles = true
         navigationBar?.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationBar?.standardAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
