@@ -108,7 +108,7 @@ private extension MediaListSearchViewController {
         viewModel.searchListSubject
             .receive(on: DispatchQueue.main)
             .sink { [weak self] mediaList in
-                self?.mediaListSearchView.reloadCollectionView()
+                self?.mediaListSearchView.reloadCollectionView(with: mediaList)
             }
             .store(in: &viewModel.cancellables)
         
@@ -224,8 +224,8 @@ extension MediaListSearchViewController: UISearchBarDelegate {
 
 extension MediaListSearchViewController: MediaListSearchViewDelegate {
     
-    func getSearchList() -> [Media] {
-        viewModel.searchListSubject.value
+    func collectionViewDidScrollToBottom() {
+        viewModel.loadNextPageIfNeeded()
     }
     
     func getRecentSearches() -> [String] {
