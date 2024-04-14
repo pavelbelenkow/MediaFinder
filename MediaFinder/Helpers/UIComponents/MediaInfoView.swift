@@ -44,6 +44,8 @@ final class MediaInfoView: UIStackView {
     private lazy var linkTextView: CustomTextView = {
         let textView = CustomTextView()
         textView.configure()
+        textView.backgroundColor = .lightText
+        textView.layer.cornerRadius = Const.linkCornerRadius
         return textView
     }()
     
@@ -77,14 +79,6 @@ private extension MediaInfoView {
 // MARK: - Methods
 
 extension MediaInfoView {
-    
-    func setupImageViewConstraints(from layout: UILayoutGuide) {
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: layout.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: layout.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: layout.trailingAnchor)
-        ])
-    }
     
     func update(for media: Media) {
         guard
