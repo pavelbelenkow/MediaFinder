@@ -158,10 +158,6 @@ extension MediaListSearchView {
         recentSearchTableView.isHidden = state
         mediaListCollectionView.isHidden = !state
     }
-    
-    func updateStackView(with message: String?) {
-        statefulStackView.updateDescriptionLabel(with: message)
-    }
 }
 
 // MARK: - MediaTypePageControlDelegate Methods
