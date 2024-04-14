@@ -89,15 +89,42 @@ private extension MediaTypePageControl {
 private extension MediaTypePageControl {
     
     @objc func buttonAction(sender: UIButton) {
-        for (buttonIndex, button) in buttons.enumerated() {
-            button.setTitleColor(.white, for: .normal)
-            if button == sender {
-                let selectorPosition = frame.width / CGFloat(buttonTitles.count) * CGFloat(buttonIndex)
-                selectedIndex = buttonIndex
-                delegate?.change(to: selectedIndex)
-                UIView.animate(withDuration: 0.3) {
-                    self.selectorView.frame.origin.x = selectorPosition
-                }
+        guard let tappedButtonIndex = buttons.firstIndex(of: sender) else { return }
+        handleSelectionChange(to: tappedButtonIndex)
+    }
+    
+    func handleSelectionChange(to newIndex: Int) {
+        guard newIndex != selectedIndex else { return }
+        animateSelectionChange(to: newIndex)
+        updateSelectorPosition(to: newIndex)
+        updateButtonAppearance(for: newIndex)
+    }
+    
+    func animateSelectionChange(to newIndex: Int) {
+        ViewAnimator.shared.animateSelection(for: buttons[newIndex]) {
+            self.selectedIndex = newIndex
+            self.delegate?.change(to: newIndex)
+        }
+    }
+    
+    func updateSelectorPosition(to newIndex: Int) {
+        let selectorPosition = frame.width / CGFloat(buttonTitles.count) * CGFloat(newIndex)
+        UIView.animate(withDuration: 0.25) {
+            self.selectorView.frame.origin.x = selectorPosition
+            self.selectorView.alpha = 0.6
+            self.selectorView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.25) {
+                self.selectorView.alpha = 1.0
+                self.selectorView.transform = .identity
+            }
+        }
+    }
+    
+    func updateButtonAppearance(for newIndex: Int) {
+        buttons.enumerated().forEach { index, button in
+            UIView.animate(withDuration: 0.25) {
+                button.transform = index == newIndex ? CGAffineTransform(scaleX: 0.8, y: 0.8) : .identity
             }
         }
     }
