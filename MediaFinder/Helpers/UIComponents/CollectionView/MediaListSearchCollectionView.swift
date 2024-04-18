@@ -9,12 +9,8 @@ protocol MediaListSearchCollectionViewDelegate: AnyObject {
 
 final class MediaListSearchCollectionView: UICollectionView {
     
-    enum Section {
-        case main
-    }
-    
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, Media>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Media>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, Media>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Media>
     
     // MARK: - Private Properties
     
@@ -80,7 +76,7 @@ extension MediaListSearchCollectionView {
     
     func applySnapshot(for mediaList: [Media]) {
         var snapshot = Snapshot()
-        snapshot.appendSections([.main])
+        snapshot.appendSections([.zero])
         snapshot.appendItems(mediaList)
         diffableDataSource?.apply(snapshot, animatingDifferences: true)
     }
