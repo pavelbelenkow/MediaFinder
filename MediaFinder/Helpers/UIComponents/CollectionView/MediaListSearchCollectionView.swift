@@ -33,7 +33,16 @@ final class MediaListSearchCollectionView: UICollectionView {
         
         backgroundColor = .clear
         
-        register(MediaListSearchCell.self, forCellWithReuseIdentifier: Const.collectionViewReuseIdentifier)
+        register(
+            MediaListSearchCell.self,
+            forCellWithReuseIdentifier: Const.mediaListSearchCellReuseIdentifier
+        )
+        
+        register(
+            MediaListSearchFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: Const.mediaListSearchFooterReuseIdentifier
+        )
         
         allowsMultipleSelection = false
         showsVerticalScrollIndicator = false
@@ -58,7 +67,7 @@ private extension MediaListSearchCollectionView {
             collectionView: self,
             cellProvider: { collectionView, indexPath, media in
                 let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: Const.collectionViewReuseIdentifier,
+                    withReuseIdentifier: Const.mediaListSearchCellReuseIdentifier,
                     for: indexPath
                 ) as? MediaListSearchCell
                 
@@ -67,6 +76,19 @@ private extension MediaListSearchCollectionView {
                 return cell
             }
         )
+        
+        diffableDataSource?
+            .supplementaryViewProvider = { collectionView, kind, indexPath in
+                let footerView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: Const.mediaListSearchFooterReuseIdentifier,
+                    for: indexPath
+                ) as? MediaListSearchFooterView
+                
+                footerView?.updateStackView(for: .idle, isEmptyResults: true)
+                
+                return footerView
+            }
     }
 }
 
@@ -79,6 +101,15 @@ extension MediaListSearchCollectionView {
         snapshot.appendSections([.zero])
         snapshot.appendItems(mediaList)
         diffableDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    func updateFooterView(for state: State, isEmptyResults: Bool) {
+        guard
+            let footerView = visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionFooter)
+                .first as? MediaListSearchFooterView
+        else { return }
+        
+        footerView.updateStackView(for: state, isEmptyResults: isEmptyResults)
     }
 }
 
@@ -119,6 +150,14 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
             bottom: params.insets,
             right: params.insets
         )
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForFooterInSection section: Int
+    ) -> CGSize {
+        CGSize(width: collectionView.bounds.width, height: Const.spacingLarge)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
