@@ -73,11 +73,8 @@ private extension StatefulStackView {
     
     func updateActivityIndicatorView(for state: State) {
         let isLoading = state == .loading
-        
-        UIView.animate(withDuration: 0.2) {
-            self.activityIndicatorView.alpha = isLoading ? 1 : 0
-            isLoading ? self.activityIndicatorView.startAnimating() : self.activityIndicatorView.stopAnimating()
-        }
+        activityIndicatorView.isHidden = !isLoading
+        isLoading ? activityIndicatorView.startAnimating() : activityIndicatorView.stopAnimating()
     }
     
     func updateTitleLabel(for state: State, isEmptyResults: Bool) {
