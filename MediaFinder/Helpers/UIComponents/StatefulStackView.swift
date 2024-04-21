@@ -83,16 +83,14 @@ private extension StatefulStackView {
     
     func updateDescriptionLabel(for state: State, isEmptyResults: Bool) {
         
-        UIView.animate(withDuration: 0.2) {
-            self.descriptionLabel.alpha = {
-                switch state {
-                case .loading,
-                        .loaded where isEmptyResults,
-                        .error: 1
-                default: 0
-                }
-            }()
-        }
+        descriptionLabel.isHidden = {
+            switch state {
+            case .loading,
+                    .loaded where isEmptyResults,
+                    .error: false
+            default: true
+            }
+        }()
         
         descriptionLabel.text = {
             switch state {
