@@ -55,8 +55,9 @@ enum Const {
     static let songsPlaceholder = "Songs"
     static let moviesPlaceholder = "Movies"
     static let mediaTypeButtonTitles = ["All", "Movies", "Songs"]
-    static let collectionViewReuseIdentifier = "mediaCell"
-    static let tableViewReuseIdentifier = "recentSearchCell"
+    static let mediaListSearchCellReuseIdentifier = "mediaCell"
+    static let mediaListSearchFooterReuseIdentifier = "mediaListSearchFooterView"
+    static let recentSearchCellReuseIdentifier = "recentSearchCell"
     static let noResultsTitle = "No Results"
     static let noResultsDescription = "Try a new search."
     static let loadingDescription = "Loading"
