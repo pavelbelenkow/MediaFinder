@@ -24,7 +24,7 @@ final class MediaListRecentSearchTableView: UITableView {
         delegate = self
         dataSource = self
         
-        register(UITableViewCell.self, forCellReuseIdentifier: Const.tableViewReuseIdentifier)
+        register(UITableViewCell.self, forCellReuseIdentifier: Const.recentSearchCellReuseIdentifier)
         
         translatesAutoresizingMaskIntoConstraints = false
     }
@@ -52,7 +52,7 @@ extension MediaListRecentSearchTableView: UITableViewDataSource {
         
         let cellData = interactionDelegate?.getRecentSearches()
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: Const.tableViewReuseIdentifier,
+            withIdentifier: Const.recentSearchCellReuseIdentifier,
             for: indexPath
         )
         
