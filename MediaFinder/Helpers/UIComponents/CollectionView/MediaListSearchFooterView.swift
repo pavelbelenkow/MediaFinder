@@ -40,6 +40,7 @@ private extension MediaListSearchFooterView {
         addSubview(statefulStackView)
         
         NSLayoutConstraint.activate([
+            statefulStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             statefulStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             statefulStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                        constant: Const.spacingOneHundred),
