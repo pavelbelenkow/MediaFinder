@@ -51,6 +51,7 @@
 		59A0E4122BCC2B320012C628 /* DetailedMediaViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0E4112BCC2B320012C628 /* DetailedMediaViewModelTests.swift */; };
 		59A0E4142BCC6D9F0012C628 /* ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0E4132BCC6D9F0012C628 /* ViewAnimator.swift */; };
 		59AE8B242BC737F400B2C79C /* SearchHistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */; };
+		59F740162BD5B432000031BE /* MediaListSearchFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		59A0E4112BCC2B320012C628 /* DetailedMediaViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedMediaViewModelTests.swift; sourceTree = "<group>"; };
 		59A0E4132BCC6D9F0012C628 /* ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimator.swift; sourceTree = "<group>"; };
 		59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryStorage.swift; sourceTree = "<group>"; };
+		59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 			children = (
 				592A15182BC5F52E00322135 /* MediaListSearchCollectionView.swift */,
 				592A151B2BC5F5DC00322135 /* MediaListSearchCell.swift */,
+				59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				5949D0B32BC1B9E700A860C8 /* MediaListSearchRequest.swift in Sources */,
 				592A151C2BC5F5DC00322135 /* MediaListSearchCell.swift in Sources */,
 				593477132BC08644004BE3AF /* Const.swift in Sources */,
+				59F740162BD5B432000031BE /* MediaListSearchFooterView.swift in Sources */,
 				590D06232BC810F6002D5688 /* DetailedMediaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
