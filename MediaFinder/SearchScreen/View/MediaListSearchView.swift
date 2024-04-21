@@ -132,6 +132,7 @@ extension MediaListSearchView {
     }
     
     func updateUI(for state: State, isEmptyResults: Bool) {
+        mediaListCollectionView.updateFooterView(for: state, isEmptyResults: isEmptyResults)
     }
     
     func updateCollectionsVisibility(_ state: Bool) {
@@ -159,6 +160,10 @@ extension MediaListSearchView: MediaListSearchCollectionViewDelegate {
     
     func didTapMedia(at index: Int) {
         delegate?.didTapMedia(at: index)
+    }
+    
+    func didTapRepeatButton() {
+        delegate?.didTapRepeatButton()
     }
 }
 
