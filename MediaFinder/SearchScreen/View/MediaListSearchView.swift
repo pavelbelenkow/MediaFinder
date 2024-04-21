@@ -41,12 +41,6 @@ final class MediaListSearchView: UIView {
         return view
     }()
     
-    private lazy var statefulStackView: StatefulStackView = {
-        let view = StatefulStackView()
-        view.delegate = self
-        return view
-    }()
-    
     // MARK: - Properties
     
     weak var delegate: MediaListSearchViewDelegate?
@@ -70,7 +64,6 @@ private extension MediaListSearchView {
     func setupAppearance() {
         setupBackgroundColor()
         setupMediaTypePageControl()
-        setupStatefulStackView()
         setupContainerView()
         setupMediaListCollectionView()
         setupRecentSearchTableView()
@@ -97,7 +90,7 @@ private extension MediaListSearchView {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: mediaTypePageControl.bottomAnchor, 
                                                constant: Const.spacingExtraSmall),
-            containerView.bottomAnchor.constraint(equalTo: statefulStackView.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
             containerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
@@ -124,18 +117,6 @@ private extension MediaListSearchView {
             recentSearchTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
     }
-    
-    func setupStatefulStackView() {
-        addSubview(statefulStackView)
-        
-        NSLayoutConstraint.activate([
-            statefulStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            statefulStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, 
-                                                       constant: Const.spacingOneHundred),
-            statefulStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, 
-                                                        constant: -Const.spacingOneHundred)
-        ])
-    }
 }
 
 // MARK: - Methods
@@ -151,7 +132,6 @@ extension MediaListSearchView {
     }
     
     func updateUI(for state: State, isEmptyResults: Bool) {
-        statefulStackView.update(for: state, isEmptyResults: isEmptyResults)
     }
     
     func updateCollectionsVisibility(_ state: Bool) {
@@ -192,14 +172,5 @@ extension MediaListSearchView: MediaListRecentSearchTableViewDelegate {
     
     func didTapRecentTerm(at index: Int) {
         delegate?.didTapRecentTerm(at: index)
-    }
-}
-
-// MARK: - StatefulStackViewDelegate Methods
-
-extension MediaListSearchView: StatefulStackViewDelegate {
-    
-    func didTapRepeatButton() {
-        delegate?.didTapRepeatButton()
     }
 }
