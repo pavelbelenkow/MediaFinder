@@ -144,20 +144,20 @@ extension MediaListSearchView: MediaTypePageControlDelegate {
     }
 }
 
-// MARK: - MediaListSearchCollectionViewDelegate Methods
+// MARK: - MediaTypeCollectionViewDelegate Methods
 
-extension MediaListSearchView: MediaListSearchCollectionViewDelegate {
+extension MediaListSearchView: MediaTypeCollectionViewDelegate {
     
-    func collectionViewDidScrollToBottom() {
-        delegate?.collectionViewDidScrollToBottom()
+    func didScrollToBottomMediaTypeCell() {
+        delegate?.didScrollToBottomCollectionView()
     }
     
-    func didTapMedia(at index: Int) {
-        delegate?.didTapMedia(at: index)
+    func didTapInnerContentMediaTypeCell(at index: Int) {
+        delegate?.didTapInnerContentCollectionView(at: index)
     }
     
-    func didTapRepeatButton() {
-        delegate?.didTapRepeatButton()
+    func didTapInnerContentFooterRepeatButton() {
+        delegate?.didTapFooterRepeatButton()
     }
 }
 
