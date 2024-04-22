@@ -124,8 +124,9 @@ private extension MediaTypePageControl {
     func updateButtonAppearance(for newIndex: Int) {
         buttons.enumerated().forEach { index, button in
             UIView.animate(withDuration: 0.25) {
-                button.setTitleColor(index == newIndex ? .white : .lightText, for: .normal)
-                button.transform = index == newIndex ? CGAffineTransform(scaleX: 0.8, y: 0.8) : .identity
+                let isSelected = index == newIndex
+                button.setTitleColor(isSelected ? .white : .lightText, for: .normal)
+                button.transform = isSelected ? CGAffineTransform(scaleX: 0.8, y: 0.8) : .identity
             }
         }
     }
