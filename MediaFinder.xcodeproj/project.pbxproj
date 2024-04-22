@@ -28,6 +28,7 @@
 		593477102BC05BF1004BE3AF /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5934770F2BC05BF1004BE3AF /* NetworkRequest.swift */; };
 		593477132BC08644004BE3AF /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593477122BC08644004BE3AF /* Const.swift */; };
 		5946FEAA2BD6EE6500E53591 /* MediaTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5946FEA92BD6EE6500E53591 /* MediaTypeCell.swift */; };
+		5946FEAC2BD7004400E53591 /* MediaTypeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5946FEAB2BD7004400E53591 /* MediaTypeCollectionView.swift */; };
 		5949D0AA2BC1AE9A00A860C8 /* NetworkClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0A92BC1AE9A00A860C8 /* NetworkClientError.swift */; };
 		5949D0AD2BC1B58400A860C8 /* MediaListSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0AC2BC1B58400A860C8 /* MediaListSearchService.swift */; };
 		5949D0AF2BC1B63F00A860C8 /* SearchServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0AE2BC1B63F00A860C8 /* SearchServiceError.swift */; };
@@ -87,6 +88,7 @@
 		5934770F2BC05BF1004BE3AF /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		593477122BC08644004BE3AF /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		5946FEA92BD6EE6500E53591 /* MediaTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTypeCell.swift; sourceTree = "<group>"; };
+		5946FEAB2BD7004400E53591 /* MediaTypeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTypeCollectionView.swift; sourceTree = "<group>"; };
 		5949D0A92BC1AE9A00A860C8 /* NetworkClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientError.swift; sourceTree = "<group>"; };
 		5949D0AC2BC1B58400A860C8 /* MediaListSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchService.swift; sourceTree = "<group>"; };
 		5949D0AE2BC1B63F00A860C8 /* SearchServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceError.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		5946FEA82BD6EE3D00E53591 /* MediaTypeCollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				5946FEAB2BD7004400E53591 /* MediaTypeCollectionView.swift */,
 				5946FEA92BD6EE6500E53591 /* MediaTypeCell.swift */,
 			);
 			path = MediaTypeCollectionView;
@@ -471,6 +474,7 @@
 				592A15092BC57F0E00322135 /* NumberFormatter+Extensions.swift in Sources */,
 				5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */,
 				595EFE742BC9612E00F7E353 /* CustomTextView.swift in Sources */,
+				5946FEAC2BD7004400E53591 /* MediaTypeCollectionView.swift in Sources */,
 				59A0E3FA2BCB7B9C0012C628 /* State.swift in Sources */,
 				592A151F2BC5F7B300322135 /* MediaListRecentSearchTableView.swift in Sources */,
 				591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */,
