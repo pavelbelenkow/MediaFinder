@@ -27,6 +27,7 @@
 		5934770E2BC05BBF004BE3AF /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5934770D2BC05BBF004BE3AF /* NetworkClient.swift */; };
 		593477102BC05BF1004BE3AF /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5934770F2BC05BF1004BE3AF /* NetworkRequest.swift */; };
 		593477132BC08644004BE3AF /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593477122BC08644004BE3AF /* Const.swift */; };
+		5946FEAA2BD6EE6500E53591 /* MediaTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5946FEA92BD6EE6500E53591 /* MediaTypeCell.swift */; };
 		5949D0AA2BC1AE9A00A860C8 /* NetworkClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0A92BC1AE9A00A860C8 /* NetworkClientError.swift */; };
 		5949D0AD2BC1B58400A860C8 /* MediaListSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0AC2BC1B58400A860C8 /* MediaListSearchService.swift */; };
 		5949D0AF2BC1B63F00A860C8 /* SearchServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0AE2BC1B63F00A860C8 /* SearchServiceError.swift */; };
@@ -85,6 +86,7 @@
 		5934770D2BC05BBF004BE3AF /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		5934770F2BC05BF1004BE3AF /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		593477122BC08644004BE3AF /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		5946FEA92BD6EE6500E53591 /* MediaTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTypeCell.swift; sourceTree = "<group>"; };
 		5949D0A92BC1AE9A00A860C8 /* NetworkClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientError.swift; sourceTree = "<group>"; };
 		5949D0AC2BC1B58400A860C8 /* MediaListSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchService.swift; sourceTree = "<group>"; };
 		5949D0AE2BC1B63F00A860C8 /* SearchServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceError.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 		592A15132BC5F15400322135 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				5946FEA82BD6EE3D00E53591 /* MediaTypeCollectionView */,
 				592A151A2BC5F5AF00322135 /* MediaListSearchCollectionView */,
 				592A151D2BC5F79800322135 /* MediaListRecentSearchTableView */,
 				592A15162BC5F42F00322135 /* MediaTypePageControl.swift */,
@@ -264,6 +267,14 @@
 				5949D0AB2BC1B56A00A860C8 /* Service */,
 			);
 			path = SearchScreen;
+			sourceTree = "<group>";
+		};
+		5946FEA82BD6EE3D00E53591 /* MediaTypeCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				5946FEA92BD6EE6500E53591 /* MediaTypeCell.swift */,
+			);
+			path = MediaTypeCollectionView;
 			sourceTree = "<group>";
 		};
 		5949D0AB2BC1B56A00A860C8 /* Service */ = {
@@ -486,6 +497,7 @@
 				590D061B2BC7FF5C002D5688 /* ArtistModel.swift in Sources */,
 				595EFE782BC9629900F7E353 /* ArtistInfoView.swift in Sources */,
 				590D06212BC8064C002D5688 /* ArtistLookupRequest.swift in Sources */,
+				5946FEAA2BD6EE6500E53591 /* MediaTypeCell.swift in Sources */,
 				5949D0AA2BC1AE9A00A860C8 /* NetworkClientError.swift in Sources */,
 				592A150B2BC5807400322135 /* GeometricParams.swift in Sources */,
 				5949D0B32BC1B9E700A860C8 /* MediaListSearchRequest.swift in Sources */,
