@@ -108,7 +108,10 @@ private extension MediaListSearchView {
 extension MediaListSearchView {
     
     func reloadCollectionView(with data: [Media]) {
-        mediaListCollectionView.applySnapshot(for: data)
+        for item in 0..<mediaTypeCollectionView.numberOfItems(inSection: .zero) {
+            let indexPath = IndexPath(item: item, section: .zero)
+            mediaTypeCollectionView.applySnapshotToMediaTypeCell(with: data, at: indexPath)
+        }
     }
     
     func reloadTableView() {
