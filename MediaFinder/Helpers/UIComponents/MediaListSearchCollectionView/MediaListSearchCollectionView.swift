@@ -5,7 +5,7 @@ import UIKit
 protocol MediaListSearchCollectionViewDelegate: AnyObject {
     func collectionViewDidScrollToBottom()
     func didTapMedia(at index: Int)
-    func didTapFooterView()
+    func didTapFooterRepeatButton()
 }
 
 final class MediaListSearchCollectionView: UICollectionView {
@@ -185,7 +185,7 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
 
 extension MediaListSearchCollectionView: MediaListSearchFooterViewDelegate {
     
-    func didTapStatefulStackView() {
-        interactionDelegate?.didTapFooterView()
+    func didTapFooterRepeatButton() {
+        interactionDelegate?.didTapFooterRepeatButton()
     }
 }
