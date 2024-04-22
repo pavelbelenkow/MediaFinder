@@ -17,20 +17,28 @@ final class MediaListRecentSearchTableView: UITableView {
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: .zero, style: .plain)
-        
-        backgroundColor = .mediaBackground
-        separatorStyle = .none
-        
-        delegate = self
-        dataSource = self
-        
-        register(UITableViewCell.self, forCellReuseIdentifier: Const.recentSearchCellReuseIdentifier)
-        
-        translatesAutoresizingMaskIntoConstraints = false
+        setupAppearance()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Setup UI
+
+private extension MediaListRecentSearchTableView {
+    
+    func setupAppearance() {
+        backgroundColor = .mediaBackground
+        separatorStyle = .none
+        
+        register(UITableViewCell.self, forCellReuseIdentifier: Const.recentSearchCellReuseIdentifier)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        delegate = self
+        dataSource = self
     }
 }
 
