@@ -119,7 +119,14 @@ extension MediaListSearchView {
     }
     
     func updateUI(for state: State, isEmptyResults: Bool) {
-        mediaListCollectionView.updateFooterView(for: state, isEmptyResults: isEmptyResults)
+        for item in 0..<mediaTypeCollectionView.numberOfItems(inSection: .zero) {
+            let indexPath = IndexPath(item: item, section: .zero)
+            mediaTypeCollectionView.updateMediaTypeCellFooter(
+                for: state,
+                isEmptyResults: isEmptyResults,
+                at: indexPath
+            )
+        }
     }
     
     func updateCollectionsVisibility(_ state: Bool) {
