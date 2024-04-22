@@ -31,7 +31,20 @@ final class MediaListSearchCollectionView: UICollectionView {
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        
+        setupAppearance()
+        makeDataSource()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Private Methods
+
+private extension MediaListSearchCollectionView {
+    
+    func setupAppearance() {
         backgroundColor = .clear
         
         register(
@@ -50,18 +63,7 @@ final class MediaListSearchCollectionView: UICollectionView {
         translatesAutoresizingMaskIntoConstraints = false
         
         delegate = self
-        
-        makeDataSource()
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-// MARK: - Private Methods
-
-private extension MediaListSearchCollectionView {
     
     func makeDataSource() {
         diffableDataSource = DataSource(
