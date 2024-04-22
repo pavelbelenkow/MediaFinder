@@ -131,7 +131,7 @@ extension MediaListSearchView {
     
     func updateCollectionsVisibility(_ state: Bool) {
         recentSearchTableView.isHidden = state
-        mediaListCollectionView.isHidden = !state
+        mediaTypeCollectionView.isHidden = !state
     }
 }
 
