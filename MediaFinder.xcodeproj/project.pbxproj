@@ -200,7 +200,7 @@
 		592A15132BC5F15400322135 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				592A151A2BC5F5AF00322135 /* CollectionView */,
+				592A151A2BC5F5AF00322135 /* MediaListSearchCollectionView */,
 				592A151D2BC5F79800322135 /* TableView */,
 				592A15162BC5F42F00322135 /* MediaTypePageControl.swift */,
 				592A15142BC5F1C700322135 /* StatefulStackView.swift */,
@@ -212,14 +212,14 @@
 			path = UIComponents;
 			sourceTree = "<group>";
 		};
-		592A151A2BC5F5AF00322135 /* CollectionView */ = {
+		592A151A2BC5F5AF00322135 /* MediaListSearchCollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				592A15182BC5F52E00322135 /* MediaListSearchCollectionView.swift */,
 				592A151B2BC5F5DC00322135 /* MediaListSearchCell.swift */,
 				59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */,
 			);
-			path = CollectionView;
+			path = MediaListSearchCollectionView;
 			sourceTree = "<group>";
 		};
 		592A151D2BC5F79800322135 /* TableView */ = {
