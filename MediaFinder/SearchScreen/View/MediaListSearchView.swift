@@ -3,12 +3,12 @@ import UIKit
 // MARK: - Delegates
 
 protocol MediaListSearchViewDelegate: AnyObject {
-    func collectionViewDidScrollToBottom()
+    func didSelectMediaType(for index: Int)
+    func didScrollToBottomCollectionView()
+    func didTapInnerContentCollectionView(at index: Int)
+    func didTapFooterRepeatButton()
     func getRecentSearches() -> [String]
     func didTapRecentTerm(at index: Int)
-    func didTapMedia(at index: Int)
-    func didSelectMediaType(for index: Int)
-    func didTapRepeatButton()
 }
 
 final class MediaListSearchView: UIView {
