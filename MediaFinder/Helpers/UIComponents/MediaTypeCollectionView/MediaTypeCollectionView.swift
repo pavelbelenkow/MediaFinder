@@ -22,6 +22,23 @@ final class MediaTypeCollectionView: UICollectionView {
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
+        setupAppearance()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: - Setup UI
+
+private extension MediaTypeCollectionView {
+    
+    func setupAppearance() {
+        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = .zero
+        }
         
         backgroundColor = .clear
         
@@ -38,10 +55,6 @@ final class MediaTypeCollectionView: UICollectionView {
         
         dataSource = self
         delegate = self
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -95,7 +108,7 @@ extension MediaTypeCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        CGSize(width: bounds.width, height: bounds.height)
+        CGSize(width: frame.width, height: frame.height)
     }
 }
 

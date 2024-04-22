@@ -23,8 +23,6 @@ final class MediaListSearchView: UIView {
     
     private lazy var mediaTypeCollectionView: MediaTypeCollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = .zero
         let view = MediaTypeCollectionView(frame: .zero, collectionViewLayout: layout)
         view.interactionDelegate = self
         return view
