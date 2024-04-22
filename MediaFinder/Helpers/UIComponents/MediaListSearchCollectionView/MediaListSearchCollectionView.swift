@@ -3,7 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol MediaListSearchCollectionViewDelegate: AnyObject {
-    func collectionViewDidScrollToBottom()
+    func didScrollToBottomCollectionView()
     func didTapMedia(at index: Int)
     func didTapFooterRepeatButton()
 }
@@ -125,7 +125,7 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
         let height = scrollView.frame.size.height
         
         if offsetY > contentHeight - height {
-            interactionDelegate?.collectionViewDidScrollToBottom()
+            interactionDelegate?.didScrollToBottomCollectionView()
         }
     }
     
