@@ -55,6 +55,7 @@ enum Const {
     static let songsPlaceholder = "Songs"
     static let moviesPlaceholder = "Movies"
     static let mediaTypeButtonTitles = ["All", "Movies", "Songs"]
+    static let mediaTypeCellReuseIdentifier = "mediaTypeCell"
     static let mediaListSearchCellReuseIdentifier = "mediaCell"
     static let mediaListSearchFooterReuseIdentifier = "mediaListSearchFooterView"
     static let recentSearchCellReuseIdentifier = "recentSearchCell"
