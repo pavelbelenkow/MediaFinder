@@ -201,7 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				592A151A2BC5F5AF00322135 /* MediaListSearchCollectionView */,
-				592A151D2BC5F79800322135 /* TableView */,
+				592A151D2BC5F79800322135 /* MediaListRecentSearchTableView */,
 				592A15162BC5F42F00322135 /* MediaTypePageControl.swift */,
 				592A15142BC5F1C700322135 /* StatefulStackView.swift */,
 				595EFE712BC960FE00F7E353 /* CustomLabel.swift */,
@@ -222,12 +222,12 @@
 			path = MediaListSearchCollectionView;
 			sourceTree = "<group>";
 		};
-		592A151D2BC5F79800322135 /* TableView */ = {
+		592A151D2BC5F79800322135 /* MediaListRecentSearchTableView */ = {
 			isa = PBXGroup;
 			children = (
 				592A151E2BC5F7B300322135 /* MediaListRecentSearchTableView.swift */,
 			);
-			path = TableView;
+			path = MediaListRecentSearchTableView;
 			sourceTree = "<group>";
 		};
 		5934770C2BC05BB1004BE3AF /* NetworkClient */ = {
