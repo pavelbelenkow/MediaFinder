@@ -73,7 +73,7 @@ private extension MediaTypePageControl {
     func createButton() {
         buttons.removeAll()
         subviews.forEach { $0.removeFromSuperview() }
-        for (index, buttonTitle) in buttonTitles.enumerated() {
+        buttonTitles.enumerated().forEach { index, buttonTitle in
             let button = UIButton(type: .custom)
             button.setTitle(buttonTitle, for: .normal)
             button.titleLabel?.font = .boldSystemFont(ofSize: 19)
