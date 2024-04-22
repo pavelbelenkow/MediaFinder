@@ -3,7 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol MediaListSearchFooterViewDelegate: AnyObject {
-    func didTapRepeatButton()
+    func didTapStatefulStackView()
 }
 
 final class MediaListSearchFooterView: UICollectionReusableView {
@@ -64,6 +64,6 @@ extension MediaListSearchFooterView {
 extension MediaListSearchFooterView: StatefulStackViewDelegate {
     
     func didTapRepeatButton() {
-        delegate?.didTapRepeatButton()
+        delegate?.didTapStatefulStackView()
     }
 }
