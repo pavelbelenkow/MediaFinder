@@ -5,6 +5,7 @@ import UIKit
 protocol MediaListSearchCollectionViewDelegate: AnyObject {
     func collectionViewDidScrollToBottom()
     func didTapMedia(at index: Int)
+    func didTapFooterView()
 }
 
 final class MediaListSearchCollectionView: UICollectionView {
@@ -86,6 +87,7 @@ private extension MediaListSearchCollectionView {
                 ) as? MediaListSearchFooterView
                 
                 footerView?.updateStackView(for: .idle, isEmptyResults: true)
+                footerView?.delegate = self
                 
                 return footerView
             }
@@ -176,5 +178,14 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
         ViewAnimator.shared.animateUnhighlight(for: cell)
+    }
+}
+
+// MARK: - MediaListSearchFooterViewDelegate Methods
+
+extension MediaListSearchCollectionView: MediaListSearchFooterViewDelegate {
+    
+    func didTapStatefulStackView() {
+        interactionDelegate?.didTapFooterView()
     }
 }
