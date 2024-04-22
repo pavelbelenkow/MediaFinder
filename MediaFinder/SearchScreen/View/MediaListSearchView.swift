@@ -21,15 +21,11 @@ final class MediaListSearchView: UIView {
         return control
     }()
     
-    private lazy var containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var mediaListCollectionView: MediaListSearchCollectionView = {
+    private lazy var mediaTypeCollectionView: MediaTypeCollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let view = MediaListSearchCollectionView(frame: .zero, collectionViewLayout: layout)
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = .zero
+        let view = MediaTypeCollectionView(frame: .zero, collectionViewLayout: layout)
         view.interactionDelegate = self
         return view
     }()
@@ -64,8 +60,7 @@ private extension MediaListSearchView {
     func setupAppearance() {
         setupBackgroundColor()
         setupMediaTypePageControl()
-        setupContainerView()
-        setupMediaListCollectionView()
+        setupMediaTypeCollectionView()
         setupRecentSearchTableView()
     }
     
@@ -84,37 +79,26 @@ private extension MediaListSearchView {
         ])
     }
     
-    func setupContainerView() {
-        addSubview(containerView)
+    func setupMediaTypeCollectionView() {
+        addSubview(mediaTypeCollectionView)
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: mediaTypePageControl.bottomAnchor, 
-                                               constant: Const.spacingExtraSmall),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            containerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
-        ])
-    }
-    
-    func setupMediaListCollectionView() {
-        containerView.addSubview(mediaListCollectionView)
-        
-        NSLayoutConstraint.activate([
-            mediaListCollectionView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            mediaListCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            mediaListCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            mediaListCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            mediaTypeCollectionView.topAnchor.constraint(equalTo: mediaTypePageControl.bottomAnchor,
+                                                         constant: Const.spacingExtraSmall),
+            mediaTypeCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            mediaTypeCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            mediaTypeCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
     func setupRecentSearchTableView() {
-        containerView.addSubview(recentSearchTableView)
+        addSubview(recentSearchTableView)
         
         NSLayoutConstraint.activate([
-            recentSearchTableView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            recentSearchTableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            recentSearchTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            recentSearchTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            recentSearchTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            recentSearchTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            recentSearchTableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            recentSearchTableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
     }
 }
