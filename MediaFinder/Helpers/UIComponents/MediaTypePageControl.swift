@@ -73,12 +73,12 @@ private extension MediaTypePageControl {
     func createButton() {
         buttons.removeAll()
         subviews.forEach { $0.removeFromSuperview() }
-        for buttonTitle in buttonTitles {
+        for (index, buttonTitle) in buttonTitles.enumerated() {
             let button = UIButton(type: .custom)
             button.setTitle(buttonTitle, for: .normal)
             button.titleLabel?.font = .boldSystemFont(ofSize: 19)
-            button.addTarget(self, action:#selector(buttonAction), for: .touchUpInside)
-            button.setTitleColor(.white, for: .normal)
+            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+            button.setTitleColor(index == selectedIndex ? .white : .lightText, for: .normal)
             buttons.append(button)
         }
     }
@@ -124,6 +124,7 @@ private extension MediaTypePageControl {
     func updateButtonAppearance(for newIndex: Int) {
         buttons.enumerated().forEach { index, button in
             UIView.animate(withDuration: 0.25) {
+                button.setTitleColor(index == newIndex ? .white : .lightText, for: .normal)
                 button.transform = index == newIndex ? CGAffineTransform(scaleX: 0.8, y: 0.8) : .identity
             }
         }
