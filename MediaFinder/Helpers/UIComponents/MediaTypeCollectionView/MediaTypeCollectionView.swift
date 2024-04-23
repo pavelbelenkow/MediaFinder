@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol MediaTypeCollectionViewDelegate: AnyObject {
+    func didScrollHorizontallyCollectionView(to index: Int)
     func didScrollToBottomMediaTypeCell()
     func didTapInnerContentMediaTypeCell(at index: Int)
     func didTapInnerContentFooterRepeatButton()
@@ -102,6 +103,15 @@ extension MediaTypeCollectionView: UICollectionViewDataSource {
 // MARK: - Delegate Methods
 
 extension MediaTypeCollectionView: UICollectionViewDelegateFlowLayout {
+    
+    func scrollViewWillEndDragging(
+        _ scrollView: UIScrollView,
+        withVelocity velocity: CGPoint,
+        targetContentOffset: UnsafeMutablePointer<CGPoint>
+    ) {
+        let index = Int(targetContentOffset.pointee.x / scrollView.frame.width)
+        interactionDelegate?.didScrollHorizontallyCollectionView(to: index)
+    }
     
     func collectionView(
         _ collectionView: UICollectionView,
