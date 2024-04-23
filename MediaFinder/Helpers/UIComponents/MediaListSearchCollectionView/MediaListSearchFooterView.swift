@@ -41,7 +41,7 @@ private extension MediaListSearchFooterView {
         
         NSLayoutConstraint.activate([
             statefulStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            statefulStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            statefulStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -Const.spacingThirty),
             statefulStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                        constant: Const.spacingOneHundred),
             statefulStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
