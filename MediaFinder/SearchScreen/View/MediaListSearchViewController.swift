@@ -107,8 +107,8 @@ private extension MediaListSearchViewController {
         
         viewModel.searchListSubject
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] mediaList in
-                self?.mediaListSearchView.reloadCollectionView(with: mediaList)
+            .sink { [weak self] mediaList, mediaType in
+                self?.mediaListSearchView.reloadCollectionView(with: mediaList, and: mediaType)
             }
             .store(in: &viewModel.cancellables)
         
