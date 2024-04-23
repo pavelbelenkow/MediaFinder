@@ -161,7 +161,7 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForFooterInSection section: Int
     ) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: Const.spacingLarge)
+        CGSize(width: collectionView.bounds.width, height: Const.spacingOneHundred)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
