@@ -63,7 +63,8 @@ private extension MediaTypeCollectionView {
 
 extension MediaTypeCollectionView {
     
-    func applySnapshotToMediaTypeCell(with data: [Media], at indexPath: IndexPath) {
+    func applySnapshotToMediaTypeCell(with data: [Media], at index: Int) {
+        let indexPath = IndexPath(item: index, section: .zero)
         guard let cell = cellForItem(at: indexPath) as? MediaTypeCell else { return }
         cell.applySnapshotToInnerContent(with: data)
     }
