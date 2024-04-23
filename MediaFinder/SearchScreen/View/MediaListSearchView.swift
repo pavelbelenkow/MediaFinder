@@ -146,6 +146,10 @@ extension MediaListSearchView: MediaTypePageControlDelegate {
 
 extension MediaListSearchView: MediaTypeCollectionViewDelegate {
     
+    func didScrollHorizontallyCollectionView(to index: Int) {
+        mediaTypePageControl.handleSelectionChange(to: index)
+    }
+    
     func didScrollToBottomMediaTypeCell() {
         delegate?.didScrollToBottomCollectionView()
     }
