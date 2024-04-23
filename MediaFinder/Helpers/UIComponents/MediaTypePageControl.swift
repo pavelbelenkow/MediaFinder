@@ -93,13 +93,6 @@ private extension MediaTypePageControl {
         handleSelectionChange(to: tappedButtonIndex)
     }
     
-    func handleSelectionChange(to newIndex: Int) {
-        guard newIndex != selectedIndex else { return }
-        animateSelectionChange(to: newIndex)
-        updateSelectorPosition(to: newIndex)
-        updateButtonAppearance(for: newIndex)
-    }
-    
     func animateSelectionChange(to newIndex: Int) {
         ViewAnimator.shared.animateSelection(for: buttons[newIndex]) {
             self.selectedIndex = newIndex
@@ -129,5 +122,17 @@ private extension MediaTypePageControl {
                 button.transform = isSelected ? CGAffineTransform(scaleX: 0.8, y: 0.8) : .identity
             }
         }
+    }
+}
+
+// MARK: - Methods
+
+extension MediaTypePageControl {
+    
+    func handleSelectionChange(to newIndex: Int) {
+        guard newIndex != selectedIndex else { return }
+        animateSelectionChange(to: newIndex)
+        updateSelectorPosition(to: newIndex)
+        updateButtonAppearance(for: newIndex)
     }
 }
