@@ -4,7 +4,7 @@ import Combine
 
 protocol MediaListSearchViewModelProtocol: ObservableObject {
     var stateSubject: CurrentValueSubject<State, Never> { get }
-    var searchListSubject: CurrentValueSubject<[Media], Never> { get }
+    var searchListSubject: CurrentValueSubject<(list: [Media], type: EntityType), Never> { get }
     var recentSearchesSubject: CurrentValueSubject<[String], Never> { get }
     var searchBarPlaceholderSubject: CurrentValueSubject<String, Never> { get }
     var searchBarTextSubject: CurrentValueSubject<String?, Never> { get }
@@ -28,7 +28,7 @@ final class MediaListSearchViewModel: MediaListSearchViewModelProtocol {
     // MARK: - Subject Properties
     
     private(set) var stateSubject = CurrentValueSubject<State, Never>(.idle)
-    private(set) var searchListSubject = CurrentValueSubject<[Media], Never>([])
+    private(set) var searchListSubject = CurrentValueSubject<(list: [Media], type: EntityType), Never>(([], .all))
     private(set) var recentSearchesSubject = CurrentValueSubject<[String], Never>([])
     private(set) var searchBarPlaceholderSubject = CurrentValueSubject<String, Never>(Const.songsAndMoviesPlaceholder)
     private(set) var searchBarTextSubject = CurrentValueSubject<String?, Never>(nil)
@@ -95,11 +95,11 @@ extension MediaListSearchViewModel {
                     guard let self else { return }
                     
                     if currentPage == .zero {
-                        searchListSubject.send(mediaList)
+                        searchListSubject.send((mediaList, entityType))
                     } else {
-                        let currentMediaList = searchListSubject.value
+                        let currentMediaList = searchListSubject.value.list
                         let updatedMediaList = currentMediaList + mediaList
-                        searchListSubject.send(updatedMediaList)
+                        searchListSubject.send((updatedMediaList, entityType))
                     }
                     
                     stateSubject.send(.loaded)
@@ -169,7 +169,7 @@ extension MediaListSearchViewModel {
     }
     
     func didSelectMedia(at index: Int) {
-        let selectedMediaItem = searchListSubject.value[index]
+        let selectedMediaItem = searchListSubject.value.list[index]
         selectedMediaSubject.send(selectedMediaItem)
     }
 }
