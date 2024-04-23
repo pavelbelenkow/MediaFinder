@@ -138,7 +138,13 @@ extension MediaListSearchView {
 extension MediaListSearchView: MediaTypePageControlDelegate {
     
     func change(to index: Int) {
+        let indexPath = IndexPath(item: index, section: .zero)
         delegate?.didSelectMediaType(for: index)
+        mediaTypeCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
     }
 }
 
