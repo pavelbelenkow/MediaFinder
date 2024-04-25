@@ -129,6 +129,13 @@ extension DetailedMediaView {
         artistInfoView.update(for: artist)
         moreFromArtistLabel.text = artist.moreFromArtistPlaceHolder()
     }
+    
+    func updateUI(for collection: [Media]) {
+        moreFromArtistLabel.isHidden = collection.isEmpty
+        artistCollectionView.applySnapshot(for: collection)
+        
+    }
+}
 }
 
 // MARK: - StatefulStackViewDelegate Methods
