@@ -54,6 +54,7 @@
 		59A0E4142BCC6D9F0012C628 /* ViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A0E4132BCC6D9F0012C628 /* ViewAnimator.swift */; };
 		59AE8B242BC737F400B2C79C /* SearchHistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */; };
 		59B6E0B12BDAED25002F0516 /* ArtistCollectionLookupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B6E0B02BDAED25002F0516 /* ArtistCollectionLookupRequest.swift */; };
+		59B6E0B42BDAEF2C002F0516 /* ArtistCollectionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B6E0B32BDAEF2C002F0516 /* ArtistCollectionMapper.swift */; };
 		59F740162BD5B432000031BE /* MediaListSearchFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +119,7 @@
 		59A0E4132BCC6D9F0012C628 /* ViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAnimator.swift; sourceTree = "<group>"; };
 		59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryStorage.swift; sourceTree = "<group>"; };
 		59B6E0B02BDAED25002F0516 /* ArtistCollectionLookupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionLookupRequest.swift; sourceTree = "<group>"; };
+		59B6E0B32BDAEF2C002F0516 /* ArtistCollectionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionMapper.swift; sourceTree = "<group>"; };
 		59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,7 +165,7 @@
 			children = (
 				590D061E2BC80598002D5688 /* ArtistLookupService.swift */,
 				59B6E0AF2BDAED12002F0516 /* Requests */,
-				595EFE792BC9743200F7E353 /* ArtistMapper.swift */,
+				59B6E0B22BDAEF17002F0516 /* Mappers */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -380,6 +382,15 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
+		59B6E0B22BDAEF17002F0516 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				595EFE792BC9743200F7E353 /* ArtistMapper.swift */,
+				59B6E0B32BDAEF2C002F0516 /* ArtistCollectionMapper.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
 		59C813E62BD97EB1003D405D /* ArtistCollectionCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +513,7 @@
 				592A15172BC5F42F00322135 /* MediaTypePageControl.swift in Sources */,
 				592A15192BC5F52E00322135 /* MediaListSearchCollectionView.swift in Sources */,
 				5949D0AF2BC1B63F00A860C8 /* SearchServiceError.swift in Sources */,
+				59B6E0B42BDAEF2C002F0516 /* ArtistCollectionMapper.swift in Sources */,
 				595EFE702BC9603F00F7E353 /* DetailedMediaView.swift in Sources */,
 				592A150D2BC5816500322135 /* ImageLoader.swift in Sources */,
 				59B6E0B12BDAED25002F0516 /* ArtistCollectionLookupRequest.swift in Sources */,
