@@ -38,6 +38,7 @@ enum Const {
     
     static let songKind = "song"
     static let movieKind = "feature-movie"
+    static let albumKind = "album"
     static let artistKind = "Artist"
     static let listenInAppleMusic = "Listen in Apple Music"
     static let watchOnAppleTV = "Watch on Apple TV"
