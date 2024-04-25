@@ -61,8 +61,8 @@ extension Media {
         kind == Const.movieKind
     }
     
-    func highQualityImage() -> String? {
-        artwork100?.replacingOccurrences(of: Const.oneHundredSize, with: Const.fiveHundredSize)
+    func setImageQuality(to size: String) -> String? {
+        artwork100?.replacingOccurrences(of: Const.oneHundredSize, with: size)
     }
     
     func attributedLinkText() -> NSAttributedString {
