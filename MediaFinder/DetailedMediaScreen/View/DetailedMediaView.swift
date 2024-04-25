@@ -16,6 +16,7 @@ final class DetailedMediaView: UIScrollView {
     
     private lazy var moreFromArtistLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .semibold)
         label.numberOfLines = .zero
         return label

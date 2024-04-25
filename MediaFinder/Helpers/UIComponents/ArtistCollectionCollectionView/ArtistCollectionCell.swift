@@ -13,6 +13,7 @@ final class ArtistCollectionCell: UICollectionViewCell {
     
     private lazy var collectionNameLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.numberOfLines = 2
