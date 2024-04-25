@@ -60,6 +60,13 @@ private extension DetailedMediaViewController {
                 self?.detailedMediaView.updateUI(for: artist.first)
             }
             .store(in: &viewModel.cancellables)
+        
+        viewModel.artistCollectionSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] collection in
+                self?.detailedMediaView.updateUI(for: collection)
+            }
+            .store(in: &viewModel.cancellables)
     }
 }
 
