@@ -6,6 +6,7 @@ protocol DetailedMediaViewModelProtocol: ObservableObject {
     var stateSubject: CurrentValueSubject<State, Never> { get }
     var mediaSubject: CurrentValueSubject<Media?, Never> { get }
     var artistSubject: CurrentValueSubject<[Artist], Never> { get }
+    var artistCollectionSubject: CurrentValueSubject<[Media], Never> { get }
     
     var cancellables: Set<AnyCancellable> { get set }
     
@@ -19,6 +20,7 @@ final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
     private(set) var stateSubject = CurrentValueSubject<State, Never>(.idle)
     private(set) var mediaSubject = CurrentValueSubject<Media?, Never>(nil)
     private(set) var artistSubject = CurrentValueSubject<[Artist], Never>([])
+    private(set) var artistCollectionSubject = CurrentValueSubject<[Media], Never>([])
     
     // MARK: - Private Properties
     
