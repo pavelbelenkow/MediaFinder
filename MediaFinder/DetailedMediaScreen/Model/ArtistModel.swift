@@ -28,6 +28,10 @@ extension Artist {
         isSongArtist() ? Const.productionBy.appending(name) : Const.distributedBy.appending(name)
     }
     
+    func moreFromArtistPlaceHolder() -> String {
+        isSongArtist() ? Const.moreAlbums.appending(name) : Const.moreBundles.appending(name)
+    }
+    
     func attributedLinkText() -> NSAttributedString {
         let placeholder = isSongArtist() ? Const.moreAboutArtist : Const.moreAboutDistributor
         return NSAttributedString.attributedLinkText(placeholder: placeholder, link: link)
