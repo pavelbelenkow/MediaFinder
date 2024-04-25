@@ -55,6 +55,8 @@
 		59AE8B242BC737F400B2C79C /* SearchHistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */; };
 		59B6E0B12BDAED25002F0516 /* ArtistCollectionLookupRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B6E0B02BDAED25002F0516 /* ArtistCollectionLookupRequest.swift */; };
 		59B6E0B42BDAEF2C002F0516 /* ArtistCollectionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B6E0B32BDAEF2C002F0516 /* ArtistCollectionMapper.swift */; };
+		59B6E0B62BDAF2D7002F0516 /* ArtistCollectionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B6E0B52BDAF2D7002F0516 /* ArtistCollectionCollectionView.swift */; };
+		59C813E82BD97F04003D405D /* ArtistCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C813E72BD97F04003D405D /* ArtistCollectionCell.swift */; };
 		59F740162BD5B432000031BE /* MediaListSearchFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +122,8 @@
 		59AE8B232BC737F400B2C79C /* SearchHistoryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryStorage.swift; sourceTree = "<group>"; };
 		59B6E0B02BDAED25002F0516 /* ArtistCollectionLookupRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionLookupRequest.swift; sourceTree = "<group>"; };
 		59B6E0B32BDAEF2C002F0516 /* ArtistCollectionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionMapper.swift; sourceTree = "<group>"; };
+		59B6E0B52BDAF2D7002F0516 /* ArtistCollectionCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionCollectionView.swift; sourceTree = "<group>"; };
+		59C813E72BD97F04003D405D /* ArtistCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionCell.swift; sourceTree = "<group>"; };
 		59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,6 +215,7 @@
 				5946FEA82BD6EE3D00E53591 /* MediaTypeCollectionView */,
 				592A151A2BC5F5AF00322135 /* MediaListSearchCollectionView */,
 				592A151D2BC5F79800322135 /* MediaListRecentSearchTableView */,
+				59C813E62BD97EB1003D405D /* ArtistCollectionCollectionView */,
 				592A15162BC5F42F00322135 /* MediaTypePageControl.swift */,
 				592A15142BC5F1C700322135 /* StatefulStackView.swift */,
 				595EFE712BC960FE00F7E353 /* CustomLabel.swift */,
@@ -395,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				59C813E72BD97F04003D405D /* ArtistCollectionCell.swift */,
+				59B6E0B52BDAF2D7002F0516 /* ArtistCollectionCollectionView.swift */,
 			);
 			path = ArtistCollectionCollectionView;
 			sourceTree = "<group>";
@@ -522,6 +528,7 @@
 				595EFE6E2BC95FF500F7E353 /* NSAttributedString+Extensions.swift in Sources */,
 				595EFE762BC9619100F7E353 /* MediaInfoView.swift in Sources */,
 				592A15072BC57E3B00322135 /* Int+Extensions.swift in Sources */,
+				59C813E82BD97F04003D405D /* ArtistCollectionCell.swift in Sources */,
 				5949D0B82BC1BEDA00A860C8 /* MediaListSearchViewModel.swift in Sources */,
 				593477102BC05BF1004BE3AF /* NetworkRequest.swift in Sources */,
 				5934770E2BC05BBF004BE3AF /* NetworkClient.swift in Sources */,
@@ -538,6 +545,7 @@
 				592A150B2BC5807400322135 /* GeometricParams.swift in Sources */,
 				5949D0B32BC1B9E700A860C8 /* MediaListSearchRequest.swift in Sources */,
 				592A151C2BC5F5DC00322135 /* MediaListSearchCell.swift in Sources */,
+				59B6E0B62BDAF2D7002F0516 /* ArtistCollectionCollectionView.swift in Sources */,
 				593477132BC08644004BE3AF /* Const.swift in Sources */,
 				59F740162BD5B432000031BE /* MediaListSearchFooterView.swift in Sources */,
 				590D06232BC810F6002D5688 /* DetailedMediaViewController.swift in Sources */,
