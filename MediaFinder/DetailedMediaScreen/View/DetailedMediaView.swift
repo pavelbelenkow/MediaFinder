@@ -13,8 +13,14 @@ final class DetailedMediaView: UIScrollView {
     private lazy var mediaInfoView = MediaInfoView()
     private lazy var artistInfoView = ArtistInfoView()
     
+    private lazy var moreFromArtistLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17, weight: .semibold)
+        label.numberOfLines = .zero
+        return label
+    }()
     private lazy var detailedMediaStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [mediaInfoView, artistInfoView])
+        let view = UIStackView(arrangedSubviews: [mediaInfoView, artistInfoView, moreFromArtistLabel])
         view.axis = .vertical
         view.spacing = Const.spacingMedium
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -100,6 +106,7 @@ extension DetailedMediaView {
     func updateUI(for artist: Artist?) {
         guard let artist else { return }
         artistInfoView.update(for: artist)
+        moreFromArtistLabel.text = artist.moreFromArtistPlaceHolder()
     }
 }
 
