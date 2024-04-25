@@ -89,4 +89,7 @@ enum Const {
     static let createdBy = "by\n"
     static let aboutArtist = "About "
     static let artistGenre = "Genre: "
+    static let moreAlbums = "Albums By "
+    static let moreBundles = "Bundles From "
+    static let artistCollectionCellReuseIdentifier = "artistCollectionCell"
 }
