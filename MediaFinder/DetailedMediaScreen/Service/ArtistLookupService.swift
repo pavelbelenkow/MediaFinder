@@ -5,6 +5,7 @@ import Combine
 
 protocol ArtistLookupServiceProtocol {
     func fetchArtist(by id: Int) -> AnyPublisher<[Artist], Error>
+    func fetchArtistCollection(by id: Int) -> AnyPublisher<[Media], Error>
 }
 
 final class ArtistLookupService {
@@ -53,6 +54,20 @@ extension ArtistLookupService: ArtistLookupServiceProtocol {
         return networkClient
             .publisher(request: urlRequest)
             .tryMap(ArtistMapper.map)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchArtistCollection(by id: Int) -> AnyPublisher<[Media], Error> {
+        
+        let request = ArtistCollectionLookupRequest(id: id)
+        
+        guard let urlRequest = create(request: request) else {
+            return Fail(error: SearchServiceError.invalidRequest).eraseToAnyPublisher()
+        }
+        
+        return networkClient
+            .publisher(request: urlRequest)
+            .tryMap(ArtistCollectionMapper.map)
             .eraseToAnyPublisher()
     }
 }
