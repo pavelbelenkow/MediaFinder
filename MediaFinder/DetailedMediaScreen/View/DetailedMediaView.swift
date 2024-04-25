@@ -19,6 +19,14 @@ final class DetailedMediaView: UIScrollView {
         label.numberOfLines = .zero
         return label
     }()
+    
+    private lazy var artistCollectionView: ArtistCollectionCollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let view = ArtistCollectionCollectionView(frame: .zero, collectionViewLayout: layout)
+        view.interactionDelegate = self
+        return view
+    }()
+    
     private lazy var detailedMediaStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [mediaInfoView, artistInfoView, moreFromArtistLabel])
         view.axis = .vertical
@@ -58,6 +66,7 @@ private extension DetailedMediaView {
         showsVerticalScrollIndicator = false
         
         setupDetailedMediaStackView()
+        setupArtistCollectionView()
         setupStatefulStackView()
     }
     
@@ -65,14 +74,24 @@ private extension DetailedMediaView {
         addSubview(detailedMediaStackView)
         
         NSLayoutConstraint.activate([
-            detailedMediaStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
-                                                    constant: Const.spacingMedium),
-            detailedMediaStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
-                                                     constant: -Const.spacingMedium),
             detailedMediaStackView.topAnchor.constraint(equalTo: topAnchor,
-                                                     constant: Const.spacingMedium),
-            detailedMediaStackView.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                                     constant: -Const.spacingMedium)
+                                                        constant: Const.spacingMedium),
+            detailedMediaStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
+                                                            constant: Const.spacingMedium),
+            detailedMediaStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
+                                                             constant: -Const.spacingMedium)
+        ])
+    }
+    
+    func setupArtistCollectionView() {
+        addSubview(artistCollectionView)
+        
+        NSLayoutConstraint.activate([
+            artistCollectionView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.4),
+            artistCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Const.spacingMedium),
+            artistCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            artistCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            artistCollectionView.topAnchor.constraint(equalTo: detailedMediaStackView.bottomAnchor, constant: Const.spacingMedium)
         ])
     }
     
@@ -95,7 +114,9 @@ extension DetailedMediaView {
     
     func updateUI(for state: State) {
         statefulStackView.update(for: state, isEmptyResults: false)
-        detailedMediaStackView.isHidden = !(state == .loaded)
+        [
+            detailedMediaStackView, moreFromArtistLabel, artistCollectionView
+        ].forEach { $0.isHidden = !(state == .loaded) }
     }
     
     func updateUI(for media: Media?) {
