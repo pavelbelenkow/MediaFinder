@@ -1,4 +1,5 @@
 import UIKit
+import SafariServices
 
 final class DetailedMediaViewController: UIViewController {
     
@@ -73,6 +74,16 @@ private extension DetailedMediaViewController {
 // MARK: - DetailedMediaViewDelegate Methods
 
 extension DetailedMediaViewController: DetailedMediaViewDelegate {
+    
+    func didTapArtistCollectionItem(at index: Int) {
+        guard
+            let urlString = viewModel.artistCollectionSubject.value[index].collectionView,
+            let url = URL(string: urlString)
+        else { return }
+        
+        let sf = SFSafariViewController(url: url)
+        present(sf, animated: true)
+    }
     
     func didTapRepeatButton() {
         viewModel.fetchArtist()
