@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol DetailedMediaViewDelegate: AnyObject {
+    func didTapArtistCollectionItem(at index: Int)
     func didTapRepeatButton()
 }
 
@@ -136,6 +137,14 @@ extension DetailedMediaView {
         
     }
 }
+
+// MARK: - ArtistCollectionCollectionViewDelegate Methods
+
+extension DetailedMediaView: ArtistCollectionCollectionViewDelegate {
+    
+    func didTapCollection(at index: Int) {
+        interactionDelegate?.didTapArtistCollectionItem(at: index)
+    }
 }
 
 // MARK: - StatefulStackViewDelegate Methods
