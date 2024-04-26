@@ -9,6 +9,7 @@ final class ImageLoader {
     
     // MARK: - Private Properties
     
+    private let placeholder = UIImage(systemName: Const.imagePlaceholder)
     private let cache = NSCache<NSString, UIImage>()
     private var cancellables: Set<AnyCancellable> = []
     
@@ -38,7 +39,7 @@ final class ImageLoader {
         
         networkClient.publisher(request: request)
             .map { data, _ in UIImage(data: data) }
-            .replaceError(with: nil)
+            .replaceError(with: placeholder)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] image in
                 
