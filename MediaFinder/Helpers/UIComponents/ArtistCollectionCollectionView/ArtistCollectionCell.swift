@@ -6,6 +6,7 @@ final class ArtistCollectionCell: UICollectionViewCell {
     
     private lazy var collectionImageView: UIImageView = {
         let view = UIImageView()
+        view.tintColor = .black
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         return view

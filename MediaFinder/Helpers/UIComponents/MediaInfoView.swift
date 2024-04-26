@@ -6,6 +6,7 @@ final class MediaInfoView: UIStackView {
     
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
+        view.tintColor = .black
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = Const.imageViewCornerRadius
         view.layer.masksToBounds = true
