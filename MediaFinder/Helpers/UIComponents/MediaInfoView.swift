@@ -4,6 +4,13 @@ final class MediaInfoView: UIStackView {
     
     // MARK: - Private Properties
     
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.style = .medium
+        view.color = .white
+        return view
+    }()
+    
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.tintColor = .black
@@ -90,7 +97,10 @@ extension MediaInfoView {
             let _ = media.trackView
         else { return }
         
+        activityIndicatorView.startAnimating()
+        
         ImageLoader.shared.loadImage(from: image) { [weak self] image in
+            self?.activityIndicatorView.stopAnimating()
             self?.imageView.image = image
         }
         
