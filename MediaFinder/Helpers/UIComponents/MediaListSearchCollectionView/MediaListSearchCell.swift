@@ -4,6 +4,13 @@ final class MediaListSearchCell: UICollectionViewCell {
     
     // MARK: - Private Properties
     
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.style = .medium
+        view.color = .mediaBackground
+        return view
+    }()
+    
     private lazy var mediaImageView: UIImageView = {
         let view = UIImageView()
         view.tintColor = .black
@@ -49,7 +56,10 @@ final class MediaListSearchCell: UICollectionViewCell {
     }()
     
     private lazy var mediaStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [mediaImageView, mediaKindLabel, mediaNameLabel, mediaDetailedStackView])
+        let view = UIStackView(arrangedSubviews: [
+            activityIndicatorView, mediaImageView, mediaKindLabel,
+            mediaNameLabel, mediaDetailedStackView
+        ])
         view.axis = .vertical
         view.distribution = .equalSpacing
         view.isLayoutMarginsRelativeArrangement = true
@@ -94,6 +104,7 @@ private extension MediaListSearchCell {
             mediaStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             mediaStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
+            activityIndicatorView.centerYAnchor.constraint(equalTo: mediaStackView.centerYAnchor),
             mediaImageView.heightAnchor.constraint(equalToConstant: Const.mediaImageViewHeight)
         ])
     }
@@ -115,7 +126,10 @@ extension MediaListSearchCell {
             return
         }
         
+        activityIndicatorView.startAnimating()
+        
         ImageLoader.shared.loadImage(from: image) { [weak self] image in
+            self?.activityIndicatorView.stopAnimating()
             self?.mediaImageView.image = image
         }
         
