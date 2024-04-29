@@ -126,7 +126,7 @@ extension MediaListSearchCell {
     func configure(with media: Media) {
         
         guard
-            let image = media.artwork100,
+            let image = media.setImageQuality(to: Const.twoHundredSize),
             let kind = media.kind,
             let name = media.name,
             let duration = media.duration,
