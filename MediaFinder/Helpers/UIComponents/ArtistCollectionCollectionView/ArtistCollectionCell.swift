@@ -42,7 +42,7 @@ final class ArtistCollectionCell: UICollectionViewCell {
             collectionNameLabel, collectionGenreLabel, collectionPriceLabel
         ])
         view.axis = .vertical
-        view.spacing = Const.spacingSmall
+        view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
         view.layoutMargins = UIEdgeInsets(top: Const.spacingSmall, left: Const.spacingSmall,
                                           bottom: Const.spacingSmall, right: Const.spacingSmall)
@@ -95,7 +95,7 @@ private extension ArtistCollectionCell {
             collectionStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            collectionImageView.heightAnchor.constraint(equalTo: collectionImageView.widthAnchor, multiplier: 1)
+            collectionImageView.heightAnchor.constraint(equalTo: collectionImageView.widthAnchor)
         ])
     }
 }
