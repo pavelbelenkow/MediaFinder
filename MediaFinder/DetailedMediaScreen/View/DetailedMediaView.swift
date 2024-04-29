@@ -111,6 +111,7 @@ extension DetailedMediaView {
     
     func updateUI(for collection: [Media]) {
         guard !collection.isEmpty else { return }
+        artistInfoView.showMoreFromArtistLabel()
         artistCollectionView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
         artistCollectionView.applySnapshot(for: collection)
     }
