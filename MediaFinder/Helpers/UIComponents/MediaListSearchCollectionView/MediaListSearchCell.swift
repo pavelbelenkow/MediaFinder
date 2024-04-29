@@ -14,7 +14,8 @@ final class MediaListSearchCell: UICollectionViewCell {
     private lazy var mediaImageView: UIImageView = {
         let view = UIImageView()
         view.tintColor = .black
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
     
