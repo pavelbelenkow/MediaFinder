@@ -35,6 +35,21 @@ final class ArtistInfoView: UIStackView {
         return textView
     }()
     
+    private lazy var artistInfoStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [
+            titleLabel, nameLabel, genreLabel, linkTextView
+        ])
+        view.backgroundColor = .white
+        view.axis = .vertical
+        view.spacing = Const.spacingSmall
+        view.layer.cornerRadius = 10
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = UIEdgeInsets(
+            top: Const.spacingMedium, left: Const.spacingMedium,
+            bottom: Const.spacingMedium, right: Const.spacingMedium
+        )
+        return view
+    }()
     // MARK: - Initialisers
     
     override init(frame: CGRect) {
@@ -52,16 +67,13 @@ final class ArtistInfoView: UIStackView {
 private extension ArtistInfoView {
     
     func setupAppearance() {
-        backgroundColor = .white
         axis = .vertical
-        spacing = Const.spacingSmall
-        layer.cornerRadius = 10
-        clipsToBounds = true
+        spacing = Const.spacingMedium
         isHidden = true
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = UIEdgeInsets(
-            top: Const.spacingMedium, left: Const.spacingMedium,
-            bottom: Const.spacingMedium, right:  Const.spacingMedium
+            top: .zero, left: Const.spacingMedium,
+            bottom: .zero, right: Const.spacingMedium
         )
         
         [titleLabel, nameLabel, genreLabel, linkTextView].forEach { addArrangedSubview($0) }
@@ -73,12 +85,15 @@ private extension ArtistInfoView {
 extension ArtistInfoView {
     
     func update(for artist: Artist) {
+        isHidden = false
+        
         titleLabel.text = Const.aboutArtist.appending(artist.kind)
         nameLabel.text = artist.namePlaceholder()
+        
         if let genre = artist.genre {
             genreLabel.text = Const.artistGenre.appending(genre)
         }
+        
         linkTextView.attributedText = artist.attributedLinkText()
-        isHidden = false
     }
 }
