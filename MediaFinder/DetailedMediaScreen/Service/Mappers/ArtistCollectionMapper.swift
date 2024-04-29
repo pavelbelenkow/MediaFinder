@@ -17,6 +17,7 @@ struct ArtistCollectionMapper {
             do {
                 let mediaModel = try decoder.decode(MediaModel.self, from: data)
                 let artistCollection: [Media] = mediaModel.results
+                    .dropFirst()
                     .compactMap {
                         guard
                             let _ = $0.collection,
