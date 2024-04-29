@@ -49,23 +49,30 @@ final class MediaListSearchCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var mediaDetailedStackView: UIStackView = {
+    private lazy var mediaHorizontalStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [mediaDurationLabel, mediaPriceLabel])
         view.axis = .horizontal
         view.distribution = .equalSpacing
         return view
     }()
     
-    private lazy var mediaStackView: UIStackView = {
+    private lazy var mediaDetailedStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
-            activityIndicatorView, mediaImageView, mediaKindLabel,
-            mediaNameLabel, mediaDetailedStackView
+            mediaKindLabel, mediaNameLabel, mediaHorizontalStackView
         ])
         view.axis = .vertical
-        view.distribution = .equalSpacing
+        view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: Const.spacingSmall, left: Const.spacingSmall, 
+        view.layoutMargins = UIEdgeInsets(top: Const.spacingSmall, left: Const.spacingSmall,
                                           bottom: Const.spacingSmall, right: Const.spacingSmall)
+        return view
+    }()
+    
+    private lazy var mediaStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [
+            activityIndicatorView, mediaImageView, mediaDetailedStackView
+        ])
+        view.axis = .vertical
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
