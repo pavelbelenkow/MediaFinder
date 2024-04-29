@@ -37,7 +37,7 @@ final class MediaListSearchCell: UICollectionViewCell {
     
     private lazy var mediaDurationLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .lightGray
+        label.textColor = .darkGray
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         return label
     }()
