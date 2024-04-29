@@ -4,6 +4,13 @@ final class ArtistCollectionCell: UICollectionViewCell {
     
     // MARK: - Private Properties
     
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.style = .medium
+        view.color = .white
+        return view
+    }()
+    
     private lazy var collectionImageView: UIImageView = {
         let view = UIImageView()
         view.tintColor = .black
@@ -50,7 +57,9 @@ final class ArtistCollectionCell: UICollectionViewCell {
     }()
     
     private lazy var collectionStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [collectionImageView, detailedInfoStackView])
+        let view = UIStackView(arrangedSubviews: [
+            activityIndicatorView ,collectionImageView, detailedInfoStackView
+        ])
         view.axis = .vertical
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -95,6 +104,7 @@ private extension ArtistCollectionCell {
             collectionStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
+            activityIndicatorView.centerYAnchor.constraint(equalTo: collectionStackView.centerYAnchor),
             collectionImageView.heightAnchor.constraint(equalTo: collectionImageView.widthAnchor)
         ])
     }
