@@ -114,7 +114,7 @@ private extension MediaListSearchCell {
             mediaStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             activityIndicatorView.centerYAnchor.constraint(equalTo: mediaStackView.centerYAnchor),
-            mediaImageView.heightAnchor.constraint(equalToConstant: Const.mediaImageViewHeight)
+            mediaImageView.heightAnchor.constraint(equalTo: mediaImageView.widthAnchor)
         ])
     }
 }
