@@ -50,6 +50,16 @@ final class ArtistInfoView: UIStackView {
         )
         return view
     }()
+    
+    private lazy var moreFromArtistLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = .systemFont(ofSize: 17, weight: .semibold)
+        label.numberOfLines = .zero
+        label.isHidden = true
+        return label
+    }()
+    
     // MARK: - Initialisers
     
     override init(frame: CGRect) {
@@ -76,7 +86,7 @@ private extension ArtistInfoView {
             bottom: .zero, right: Const.spacingMedium
         )
         
-        [titleLabel, nameLabel, genreLabel, linkTextView].forEach { addArrangedSubview($0) }
+        [artistInfoStackView, moreFromArtistLabel].forEach { addArrangedSubview($0) }
     }
 }
 
@@ -95,5 +105,7 @@ extension ArtistInfoView {
         }
         
         linkTextView.attributedText = artist.attributedLinkText()
+        moreFromArtistLabel.text = artist.moreFromArtistPlaceHolder()
+    }
     }
 }

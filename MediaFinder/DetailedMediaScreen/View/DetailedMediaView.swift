@@ -14,15 +14,6 @@ final class DetailedMediaView: UIScrollView {
     private lazy var mediaInfoView = MediaInfoView()
     private lazy var artistInfoView = ArtistInfoView()
     
-    private lazy var moreFromArtistLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 17, weight: .semibold)
-        label.numberOfLines = .zero
-        label.isHidden = true
-        return label
-    }()
-    
     private lazy var artistCollectionView: ArtistCollectionCollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = ArtistCollectionCollectionView(frame: .zero, collectionViewLayout: layout)
@@ -31,7 +22,9 @@ final class DetailedMediaView: UIScrollView {
     }()
     
     private lazy var detailedMediaStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [mediaInfoView, artistInfoView, moreFromArtistLabel, artistCollectionView])
+        let view = UIStackView(arrangedSubviews: [
+            mediaInfoView, artistInfoView, artistCollectionView
+        ])
         view.axis = .vertical
         view.spacing = Const.spacingMedium
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -102,7 +95,7 @@ extension DetailedMediaView {
     func updateUI(for state: State) {
         statefulStackView.update(for: state, isEmptyResults: false)
         [
-            detailedMediaStackView, moreFromArtistLabel, artistCollectionView
+            detailedMediaStackView, artistCollectionView
         ].forEach { $0.isHidden = !(state == .loaded) }
     }
     
@@ -114,15 +107,12 @@ extension DetailedMediaView {
     func updateUI(for artist: Artist?) {
         guard let artist else { return }
         artistInfoView.update(for: artist)
-        moreFromArtistLabel.text = artist.moreFromArtistPlaceHolder()
     }
     
     func updateUI(for collection: [Media]) {
         guard !collection.isEmpty else { return }
         artistCollectionView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
-        moreFromArtistLabel.isHidden = false
         artistCollectionView.applySnapshot(for: collection)
-        
     }
 }
 
