@@ -31,7 +31,7 @@ final class DetailedMediaView: UIScrollView {
     }()
     
     private lazy var detailedMediaStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [mediaInfoView, artistInfoView, moreFromArtistLabel])
+        let view = UIStackView(arrangedSubviews: [mediaInfoView, artistInfoView, moreFromArtistLabel, artistCollectionView])
         view.axis = .vertical
         view.spacing = Const.spacingMedium
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +69,6 @@ private extension DetailedMediaView {
         showsVerticalScrollIndicator = false
         
         setupDetailedMediaStackView()
-        setupArtistCollectionView()
         setupStatefulStackView()
     }
     
@@ -77,24 +76,9 @@ private extension DetailedMediaView {
         addSubview(detailedMediaStackView)
         
         NSLayoutConstraint.activate([
-            detailedMediaStackView.topAnchor.constraint(equalTo: topAnchor,
-                                                        constant: Const.spacingMedium),
-            detailedMediaStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
-                                                            constant: Const.spacingMedium),
-            detailedMediaStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
-                                                             constant: -Const.spacingMedium)
-        ])
-    }
-    
-    func setupArtistCollectionView() {
-        addSubview(artistCollectionView)
-        
-        NSLayoutConstraint.activate([
-            artistCollectionView.heightAnchor.constraint(greaterThanOrEqualTo: heightAnchor, multiplier: 0.4),
-            artistCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Const.spacingMedium),
-            artistCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            artistCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            artistCollectionView.topAnchor.constraint(equalTo: detailedMediaStackView.bottomAnchor, constant: Const.spacingMedium)
+            detailedMediaStackView.topAnchor.constraint(equalTo: topAnchor),
+            detailedMediaStackView.widthAnchor.constraint(equalTo: widthAnchor),
+            detailedMediaStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Const.spacingMedium)
         ])
     }
     
