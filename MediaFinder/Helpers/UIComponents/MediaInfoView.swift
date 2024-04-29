@@ -15,8 +15,7 @@ final class MediaInfoView: UIStackView {
         let view = UIImageView()
         view.tintColor = .black
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = Const.imageViewCornerRadius
-        view.layer.masksToBounds = true
+        view.clipsToBounds = true
         return view
     }()
     
@@ -57,6 +56,20 @@ final class MediaInfoView: UIStackView {
         return textView
     }()
     
+    private lazy var mediaStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [
+            kindLabel, nameLabel, artistNameLabel,
+            descriptionLabel, linkTextView
+        ])
+        view.axis = .vertical
+        view.alignment = .center
+        view.spacing = Const.spacingMedium
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = UIEdgeInsets(top: Const.spacingMedium, left: Const.spacingMedium,
+                                          bottom: Const.spacingMedium, right: Const.spacingMedium)
+        return view
+    }()
+    
     // MARK: - Initialisers
     
     override init(frame: CGRect) {
@@ -75,11 +88,8 @@ private extension MediaInfoView {
     
     func setupAppearance() {
         axis = .vertical
-        alignment = .center
-        spacing = Const.spacingSmall
         [
-            imageView, kindLabel, nameLabel,
-            artistNameLabel, descriptionLabel, linkTextView
+            activityIndicatorView, imageView, mediaStackView
         ].forEach { addArrangedSubview($0) }
     }
 }
