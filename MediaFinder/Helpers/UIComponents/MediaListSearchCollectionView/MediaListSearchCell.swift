@@ -101,8 +101,9 @@ final class MediaListSearchCell: UICollectionViewCell {
 private extension MediaListSearchCell {
     
     func setupAppearance() {
-        backgroundColor = .white
+        backgroundColor = .lightText
         layer.cornerRadius = Const.collectionCellCornerRadius
+        clipsToBounds = true
         
         contentView.addSubview(mediaStackView)
         
