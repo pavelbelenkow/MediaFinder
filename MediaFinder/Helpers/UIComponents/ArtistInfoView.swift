@@ -107,5 +107,8 @@ extension ArtistInfoView {
         linkTextView.attributedText = artist.attributedLinkText()
         moreFromArtistLabel.text = artist.moreFromArtistPlaceHolder()
     }
+    
+    func showMoreFromArtistLabel() {
+        moreFromArtistLabel.isHidden = false
     }
 }
