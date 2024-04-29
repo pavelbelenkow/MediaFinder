@@ -80,7 +80,7 @@ enum Const {
     static let spacingMedium: CGFloat = 16
     static let spacingLarge: CGFloat = 60
     static let spacingOneHundred: CGFloat = 100
-    static let collectionViewCellHeight: CGFloat = 200
+    static let collectionViewCellHeight: CGFloat = 300
     static let collectionCellCornerRadius: CGFloat = 15
     static let imageViewCornerRadius: CGFloat = 20
     static let linkCornerRadius: CGFloat = 16
