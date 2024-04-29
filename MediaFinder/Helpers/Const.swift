@@ -47,6 +47,7 @@ enum Const {
     static let moreAboutArtist = "More about the artist"
     static let moreAboutDistributor = "More about the distributor"
     static let oneHundredSize = "100"
+    static let twoHundredSize = "200"
     static let twoHundredAndFiftySize = "250"
     static let fiveHundredSize = "500"
     
