@@ -7,7 +7,7 @@ final class MediaListSearchCell: UICollectionViewCell {
     private lazy var activityIndicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
         view.style = .medium
-        view.color = .mediaBackground
+        view.color = .white
         return view
     }()
     
