@@ -125,7 +125,10 @@ extension ArtistCollectionCell {
             return
         }
         
+        activityIndicatorView.startAnimating()
+        
         ImageLoader.shared.loadImage(from: image) { [weak self] image in
+            self?.activityIndicatorView.stopAnimating()
             self?.collectionImageView.image = image
         }
         
