@@ -92,6 +92,11 @@ private extension MediaInfoView {
         [
             activityIndicatorView, imageView, mediaStackView
         ].forEach { addArrangedSubview($0) }
+        
+        activityIndicatorView.centerYAnchor.constraint(
+            equalTo: topAnchor,
+            constant: UIScreen.main.bounds.height / 4
+        ).isActive = true
     }
 }
 
