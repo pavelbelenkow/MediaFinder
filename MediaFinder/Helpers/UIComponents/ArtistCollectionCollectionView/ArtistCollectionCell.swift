@@ -117,7 +117,7 @@ extension ArtistCollectionCell {
     func configure(with item: Media) {
         
         guard
-            let image = item.setImageQuality(to: Const.twoHundredAndFiftySize),
+            let imageUrl = item.setImageQuality(to: Const.twoHundredAndFiftySize),
             let name = item.collection,
             let genre = item.genre,
             let price = item.collectionPrice
@@ -127,7 +127,7 @@ extension ArtistCollectionCell {
         
         activityIndicatorView.startAnimating()
         
-        ImageLoader.shared.loadImage(from: image) { [weak self] image in
+        ImageLoader.shared.loadImage(from: imageUrl) { [weak self] image in
             self?.activityIndicatorView.stopAnimating()
             self?.collectionImageView.image = image
         }
