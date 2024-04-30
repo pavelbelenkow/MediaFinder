@@ -46,10 +46,10 @@ enum Const {
     static let distributedBy = "Distributed by "
     static let moreAboutArtist = "More about the artist"
     static let moreAboutDistributor = "More about the distributor"
-    static let oneHundredSize = "100"
-    static let twoHundredSize = "200"
-    static let twoHundredAndFiftySize = "250"
-    static let fiveHundredSize = "500"
+    static let oneHundredSize = "100x100"
+    static let twoHundredSize = "200x200"
+    static let twoHundredAndFiftySize = "250x250"
+    static let fiveHundredSize = "500x500"
     
     // MARK: - MediaListSearch Screen Constants
     
