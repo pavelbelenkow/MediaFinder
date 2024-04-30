@@ -106,7 +106,7 @@ extension MediaInfoView {
     
     func update(for media: Media) {
         guard
-            let image = media.setImageQuality(to: Const.fiveHundredSize),
+            let imageUrl = media.setImageQuality(to: Const.fiveHundredSize),
             let kind = media.kind,
             let name = media.name,
             let artist = media.artist,
@@ -115,7 +115,7 @@ extension MediaInfoView {
         
         activityIndicatorView.startAnimating()
         
-        ImageLoader.shared.loadImage(from: image) { [weak self] image in
+        ImageLoader.shared.loadImage(from: imageUrl) { [weak self] image in
             self?.activityIndicatorView.stopAnimating()
             self?.imageView.image = image
         }
