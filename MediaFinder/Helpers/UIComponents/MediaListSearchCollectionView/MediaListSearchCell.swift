@@ -126,7 +126,7 @@ extension MediaListSearchCell {
     func configure(with media: Media) {
         
         guard
-            let image = media.setImageQuality(to: Const.twoHundredSize),
+            let imageUrl = media.setImageQuality(to: Const.twoHundredSize),
             let kind = media.kind,
             let name = media.name,
             let duration = media.duration,
@@ -137,7 +137,7 @@ extension MediaListSearchCell {
         
         activityIndicatorView.startAnimating()
         
-        ImageLoader.shared.loadImage(from: image) { [weak self] image in
+        ImageLoader.shared.loadImage(from: imageUrl) { [weak self] image in
             self?.activityIndicatorView.stopAnimating()
             self?.mediaImageView.image = image
         }
