@@ -70,7 +70,7 @@ private extension ArtistCollectionCollectionView {
                     for: indexPath
                 ) as? ArtistCollectionCell
                 
-                cell?.configure(with: collection, at: indexPath)
+                cell?.configure(with: collection)
                 
                 return cell
             }

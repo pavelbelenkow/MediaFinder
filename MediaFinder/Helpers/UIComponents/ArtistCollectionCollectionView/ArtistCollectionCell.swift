@@ -143,7 +143,7 @@ private extension ArtistCollectionCell {
 
 extension ArtistCollectionCell {
     
-    func configure(with item: Media, at indexPath: IndexPath) {
+    func configure(with item: Media) {
         
         guard
             let imageUrl = item.setImageQuality(to: Const.twoHundredAndFiftySize),
