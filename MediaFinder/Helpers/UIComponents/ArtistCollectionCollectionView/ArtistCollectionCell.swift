@@ -65,6 +65,8 @@ final class ArtistCollectionCell: UICollectionViewCell {
         return view
     }()
     
+    private var currentIndexPath: IndexPath?
+    
     // MARK: - Initialisers
     
     override init(frame: CGRect) {
