@@ -56,5 +56,9 @@ final class ImageLoader {
         
         cancellables[indexPath] = cancellable
     }
+    
+    func cancelLoading(for indexPath: IndexPath) {
+        cancellables[indexPath]?.cancel()
+        cancellables.removeValue(forKey: indexPath)
     }
 }
