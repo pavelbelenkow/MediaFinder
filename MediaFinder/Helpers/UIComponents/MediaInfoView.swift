@@ -98,6 +98,16 @@ private extension MediaInfoView {
             constant: UIScreen.main.bounds.height / 4
         ).isActive = true
     }
+    
+    func loadAndSetupImage(from urlString: String) {
+        activityIndicatorView.startAnimating()
+        
+        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
+            guard let self else { return }
+            activityIndicatorView.stopAnimating()
+            imageView.image = image
+        }
+    }
 }
 
 // MARK: - Methods
@@ -113,12 +123,7 @@ extension MediaInfoView {
             let _ = media.trackView
         else { return }
         
-        activityIndicatorView.startAnimating()
-        
-        ImageLoader.shared.loadImage(from: imageUrl) { [weak self] image in
-            self?.activityIndicatorView.stopAnimating()
-            self?.imageView.image = image
-        }
+        loadAndSetupImage(from: imageUrl)
         
         kindLabel.text = kind
         nameLabel.text = name
