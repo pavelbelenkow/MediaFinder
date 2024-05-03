@@ -77,7 +77,7 @@ final class MediaListSearchCell: UICollectionViewCell {
         return view
     }()
     
-    private var currentIndexPath: IndexPath?
+    private var currentUrlString: String?
     
     // MARK: - Initialisers
     
