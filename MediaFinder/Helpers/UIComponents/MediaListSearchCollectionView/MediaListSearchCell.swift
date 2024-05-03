@@ -125,7 +125,7 @@ private extension MediaListSearchCell {
 
 extension MediaListSearchCell {
     
-    func configure(with media: Media) {
+    func configure(with media: Media, at indexPath: IndexPath) {
         
         guard
             let imageUrl = media.setImageQuality(to: Const.twoHundredSize),
@@ -139,9 +139,13 @@ extension MediaListSearchCell {
         
         activityIndicatorView.startAnimating()
         
-        ImageLoader.shared.loadImage(from: imageUrl) { [weak self] image in
-            self?.activityIndicatorView.stopAnimating()
-            self?.mediaImageView.image = image
+        currentIndexPath = indexPath
+        
+        ImageLoader.shared.loadImage(from: imageUrl, for: indexPath) { [weak self] image in
+            guard let self else { return }
+            activityIndicatorView.stopAnimating()
+            mediaImageView.image = image
+            currentIndexPath = nil
         }
         
         mediaKindLabel.text = kind
