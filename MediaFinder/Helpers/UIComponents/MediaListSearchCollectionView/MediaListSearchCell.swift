@@ -77,6 +77,8 @@ final class MediaListSearchCell: UICollectionViewCell {
         return view
     }()
     
+    private var currentIndexPath: IndexPath?
+    
     // MARK: - Initialisers
     
     override init(frame: CGRect) {
