@@ -94,7 +94,18 @@ final class MediaListSearchCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        if let currentIndexPath {
+            ImageLoader.shared.cancelLoading(for: currentIndexPath)
+        }
+        
         mediaImageView.image = nil
+        mediaKindLabel.text = nil
+        mediaNameLabel.text = nil
+        mediaDurationLabel.text = nil
+        mediaPriceLabel.text = nil
+        
+        activityIndicatorView.stopAnimating()
     }
 }
 
