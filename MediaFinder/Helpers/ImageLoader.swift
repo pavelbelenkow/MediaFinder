@@ -11,7 +11,7 @@ final class ImageLoader {
     
     private let placeholder = UIImage(systemName: Const.imagePlaceholder)
     private let cache = NSCache<NSString, UIImage>()
-    private var cancellables: [IndexPath: AnyCancellable] = [:]
+    private var cancellables: [String: AnyCancellable] = [:]
     
     private let networkClient: NetworkClient
     
@@ -25,7 +25,6 @@ final class ImageLoader {
     
     func loadImage(
         from urlString: String,
-        for indexPath: IndexPath,
         completion: @escaping (UIImage?) -> Void
     ) {
         
@@ -47,18 +46,20 @@ final class ImageLoader {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] image in
                 
-                if let image {
-                    self?.cache.setObject(image, forKey: NSString(string: urlString))
+                guard let self else { return }
+                
+                if let image, image != placeholder {
+                    cache.setObject(image, forKey: NSString(string: urlString))
                 }
                 
                 completion(image)
             }
         
-        cancellables[indexPath] = cancellable
+        cancellables[urlString] = cancellable
     }
     
-    func cancelLoading(for indexPath: IndexPath) {
-        cancellables[indexPath]?.cancel()
-        cancellables.removeValue(forKey: indexPath)
+    func cancelLoading(for urlString: String) {
+        cancellables[urlString]?.cancel()
+        cancellables.removeValue(forKey: urlString)
     }
 }
