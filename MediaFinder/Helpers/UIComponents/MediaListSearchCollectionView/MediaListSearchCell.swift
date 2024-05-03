@@ -94,18 +94,8 @@ final class MediaListSearchCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        if let currentIndexPath {
-            ImageLoader.shared.cancelLoading(for: currentIndexPath)
-        }
-        
-        mediaImageView.image = nil
-        mediaKindLabel.text = nil
-        mediaNameLabel.text = nil
-        mediaDurationLabel.text = nil
-        mediaPriceLabel.text = nil
-        
-        activityIndicatorView.stopAnimating()
+        cancelImageLoading()
+        resetCellState()
     }
 }
 
@@ -129,6 +119,24 @@ private extension MediaListSearchCell {
             activityIndicatorView.centerYAnchor.constraint(equalTo: mediaStackView.centerYAnchor),
             mediaImageView.heightAnchor.constraint(equalTo: mediaImageView.widthAnchor)
         ])
+    }
+    
+    func cancelImageLoading() {
+        if let currentUrlString {
+            ImageLoader.shared.cancelLoading(for: currentUrlString)
+        }
+        
+        currentUrlString = nil
+    }
+    
+    func resetCellState() {
+        mediaImageView.image = nil
+        mediaKindLabel.text = nil
+        mediaNameLabel.text = nil
+        mediaDurationLabel.text = nil
+        mediaPriceLabel.text = nil
+        
+        activityIndicatorView.stopAnimating()
     }
 }
 
