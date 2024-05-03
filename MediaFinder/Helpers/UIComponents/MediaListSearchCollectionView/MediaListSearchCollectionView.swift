@@ -74,7 +74,7 @@ private extension MediaListSearchCollectionView {
                     for: indexPath
                 ) as? MediaListSearchCell
                 
-                cell?.configure(with: media, at: indexPath)
+                cell?.configure(with: media)
                 
                 return cell
             }
