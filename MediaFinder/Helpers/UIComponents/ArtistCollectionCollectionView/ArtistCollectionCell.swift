@@ -125,6 +125,18 @@ private extension ArtistCollectionCell {
         
         activityIndicatorView.stopAnimating()
     }
+    
+    func loadAndSetupImage(from urlString: String) {
+        currentUrlString = urlString
+        
+        activityIndicatorView.startAnimating()
+        
+        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
+            guard let self else { return }
+            activityIndicatorView.stopAnimating()
+            collectionImageView.image = image
+        }
+    }
 }
 
 // MARK: - Methods
@@ -142,16 +154,7 @@ extension ArtistCollectionCell {
             return
         }
         
-        activityIndicatorView.startAnimating()
-        
-        currentIndexPath = indexPath
-        
-        ImageLoader.shared.loadImage(from: imageUrl, for: indexPath) { [weak self] image in
-            guard let self else { return }
-            activityIndicatorView.stopAnimating()
-            collectionImageView.image = image
-            currentIndexPath = nil
-        }
+        loadAndSetupImage(from: imageUrl)
         
         collectionNameLabel.text = name
         collectionGenreLabel.text = genre
