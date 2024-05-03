@@ -65,7 +65,7 @@ final class ArtistCollectionCell: UICollectionViewCell {
         return view
     }()
     
-    private var currentIndexPath: IndexPath?
+    private var currentUrlString: String?
     
     // MARK: - Initialisers
     
