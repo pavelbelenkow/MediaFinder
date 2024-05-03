@@ -82,10 +82,17 @@ final class ArtistCollectionCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        if let currentIndexPath {
+            ImageLoader.shared.cancelLoading(for: currentIndexPath)
+        }
+        
         collectionImageView.image = nil
         collectionNameLabel.text = nil
         collectionPriceLabel.text = nil
         collectionGenreLabel.text = nil
+        
+        activityIndicatorView.stopAnimating()
     }
 }
 
