@@ -82,17 +82,8 @@ final class ArtistCollectionCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        if let currentIndexPath {
-            ImageLoader.shared.cancelLoading(for: currentIndexPath)
-        }
-        
-        collectionImageView.image = nil
-        collectionNameLabel.text = nil
-        collectionPriceLabel.text = nil
-        collectionGenreLabel.text = nil
-        
-        activityIndicatorView.stopAnimating()
+        cancelImageLoading()
+        resetCellState()
     }
 }
 
@@ -116,6 +107,23 @@ private extension ArtistCollectionCell {
             activityIndicatorView.centerYAnchor.constraint(equalTo: collectionStackView.centerYAnchor),
             collectionImageView.heightAnchor.constraint(equalTo: collectionImageView.widthAnchor)
         ])
+    }
+    
+    func cancelImageLoading() {
+        if let currentUrlString {
+            ImageLoader.shared.cancelLoading(for: currentUrlString)
+        }
+        
+        currentUrlString = nil
+    }
+    
+    func resetCellState() {
+        collectionImageView.image = nil
+        collectionNameLabel.text = nil
+        collectionPriceLabel.text = nil
+        collectionGenreLabel.text = nil
+        
+        activityIndicatorView.stopAnimating()
     }
 }
 
