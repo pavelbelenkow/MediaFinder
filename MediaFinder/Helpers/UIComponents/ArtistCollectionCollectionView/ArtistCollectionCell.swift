@@ -116,7 +116,7 @@ private extension ArtistCollectionCell {
 
 extension ArtistCollectionCell {
     
-    func configure(with item: Media) {
+    func configure(with item: Media, at indexPath: IndexPath) {
         
         guard
             let imageUrl = item.setImageQuality(to: Const.twoHundredAndFiftySize),
@@ -129,9 +129,13 @@ extension ArtistCollectionCell {
         
         activityIndicatorView.startAnimating()
         
-        ImageLoader.shared.loadImage(from: imageUrl) { [weak self] image in
-            self?.activityIndicatorView.stopAnimating()
-            self?.collectionImageView.image = image
+        currentIndexPath = indexPath
+        
+        ImageLoader.shared.loadImage(from: imageUrl, for: indexPath) { [weak self] image in
+            guard let self else { return }
+            activityIndicatorView.stopAnimating()
+            collectionImageView.image = image
+            currentIndexPath = nil
         }
         
         collectionNameLabel.text = name
