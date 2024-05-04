@@ -14,8 +14,9 @@ final class MediaInfoView: UIStackView {
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.tintColor = .black
-        view.contentMode = .scaleAspectFill
+        view.contentMode = .scaleAspectFit
         view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -96,6 +97,9 @@ private extension MediaInfoView {
         ].forEach { addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
             mediaStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Const.spacingMedium),
             mediaStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Const.spacingMedium),
             
@@ -110,9 +114,16 @@ private extension MediaInfoView {
         activityIndicatorView.startAnimating()
         
         ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
-            guard let self else { return }
-            activityIndicatorView.stopAnimating()
+            guard let self, let image else { return }
+            let aspectRatio = image.size.width / image.size.height
+            
             imageView.image = image
+            imageView.widthAnchor.constraint(
+                equalTo: imageView.heightAnchor,
+                multiplier: aspectRatio
+            ).isActive = true
+            
+            activityIndicatorView.stopAnimating()
         }
     }
 }
