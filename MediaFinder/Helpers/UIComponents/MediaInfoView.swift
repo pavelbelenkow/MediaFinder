@@ -51,8 +51,6 @@ final class MediaInfoView: UIStackView {
     private lazy var linkTextView: CustomTextView = {
         let textView = CustomTextView()
         textView.configure()
-        textView.backgroundColor = .lightText
-        textView.layer.cornerRadius = Const.linkCornerRadius
         return textView
     }()
     
@@ -61,12 +59,15 @@ final class MediaInfoView: UIStackView {
             kindLabel, nameLabel, artistNameLabel,
             descriptionLabel, linkTextView
         ])
+        view.backgroundColor = .lightText
+        view.layer.cornerRadius = Const.repeatButtonCornerRadius
         view.axis = .vertical
         view.alignment = .center
         view.spacing = Const.spacingMedium
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: .zero, left: Const.spacingMedium,
-                                          bottom: .zero, right: Const.spacingMedium)
+        view.layoutMargins = UIEdgeInsets(top: Const.spacingMedium, left: Const.spacingMedium,
+                                          bottom: Const.spacingMedium, right: Const.spacingMedium)
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -89,14 +90,20 @@ private extension MediaInfoView {
     func setupAppearance() {
         axis = .vertical
         spacing = Const.spacingMedium
+        
         [
             activityIndicatorView, imageView, mediaStackView
         ].forEach { addArrangedSubview($0) }
         
-        activityIndicatorView.centerYAnchor.constraint(
-            equalTo: topAnchor,
-            constant: UIScreen.main.bounds.height / 4
-        ).isActive = true
+        NSLayoutConstraint.activate([
+            mediaStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Const.spacingMedium),
+            mediaStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Const.spacingMedium),
+            
+            activityIndicatorView.centerYAnchor.constraint(
+                equalTo: topAnchor,
+                constant: UIScreen.main.bounds.height / 4
+            )
+        ])
     }
     
     func loadAndSetupImage(from urlString: String) {
