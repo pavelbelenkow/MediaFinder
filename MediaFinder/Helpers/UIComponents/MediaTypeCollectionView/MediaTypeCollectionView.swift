@@ -11,9 +11,9 @@ protocol MediaTypeCollectionViewDelegate: AnyObject {
 
 final class MediaTypeCollectionView: UICollectionView {
     
-    // MARK: - Override Properties
+    // MARK: - Private Properties
     
-    override var safeAreaInsets: UIEdgeInsets { .zero }
+    private var previousBounds: CGRect = .zero
     
     // MARK: - Properties
     
