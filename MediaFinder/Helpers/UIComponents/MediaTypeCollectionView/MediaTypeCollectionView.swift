@@ -30,6 +30,20 @@ final class MediaTypeCollectionView: UICollectionView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Layout Overrides
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        guard
+            let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout,
+            bounds != previousBounds
+        else { return }
+        
+        previousBounds = bounds
+        flowLayout.invalidateLayout()
+    }
 }
 
 // MARK: - Setup UI
