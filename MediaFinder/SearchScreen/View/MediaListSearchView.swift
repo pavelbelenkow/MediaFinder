@@ -22,8 +22,7 @@ final class MediaListSearchView: UIView {
     }()
     
     private lazy var mediaTypeCollectionView: MediaTypeCollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let view = MediaTypeCollectionView(frame: .zero, collectionViewLayout: layout)
+        let view = MediaTypeCollectionView()
         view.interactionDelegate = self
         return view
     }()

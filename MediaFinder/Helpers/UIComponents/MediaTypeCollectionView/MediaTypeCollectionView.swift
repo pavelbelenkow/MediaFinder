@@ -21,8 +21,9 @@ final class MediaTypeCollectionView: UICollectionView {
     
     // MARK: - Initialisers
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        super.init(frame: frame, collectionViewLayout: layout)
+    init() {
+        let layout = UICollectionViewFlowLayout()
+        super.init(frame: .zero, collectionViewLayout: layout)
         setupAppearance()
     }
     
