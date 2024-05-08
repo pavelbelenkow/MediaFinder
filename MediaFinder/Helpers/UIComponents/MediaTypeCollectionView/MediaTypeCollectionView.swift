@@ -119,7 +119,7 @@ extension MediaTypeCollectionView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        CGSize(width: frame.width, height: frame.height)
+        frame.size
     }
 }
 
