@@ -99,10 +99,7 @@ extension ArtistCollectionCollectionView: UICollectionViewDelegateFlowLayout {
         willDisplay cell: UICollectionViewCell,
         forItemAt indexPath: IndexPath
     ) {
-        cell.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        UIView.animate(withDuration: 0.5) {
-            cell.transform = .identity
-        }
+        ViewAnimator.shared.animateCellAppearance(cell)
     }
 
     func collectionView(
