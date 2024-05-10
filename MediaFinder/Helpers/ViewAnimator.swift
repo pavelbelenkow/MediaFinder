@@ -50,4 +50,15 @@ final class ViewAnimator {
             cell.transform = .identity
         }
     }
+    
+    func animateCellAppearance(_ cell: UICollectionViewCell) {
+        cell.transform = CGAffineTransform(translationX: 0, y: 50)
+        cell.alpha = .zero
+        
+        let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.9) {
+            cell.transform = .identity
+            cell.alpha = 1
+        }
+        animator.startAnimation()
+    }
 }
