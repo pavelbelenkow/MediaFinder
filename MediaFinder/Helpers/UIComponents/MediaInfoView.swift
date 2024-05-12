@@ -145,6 +145,15 @@ private extension MediaInfoView {
             activityIndicatorView.stopAnimating()
         }
     }
+    
+    @objc func moreButtonTapped() {
+        ViewAnimator
+            .shared
+            .animateLabelExpansion(
+                descriptionLabel,
+                moreButton: moreButton
+            )
+    }
 }
 
 // MARK: - Methods
