@@ -91,6 +91,7 @@ enum Const {
     // MARK: - DetailedMedia Screen Constants
     
     static let createdBy = "by\n"
+    static let moreButtonText = "more"
     static let aboutArtist = "About "
     static let artistGenre = "Genre: "
     static let moreAlbums = "Albums By "
