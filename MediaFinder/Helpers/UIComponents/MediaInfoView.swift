@@ -177,6 +177,7 @@ extension MediaInfoView {
         
         if let description = media.description {
             descriptionLabel.text = description
+            setupMoreButton()
         }
         
         linkTextView.attributedText = media.attributedLinkText()
