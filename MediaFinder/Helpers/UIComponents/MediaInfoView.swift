@@ -49,6 +49,16 @@ final class MediaInfoView: UIStackView {
         return label
     }()
     
+    private lazy var moreButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = .systemFont(ofSize: 13)
+        button.setTitle(Const.moreButtonText, for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private lazy var linkTextView: CustomTextView = {
         let textView = CustomTextView()
         textView.configure()
