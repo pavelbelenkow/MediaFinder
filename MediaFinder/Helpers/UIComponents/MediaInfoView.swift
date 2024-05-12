@@ -120,6 +120,15 @@ private extension MediaInfoView {
         ])
     }
     
+    func setupMoreButton() {
+        mediaStackView.addSubview(moreButton)
+        
+        NSLayoutConstraint.activate([
+            moreButton.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
+            moreButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor)
+        ])
+    }
+    
     func loadAndSetupImage(from urlString: String) {
         activityIndicatorView.startAnimating()
         
