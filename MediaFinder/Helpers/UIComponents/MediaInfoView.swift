@@ -182,4 +182,8 @@ extension MediaInfoView {
         
         linkTextView.attributedText = media.attributedLinkText()
     }
+    
+    func updateImageViewFrame(for point: CGFloat) {
+        imageView.frame.origin.y = point
+    }
 }
