@@ -4,6 +4,11 @@ final class ViewAnimator {
     
     static let shared = ViewAnimator()
     
+    private var animationStartTime: CFTimeInterval = 0
+    private var words: [String] = []
+    private var label: UILabel?
+    private var displayLink: CADisplayLink?
+    
     private init() {}
     
     func animateButtonAction(_ button: UIButton, action: (() -> Void)?) {
@@ -60,5 +65,23 @@ final class ViewAnimator {
             cell.alpha = 1
         }
         animator.startAnimation()
+    }
+        
+    func animateLabelExpansion(_ label: UILabel, moreButton: UIButton) {
+        self.label = label
+        
+        guard
+            let words = label.text?.components(separatedBy: .whitespacesAndNewlines),
+            !words.isEmpty
+        else { return }
+        
+        self.words = words
+        
+        moreButton.isHidden = true
+        label.numberOfLines = .zero
+        
+        animationStartTime = CACurrentMediaTime()
+        displayLink = CADisplayLink(target: self, selector: #selector(updateLabel))
+        displayLink?.add(to: .main, forMode: .common)
     }
 }
