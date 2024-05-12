@@ -60,6 +60,7 @@ private extension DetailedMediaView {
     func setupAppearance() {
         backgroundColor = .mediaBackground
         showsVerticalScrollIndicator = false
+        delegate = self
         
         setupDetailedMediaStackView()
         setupStatefulStackView()
@@ -114,6 +115,16 @@ extension DetailedMediaView {
         artistInfoView.showMoreFromArtistLabel()
         artistCollectionView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
         artistCollectionView.applySnapshot(for: collection)
+    }
+}
+
+// MARK: - Delegate Methods
+
+extension DetailedMediaView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        offsetY <= .zero ? mediaInfoView.updateImageViewFrame(for: offsetY) : nil
     }
 }
 
