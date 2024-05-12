@@ -84,4 +84,24 @@ final class ViewAnimator {
         displayLink = CADisplayLink(target: self, selector: #selector(updateLabel))
         displayLink?.add(to: .main, forMode: .common)
     }
+    
+    @objc private func updateLabel() {
+        guard let displayLink, let label else { return }
+        
+        let duration = 1.0
+        let elapsedTime = CACurrentMediaTime() - animationStartTime
+        let progress = min(elapsedTime / duration, 1.0)
+        
+        let totalWordsCount = words.count
+        let wordsToShowCount = Int(Double(totalWordsCount) * progress)
+        
+        let displayText = words.prefix(wordsToShowCount).joined(separator: " ")
+        
+        label.text = displayText
+        
+        if progress >= 1.0 {
+            displayLink.invalidate()
+            self.displayLink = nil
+        }
+    }
 }
