@@ -91,6 +91,42 @@ final class ViewAnimator {
         displayLink?.add(to: .main, forMode: .common)
     }
     
+    func animateWithShimmer(_ view: UIView) {
+        guard shimmerLayers[view] == nil else { return }
+        
+        let gradient = CAGradientLayer()
+        let viewSize = view.bounds.size
+        let radians = 45.0 * .pi / 180
+        let x = cos(CGFloat(radians))
+        let y = sin(CGFloat(radians))
+        
+        gradient.frame = CGRect(
+            x: -viewSize.width,
+            y: 0,
+            width: 3 * viewSize.width,
+            height: viewSize.height
+        )
+        gradient.startPoint = CGPoint(x: 1.0 - x, y: 1.0 - y)
+        gradient.endPoint = CGPoint(x: x, y: y)
+        gradient.locations = [-1.0, -0.5, 0.0]
+        gradient.colors = [
+            UIColor.mediaBackground.cgColor,
+            UIColor(white: 0.75, alpha: 1.0).cgColor,
+            UIColor.mediaBackground.cgColor
+        ]
+        
+        view.layer.addSublayer(gradient)
+        shimmerLayers[view] = gradient
+        
+        let animation = CABasicAnimation(keyPath: Const.locationsKeyPath)
+        animation.fromValue = [-1.0, -0.5, 0.0]
+        animation.toValue = [1.0, 1.5, 2.0]
+        animation.duration = 1.5
+        animation.repeatCount = .infinity
+        gradient.add(animation, forKey: Const.shimmerAnimationKey)
+        
+        addObservers(for: view)
+    }
     @objc private func updateLabel() {
         guard let displayLink, let label else { return }
         
