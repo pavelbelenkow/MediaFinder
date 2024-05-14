@@ -2,7 +2,11 @@ import UIKit
 
 final class ViewAnimator {
     
+    // MARK: - Static Properties
+    
     static let shared = ViewAnimator()
+    
+    // MARK: - Private Properties
     
     private let notificationCenter: NotificationCenter
     
@@ -13,9 +17,77 @@ final class ViewAnimator {
     private var label: UILabel?
     private var displayLink: CADisplayLink?
     
+    // MARK: - Private Initialisers
+    
     private init(notificationCenter: NotificationCenter = .default) {
         self.notificationCenter = notificationCenter
     }
+}
+
+// MARK: - Private Methods
+
+private extension ViewAnimator {
+    
+    func resumeShimmering(for view: UIView) {
+        guard let gradientLayer = shimmerLayers[view] else { return }
+        
+        let animation = CABasicAnimation(keyPath: Const.locationsKeyPath)
+        animation.fromValue = gradientLayer.presentation()?.value(forKey: Const.locationsKeyPath)
+        animation.toValue = [1.0, 1.5, 2.0]
+        animation.duration = 1.5
+        animation.repeatCount = .infinity
+        gradientLayer.add(animation, forKey: Const.shimmerAnimationKey)
+    }
+    
+    func pauseShimmering(for view: UIView) {
+        guard let gradientLayer = shimmerLayers[view] else { return }
+        gradientLayer.removeAllAnimations()
+    }
+    
+    func addObservers(for view: UIView) {
+        notificationCenter
+            .addObserver(
+                forName: UIApplication.willEnterForegroundNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                self?.resumeShimmering(for: view)
+            }
+        
+        notificationCenter
+            .addObserver(
+                forName: UIApplication.didEnterBackgroundNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                self?.pauseShimmering(for: view)
+            }
+    }
+    
+    @objc func updateLabel() {
+        guard let displayLink, let label else { return }
+        
+        let duration = 1.0
+        let elapsedTime = CACurrentMediaTime() - animationStartTime
+        let progress = min(elapsedTime / duration, 1.0)
+        
+        let totalWordsCount = words.count
+        let wordsToShowCount = Int(Double(totalWordsCount) * progress)
+        
+        let displayText = words.prefix(wordsToShowCount).joined(separator: " ")
+        
+        label.text = displayText
+        
+        if progress >= 1.0 {
+            displayLink.invalidate()
+            self.displayLink = nil
+        }
+    }
+}
+
+// MARK: - Methods
+
+extension ViewAnimator {
     
     func animateWithShimmer(_ view: UIView) {
         guard shimmerLayers[view] == nil else { return }
@@ -132,64 +204,5 @@ final class ViewAnimator {
         animationStartTime = CACurrentMediaTime()
         displayLink = CADisplayLink(target: self, selector: #selector(updateLabel))
         displayLink?.add(to: .main, forMode: .common)
-    }
-}
-
-private extension ViewAnimator {
-    
-    func addObservers(for view: UIView) {
-        notificationCenter
-            .addObserver(
-                forName: UIApplication.willEnterForegroundNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                self?.resumeShimmering(for: view)
-            }
-        
-        notificationCenter
-            .addObserver(
-                forName: UIApplication.didEnterBackgroundNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                self?.pauseShimmering(for: view)
-            }
-    }
-    
-    func resumeShimmering(for view: UIView) {
-        guard let gradientLayer = shimmerLayers[view] else { return }
-        
-        let animation = CABasicAnimation(keyPath: Const.locationsKeyPath)
-        animation.fromValue = gradientLayer.presentation()?.value(forKey: Const.locationsKeyPath)
-        animation.toValue = [1.0, 1.5, 2.0]
-        animation.duration = 1.5
-        animation.repeatCount = .infinity
-        gradientLayer.add(animation, forKey: Const.shimmerAnimationKey)
-    }
-    
-    func pauseShimmering(for view: UIView) {
-        guard let gradientLayer = shimmerLayers[view] else { return }
-        gradientLayer.removeAllAnimations()
-    }
-    
-    @objc func updateLabel() {
-        guard let displayLink, let label else { return }
-        
-        let duration = 1.0
-        let elapsedTime = CACurrentMediaTime() - animationStartTime
-        let progress = min(elapsedTime / duration, 1.0)
-        
-        let totalWordsCount = words.count
-        let wordsToShowCount = Int(Double(totalWordsCount) * progress)
-        
-        let displayText = words.prefix(wordsToShowCount).joined(separator: " ")
-        
-        label.text = displayText
-        
-        if progress >= 1.0 {
-            displayLink.invalidate()
-            self.displayLink = nil
-        }
     }
 }
