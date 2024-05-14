@@ -127,6 +127,13 @@ final class ViewAnimator {
         
         addObservers(for: view)
     }
+    
+    func stopAnimatingWithShimmer(_ view: UIView) {
+        guard let gradientLayer = shimmerLayers[view] else { return }
+        gradientLayer.removeFromSuperlayer()
+        shimmerLayers.removeValue(forKey: view)
+    }
+    
     @objc private func updateLabel() {
         guard let displayLink, let label else { return }
         
