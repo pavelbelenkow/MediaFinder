@@ -4,12 +4,14 @@ final class ViewAnimator {
     
     static let shared = ViewAnimator()
     
+    private let notificationCenter: NotificationCenter
+    
     private var animationStartTime: CFTimeInterval = 0
     private var words: [String] = []
     private var label: UILabel?
     private var displayLink: CADisplayLink?
     
-    private init() {}
+    private var shimmerLayers: [UIView: CAGradientLayer] = [:]
     
     func animateButtonAction(_ button: UIButton, action: (() -> Void)?) {
         UIView.animate(withDuration: 0.25) {
