@@ -111,6 +111,29 @@ final class ViewAnimator {
         }
     }
 }
+
+private extension ViewAnimator {
+    
+    func addObservers(for view: UIView) {
+        notificationCenter
+            .addObserver(
+                forName: UIApplication.willEnterForegroundNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                self?.resumeShimmering(for: view)
+            }
+        
+        notificationCenter
+            .addObserver(
+                forName: UIApplication.didEnterBackgroundNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                self?.pauseShimmering(for: view)
+            }
+    }
+    
     func resumeShimmering(for view: UIView) {
         guard let gradientLayer = shimmerLayers[view] else { return }
         
