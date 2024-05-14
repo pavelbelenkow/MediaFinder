@@ -4,10 +4,9 @@ final class MediaInfoView: UIStackView {
     
     // MARK: - Private Properties
     
-    private lazy var activityIndicatorView: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView()
-        view.style = .medium
-        view.color = .white
+    private lazy var emptyView: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
         return view
     }()
     
@@ -103,7 +102,7 @@ private extension MediaInfoView {
         spacing = Const.spacingMedium
         
         [
-            activityIndicatorView, imageView, mediaStackView
+            emptyView, imageView, mediaStackView
         ].forEach { addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
@@ -113,7 +112,7 @@ private extension MediaInfoView {
             mediaStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Const.spacingMedium),
             mediaStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Const.spacingMedium),
             
-            activityIndicatorView.centerYAnchor.constraint(
+            emptyView.centerYAnchor.constraint(
                 equalTo: topAnchor,
                 constant: UIScreen.main.bounds.height / 4
             )
@@ -130,7 +129,7 @@ private extension MediaInfoView {
     }
     
     func loadAndSetupImage(from urlString: String) {
-        activityIndicatorView.startAnimating()
+        ViewAnimator.shared.animateWithShimmer(emptyView)
         
         ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
             guard let self, let image else { return }
@@ -142,7 +141,8 @@ private extension MediaInfoView {
                 multiplier: aspectRatio
             ).isActive = true
             
-            activityIndicatorView.stopAnimating()
+            ViewAnimator.shared.stopAnimatingWithShimmer(emptyView)
+            emptyView.removeFromSuperview()
         }
     }
     
