@@ -13,6 +13,10 @@ final class ViewAnimator {
     
     private var shimmerLayers: [UIView: CAGradientLayer] = [:]
     
+    private init(notificationCenter: NotificationCenter = .default) {
+        self.notificationCenter = notificationCenter
+    }
+    
     func animateButtonAction(_ button: UIButton, action: (() -> Void)?) {
         UIView.animate(withDuration: 0.25) {
             button.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
