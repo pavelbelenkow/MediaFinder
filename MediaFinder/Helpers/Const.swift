@@ -68,6 +68,8 @@ enum Const {
     static let repeatButtonTitle = "Try Again"
     static let limitIcon = "line.horizontal.3.decrease.circle"
     static let imagePlaceholder = "photo"
+    static let locationsKeyPath = "locations"
+    static let shimmerAnimationKey = "shimmerAnimation"
     
     static let limitTen = 10
     static let limitThirty = 30
