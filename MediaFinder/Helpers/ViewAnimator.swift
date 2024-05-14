@@ -121,3 +121,9 @@ final class ViewAnimator {
         animation.repeatCount = .infinity
         gradientLayer.add(animation, forKey: Const.shimmerAnimationKey)
     }
+    
+    func pauseShimmering(for view: UIView) {
+        guard let gradientLayer = shimmerLayers[view] else { return }
+        gradientLayer.removeAllAnimations()
+    }
+}
