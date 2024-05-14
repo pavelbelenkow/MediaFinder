@@ -111,3 +111,13 @@ final class ViewAnimator {
         }
     }
 }
+    func resumeShimmering(for view: UIView) {
+        guard let gradientLayer = shimmerLayers[view] else { return }
+        
+        let animation = CABasicAnimation(keyPath: Const.locationsKeyPath)
+        animation.fromValue = gradientLayer.presentation()?.value(forKey: Const.locationsKeyPath)
+        animation.toValue = [1.0, 1.5, 2.0]
+        animation.duration = 1.5
+        animation.repeatCount = .infinity
+        gradientLayer.add(animation, forKey: Const.shimmerAnimationKey)
+    }
