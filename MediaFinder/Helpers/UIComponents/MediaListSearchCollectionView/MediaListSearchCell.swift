@@ -4,13 +4,6 @@ final class MediaListSearchCell: UICollectionViewCell {
     
     // MARK: - Private Properties
     
-    private lazy var activityIndicatorView: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView()
-        view.style = .medium
-        view.color = .white
-        return view
-    }()
-    
     private lazy var mediaImageView: UIImageView = {
         let view = UIImageView()
         view.tintColor = .black
@@ -70,7 +63,7 @@ final class MediaListSearchCell: UICollectionViewCell {
     
     private lazy var mediaStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
-            activityIndicatorView, mediaImageView, mediaDetailedStackView
+            mediaImageView, mediaDetailedStackView
         ])
         view.axis = .vertical
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +109,6 @@ private extension MediaListSearchCell {
             mediaStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             mediaStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            activityIndicatorView.centerYAnchor.constraint(equalTo: mediaStackView.centerYAnchor),
             mediaImageView.heightAnchor.constraint(equalTo: mediaImageView.widthAnchor)
         ])
     }
@@ -136,17 +128,17 @@ private extension MediaListSearchCell {
         mediaDurationLabel.text = nil
         mediaPriceLabel.text = nil
         
-        activityIndicatorView.stopAnimating()
+        ViewAnimator.shared.stopAnimatingWithShimmer(self)
     }
     
     func loadAndSetupImage(from urlString: String) {
         currentUrlString = urlString
         
-        activityIndicatorView.startAnimating()
+        ViewAnimator.shared.animateWithShimmer(self)
         
         ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
             guard let self else { return }
-            activityIndicatorView.stopAnimating()
+            ViewAnimator.shared.stopAnimatingWithShimmer(self)
             mediaImageView.image = image
         }
     }
