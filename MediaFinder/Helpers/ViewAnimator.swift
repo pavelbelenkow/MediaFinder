@@ -15,9 +15,7 @@ final class ViewAnimator {
     
     // MARK: - Private Initialisers
     
-    private init(notificationCenter: NotificationCenter = .default) {
-        self.notificationCenter = notificationCenter
-    }
+    private init() {}
 }
 
 // MARK: - Private Methods
