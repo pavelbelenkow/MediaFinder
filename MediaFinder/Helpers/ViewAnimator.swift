@@ -6,41 +6,9 @@ final class ViewAnimator {
     
     static let shared = ViewAnimator()
     
-    // MARK: - Private Properties
-    
-    private var animationStartTime: CFTimeInterval = 0
-    private var words: [String] = []
-    private var label: UILabel?
-    private var displayLink: CADisplayLink?
-    
     // MARK: - Private Initialisers
     
     private init() {}
-}
-
-// MARK: - Private Methods
-
-private extension ViewAnimator {
-    
-    @objc func updateLabel() {
-        guard let displayLink, let label else { return }
-        
-        let duration = 1.0
-        let elapsedTime = CACurrentMediaTime() - animationStartTime
-        let progress = min(elapsedTime / duration, 1.0)
-        
-        let totalWordsCount = words.count
-        let wordsToShowCount = Int(Double(totalWordsCount) * progress)
-        
-        let displayText = words.prefix(wordsToShowCount).joined(separator: " ")
-        
-        label.text = displayText
-        
-        if progress >= 1.0 {
-            displayLink.invalidate()
-            self.displayLink = nil
-        }
-    }
 }
 
 // MARK: - Methods
@@ -134,20 +102,18 @@ extension ViewAnimator {
     }
     
     func animateLabelExpansion(_ label: UILabel, moreButton: UIButton) {
-        self.label = label
+        guard let text = label.text else { return }
         
-        guard
-            let words = label.text?.components(separatedBy: .whitespacesAndNewlines),
-            !words.isEmpty
-        else { return }
-        
-        self.words = words
+        var prefixText = String(text.prefix(140))
+        let suffixText = text.suffix(from: .init(utf16Offset: 140, in: text))
         
         moreButton.isHidden = true
         label.numberOfLines = .zero
         
-        animationStartTime = CACurrentMediaTime()
-        displayLink = CADisplayLink(target: self, selector: #selector(updateLabel))
-        displayLink?.add(to: .main, forMode: .common)
+        suffixText.forEach {
+            prefixText += "\($0)"
+            label.text = prefixText
+            RunLoop.current.run(until: Date() + 0.007)
+        }
     }
 }
