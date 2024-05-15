@@ -22,8 +22,8 @@ final class ArtistInfoView: UIStackView {
     private lazy var genreLabel: CustomLabel = {
         let label = CustomLabel()
         label.configure(
-            textColor: .mediaRed,
-            font: .systemFont(ofSize: 18),
+            textColor: .systemIndigo,
+            font: .systemFont(ofSize: 13, weight: .medium),
             alignment: .left
         )
         return label
