@@ -8,10 +8,6 @@ final class ViewAnimator {
     
     // MARK: - Private Properties
     
-    private let notificationCenter: NotificationCenter
-    
-    private var shimmerLayers: [UIView: CAGradientLayer] = [:]
-    
     private var animationStartTime: CFTimeInterval = 0
     private var words: [String] = []
     private var label: UILabel?
