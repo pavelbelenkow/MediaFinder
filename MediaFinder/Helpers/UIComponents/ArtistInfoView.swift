@@ -51,11 +51,12 @@ final class ArtistInfoView: UIStackView {
         return view
     }()
     
-    private lazy var moreFromArtistLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 17, weight: .semibold)
-        label.numberOfLines = .zero
+    private lazy var moreFromArtistLabel: CustomLabel = {
+        let label = CustomLabel()
+        label.configure(
+            font: .systemFont(ofSize: 17, weight: .medium),
+            alignment: .left
+        )
         label.isHidden = true
         return label
     }()
