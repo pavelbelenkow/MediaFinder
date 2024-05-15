@@ -37,7 +37,7 @@ final class ArtistInfoView: UIStackView {
     
     private lazy var artistInfoStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
-            titleLabel, nameLabel, genreLabel, linkTextView
+            nameLabel, genreLabel, linkTextView
         ])
         view.backgroundColor = .white
         view.axis = .vertical
@@ -83,11 +83,13 @@ private extension ArtistInfoView {
         isHidden = true
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = UIEdgeInsets(
-            top: .zero, left: Const.spacingMedium,
+            top: Const.spacingMedium, left: Const.spacingMedium,
             bottom: .zero, right: Const.spacingMedium
         )
         
-        [artistInfoStackView, moreFromArtistLabel].forEach { addArrangedSubview($0) }
+        [
+            titleLabel, artistInfoStackView, moreFromArtistLabel
+        ].forEach { addArrangedSubview($0) }
     }
 }
 
