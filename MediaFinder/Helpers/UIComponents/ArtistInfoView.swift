@@ -6,7 +6,10 @@ final class ArtistInfoView: UIStackView {
     
     private lazy var titleLabel: CustomLabel = {
         let label = CustomLabel()
-        label.configure(font: .boldSystemFont(ofSize: 21), alignment: .left)
+        label.configure(
+            font: .systemFont(ofSize: 17, weight: .medium),
+            alignment: .left
+        )
         return label
     }()
     
