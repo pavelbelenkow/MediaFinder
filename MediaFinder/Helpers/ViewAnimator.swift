@@ -71,9 +71,10 @@ extension ViewAnimator {
     }
     
     func stopAnimatingWithShimmer(_ view: UIView) {
-        guard let gradientLayer = shimmerLayers[view] else { return }
+        guard
+            let gradientLayer = view.layer.sublayers?.first(where: { $0 is CAGradientLayer })
+        else { return }
         gradientLayer.removeFromSuperlayer()
-        shimmerLayers.removeValue(forKey: view)
     }
     
     func animateButtonAction(_ button: UIButton, action: (() -> Void)?) {
