@@ -129,7 +129,7 @@ private extension MediaInfoView {
     }
     
     func loadAndSetupImage(from urlString: String) {
-        ViewAnimator.shared.animateWithShimmer(emptyView)
+        imageView.addShimmerAnimation()
         
         ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
             guard let self, let image else { return }
@@ -141,18 +141,12 @@ private extension MediaInfoView {
                 multiplier: aspectRatio
             ).isActive = true
             
-            ViewAnimator.shared.stopAnimatingWithShimmer(emptyView)
-            emptyView.removeFromSuperview()
+            imageView.removeShimmerAnimation()
         }
     }
     
     @objc func moreButtonTapped() {
-        ViewAnimator
-            .shared
-            .animateLabelExpansion(
-                descriptionLabel,
-                moreButton: moreButton
-            )
+        descriptionLabel.animateLabelExpansion(with: moreButton)
     }
 }
 
