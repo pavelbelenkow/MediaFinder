@@ -4,6 +4,15 @@ import UIKit
 
 extension UIColor {
     
+    /// Stores default shimmer CG colors array
+    static var defaultShimmerColors: [CGColor] {
+        [
+            mediaBackground.cgColor(multipliedBy: 0.9),
+            mediaBackground.cgColor,
+            mediaBackground.cgColor(multipliedBy: 0.9)
+        ]
+    }
+    
     /// Returns a CGColor with each of its components (except alpha) multiplied by the specified multiplier.
     func cgColor(multipliedBy multiplier: CGFloat) -> CGColor {
         
