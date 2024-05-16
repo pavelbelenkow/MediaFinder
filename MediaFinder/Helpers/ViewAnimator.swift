@@ -15,24 +15,32 @@ final class ViewAnimator {
 
 extension ViewAnimator {
     
-    func animateWithShimmer(_ view: UIView) {
+    func animateWithShimmer(
+        _ view: UIView,
+        colors: [CGColor] = [
+            UIColor.mediaBackground.cgColor(multipliedBy: 0.9),
+            UIColor.mediaBackground.cgColor,
+            UIColor.mediaBackground.cgColor(multipliedBy: 0.9)
+        ],
+        startPoint: CGPoint = CGPoint(x: 0.0, y: 0.0),
+        endPoint: CGPoint = CGPoint(x: 1.0, y: 1.0),
+        locations: [NSNumber] = [0.0, 0.5, 1.0],
+        fromValues: [NSNumber] = [-1.0, -0.5, 0.0],
+        toValues: [NSNumber] = [1.0, 1.5, 2.0],
+        duration: CFTimeInterval = 1.5
+    ) {
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        gradient.locations = [0.0, 0.5, 1.0]
-        gradient.colors = [
-            UIColor.mediaBackground.cgColor,
-            UIColor(white: 0.75, alpha: 1.0).cgColor,
-            UIColor.mediaBackground.cgColor
-        ]
-        
+        gradient.startPoint = startPoint
+        gradient.endPoint = endPoint
+        gradient.locations = locations
+        gradient.colors = colors
         view.layer.addSublayer(gradient)
         
         let animation = CABasicAnimation(keyPath: Const.locationsKeyPath)
-        animation.fromValue = [-1.0, -0.5, 0.0]
-        animation.toValue = [1.0, 1.5, 2.0]
-        animation.duration = 1.5
+        animation.fromValue = fromValues
+        animation.toValue = toValues
+        animation.duration = duration
         animation.repeatCount = .infinity
         animation.isRemovedOnCompletion = false
         gradient.add(animation, forKey: Const.shimmerAnimationKey)
