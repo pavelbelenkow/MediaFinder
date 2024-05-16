@@ -115,17 +115,17 @@ private extension ArtistCollectionCell {
         collectionPriceLabel.text = nil
         collectionGenreLabel.text = nil
         
-        ViewAnimator.shared.stopAnimatingWithShimmer(self)
+        removeShimmerAnimation()
     }
     
     func loadAndSetupImage(from urlString: String) {
         currentUrlString = urlString
         
-        ViewAnimator.shared.animateWithShimmer(self)
+        addShimmerAnimation()
         
         ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
             guard let self else { return }
-            ViewAnimator.shared.stopAnimatingWithShimmer(self)
+            removeShimmerAnimation()
             collectionImageView.image = image
         }
     }
