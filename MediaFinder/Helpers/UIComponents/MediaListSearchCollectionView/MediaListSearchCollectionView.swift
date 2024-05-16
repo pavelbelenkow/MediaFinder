@@ -175,19 +175,19 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
         
-        ViewAnimator.shared.animateSelection(for: cell) { [weak self] in
-            self?.interactionDelegate?.didTapMedia(at: indexPath.item)
+        cell.animateSelection {
+            self.interactionDelegate?.didTapMedia(at: indexPath.item)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        ViewAnimator.shared.animateHighlight(for: cell)
+        cell.animateHighlight()
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        ViewAnimator.shared.animateUnhighlight(for: cell)
+        cell.animateUnhighlight()
     }
 }
 
