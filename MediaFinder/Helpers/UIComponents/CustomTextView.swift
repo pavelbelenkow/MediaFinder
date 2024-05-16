@@ -26,7 +26,7 @@ extension CustomTextView: UITextViewDelegate {
         in characterRange: NSRange,
         interaction: UITextItemInteraction
     ) -> Bool {
-        ViewAnimator.shared.animateTextViewInteraction(textView, openURL: URL)
+        animateTextViewInteraction(openURL: URL)
         return false
     }
 }
