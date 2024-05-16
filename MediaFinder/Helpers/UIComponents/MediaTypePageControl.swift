@@ -94,7 +94,7 @@ private extension MediaTypePageControl {
     }
     
     func animateSelectionChange(to newIndex: Int) {
-        ViewAnimator.shared.animateSelection(for: buttons[newIndex]) {
+        buttons[newIndex].animateSelection {
             self.selectedIndex = newIndex
             self.delegate?.change(to: newIndex)
         }
