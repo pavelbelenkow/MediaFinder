@@ -5,13 +5,13 @@ import UIKit
 extension UIView {
     
     func addShimmerAnimation(
-        startPoint: CGPoint = CGPoint(x: 0.0, y: 0.0),
-        endPoint: CGPoint = CGPoint(x: 1.0, y: 1.0),
         locations: [NSNumber] = [0.0, 0.5, 1.0],
         fromValues: [NSNumber] = [-1.0, -0.5, 0.0],
         toValues: [NSNumber] = [1.0, 1.5, 2.0],
         duration: CFTimeInterval = 1.5
         colors: [CGColor] = UIColor.defaultShimmerColors,
+        startPoint: CGPoint = .defaultShimmerStartPoint,
+        endPoint: CGPoint = .defaultShimmerEndPoint,
     ) {
         let gradient = CAGradientLayer()
         gradient.frame = bounds
