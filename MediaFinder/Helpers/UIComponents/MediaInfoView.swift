@@ -4,12 +4,6 @@ final class MediaInfoView: UIStackView {
     
     // MARK: - Private Properties
     
-    private lazy var emptyView: UIView = {
-        let view = UIView()
-        view.clipsToBounds = true
-        return view
-    }()
-    
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.tintColor = .black
@@ -101,21 +95,15 @@ private extension MediaInfoView {
         axis = .vertical
         spacing = Const.spacingMedium
         
-        [
-            emptyView, imageView, mediaStackView
-        ].forEach { addArrangedSubview($0) }
+        [imageView, mediaStackView].forEach { addArrangedSubview($0) }
         
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             
             mediaStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Const.spacingMedium),
-            mediaStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Const.spacingMedium),
-            
-            emptyView.centerYAnchor.constraint(
-                equalTo: topAnchor,
-                constant: UIScreen.main.bounds.height / 4
-            )
+            mediaStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Const.spacingMedium)
         ])
     }
     
