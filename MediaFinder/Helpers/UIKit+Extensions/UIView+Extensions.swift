@@ -76,13 +76,21 @@ extension UIView {
         }
     }
     
-    func animateCellAppearance() {
-        transform = CGAffineTransform(translationX: 0, y: 50)
-        alpha = .zero
+    func animateCellAppearance(
+        with translation: CGPoint = .init(x: 0, y: 50),
+        alpha: CGFloat = 1,
+        duration: TimeInterval = 0.5,
+        dampingRatio: CGFloat = 0.9
+    ) {
+        transform = CGAffineTransform(translationX: translation.x, y: translation.y)
+        self.alpha = .zero
         
-        let animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.9) {
+        let animator = UIViewPropertyAnimator(
+            duration: duration,
+            dampingRatio: dampingRatio
+        ) {
             self.transform = .identity
-            self.alpha = 1
+            self.alpha = alpha
         }
         
         animator.startAnimation()
