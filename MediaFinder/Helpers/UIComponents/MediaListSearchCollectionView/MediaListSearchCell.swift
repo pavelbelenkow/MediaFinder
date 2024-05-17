@@ -6,7 +6,9 @@ final class MediaListSearchCell: UICollectionViewCell {
     
     private lazy var mediaImageView: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFit
+        view.tintColor = .black
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         return view
     }()
     
@@ -28,7 +30,7 @@ final class MediaListSearchCell: UICollectionViewCell {
     
     private lazy var mediaDurationLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .lightGray
+        label.textColor = .darkGray
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         return label
     }()
@@ -40,23 +42,34 @@ final class MediaListSearchCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var mediaDetailedStackView: UIStackView = {
+    private lazy var mediaHorizontalStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [mediaDurationLabel, mediaPriceLabel])
         view.axis = .horizontal
         view.distribution = .equalSpacing
         return view
     }()
     
-    private lazy var mediaStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [mediaImageView, mediaKindLabel, mediaNameLabel, mediaDetailedStackView])
+    private lazy var mediaDetailedStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [
+            mediaKindLabel, mediaNameLabel, mediaHorizontalStackView
+        ])
         view.axis = .vertical
-        view.distribution = .equalSpacing
+        view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: Const.spacingSmall, left: Const.spacingSmall, 
-                                          bottom: Const.spacingSmall, right: Const.spacingSmall)
+        view.layoutMargins = .small
+        return view
+    }()
+    
+    private lazy var mediaStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [
+            mediaImageView, mediaDetailedStackView
+        ])
+        view.axis = .vertical
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    private var currentUrlString: String?
     
     // MARK: - Initialisers
     
@@ -73,7 +86,8 @@ final class MediaListSearchCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        mediaImageView.image = nil
+        cancelImageLoading()
+        resetCellState()
     }
 }
 
@@ -82,8 +96,9 @@ final class MediaListSearchCell: UICollectionViewCell {
 private extension MediaListSearchCell {
     
     func setupAppearance() {
-        backgroundColor = .white
+        backgroundColor = .lightText
         layer.cornerRadius = Const.collectionCellCornerRadius
+        clipsToBounds = true
         
         contentView.addSubview(mediaStackView)
         
@@ -93,8 +108,40 @@ private extension MediaListSearchCell {
             mediaStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             mediaStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            mediaImageView.heightAnchor.constraint(equalToConstant: Const.mediaImageViewHeight)
+            mediaImageView.heightAnchor.constraint(equalTo: mediaImageView.widthAnchor)
         ])
+    }
+    
+    func cancelImageLoading() {
+        if let currentUrlString {
+            ImageLoader.shared.cancelLoading(for: currentUrlString)
+        }
+        
+        currentUrlString = nil
+    }
+    
+    func resetCellState() {
+        mediaImageView.image = nil
+        mediaKindLabel.text = nil
+        mediaNameLabel.text = nil
+        mediaDurationLabel.text = nil
+        mediaPriceLabel.text = nil
+        
+        removeShimmerAnimation()
+    }
+    
+    func loadAndSetupImage(from urlString: String) {
+        currentUrlString = urlString
+        
+        addShimmerAnimation()
+        isUserInteractionEnabled = false
+        
+        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
+            guard let self else { return }
+            removeShimmerAnimation()
+            mediaImageView.image = image
+            isUserInteractionEnabled = true
+        }
     }
 }
 
@@ -105,7 +152,7 @@ extension MediaListSearchCell {
     func configure(with media: Media) {
         
         guard
-            let image = media.artwork100,
+            let imageUrl = media.setImageQuality(to: Const.twoHundredSize),
             let kind = media.kind,
             let name = media.name,
             let duration = media.duration,
@@ -114,9 +161,7 @@ extension MediaListSearchCell {
             return
         }
         
-        ImageLoader.shared.loadImage(from: image) { [weak self] image in
-            self?.mediaImageView.image = image
-        }
+        loadAndSetupImage(from: imageUrl)
         
         mediaKindLabel.text = kind
         mediaNameLabel.text = name

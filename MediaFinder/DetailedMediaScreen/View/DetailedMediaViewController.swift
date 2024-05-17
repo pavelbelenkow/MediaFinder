@@ -60,12 +60,28 @@ private extension DetailedMediaViewController {
                 self?.detailedMediaView.updateUI(for: artist.first)
             }
             .store(in: &viewModel.cancellables)
+        
+        viewModel.artistCollectionSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] collection in
+                self?.detailedMediaView.updateUI(for: collection)
+            }
+            .store(in: &viewModel.cancellables)
     }
 }
 
 // MARK: - DetailedMediaViewDelegate Methods
 
 extension DetailedMediaViewController: DetailedMediaViewDelegate {
+    
+    func didTapArtistCollectionItem(at index: Int) {
+        guard
+            let urlString = viewModel.artistCollectionSubject.value[index].collectionView,
+            let url = URL(string: urlString)
+        else { return }
+        
+        UIApplication.shared.open(url)
+    }
     
     func didTapRepeatButton() {
         viewModel.fetchArtist()

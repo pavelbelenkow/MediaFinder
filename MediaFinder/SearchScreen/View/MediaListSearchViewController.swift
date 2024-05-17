@@ -107,8 +107,8 @@ private extension MediaListSearchViewController {
         
         viewModel.searchListSubject
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] mediaList in
-                self?.mediaListSearchView.reloadCollectionView(with: mediaList)
+            .sink { [weak self] mediaList, mediaType in
+                self?.mediaListSearchView.reloadCollectionView(with: mediaList, and: mediaType)
             }
             .store(in: &viewModel.cancellables)
         
@@ -224,8 +224,20 @@ extension MediaListSearchViewController: UISearchBarDelegate {
 
 extension MediaListSearchViewController: MediaListSearchViewDelegate {
     
-    func collectionViewDidScrollToBottom() {
+    func didSelectMediaType(for index: Int) {
+        viewModel.fetchSearchListForMediaType(by: index)
+    }
+    
+    func didScrollToBottomCollectionView() {
         viewModel.loadNextPageIfNeeded()
+    }
+    
+    func didTapInnerContentCollectionView(at index: Int) {
+        viewModel.didSelectMedia(at: index)
+    }
+    
+    func didTapFooterRepeatButton() {
+        viewModel.fetchSearchList()
     }
     
     func getRecentSearches() -> [String] {
@@ -234,17 +246,5 @@ extension MediaListSearchViewController: MediaListSearchViewDelegate {
     
     func didTapRecentTerm(at index: Int) {
         viewModel.didSelectRecentSearch(at: index)
-    }
-    
-    func didTapMedia(at index: Int) {
-        viewModel.didSelectMedia(at: index)
-    }
-    
-    func didSelectMediaType(for index: Int) {
-        viewModel.fetchSearchListForMediaType(by: index)
-    }
-    
-    func didTapRepeatButton() {
-        viewModel.fetchSearchList()
     }
 }

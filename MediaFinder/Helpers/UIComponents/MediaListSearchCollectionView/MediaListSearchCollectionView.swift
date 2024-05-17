@@ -3,18 +3,15 @@ import UIKit
 // MARK: - Delegates
 
 protocol MediaListSearchCollectionViewDelegate: AnyObject {
-    func collectionViewDidScrollToBottom()
+    func didScrollToBottomCollectionView()
     func didTapMedia(at index: Int)
+    func didTapFooterRepeatButton()
 }
 
 final class MediaListSearchCollectionView: UICollectionView {
     
-    enum Section {
-        case main
-    }
-    
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, Media>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Media>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, Media>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Media>
     
     // MARK: - Private Properties
     
@@ -34,17 +31,7 @@ final class MediaListSearchCollectionView: UICollectionView {
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
-        
-        backgroundColor = .clear
-        
-        register(MediaListSearchCell.self, forCellWithReuseIdentifier: Const.collectionViewReuseIdentifier)
-        
-        allowsMultipleSelection = false
-        showsVerticalScrollIndicator = false
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        delegate = self
-        
+        setupAppearance()
         makeDataSource()
     }
     
@@ -57,12 +44,33 @@ final class MediaListSearchCollectionView: UICollectionView {
 
 private extension MediaListSearchCollectionView {
     
+    func setupAppearance() {
+        backgroundColor = .clear
+        
+        register(
+            MediaListSearchCell.self,
+            forCellWithReuseIdentifier: Const.mediaListSearchCellReuseIdentifier
+        )
+        
+        register(
+            MediaListSearchFooterView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: Const.mediaListSearchFooterReuseIdentifier
+        )
+        
+        allowsMultipleSelection = false
+        showsVerticalScrollIndicator = false
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        delegate = self
+    }
+    
     func makeDataSource() {
         diffableDataSource = DataSource(
             collectionView: self,
             cellProvider: { collectionView, indexPath, media in
                 let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: Const.collectionViewReuseIdentifier,
+                    withReuseIdentifier: Const.mediaListSearchCellReuseIdentifier,
                     for: indexPath
                 ) as? MediaListSearchCell
                 
@@ -71,6 +79,20 @@ private extension MediaListSearchCollectionView {
                 return cell
             }
         )
+        
+        diffableDataSource?
+            .supplementaryViewProvider = { collectionView, kind, indexPath in
+                let footerView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: Const.mediaListSearchFooterReuseIdentifier,
+                    for: indexPath
+                ) as? MediaListSearchFooterView
+                
+                footerView?.updateStackView(for: .idle, isEmptyResults: true)
+                footerView?.delegate = self
+                
+                return footerView
+            }
     }
 }
 
@@ -80,9 +102,18 @@ extension MediaListSearchCollectionView {
     
     func applySnapshot(for mediaList: [Media]) {
         var snapshot = Snapshot()
-        snapshot.appendSections([.main])
+        snapshot.appendSections([.zero])
         snapshot.appendItems(mediaList)
         diffableDataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    func updateFooterView(for state: State, isEmptyResults: Bool) {
+        guard
+            let footerView = visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionFooter)
+                .first as? MediaListSearchFooterView
+        else { return }
+        
+        footerView.updateStackView(for: state, isEmptyResults: isEmptyResults)
     }
 }
 
@@ -96,7 +127,7 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
         let height = scrollView.frame.size.height
         
         if offsetY > contentHeight - height {
-            interactionDelegate?.collectionViewDidScrollToBottom()
+            interactionDelegate?.didScrollToBottomCollectionView()
         }
     }
     
@@ -125,21 +156,46 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
         )
     }
     
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        params.insets
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        referenceSizeForFooterInSection section: Int
+    ) -> CGSize {
+        CGSize(width: collectionView.bounds.width, height: Const.spacingOneHundred)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
         
-        ViewAnimator.shared.animateSelection(for: cell) { [weak self] in
-            self?.interactionDelegate?.didTapMedia(at: indexPath.item)
+        cell.animateSelection {
+            self.interactionDelegate?.didTapMedia(at: indexPath.item)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        ViewAnimator.shared.animateHighlight(for: cell)
+        cell.animateHighlight()
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        ViewAnimator.shared.animateUnhighlight(for: cell)
+        cell.animateUnhighlight()
+    }
+}
+
+// MARK: - MediaListSearchFooterViewDelegate Methods
+
+extension MediaListSearchCollectionView: MediaListSearchFooterViewDelegate {
+    
+    func didTapFooterRepeatButton() {
+        interactionDelegate?.didTapFooterRepeatButton()
     }
 }

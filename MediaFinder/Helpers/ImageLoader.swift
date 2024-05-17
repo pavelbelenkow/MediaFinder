@@ -9,8 +9,9 @@ final class ImageLoader {
     
     // MARK: - Private Properties
     
+    private let placeholder = UIImage(systemName: Const.imagePlaceholder)
     private let cache = NSCache<NSString, UIImage>()
-    private var cancellables: Set<AnyCancellable> = []
+    private var cancellables: [String: AnyCancellable] = [:]
     
     private let networkClient: NetworkClient
     
@@ -22,7 +23,10 @@ final class ImageLoader {
     
     // MARK: - Methods
     
-    func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
+    func loadImage(
+        from urlString: String,
+        completion: @escaping (UIImage?) -> Void
+    ) {
         
         if let cachedImage = cache.object(forKey: NSString(string: urlString)) {
             completion(cachedImage)
@@ -36,18 +40,26 @@ final class ImageLoader {
         
         let request = URLRequest(url: url)
         
-        networkClient.publisher(request: request)
+        let cancellable = networkClient.publisher(request: request)
             .map { data, _ in UIImage(data: data) }
-            .replaceError(with: nil)
+            .replaceError(with: placeholder)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] image in
                 
-                if let image {
-                    self?.cache.setObject(image, forKey: NSString(string: urlString))
+                guard let self else { return }
+                
+                if let image, image != placeholder {
+                    cache.setObject(image, forKey: NSString(string: urlString))
                 }
                 
                 completion(image)
             }
-            .store(in: &cancellables)
+        
+        cancellables[urlString] = cancellable
+    }
+    
+    func cancelLoading(for urlString: String) {
+        cancellables[urlString]?.cancel()
+        cancellables.removeValue(forKey: urlString)
     }
 }

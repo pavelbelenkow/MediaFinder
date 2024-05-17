@@ -38,6 +38,7 @@ enum Const {
     
     static let songKind = "song"
     static let movieKind = "feature-movie"
+    static let albumKind = "album"
     static let artistKind = "Artist"
     static let listenInAppleMusic = "Listen in Apple Music"
     static let watchOnAppleTV = "Watch on Apple TV"
@@ -45,8 +46,10 @@ enum Const {
     static let distributedBy = "Distributed by "
     static let moreAboutArtist = "More about the artist"
     static let moreAboutDistributor = "More about the distributor"
-    static let oneHundredSize = "100"
-    static let fiveHundredSize = "500"
+    static let oneHundredSize = "100x100"
+    static let twoHundredSize = "200x200"
+    static let twoHundredAndFiftySize = "250x250"
+    static let fiveHundredSize = "500x500"
     
     // MARK: - MediaListSearch Screen Constants
     
@@ -55,13 +58,18 @@ enum Const {
     static let songsPlaceholder = "Songs"
     static let moviesPlaceholder = "Movies"
     static let mediaTypeButtonTitles = ["All", "Movies", "Songs"]
-    static let collectionViewReuseIdentifier = "mediaCell"
-    static let tableViewReuseIdentifier = "recentSearchCell"
+    static let mediaTypeCellReuseIdentifier = "mediaTypeCell"
+    static let mediaListSearchCellReuseIdentifier = "mediaCell"
+    static let mediaListSearchFooterReuseIdentifier = "mediaListSearchFooterView"
+    static let recentSearchCellReuseIdentifier = "recentSearchCell"
     static let noResultsTitle = "No Results"
     static let noResultsDescription = "Try a new search."
     static let loadingDescription = "Loading"
     static let repeatButtonTitle = "Try Again"
     static let limitIcon = "line.horizontal.3.decrease.circle"
+    static let imagePlaceholder = "photo"
+    static let locationsKeyPath = "locations"
+    static let shimmerAnimationKey = "shimmerAnimation"
     
     static let limitTen = 10
     static let limitThirty = 30
@@ -74,7 +82,7 @@ enum Const {
     static let spacingMedium: CGFloat = 16
     static let spacingLarge: CGFloat = 60
     static let spacingOneHundred: CGFloat = 100
-    static let collectionViewCellHeight: CGFloat = 200
+    static let collectionViewCellHeight: CGFloat = 300
     static let collectionCellCornerRadius: CGFloat = 15
     static let imageViewCornerRadius: CGFloat = 20
     static let linkCornerRadius: CGFloat = 16
@@ -85,6 +93,12 @@ enum Const {
     // MARK: - DetailedMedia Screen Constants
     
     static let createdBy = "by\n"
+    static let moreButtonText = "more"
     static let aboutArtist = "About "
     static let artistGenre = "Genre: "
+    static let moreAlbums = "Albums By "
+    static let moreBundles = "Bundles From "
+    static let artistCollectionCellReuseIdentifier = "artistCollectionCell"
+    
+    static let labelCornerRadius: CGFloat = 6
 }

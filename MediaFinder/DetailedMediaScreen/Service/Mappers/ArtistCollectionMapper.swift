@@ -1,8 +1,8 @@
 import Foundation
 
-// MARK: - MediaListMapper
+// MARK: - ArtistCollectionMapper
 
-struct MediaListMapper {
+struct ArtistCollectionMapper {
     
     // MARK: - Private Properties
     
@@ -16,23 +16,21 @@ struct MediaListMapper {
         case 200:
             do {
                 let mediaModel = try decoder.decode(MediaModel.self, from: data)
-                let songsAndMovies: [Media] = mediaModel.results
-                    .filter { $0.isSong() || $0.isMovie() }
+                let artistCollection: [Media] = mediaModel.results
+                    .dropFirst()
                     .compactMap {
                         guard
-                            let _ = $0.kind,
-                            let _ = $0.name,
-                            let _ = $0.artist,
+                            let _ = $0.collection,
+                            let _ = $0.collectionView,
                             let _ = $0.artwork100,
-                            let _ = $0.duration,
-                            let _ = $0.price,
-                            let _ = $0.trackView
+                            let _ = $0.collectionPrice,
+                            let _ = $0.genre
                         else { return nil }
                         
                         return $0
                     }
                 
-                return songsAndMovies
+                return artistCollection
             } catch {
                 try mapDecodingError(error)
             }
@@ -58,7 +56,7 @@ struct MediaListMapper {
 
 // MARK: - Private Methods
 
-private extension MediaListMapper {
+private extension ArtistCollectionMapper {
     
     static func mapDecodingError(_ error: Error) throws {
         

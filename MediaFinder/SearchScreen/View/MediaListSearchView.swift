@@ -3,12 +3,12 @@ import UIKit
 // MARK: - Delegates
 
 protocol MediaListSearchViewDelegate: AnyObject {
-    func collectionViewDidScrollToBottom()
+    func didSelectMediaType(for index: Int)
+    func didScrollToBottomCollectionView()
+    func didTapInnerContentCollectionView(at index: Int)
+    func didTapFooterRepeatButton()
     func getRecentSearches() -> [String]
     func didTapRecentTerm(at index: Int)
-    func didTapMedia(at index: Int)
-    func didSelectMediaType(for index: Int)
-    func didTapRepeatButton()
 }
 
 final class MediaListSearchView: UIView {
@@ -21,15 +21,8 @@ final class MediaListSearchView: UIView {
         return control
     }()
     
-    private lazy var containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var mediaListCollectionView: MediaListSearchCollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let view = MediaListSearchCollectionView(frame: .zero, collectionViewLayout: layout)
+    private lazy var mediaTypeCollectionView: MediaTypeCollectionView = {
+        let view = MediaTypeCollectionView()
         view.interactionDelegate = self
         return view
     }()
@@ -38,12 +31,6 @@ final class MediaListSearchView: UIView {
         let view = MediaListRecentSearchTableView()
         view.isHidden = true
         view.interactionDelegate = self
-        return view
-    }()
-    
-    private lazy var statefulStackView: StatefulStackView = {
-        let view = StatefulStackView()
-        view.delegate = self
         return view
     }()
     
@@ -70,9 +57,7 @@ private extension MediaListSearchView {
     func setupAppearance() {
         setupBackgroundColor()
         setupMediaTypePageControl()
-        setupStatefulStackView()
-        setupContainerView()
-        setupMediaListCollectionView()
+        setupMediaTypeCollectionView()
         setupRecentSearchTableView()
     }
     
@@ -91,49 +76,26 @@ private extension MediaListSearchView {
         ])
     }
     
-    func setupContainerView() {
-        addSubview(containerView)
+    func setupMediaTypeCollectionView() {
+        addSubview(mediaTypeCollectionView)
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: mediaTypePageControl.bottomAnchor, 
-                                               constant: Const.spacingExtraSmall),
-            containerView.bottomAnchor.constraint(equalTo: statefulStackView.topAnchor),
-            containerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
-        ])
-    }
-    
-    func setupMediaListCollectionView() {
-        containerView.addSubview(mediaListCollectionView)
-        
-        NSLayoutConstraint.activate([
-            mediaListCollectionView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            mediaListCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            mediaListCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            mediaListCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            mediaTypeCollectionView.topAnchor.constraint(equalTo: mediaTypePageControl.bottomAnchor,
+                                                         constant: Const.spacingExtraSmall),
+            mediaTypeCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            mediaTypeCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            mediaTypeCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
     func setupRecentSearchTableView() {
-        containerView.addSubview(recentSearchTableView)
+        addSubview(recentSearchTableView)
         
         NSLayoutConstraint.activate([
-            recentSearchTableView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            recentSearchTableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            recentSearchTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            recentSearchTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
-        ])
-    }
-    
-    func setupStatefulStackView() {
-        addSubview(statefulStackView)
-        
-        NSLayoutConstraint.activate([
-            statefulStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            statefulStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, 
-                                                       constant: Const.spacingOneHundred),
-            statefulStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, 
-                                                        constant: -Const.spacingOneHundred)
+            recentSearchTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            recentSearchTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            recentSearchTableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            recentSearchTableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
     }
 }
@@ -142,8 +104,15 @@ private extension MediaListSearchView {
 
 extension MediaListSearchView {
     
-    func reloadCollectionView(with data: [Media]) {
-        mediaListCollectionView.applySnapshot(for: data)
+    func reloadCollectionView(with data: [Media], and type: EntityType) {
+        switch type {
+        case .all:
+            mediaTypeCollectionView.applySnapshotToMediaTypeCell(with: data, at: .zero)
+        case .movie:
+            mediaTypeCollectionView.applySnapshotToMediaTypeCell(with: data, at: 1)
+        case .song:
+            mediaTypeCollectionView.applySnapshotToMediaTypeCell(with: data, at: 2)
+        }
     }
     
     func reloadTableView() {
@@ -151,12 +120,19 @@ extension MediaListSearchView {
     }
     
     func updateUI(for state: State, isEmptyResults: Bool) {
-        statefulStackView.update(for: state, isEmptyResults: isEmptyResults)
+        for item in 0..<mediaTypeCollectionView.numberOfItems(inSection: .zero) {
+            let indexPath = IndexPath(item: item, section: .zero)
+            mediaTypeCollectionView.updateMediaTypeCellFooter(
+                for: state,
+                isEmptyResults: isEmptyResults,
+                at: indexPath
+            )
+        }
     }
     
     func updateCollectionsVisibility(_ state: Bool) {
         recentSearchTableView.isHidden = state
-        mediaListCollectionView.isHidden = !state
+        mediaTypeCollectionView.isHidden = !state
     }
 }
 
@@ -165,20 +141,34 @@ extension MediaListSearchView {
 extension MediaListSearchView: MediaTypePageControlDelegate {
     
     func change(to index: Int) {
+        let indexPath = IndexPath(item: index, section: .zero)
         delegate?.didSelectMediaType(for: index)
+        mediaTypeCollectionView.scrollToItem(
+            at: indexPath,
+            at: .centeredHorizontally,
+            animated: true
+        )
     }
 }
 
-// MARK: - MediaListSearchCollectionViewDelegate Methods
+// MARK: - MediaTypeCollectionViewDelegate Methods
 
-extension MediaListSearchView: MediaListSearchCollectionViewDelegate {
+extension MediaListSearchView: MediaTypeCollectionViewDelegate {
     
-    func collectionViewDidScrollToBottom() {
-        delegate?.collectionViewDidScrollToBottom()
+    func didScrollHorizontallyCollectionView(to index: Int) {
+        mediaTypePageControl.handleSelectionChange(to: index)
     }
     
-    func didTapMedia(at index: Int) {
-        delegate?.didTapMedia(at: index)
+    func didScrollToBottomMediaTypeCell() {
+        delegate?.didScrollToBottomCollectionView()
+    }
+    
+    func didTapInnerContentMediaTypeCell(at index: Int) {
+        delegate?.didTapInnerContentCollectionView(at: index)
+    }
+    
+    func didTapInnerContentFooterRepeatButton() {
+        delegate?.didTapFooterRepeatButton()
     }
 }
 
@@ -192,14 +182,5 @@ extension MediaListSearchView: MediaListRecentSearchTableViewDelegate {
     
     func didTapRecentTerm(at index: Int) {
         delegate?.didTapRecentTerm(at: index)
-    }
-}
-
-// MARK: - StatefulStackViewDelegate Methods
-
-extension MediaListSearchView: StatefulStackViewDelegate {
-    
-    func didTapRepeatButton() {
-        delegate?.didTapRepeatButton()
     }
 }

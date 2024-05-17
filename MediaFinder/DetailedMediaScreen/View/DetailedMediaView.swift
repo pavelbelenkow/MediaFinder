@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol DetailedMediaViewDelegate: AnyObject {
+    func didTapArtistCollectionItem(at index: Int)
     func didTapRepeatButton()
 }
 
@@ -13,8 +14,17 @@ final class DetailedMediaView: UIScrollView {
     private lazy var mediaInfoView = MediaInfoView()
     private lazy var artistInfoView = ArtistInfoView()
     
+    private lazy var artistCollectionView: ArtistCollectionCollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let view = ArtistCollectionCollectionView(frame: .zero, collectionViewLayout: layout)
+        view.interactionDelegate = self
+        return view
+    }()
+    
     private lazy var detailedMediaStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [mediaInfoView, artistInfoView])
+        let view = UIStackView(arrangedSubviews: [
+            mediaInfoView, artistInfoView, artistCollectionView
+        ])
         view.axis = .vertical
         view.spacing = Const.spacingMedium
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +60,7 @@ private extension DetailedMediaView {
     func setupAppearance() {
         backgroundColor = .mediaBackground
         showsVerticalScrollIndicator = false
+        delegate = self
         
         setupDetailedMediaStackView()
         setupStatefulStackView()
@@ -59,14 +70,9 @@ private extension DetailedMediaView {
         addSubview(detailedMediaStackView)
         
         NSLayoutConstraint.activate([
-            detailedMediaStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
-                                                    constant: Const.spacingMedium),
-            detailedMediaStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
-                                                     constant: -Const.spacingMedium),
-            detailedMediaStackView.topAnchor.constraint(equalTo: topAnchor,
-                                                     constant: Const.spacingMedium),
-            detailedMediaStackView.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                                     constant: -Const.spacingMedium)
+            detailedMediaStackView.topAnchor.constraint(equalTo: topAnchor),
+            detailedMediaStackView.widthAnchor.constraint(equalTo: widthAnchor),
+            detailedMediaStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Const.spacingMedium)
         ])
     }
     
@@ -89,7 +95,9 @@ extension DetailedMediaView {
     
     func updateUI(for state: State) {
         statefulStackView.update(for: state, isEmptyResults: false)
-        detailedMediaStackView.isHidden = !(state == .loaded)
+        [
+            detailedMediaStackView, artistCollectionView
+        ].forEach { $0.isHidden = !(state == .loaded) }
     }
     
     func updateUI(for media: Media?) {
@@ -100,6 +108,32 @@ extension DetailedMediaView {
     func updateUI(for artist: Artist?) {
         guard let artist else { return }
         artistInfoView.update(for: artist)
+    }
+    
+    func updateUI(for collection: [Media]) {
+        guard !collection.isEmpty else { return }
+        artistInfoView.showMoreFromArtistLabel()
+        artistCollectionView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
+        artistCollectionView.applySnapshot(for: collection)
+    }
+}
+
+// MARK: - Delegate Methods
+
+extension DetailedMediaView: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        offsetY <= .zero ? mediaInfoView.updateImageViewFrame(for: offsetY) : nil
+    }
+}
+
+// MARK: - ArtistCollectionCollectionViewDelegate Methods
+
+extension DetailedMediaView: ArtistCollectionCollectionViewDelegate {
+    
+    func didTapCollection(at index: Int) {
+        interactionDelegate?.didTapArtistCollectionItem(at: index)
     }
 }
 

@@ -73,12 +73,12 @@ private extension MediaTypePageControl {
     func createButton() {
         buttons.removeAll()
         subviews.forEach { $0.removeFromSuperview() }
-        for buttonTitle in buttonTitles {
+        buttonTitles.enumerated().forEach { index, buttonTitle in
             let button = UIButton(type: .custom)
             button.setTitle(buttonTitle, for: .normal)
             button.titleLabel?.font = .boldSystemFont(ofSize: 19)
-            button.addTarget(self, action:#selector(buttonAction), for: .touchUpInside)
-            button.setTitleColor(.white, for: .normal)
+            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+            button.setTitleColor(index == selectedIndex ? .white : .lightText, for: .normal)
             buttons.append(button)
         }
     }
@@ -93,15 +93,8 @@ private extension MediaTypePageControl {
         handleSelectionChange(to: tappedButtonIndex)
     }
     
-    func handleSelectionChange(to newIndex: Int) {
-        guard newIndex != selectedIndex else { return }
-        animateSelectionChange(to: newIndex)
-        updateSelectorPosition(to: newIndex)
-        updateButtonAppearance(for: newIndex)
-    }
-    
     func animateSelectionChange(to newIndex: Int) {
-        ViewAnimator.shared.animateSelection(for: buttons[newIndex]) {
+        buttons[newIndex].animateSelection {
             self.selectedIndex = newIndex
             self.delegate?.change(to: newIndex)
         }
@@ -124,8 +117,22 @@ private extension MediaTypePageControl {
     func updateButtonAppearance(for newIndex: Int) {
         buttons.enumerated().forEach { index, button in
             UIView.animate(withDuration: 0.25) {
-                button.transform = index == newIndex ? CGAffineTransform(scaleX: 0.8, y: 0.8) : .identity
+                let isSelected = index == newIndex
+                button.setTitleColor(isSelected ? .white : .lightText, for: .normal)
+                button.transform = isSelected ? CGAffineTransform(scaleX: 0.8, y: 0.8) : .identity
             }
         }
+    }
+}
+
+// MARK: - Methods
+
+extension MediaTypePageControl {
+    
+    func handleSelectionChange(to newIndex: Int) {
+        guard newIndex != selectedIndex else { return }
+        animateSelectionChange(to: newIndex)
+        updateSelectorPosition(to: newIndex)
+        updateButtonAppearance(for: newIndex)
     }
 }

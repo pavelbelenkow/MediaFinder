@@ -6,10 +6,12 @@ protocol DetailedMediaViewModelProtocol: ObservableObject {
     var stateSubject: CurrentValueSubject<State, Never> { get }
     var mediaSubject: CurrentValueSubject<Media?, Never> { get }
     var artistSubject: CurrentValueSubject<[Artist], Never> { get }
+    var artistCollectionSubject: CurrentValueSubject<[Media], Never> { get }
     
     var cancellables: Set<AnyCancellable> { get set }
     
     func fetchArtist()
+    func fetchArtistCollection()
 }
 
 final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
@@ -19,6 +21,7 @@ final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
     private(set) var stateSubject = CurrentValueSubject<State, Never>(.idle)
     private(set) var mediaSubject = CurrentValueSubject<Media?, Never>(nil)
     private(set) var artistSubject = CurrentValueSubject<[Artist], Never>([])
+    private(set) var artistCollectionSubject = CurrentValueSubject<[Media], Never>([])
     
     // MARK: - Private Properties
     
@@ -37,6 +40,7 @@ final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
         self.mediaSubject.send(mediaModel)
         self.artistLookupService = artistLookupService
         fetchArtist()
+        fetchArtistCollection()
     }
     
     // MARK: - Deinitialisers
@@ -80,6 +84,38 @@ extension DetailedMediaViewModel {
                 },
                 receiveValue: { artist in
                     self.artistSubject.send(artist)
+                })
+            .store(in: &cancellables)
+    }
+    
+    func fetchArtistCollection() {
+        let artistId: Int
+        
+        if let id = mediaSubject.value?.artistId {
+            artistId = id
+        } else if let id = mediaSubject.value?.collectionArtistId {
+            artistId = id
+        } else {
+            artistSubject.send([])
+            stateSubject.send(.loaded)
+            return
+        }
+        
+        artistLookupService
+            .fetchArtistCollection(by: artistId)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self else { return }
+                    
+                    switch completion {
+                    case .failure(let failure):
+                        stateSubject.send(.error(failure.localizedDescription))
+                    case .finished:
+                        stateSubject.send(.loaded)
+                    }
+                },
+                receiveValue: { collection in
+                    self.artistCollectionSubject.send(collection)
                 })
             .store(in: &cancellables)
     }

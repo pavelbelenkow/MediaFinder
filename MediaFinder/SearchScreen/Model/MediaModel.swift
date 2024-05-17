@@ -10,13 +10,17 @@ struct Media: Decodable {
     let kind: String?
     let artistId: Int?
     let artist: String?
+    let collection: String?
     let name: String?
     let collectionArtistId: Int?
+    let collectionView: String?
     let trackView: String?
     let artwork60: String?
     let artwork100: String?
+    let collectionPrice: Double?
     let price: Double?
     let releaseDate: String?
+    let genre: String?
     let description: String?
     let duration: Int?
     
@@ -24,13 +28,17 @@ struct Media: Decodable {
         case kind
         case artistId
         case artist = "artistName"
+        case collection = "collectionName"
         case name = "trackName"
         case collectionArtistId
+        case collectionView = "collectionViewUrl"
         case trackView = "trackViewUrl"
         case artwork60 = "artworkUrl60"
         case artwork100 = "artworkUrl100"
+        case collectionPrice
         case price = "trackPrice"
         case releaseDate
+        case genre = "primaryGenreName"
         case description = "longDescription"
         case duration = "trackTimeMillis"
     }
@@ -53,8 +61,8 @@ extension Media {
         kind == Const.movieKind
     }
     
-    func highQualityImage() -> String? {
-        artwork100?.replacingOccurrences(of: Const.oneHundredSize, with: Const.fiveHundredSize)
+    func setImageQuality(to size: String) -> String? {
+        artwork100?.replacingOccurrences(of: Const.oneHundredSize, with: size)
     }
     
     func attributedLinkText() -> NSAttributedString {

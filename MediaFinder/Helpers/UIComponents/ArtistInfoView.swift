@@ -6,24 +6,24 @@ final class ArtistInfoView: UIStackView {
     
     private lazy var titleLabel: CustomLabel = {
         let label = CustomLabel()
-        label.configure(font: .boldSystemFont(ofSize: 21), alignment: .left)
+        label.configure(
+            font: .systemFont(ofSize: 17, weight: .medium),
+            alignment: .left
+        )
         return label
     }()
     
     private lazy var nameLabel: CustomLabel = {
         let label = CustomLabel()
-        label.configure(
-            font: .systemFont(ofSize: 19, weight: .medium),
-            alignment: .left
-        )
+        label.configure(alignment: .left)
         return label
     }()
     
     private lazy var genreLabel: CustomLabel = {
         let label = CustomLabel()
         label.configure(
-            textColor: .mediaRed,
-            font: .systemFont(ofSize: 18),
+            textColor: .systemIndigo,
+            font: .systemFont(ofSize: 13, weight: .medium),
             alignment: .left
         )
         return label
@@ -33,6 +33,29 @@ final class ArtistInfoView: UIStackView {
         let textView = CustomTextView()
         textView.configure()
         return textView
+    }()
+    
+    private lazy var artistInfoStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [
+            nameLabel, genreLabel, linkTextView
+        ])
+        view.backgroundColor = .white
+        view.axis = .vertical
+        view.spacing = Const.spacingSmall
+        view.layer.cornerRadius = 10
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = .medium
+        return view
+    }()
+    
+    private lazy var moreFromArtistLabel: CustomLabel = {
+        let label = CustomLabel()
+        label.configure(
+            font: .systemFont(ofSize: 17, weight: .medium),
+            alignment: .left
+        )
+        label.isHidden = true
+        return label
     }()
     
     // MARK: - Initialisers
@@ -52,19 +75,18 @@ final class ArtistInfoView: UIStackView {
 private extension ArtistInfoView {
     
     func setupAppearance() {
-        backgroundColor = .white
         axis = .vertical
-        spacing = Const.spacingSmall
-        layer.cornerRadius = 10
-        clipsToBounds = true
+        spacing = Const.spacingMedium
         isHidden = true
         isLayoutMarginsRelativeArrangement = true
         layoutMargins = UIEdgeInsets(
             top: Const.spacingMedium, left: Const.spacingMedium,
-            bottom: Const.spacingMedium, right:  Const.spacingMedium
+            bottom: .zero, right: Const.spacingMedium
         )
         
-        [titleLabel, nameLabel, genreLabel, linkTextView].forEach { addArrangedSubview($0) }
+        [
+            titleLabel, artistInfoStackView, moreFromArtistLabel
+        ].forEach { addArrangedSubview($0) }
     }
 }
 
@@ -73,12 +95,20 @@ private extension ArtistInfoView {
 extension ArtistInfoView {
     
     func update(for artist: Artist) {
+        isHidden = false
+        
         titleLabel.text = Const.aboutArtist.appending(artist.kind)
         nameLabel.text = artist.namePlaceholder()
+        
         if let genre = artist.genre {
             genreLabel.text = Const.artistGenre.appending(genre)
         }
+        
         linkTextView.attributedText = artist.attributedLinkText()
-        isHidden = false
+        moreFromArtistLabel.text = artist.moreFromArtistPlaceHolder()
+    }
+    
+    func showMoreFromArtistLabel() {
+        moreFromArtistLabel.isHidden = false
     }
 }
