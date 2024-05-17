@@ -1,5 +1,22 @@
 import UIKit
 
+// MARK: - Private Methods
+
+private extension UIView {
+    
+    func animateScale(
+        to scale: CGFloat = 1.0,
+        duration: TimeInterval = 0.2,
+        completion: (() -> Void)? = nil
+    ) {
+        UIView.animate(withDuration: duration) { [weak self] in
+            self?.transform = CGAffineTransform(scaleX: scale, y: scale)
+        } completion: { _ in
+            completion?()
+        }
+    }
+}
+
 // MARK: - Shimmer Animation
 
 extension UIView {
