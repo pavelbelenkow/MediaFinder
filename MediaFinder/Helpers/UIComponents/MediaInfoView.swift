@@ -35,14 +35,16 @@ final class MediaInfoView: UIStackView {
     
     private lazy var artistNameLabel: CustomLabel = {
         let label = CustomLabel()
-        label.configure(font: .systemFont(ofSize: 18, weight: .medium))
+        label.configure(
+            font: .systemFont(ofSize: 15, weight: .medium)
+        )
         return label
     }()
     
     private lazy var descriptionLabel: CustomLabel = {
         let label = CustomLabel()
         label.configure(
-            textColor: .white,
+            textColor: .gray,
             font: .italicSystemFont(ofSize: 15),
             alignment: .justified,
             numberOfLines: 3
