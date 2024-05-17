@@ -57,40 +57,18 @@ extension UIView {
 
 extension UIView {
     
-    func animateTextViewInteraction(openURL url: URL) {
-        UIView.animate(withDuration: 0.25) { [weak self] in
-            self?.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        } completion: { _ in
-            UIView.animate(withDuration: 0.25) { [weak self] in
-                self?.transform = .identity
-            }
-            
-            UIApplication.shared.open(url)
-        }
-    }
-    
-    func animateSelection(_ completion: (() -> Void)?) {
-        UIView.animate(withDuration: 0.2) { [weak self] in
-            self?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-        } completion: { _ in
-            UIView.animate(withDuration: 0.2) { [weak self] in
-                self?.transform = .identity
-            }
-            
-            completion?()
+    func animateSelection(completion: (() -> Void)?) {
+        animateScale(to: 0.9) {
+            self.animateScale(completion: completion)
         }
     }
     
     func animateHighlight() {
-        UIView.animate(withDuration: 0.2) { [weak self] in
-            self?.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-        }
+        animateScale(to: 0.9)
     }
     
     func animateUnhighlight() {
-        UIView.animate(withDuration: 0.2) { [weak self] in
-            self?.transform = .identity
-        }
+        animateScale()
     }
     
     func animateCellAppearance(
