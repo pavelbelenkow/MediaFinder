@@ -2,6 +2,16 @@ import UIKit
 
 final class CustomLabel: UILabel {
     
+    // MARK: - Override Properties
+    
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(
+            width: size.width + textInsets.left + textInsets.right,
+            height: size.height + textInsets.top + textInsets.bottom
+        )
+    }
+    
     // MARK: - Private Properties
     
     private var textInsets = UIEdgeInsets.zero {
