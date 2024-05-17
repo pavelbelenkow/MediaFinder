@@ -44,10 +44,7 @@ final class ArtistInfoView: UIStackView {
         view.spacing = Const.spacingSmall
         view.layer.cornerRadius = 10
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(
-            top: Const.spacingMedium, left: Const.spacingMedium,
-            bottom: Const.spacingMedium, right: Const.spacingMedium
-        )
+        view.layoutMargins = .medium
         return view
     }()
     
