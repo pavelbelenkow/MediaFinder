@@ -1,5 +1,4 @@
 import UIKit
-import SafariServices
 
 final class DetailedMediaViewController: UIViewController {
     
@@ -81,8 +80,7 @@ extension DetailedMediaViewController: DetailedMediaViewDelegate {
             let url = URL(string: urlString)
         else { return }
         
-        let sf = SFSafariViewController(url: url)
-        present(sf, animated: true)
+        UIApplication.shared.open(url)
     }
     
     func didTapRepeatButton() {
