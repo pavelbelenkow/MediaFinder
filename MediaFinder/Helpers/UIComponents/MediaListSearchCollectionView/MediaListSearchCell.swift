@@ -56,8 +56,7 @@ final class MediaListSearchCell: UICollectionViewCell {
         view.axis = .vertical
         view.distribution = .fillEqually
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: Const.spacingSmall, left: Const.spacingSmall,
-                                          bottom: Const.spacingSmall, right: Const.spacingSmall)
+        view.layoutMargins = .small
         return view
     }()
     
