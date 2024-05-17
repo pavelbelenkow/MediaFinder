@@ -23,7 +23,13 @@ final class MediaInfoView: UIStackView {
     
     private lazy var nameLabel: CustomLabel = {
         let label = CustomLabel()
-        label.configure(textColor: .white, font: .boldSystemFont(ofSize: 24))
+        label.configure(
+            font: .systemFont(ofSize: 19, weight: .medium),
+            backgroundColor: .white,
+            cornerRadius: Const.labelCornerRadius,
+            textInsets: .small,
+            adjustsFontSizeToFitWidth: true
+        )
         return label
     }()
     
