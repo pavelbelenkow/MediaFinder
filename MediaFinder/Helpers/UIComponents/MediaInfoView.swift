@@ -69,8 +69,7 @@ final class MediaInfoView: UIStackView {
         view.alignment = .center
         view.spacing = Const.spacingMedium
         view.isLayoutMarginsRelativeArrangement = true
-        view.layoutMargins = UIEdgeInsets(top: Const.spacingMedium, left: Const.spacingMedium,
-                                          bottom: Const.spacingMedium, right: Const.spacingMedium)
+        view.layoutMargins = .medium
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
