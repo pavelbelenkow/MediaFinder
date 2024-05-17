@@ -99,4 +99,6 @@ enum Const {
     static let moreAlbums = "Albums By "
     static let moreBundles = "Bundles From "
     static let artistCollectionCellReuseIdentifier = "artistCollectionCell"
+    
+    static let labelCornerRadius: CGFloat = 6
 }
