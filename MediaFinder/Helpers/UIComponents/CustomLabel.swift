@@ -2,6 +2,18 @@ import UIKit
 
 final class CustomLabel: UILabel {
     
+    // MARK: - Private Properties
+    
+    private var textInsets = UIEdgeInsets.zero {
+        didSet { invalidateIntrinsicContentSize() }
+    }
+    
+    // MARK: - Override Methods
+    
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: textInsets))
+    }
+    
     // MARK: - Configure Label
     
     func configure(
