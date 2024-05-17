@@ -15,7 +15,9 @@ final class MediaInfoView: UIStackView {
     
     private lazy var kindLabel: CustomLabel = {
         let label = CustomLabel()
-        label.configure()
+        label.configure(
+            font: .systemFont(ofSize: 15, weight: .medium)
+        )
         return label
     }()
     
