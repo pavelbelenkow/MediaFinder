@@ -45,6 +45,7 @@
 		595EFE7A2BC9743200F7E353 /* ArtistMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE792BC9743200F7E353 /* ArtistMapper.swift */; };
 		5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */; };
 		5976B1B62BBF546200DB8CBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5976B1B52BBF546200DB8CBA /* Assets.xcassets */; };
+		598B95F32BF7AC4000865B1C /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598B95F22BF7AC4000865B1C /* UIEdgeInsets+Extensions.swift */; };
 		599E72232BF681230033C677 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E72222BF681230033C677 /* UIColor+Extensions.swift */; };
 		599E72252BF695CB0033C677 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E72242BF695CB0033C677 /* UIView+Extensions.swift */; };
 		599E72272BF6988F0033C677 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E72262BF6988F0033C677 /* UILabel+Extensions.swift */; };
@@ -118,6 +119,7 @@
 		5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5976B1B52BBF546200DB8CBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5976B1BA2BBF546200DB8CBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		598B95F22BF7AC4000865B1C /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
 		599E72222BF681230033C677 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		599E72242BF695CB0033C677 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		599E72262BF6988F0033C677 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				599E72222BF681230033C677 /* UIColor+Extensions.swift */,
 				599E72242BF695CB0033C677 /* UIView+Extensions.swift */,
 				599E72262BF6988F0033C677 /* UILabel+Extensions.swift */,
+				598B95F22BF7AC4000865B1C /* UIEdgeInsets+Extensions.swift */,
 				595EFE6D2BC95FF500F7E353 /* NSAttributedString+Extensions.swift */,
 			);
 			path = "UIKit+Extensions";
@@ -574,6 +577,7 @@
 				592A15122BC5B80500322135 /* MediaListSearchView.swift in Sources */,
 				599E72232BF681230033C677 /* UIColor+Extensions.swift in Sources */,
 				595EFE6E2BC95FF500F7E353 /* NSAttributedString+Extensions.swift in Sources */,
+				598B95F32BF7AC4000865B1C /* UIEdgeInsets+Extensions.swift in Sources */,
 				599E72252BF695CB0033C677 /* UIView+Extensions.swift in Sources */,
 				595EFE762BC9619100F7E353 /* MediaInfoView.swift in Sources */,
 				592A15072BC57E3B00322135 /* Int+Extensions.swift in Sources */,
