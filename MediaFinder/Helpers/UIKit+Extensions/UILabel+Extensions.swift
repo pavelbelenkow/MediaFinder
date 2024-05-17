@@ -1,6 +1,6 @@
 import UIKit
 
-// MARK: = Label Animations
+// MARK: - Label Animations
 
 extension UILabel {
     

@@ -134,11 +134,13 @@ private extension MediaListSearchCell {
         currentUrlString = urlString
         
         addShimmerAnimation()
+        isUserInteractionEnabled = false
         
         ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
             guard let self else { return }
             removeShimmerAnimation()
             mediaImageView.image = image
+            isUserInteractionEnabled = true
         }
     }
 }

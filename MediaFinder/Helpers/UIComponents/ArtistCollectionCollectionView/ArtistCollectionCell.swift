@@ -121,11 +121,13 @@ private extension ArtistCollectionCell {
         currentUrlString = urlString
         
         addShimmerAnimation()
+        isUserInteractionEnabled = false
         
         ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
             guard let self else { return }
             removeShimmerAnimation()
             collectionImageView.image = image
+            isUserInteractionEnabled = true
         }
     }
 }
