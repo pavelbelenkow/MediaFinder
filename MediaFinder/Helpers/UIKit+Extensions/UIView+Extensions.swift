@@ -13,21 +13,19 @@ extension UIView {
         toValues: [NSNumber] = NSNumber.defaultShimmerToValues,
         duration: CFTimeInterval = .defaultShimmerDuration
     ) {
-        let gradient = CAGradientLayer()
-        gradient.frame = bounds
-        gradient.startPoint = startPoint
-        gradient.endPoint = endPoint
-        gradient.locations = locations
-        gradient.colors = colors
-        layer.addSublayer(gradient)
+        let gradient = CALayer
+            .shimmerGradient(frame: bounds,
+                             colors: colors,
+                             startPoint: startPoint,
+                             endPoint: endPoint,
+                             locations: locations)
         
-        let animation = CABasicAnimation(keyPath: Const.locationsKeyPath)
-        animation.fromValue = fromValues
-        animation.toValue = toValues
-        animation.duration = duration
-        animation.repeatCount = .infinity
-        animation.isRemovedOnCompletion = false
-        gradient.add(animation, forKey: Const.shimmerAnimationKey)
+        gradient
+            .addShimmerAnimation(fromValue: fromValues,
+                                 toValue: toValues,
+                                 duration: duration)
+        
+        layer.addSublayer(gradient)
     }
     
     func removeShimmerAnimation() {
