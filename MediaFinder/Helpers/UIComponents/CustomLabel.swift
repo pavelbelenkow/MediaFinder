@@ -30,11 +30,20 @@ final class CustomLabel: UILabel {
         textColor: UIColor = .black,
         font: UIFont = .systemFont(ofSize: 17),
         alignment: NSTextAlignment = .center,
-        numberOfLines: Int = .zero
+        numberOfLines: Int = .zero,
+        backgroundColor: UIColor = .clear,
+        cornerRadius: CGFloat = .zero,
+        textInsets: UIEdgeInsets = .zero,
+        adjustsFontSizeToFitWidth: Bool = false
     ) {
         self.textColor = textColor
         self.font = font
         self.textAlignment = alignment
         self.numberOfLines = numberOfLines
+        self.backgroundColor = backgroundColor
+        self.layer.cornerRadius = cornerRadius
+        self.textInsets = textInsets
+        self.adjustsFontSizeToFitWidth = adjustsFontSizeToFitWidth
+        self.clipsToBounds = true
     }
 }
