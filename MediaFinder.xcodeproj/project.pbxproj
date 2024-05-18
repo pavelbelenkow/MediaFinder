@@ -274,7 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				599E72282BF699E00033C677 /* Foundation+Extensions */,
-				599E72342BF6CF980033C677 /* QuartCore+Extensions */,
+				599E72342BF6CF980033C677 /* QuartzCore+Extensions */,
 				599E72292BF699F60033C677 /* UIKit+Extensions */,
 				592A15132BC5F15400322135 /* UIComponents */,
 				593477122BC08644004BE3AF /* Const.swift */,
@@ -381,13 +381,13 @@
 			path = "UIKit+Extensions";
 			sourceTree = "<group>";
 		};
-		599E72342BF6CF980033C677 /* QuartCore+Extensions */ = {
+		599E72342BF6CF980033C677 /* QuartzCore+Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				599E72302BF6CB5F0033C677 /* CALayer+Extensions.swift */,
 				599E72322BF6CB740033C677 /* CAAnimation+Extensions.swift */,
 			);
-			path = "QuartCore+Extensions";
+			path = "QuartzCore+Extensions";
 			sourceTree = "<group>";
 		};
 		59A0E4002BCBBCF70012C628 /* MediaFinderTests */ = {
