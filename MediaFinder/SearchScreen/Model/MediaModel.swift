@@ -23,6 +23,9 @@ struct Media: Decodable {
     let genre: String?
     let description: String?
     let duration: Int?
+    var ratio: CGFloat {
+        isSong() ? 1.0 : 0.665
+    }
     
     private enum CodingKeys: String, CodingKey {
         case kind
