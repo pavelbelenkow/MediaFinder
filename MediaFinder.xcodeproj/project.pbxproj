@@ -46,6 +46,7 @@
 		5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5976B1AC2BBF546100DB8CBA /* AppDelegate.swift */; };
 		5976B1B62BBF546200DB8CBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5976B1B52BBF546200DB8CBA /* Assets.xcassets */; };
 		598B95F32BF7AC4000865B1C /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598B95F22BF7AC4000865B1C /* UIEdgeInsets+Extensions.swift */; };
+		5991DE0D2BFA9DC100823655 /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5991DE0C2BFA9DC100823655 /* WaterfallLayout.swift */; };
 		599E72232BF681230033C677 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E72222BF681230033C677 /* UIColor+Extensions.swift */; };
 		599E72252BF695CB0033C677 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E72242BF695CB0033C677 /* UIView+Extensions.swift */; };
 		599E72272BF6988F0033C677 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E72262BF6988F0033C677 /* UILabel+Extensions.swift */; };
@@ -120,6 +121,7 @@
 		5976B1B52BBF546200DB8CBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5976B1BA2BBF546200DB8CBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		598B95F22BF7AC4000865B1C /* UIEdgeInsets+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extensions.swift"; sourceTree = "<group>"; };
+		5991DE0C2BFA9DC100823655 /* WaterfallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
 		599E72222BF681230033C677 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		599E72242BF695CB0033C677 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		599E72262BF6988F0033C677 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		592A151A2BC5F5AF00322135 /* MediaListSearchCollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				5991DE0C2BFA9DC100823655 /* WaterfallLayout.swift */,
 				592A15182BC5F52E00322135 /* MediaListSearchCollectionView.swift */,
 				592A151B2BC5F5DC00322135 /* MediaListSearchCell.swift */,
 				59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */,
@@ -586,6 +589,7 @@
 				593477102BC05BF1004BE3AF /* NetworkRequest.swift in Sources */,
 				5934770E2BC05BBF004BE3AF /* NetworkClient.swift in Sources */,
 				590D061F2BC80598002D5688 /* ArtistLookupService.swift in Sources */,
+				5991DE0D2BFA9DC100823655 /* WaterfallLayout.swift in Sources */,
 				592A15102BC588B200322135 /* MediaListSearchViewController.swift in Sources */,
 				599E72332BF6CB740033C677 /* CAAnimation+Extensions.swift in Sources */,
 				592A15152BC5F1C700322135 /* StatefulStackView.swift in Sources */,
