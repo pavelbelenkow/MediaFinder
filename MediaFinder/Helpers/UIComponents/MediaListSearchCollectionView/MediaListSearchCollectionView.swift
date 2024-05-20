@@ -99,24 +99,11 @@ private extension MediaListSearchCollectionView {
 
 extension MediaListSearchCollectionView {
     
-    func updateLayout(with mediaList: [Media]) {
-        let itemRatios = mediaList.compactMap { $0.ratio }
-        let waterfallLayout = WaterfallLayout(
-            columnsCount: 2,
-            spacing: 4,
-            contentWidth: frame.width,
-            itemRatios: itemRatios
-        )
-        collectionViewLayout = waterfallLayout
-    }
-    
     func applySnapshot(for mediaList: [Media]) {
         var snapshot = Snapshot()
         snapshot.appendSections([.zero])
         snapshot.appendItems(mediaList)
         diffableDataSource?.apply(snapshot, animatingDifferences: true)
-        
-        updateLayout(with: mediaList)
     }
     
     func updateFooterView(for state: State, isEmptyResults: Bool) {
