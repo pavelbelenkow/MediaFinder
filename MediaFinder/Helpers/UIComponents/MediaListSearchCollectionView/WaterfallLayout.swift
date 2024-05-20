@@ -80,20 +80,41 @@ private extension WaterfallLayout {
         cache.removeAll()
         contentHeight = .zero
     }
+    
+    func calculateItemAttributes(
+        collectionView: UICollectionView,
+        columnWidth: CGFloat,
+        xOffsets: [CGFloat],
+        yOffsets: inout [CGFloat]
+    ) {
+        var column: Int = .zero
         
-        for ratio in itemRatios {
-            let descriptionHeight: CGFloat = Const.spacingOneHundred
-            let frame = CGRect(
-                x: xOffsets[currentColumn],
-                y: yOffsets[currentColumn],
-                width: columnWidth,
-                height: (columnWidth / ratio) + descriptionHeight
-            ).insetBy(dx: padding, dy: padding)
+        for item in .zero..<collectionView.numberOfItems(inSection: .zero) {
+            let indexPath = IndexPath(item: item, section: .zero)
             
-            frames.append(frame)
-            yOffsets[currentColumn] = frame.maxY
-            currentColumn = yOffsets.indexOfMinElement ?? .zero
+            let height = calculateItemHeight(
+                collectionView: collectionView,
+                for: indexPath,
+                columnWidth: columnWidth
+            )
+            
+            let frame = CGRect(
+                x: xOffsets[column],
+                y: yOffsets[column],
+                width: columnWidth,
+                height: height
+            ).insetBy(dx: cellPadding, dy: cellPadding)
+            
+            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+            attributes.frame = frame
+            cache.append(attributes)
+            
+            contentHeight = max(contentHeight, frame.maxY)
+            yOffsets[column] = yOffsets[column] + height
+            
+            column = column < (columnsCount - 1) ? (column + 1) : 0
         }
+    }
     
     func calculateItemHeight(
         collectionView: UICollectionView,
