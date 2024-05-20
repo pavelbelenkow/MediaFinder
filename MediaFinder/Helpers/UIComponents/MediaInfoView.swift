@@ -168,7 +168,7 @@ extension MediaInfoView {
         
         if let description = media.description {
             descriptionLabel.text = description
-            setupMoreButton()
+            description.count > 140 ? setupMoreButton() : nil
         }
         
         linkTextView.attributedText = media.attributedLinkText()
