@@ -40,6 +40,22 @@ final class WaterfallLayout: UICollectionViewLayout {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Overridden Properties
+    
+    override var collectionViewContentSize: CGSize { .init(width: contentWidth, height: contentHeight) }
+    
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        cache.filter { $0.frame.intersects(rect) }
+    }
+    
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        cache.first { $0.indexPath == indexPath }
+    }
+    
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        cache.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
+    }
 }
 
 // MARK: - Private Methods
