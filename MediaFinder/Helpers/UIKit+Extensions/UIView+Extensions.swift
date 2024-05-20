@@ -22,6 +22,8 @@ private extension UIView {
 extension UIView {
     
     func addShimmerAnimation(
+        borderWidth: CGFloat = 0.2,
+        borderColor: CGColor = UIColor.lightText.cgColor,
         colors: [CGColor] = UIColor.defaultShimmerColors,
         startPoint: CGPoint = .defaultShimmerStartPoint,
         endPoint: CGPoint = .defaultShimmerEndPoint,
@@ -32,6 +34,9 @@ extension UIView {
     ) {
         let gradient = CALayer
             .shimmerGradient(frame: bounds,
+                             borderWidth: borderWidth,
+                             borderRadius: layer.cornerRadius,
+                             borderColor: borderColor,
                              colors: colors,
                              startPoint: startPoint,
                              endPoint: endPoint,
