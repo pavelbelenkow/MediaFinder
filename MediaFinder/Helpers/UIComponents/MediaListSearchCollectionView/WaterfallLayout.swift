@@ -74,17 +74,14 @@ private extension WaterfallLayout {
         
         for item in 0..<itemRatios.count {
             let ratio = itemRatios[item]
-            let descriptionHeight: CGFloat = ratio == 1.0 ? 100 : .zero
+            let descriptionHeight = Const.spacingOneHundred
             
             let frame = CGRect(
                 x: xOffsets[currentColumn],
                 y: yOffsets[currentColumn],
                 width: columnWidth,
                 height: (columnWidth / ratio) + descriptionHeight
-            )
-                .insetBy(dx: padding, dy: padding)
-                .offsetBy(dx: .zero, dy: insets.leading)
-                .setHeight(ratio: ratio)
+            ).insetBy(dx: padding, dy: padding)
             
             frames.append(frame)
             
