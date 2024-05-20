@@ -114,10 +114,3 @@ private extension Array where Element: Comparable {
         return index
     }
 }
-
-private extension CGRect {
-    
-    func setHeight(ratio: CGFloat) -> CGRect {
-        .init(x: minX, y: minY, width: width, height: height / ratio)
-    }
-}
