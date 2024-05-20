@@ -108,8 +108,9 @@ extension MediaListSearchCollectionView {
     
     func updateFooterView(for state: State, isEmptyResults: Bool) {
         guard
-            let footerView = visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionFooter)
-                .first as? MediaListSearchFooterView
+            let footerView = visibleSupplementaryViews(
+                ofKind: UICollectionView.elementKindSectionFooter
+            ).first as? MediaListSearchFooterView
         else { return }
         
         footerView.updateStackView(for: state, isEmptyResults: isEmptyResults)
