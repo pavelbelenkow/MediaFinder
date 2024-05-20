@@ -94,12 +94,21 @@ private extension WaterfallLayout {
             yOffsets[currentColumn] = frame.maxY
             currentColumn = yOffsets.indexOfMinElement ?? .zero
         }
+    
+    func calculateItemHeight(
+        collectionView: UICollectionView,
+        for indexPath: IndexPath,
+        columnWidth: CGFloat
+    ) -> CGFloat {
+        let width = columnWidth - cellPadding * 2
+        let imageHeight = delegate?.collectionView(
+            collectionView,
+            heightForItemAt: indexPath,
+            with: width
+        ) ?? .zero
         
-        let sectionHeight = frames.map(\.maxY).max() ?? .zero + insets.bottom
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(sectionHeight)
+        return cellPadding * 2 + imageHeight
+    }
         )
         let group = NSCollectionLayoutGroup.custom(layoutSize: groupSize) { environment in
             frames.map { NSCollectionLayoutGroupCustomItem(frame: $0) }
