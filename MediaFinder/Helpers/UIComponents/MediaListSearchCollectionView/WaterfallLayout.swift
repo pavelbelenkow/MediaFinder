@@ -1,6 +1,15 @@
 import UIKit
 
 final class WaterfallLayout: UICollectionViewCompositionalLayout {
+// MARK: - Delegates
+
+protocol WaterfallLayoutDelegate: AnyObject {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        heightForItemAt indexPath: IndexPath,
+        with width: CGFloat) -> CGFloat
+}
+
     
     // MARK: - Private Properties
     
