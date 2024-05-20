@@ -1,52 +1,14 @@
 import UIKit
 
-final class WaterfallLayout {
+final class WaterfallLayout: UICollectionViewCompositionalLayout {
     
-    private let numberOfColumns: Int
-    private let itemRatios: [CGFloat]
-    private let spacing: CGFloat
-    private let contentWidth: CGFloat
+    // MARK: - Private Properties
     
-    private var padding: CGFloat { spacing / 2 }
-    private var insets: NSDirectionalEdgeInsets {
-        .init(top: padding, leading: padding, bottom: padding, trailing: padding)
-    }
+    private var columnsCount: Int
+    private var spacing: CGFloat
+    private var contentWidth: CGFloat
+    private var itemRatios: [CGFloat]
     
-    private lazy var frames: [CGRect] = {
-        calculateFrames()
-    }()
-    
-    private lazy var sectionHeight: CGFloat = {
-        frames.map(\.maxY).max() ?? .zero + insets.bottom
-    }()
-    
-    private lazy var layoutGroup: NSCollectionLayoutGroup = {
-        let size = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(sectionHeight)
-        )
-        
-        return NSCollectionLayoutGroup.custom(layoutSize: size) { _ in
-            self.frames.map { .init(frame: $0) }
-        }
-    }()
-    
-    var layoutSection: NSCollectionLayoutSection {
-        let section = NSCollectionLayoutSection(group: layoutGroup)
-        let footerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(100)
-        )
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: footerSize,
-            elementKind: UICollectionView.elementKindSectionFooter,
-            alignment: .bottom
-        )
-        
-        section.boundarySupplementaryItems = [footer]
-        section.contentInsets = .init(top: .zero, leading: padding, bottom: .zero, trailing: padding)
-        return section
-    }
     
     init(
         columnsCount: Int,
@@ -61,21 +23,27 @@ final class WaterfallLayout {
     }
 }
 
+// MARK: - Private Methods
+
 private extension WaterfallLayout {
     
-    func calculateFrames() -> [CGRect] {
+    static func createLayoutSection(
+        columnsCount: Int,
+        spacing: CGFloat,
+        contentWidth: CGFloat,
+        itemRatios: [CGFloat]
+    ) -> NSCollectionLayoutSection {
+        let padding: CGFloat = spacing / 2
+        let insets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
         
-        let columnWidth = (contentWidth - insets.leading - insets.trailing) / CGFloat(numberOfColumns)
-        let xOffsets = (0..<numberOfColumns).map { CGFloat($0) * columnWidth }
-        var yOffsets: [CGFloat] = .init(repeating: .zero, count: numberOfColumns)
-        var currentColumn = 0
+        let columnWidth = (contentWidth - insets.leading - insets.trailing) / CGFloat(columnsCount)
+        let xOffsets = (0..<columnsCount).map { CGFloat($0) * columnWidth }
+        var yOffsets: [CGFloat] = .init(repeating: .zero, count: columnsCount)
         var frames: [CGRect] = []
-        var contentHeight: CGFloat = .zero
+        var currentColumn = 0
         
-        for item in 0..<itemRatios.count {
-            let ratio = itemRatios[item]
-            let descriptionHeight = Const.spacingOneHundred
-            
+        for ratio in itemRatios {
+            let descriptionHeight: CGFloat = Const.spacingOneHundred
             let frame = CGRect(
                 x: xOffsets[currentColumn],
                 y: yOffsets[currentColumn],
@@ -84,13 +52,35 @@ private extension WaterfallLayout {
             ).insetBy(dx: padding, dy: padding)
             
             frames.append(frame)
-            
-            contentHeight = max(contentHeight, frame.maxY)
             yOffsets[currentColumn] = frame.maxY
             currentColumn = yOffsets.indexOfMinElement ?? .zero
         }
         
-        return frames
+        let sectionHeight = frames.map(\.maxY).max() ?? .zero + insets.bottom
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(sectionHeight)
+        )
+        let group = NSCollectionLayoutGroup.custom(layoutSize: groupSize) { environment in
+            frames.map { NSCollectionLayoutGroupCustomItem(frame: $0) }
+        }
+        
+        let footerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(100)
+        )
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: footerSize,
+            elementKind: UICollectionView.elementKindSectionFooter,
+            alignment: .bottom
+        )
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = insets
+        section.boundarySupplementaryItems = [footer]
+        
+        return section
     }
 }
 
