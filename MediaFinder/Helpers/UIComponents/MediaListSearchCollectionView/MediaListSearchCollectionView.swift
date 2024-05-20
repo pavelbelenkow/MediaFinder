@@ -57,6 +57,10 @@ private extension MediaListSearchCollectionView {
         showsVerticalScrollIndicator = false
         translatesAutoresizingMaskIntoConstraints = false
         
+        if let layout = collectionViewLayout as? WaterfallLayout {
+            layout.delegate = self
+        }
+        
         delegate = self
     }
     
@@ -122,6 +126,23 @@ extension MediaListSearchCollectionView {
         else { return }
         
         footerView.updateStackView(for: state, isEmptyResults: isEmptyResults)
+    }
+}
+
+// MARK: - Layout Delegate Methods
+
+extension MediaListSearchCollectionView: WaterfallLayoutDelegate {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        heightForItemAt indexPath: IndexPath,
+        with width: CGFloat
+    ) -> CGFloat {
+        guard
+            let media = diffableDataSource?.itemIdentifier(for: indexPath)
+        else { return .zero }
+        
+        return width / media.ratio + Const.spacingOneHundred
     }
 }
 
