@@ -9,17 +9,31 @@ final class WaterfallLayout: UICollectionViewCompositionalLayout {
     private var contentWidth: CGFloat
     private var itemRatios: [CGFloat]
     
+    // MARK: - Initialisers
     
     init(
         columnsCount: Int,
-        itemRatios: [CGFloat],
         spacing: CGFloat,
-        contentWidth: CGFloat
+        contentWidth: CGFloat,
+        itemRatios: [CGFloat]
     ) {
-        self.numberOfColumns = columnsCount
-        self.itemRatios = itemRatios
+        self.columnsCount = columnsCount
         self.spacing = spacing
         self.contentWidth = contentWidth
+        self.itemRatios = itemRatios
+        
+        let section = WaterfallLayout.createLayoutSection(
+            columnsCount: columnsCount,
+            spacing: spacing,
+            contentWidth: contentWidth,
+            itemRatios: itemRatios
+        )
+        
+        super.init(section: section)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
