@@ -76,6 +76,10 @@ private extension WaterfallLayout {
         var yOffsets: [CGFloat] = .init(repeating: .zero, count: columnsCount)
         var frames: [CGRect] = []
         var currentColumn = 0
+    func clearCacheAndContentHeight() {
+        cache.removeAll()
+        contentHeight = .zero
+    }
         
         for ratio in itemRatios {
             let descriptionHeight: CGFloat = Const.spacingOneHundred
