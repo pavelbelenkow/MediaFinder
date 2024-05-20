@@ -109,33 +109,25 @@ private extension WaterfallLayout {
         
         return cellPadding * 2 + imageHeight
     }
-        )
-        let group = NSCollectionLayoutGroup.custom(layoutSize: groupSize) { environment in
-            frames.map { NSCollectionLayoutGroupCustomItem(frame: $0) }
-        }
-        
-        let footerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(100)
-        )
-        let footer = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: footerSize,
-            elementKind: UICollectionView.elementKindSectionFooter,
-            alignment: .bottom
-        )
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = insets
-        section.boundarySupplementaryItems = [footer]
-        
-        return section
-    }
-}
-
-private extension Array where Element: Comparable {
     
-    var indexOfMinElement: Int? {
-        guard let minElement = self.min() else { return nil }
-        return firstIndex(of: minElement)
+    func calculateFooterAttributes(for collectionView: UICollectionView) {
+        let indexPath = IndexPath(item: .zero, section: .zero)
+        let attributes = UICollectionViewLayoutAttributes(
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            with: indexPath
+        )
+        
+        let footerHeight = Const.spacingOneHundred
+        let footerWidth = collectionView.bounds.width
+        let frame = CGRect(
+            x: .zero,
+            y: contentHeight,
+            width: footerWidth,
+            height: footerHeight
+        )
+        
+        attributes.frame = frame
+        cache.append(attributes)
+        contentHeight += footerHeight
     }
 }
