@@ -84,6 +84,11 @@ final class WaterfallLayout: UICollectionViewLayout {
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         cache.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
     }
+    
+    override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
+        super.invalidateLayout(with: context)
+        clearCacheAndContentHeight()
+    }
 }
 
 // MARK: - Private Methods
