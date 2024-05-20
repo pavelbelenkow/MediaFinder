@@ -57,7 +57,6 @@ private extension MediaTypeCollectionView {
         }
         
         backgroundColor = .clear
-        contentInsetAdjustmentBehavior = .never
         
         register(
             MediaTypeCell.self,
