@@ -15,8 +15,8 @@ extension CAAnimation {
         animation.fromValue = fromValue
         animation.toValue = toValue
         animation.duration = duration
-        animation.repeatCount = .infinity
-        animation.isRemovedOnCompletion = false
+        animation.repeatCount = repeatCount
+        animation.isRemovedOnCompletion = isRemovedOnCompletion
         
         return animation
     }
