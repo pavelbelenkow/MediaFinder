@@ -106,7 +106,9 @@ private extension MediaListSearchCell {
             mediaStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             mediaStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             mediaStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            mediaStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            mediaStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            mediaDetailedStackView.heightAnchor.constraint(equalToConstant: Const.spacingOneHundred)
         ])
     }
     
