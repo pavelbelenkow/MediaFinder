@@ -150,7 +150,7 @@ extension MediaListSearchCell {
     func configure(with media: Media) {
         
         guard
-            let imageUrl = media.setImageQuality(to: Const.twoHundredSize),
+            let imageUrl = media.setImageQuality(to: Const.twoHundredAndFiftySize),
             let kind = media.kind,
             let name = media.name,
             let duration = media.duration,
