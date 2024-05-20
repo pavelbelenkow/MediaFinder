@@ -126,7 +126,7 @@ private extension MediaInfoView {
     }
     
     func loadAndSetupImage(from urlString: String) {
-        imageView.addShimmerAnimation()
+        imageView.addShimmerAnimation(borderWidth: .zero)
         
         ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
             guard let self, let image else { return }
