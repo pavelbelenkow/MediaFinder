@@ -1,6 +1,5 @@
 import UIKit
 
-final class WaterfallLayout: UICollectionViewCompositionalLayout {
 // MARK: - Delegates
 
 protocol WaterfallLayoutDelegate: AnyObject {
@@ -10,13 +9,25 @@ protocol WaterfallLayoutDelegate: AnyObject {
         with width: CGFloat) -> CGFloat
 }
 
+final class WaterfallLayout: UICollectionViewLayout {
     
     // MARK: - Private Properties
     
     private var columnsCount: Int
-    private var spacing: CGFloat
-    private var contentWidth: CGFloat
-    private var itemRatios: [CGFloat]
+    private var cellPadding: CGFloat
+    private var cache: [UICollectionViewLayoutAttributes] = []
+    
+    private var contentHeight: CGFloat = .zero
+    private var contentWidth: CGFloat {
+        guard let collectionView else { return .zero }
+        
+        let insets = collectionView.contentInset
+        return collectionView.bounds.width - (insets.left + insets.right)
+    }
+    
+    // MARK: - Properties
+    
+    weak var delegate: WaterfallLayoutDelegate?
     
     // MARK: - Initialisers
     
