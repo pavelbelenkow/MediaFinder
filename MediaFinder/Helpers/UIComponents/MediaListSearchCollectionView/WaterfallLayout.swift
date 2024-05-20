@@ -45,6 +45,34 @@ final class WaterfallLayout: UICollectionViewLayout {
     
     override var collectionViewContentSize: CGSize { .init(width: contentWidth, height: contentHeight) }
     
+    // MARK: - Overridden Methods
+    
+    override func prepare() {
+        guard
+            let collectionView,
+            collectionView.numberOfSections > .zero,
+            cache.isEmpty
+        else {
+            return
+        }
+        
+        clearCacheAndContentHeight()
+        
+        let columnWidth = contentWidth / CGFloat(columnsCount)
+        let xOffsets: [CGFloat] = (.zero..<columnsCount).map { CGFloat($0) * columnWidth }
+        var yOffsets: [CGFloat] = .init(repeating: .zero, count: columnsCount)
+        
+        
+        calculateItemAttributes(
+            collectionView: collectionView,
+            columnWidth: columnWidth,
+            xOffsets: xOffsets,
+            yOffsets: &yOffsets
+        )
+        
+        calculateFooterAttributes(for: collectionView)
+    }
+    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         cache.filter { $0.frame.intersects(rect) }
     }
@@ -62,20 +90,6 @@ final class WaterfallLayout: UICollectionViewLayout {
 
 private extension WaterfallLayout {
     
-    static func createLayoutSection(
-        columnsCount: Int,
-        spacing: CGFloat,
-        contentWidth: CGFloat,
-        itemRatios: [CGFloat]
-    ) -> NSCollectionLayoutSection {
-        let padding: CGFloat = spacing / 2
-        let insets = NSDirectionalEdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
-        
-        let columnWidth = (contentWidth - insets.leading - insets.trailing) / CGFloat(columnsCount)
-        let xOffsets = (0..<columnsCount).map { CGFloat($0) * columnWidth }
-        var yOffsets: [CGFloat] = .init(repeating: .zero, count: columnsCount)
-        var frames: [CGRect] = []
-        var currentColumn = 0
     func clearCacheAndContentHeight() {
         cache.removeAll()
         contentHeight = .zero
