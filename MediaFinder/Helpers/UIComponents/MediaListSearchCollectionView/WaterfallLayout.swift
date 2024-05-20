@@ -31,25 +31,10 @@ final class WaterfallLayout: UICollectionViewLayout {
     
     // MARK: - Initialisers
     
-    init(
-        columnsCount: Int,
-        spacing: CGFloat,
-        contentWidth: CGFloat,
-        itemRatios: [CGFloat]
-    ) {
+    init(columnsCount: Int = 2, cellPadding: CGFloat = 4) {
         self.columnsCount = columnsCount
-        self.spacing = spacing
-        self.contentWidth = contentWidth
-        self.itemRatios = itemRatios
-        
-        let section = WaterfallLayout.createLayoutSection(
-            columnsCount: columnsCount,
-            spacing: spacing,
-            contentWidth: contentWidth,
-            itemRatios: itemRatios
-        )
-        
-        super.init(section: section)
+        self.cellPadding = cellPadding
+        super.init()
     }
     
     required init?(coder: NSCoder) {
