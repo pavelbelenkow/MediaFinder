@@ -97,20 +97,7 @@ private extension WaterfallLayout {
 private extension Array where Element: Comparable {
     
     var indexOfMinElement: Int? {
-        guard count > .zero else { return nil }
-        
-        var min = first
-        var index = 0
-        
-        indices.forEach {
-            let current = self[$0]
-            
-            if let minimum = min, current < minimum {
-                min = current
-                index = $0
-            }
-        }
-        
-        return index
+        guard let minElement = self.min() else { return nil }
+        return firstIndex(of: minElement)
     }
 }
