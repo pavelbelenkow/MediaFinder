@@ -13,6 +13,8 @@ final class MediaListSearchCollectionView: UICollectionView {
     typealias DataSource = UICollectionViewDiffableDataSource<Int, Media>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Media>
     
+    // MARK: - Private Properties
+    
     private var diffableDataSource: DataSource?
     
     // MARK: - Properties
@@ -94,14 +96,13 @@ extension MediaListSearchCollectionView {
     
     func updateLayout(with mediaList: [Media]) {
         let itemRatios = mediaList.compactMap { $0.ratio }
-        let section = WaterfallLayout(
+        let waterfallLayout = WaterfallLayout(
             columnsCount: 2,
-            itemRatios: itemRatios,
             spacing: 4,
-            contentWidth: frame.width
-        ).layoutSection
-        
-        collectionViewLayout = UICollectionViewCompositionalLayout(section: section)
+            contentWidth: frame.width,
+            itemRatios: itemRatios
+        )
+        collectionViewLayout = waterfallLayout
     }
     
     func applySnapshot(for mediaList: [Media]) {
