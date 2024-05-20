@@ -23,8 +23,9 @@ final class MediaListSearchCollectionView: UICollectionView {
     
     // MARK: - Initialisers
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        super.init(frame: frame, collectionViewLayout: layout)
+    init() {
+        let layout = WaterfallLayout()
+        super.init(frame: .zero, collectionViewLayout: layout)
         setupAppearance()
         makeDataSource()
     }

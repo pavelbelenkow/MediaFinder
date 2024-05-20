@@ -13,8 +13,7 @@ final class MediaTypeCell: UICollectionViewCell {
     // MARK: - Private Properties
     
     private lazy var collectionView: MediaListSearchCollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let view = MediaListSearchCollectionView(frame: .zero, collectionViewLayout: layout)
+        let view = MediaListSearchCollectionView()
         view.interactionDelegate = self
         return view
     }()
