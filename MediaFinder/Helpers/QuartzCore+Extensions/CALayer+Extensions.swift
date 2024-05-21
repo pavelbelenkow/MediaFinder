@@ -5,24 +5,20 @@ extension CALayer {
     /// Returns CAGradientLayer for input values
     static func shimmerGradient(
         frame: CGRect,
-        borderWidth: CGFloat,
-        borderRadius: CGFloat,
-        borderColor: CGColor,
         colors: [CGColor],
         startPoint: CGPoint,
         endPoint: CGPoint,
-        locations: [NSNumber]
+        locations: [NSNumber],
+        cornerRadius: CGFloat
     ) -> CAGradientLayer {
         let gradient = CAGradientLayer()
         
         gradient.frame = frame
-        gradient.borderWidth = borderWidth
-        gradient.cornerRadius = borderRadius
-        gradient.borderColor = borderColor
         gradient.colors = colors
         gradient.startPoint = startPoint
         gradient.endPoint = endPoint
         gradient.locations = locations
+        gradient.cornerRadius = cornerRadius
         
         return gradient
     }
