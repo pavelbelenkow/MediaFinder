@@ -6,11 +6,14 @@ private extension UIView {
     
     func animateScale(
         to scale: CGFloat = 1.0,
+        zPosition: CGFloat = .zero,
         duration: TimeInterval = 0.2,
         completion: (() -> Void)? = nil
     ) {
         UIView.animate(withDuration: duration) { [weak self] in
-            self?.transform = CGAffineTransform(scaleX: scale, y: scale)
+            guard let self else { return }
+            layer.zPosition = zPosition
+            transform = CGAffineTransform(scaleX: scale, y: scale)
         } completion: { _ in
             completion?()
         }
