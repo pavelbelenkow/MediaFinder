@@ -4,12 +4,21 @@ import UIKit
 
 extension UIColor {
     
-    /// Stores default shimmer CG colors array
+    /// Stores default shimmer CGColor array
     static var defaultShimmerColors: [CGColor] {
         [
-            mediaBackground.cgColor(multipliedBy: 0.9),
+            mediaBackground.cgColor(multipliedBy: 0.95),
+            mediaBackground.cgColor(multipliedBy: 1.1),
+            mediaBackground.cgColor(multipliedBy: 0.95)
+        ]
+    }
+    
+    /// Stores default shimmer border CGColor array
+    static var defaultShimmerBorderColors: [CGColor] {
+        [
             mediaBackground.cgColor,
-            mediaBackground.cgColor(multipliedBy: 0.9)
+            mediaBackground.cgColor(multipliedBy: 1.8),
+            mediaBackground.cgColor
         ]
     }
     
