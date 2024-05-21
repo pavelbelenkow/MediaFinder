@@ -22,9 +22,9 @@ private extension UIView {
 extension UIView {
     
     func addShimmerAnimation(
-        borderWidth: CGFloat = 0.2,
-        borderColor: CGColor = UIColor.lightText.cgColor,
         colors: [CGColor] = UIColor.defaultShimmerColors,
+        borderWidth: CGFloat = .zero,
+        borderColors: [CGColor] = UIColor.defaultShimmerBorderColors,
         startPoint: CGPoint = .defaultShimmerStartPoint,
         endPoint: CGPoint = .defaultShimmerEndPoint,
         locations: [NSNumber] = NSNumber.defaultShimmerLocations,
@@ -32,22 +32,38 @@ extension UIView {
         toValues: [NSNumber] = NSNumber.defaultShimmerToValues,
         duration: CFTimeInterval = .defaultShimmerDuration
     ) {
-        let gradient = CALayer
-            .shimmerGradient(frame: bounds,
-                             borderWidth: borderWidth,
-                             borderRadius: layer.cornerRadius,
-                             borderColor: borderColor,
-                             colors: colors,
-                             startPoint: startPoint,
-                             endPoint: endPoint,
-                             locations: locations)
+        let gradient = CALayer.shimmerGradient(
+            frame: bounds.inset(by: .makeInsets(for: borderWidth)),
+            colors: colors,
+            startPoint: startPoint,
+            endPoint: endPoint,
+            locations: locations,
+            cornerRadius: layer.cornerRadius
+        )
         
-        gradient
-            .addShimmerAnimation(fromValue: fromValues,
-                                 toValue: toValues,
-                                 duration: duration)
+        gradient.addShimmerAnimation(
+            fromValue: fromValues,
+            toValue: toValues,
+            duration: duration
+        )
         
-        layer.addSublayer(gradient)
+        let borderGradient = CALayer.shimmerGradient(
+            frame: bounds,
+            colors: borderColors,
+            startPoint: startPoint,
+            endPoint: endPoint,
+            locations: locations,
+            cornerRadius: layer.cornerRadius
+        )
+        
+        borderGradient.addShimmerAnimation(
+            fromValue: fromValues,
+            toValue: toValues,
+            duration: duration
+        )
+        
+        layer.addSublayer(borderGradient)
+        borderGradient.addSublayer(gradient)
     }
     
     func removeShimmerAnimation() {
