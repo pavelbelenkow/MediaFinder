@@ -40,4 +40,16 @@ extension CALayer {
         
         add(animation, forKey: Const.shimmerAnimationKey)
     }
+    
+    func addShadow(
+        color: CGColor,
+        offset: CGSize,
+        radius: CGFloat,
+        opacity: Float
+    ) {
+        shadowColor = color
+        shadowOffset = offset
+        shadowRadius = radius
+        shadowOpacity = opacity
+    }
 }
