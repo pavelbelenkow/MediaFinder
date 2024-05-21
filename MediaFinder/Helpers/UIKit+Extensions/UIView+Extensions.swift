@@ -82,13 +82,13 @@ extension UIView {
 extension UIView {
     
     func animateSelection(completion: (() -> Void)?) {
-        animateScale(to: 0.9) {
+        animateScale(to: 1.05, zPosition: 1) {
             self.animateScale(completion: completion)
         }
     }
     
     func animateHighlight() {
-        animateScale(to: 0.9)
+        animateScale(to: 1.05, zPosition: 1)
     }
     
     func animateUnhighlight() {
