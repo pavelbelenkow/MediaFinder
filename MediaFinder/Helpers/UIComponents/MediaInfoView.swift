@@ -67,7 +67,6 @@ final class MediaInfoView: UIStackView {
         button.layer.addShadow(
             color: UIColor.white.cgColor,
             offset: CGSize(width: -8, height: .zero),
-            radius: 5,
             opacity: 1
         )
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +84,7 @@ final class MediaInfoView: UIStackView {
             kindLabel, nameLabel, artistNameLabel,
             descriptionLabel, linkTextView
         ])
-        view.backgroundColor = .lightText
+        view.backgroundColor = .white
         view.layer.cornerRadius = Const.repeatButtonCornerRadius
         view.axis = .vertical
         view.alignment = .center
@@ -179,7 +178,7 @@ extension MediaInfoView {
         artistNameLabel.text = Const.createdBy.appending(artist)
         
         if let description = media.description {
-            descriptionLabel.text = description
+            descriptionLabel.attributedText = media.attributedDescription(with: Const.spacingExtraSmall)
             description.count > 140 ? setupMoreButton() : nil
         }
         
