@@ -72,4 +72,8 @@ extension Media {
         let placeholder = isSong() ? Const.listenInAppleMusic : Const.watchOnAppleTV
         return NSAttributedString.attributedLinkText(placeholder: placeholder, link: trackView ?? "")
     }
+    
+    func attributedDescription(with spacing: CGFloat) -> NSAttributedString {
+        NSAttributedString.attributedTextWithLineSpacing(text: description ?? "", spacing: spacing)
+    }
 }
