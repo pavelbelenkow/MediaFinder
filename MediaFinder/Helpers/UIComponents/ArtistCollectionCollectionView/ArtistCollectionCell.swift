@@ -120,7 +120,7 @@ private extension ArtistCollectionCell {
     func loadAndSetupImage(from urlString: String) {
         currentUrlString = urlString
         
-        addShimmerAnimation()
+        addShimmerAnimation(borderWidth: 1)
         isUserInteractionEnabled = false
         
         ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
