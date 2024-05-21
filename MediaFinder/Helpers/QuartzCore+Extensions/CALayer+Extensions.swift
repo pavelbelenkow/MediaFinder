@@ -42,10 +42,10 @@ extension CALayer {
     }
     
     func addShadow(
-        color: CGColor,
-        offset: CGSize,
-        radius: CGFloat,
-        opacity: Float
+        color: CGColor? = nil,
+        offset: CGSize = CGSize(width: 0.0, height: -3.0),
+        radius: CGFloat = 3.0,
+        opacity: Float = .zero
     ) {
         shadowColor = color
         shadowOffset = offset
