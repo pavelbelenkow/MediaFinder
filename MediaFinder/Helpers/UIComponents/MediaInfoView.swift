@@ -55,10 +55,21 @@ final class MediaInfoView: UIStackView {
     
     private lazy var moreButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = .white
         button.titleLabel?.font = .systemFont(ofSize: 13)
         button.setTitle(Const.moreButtonText, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+        button.addTarget(
+            self,
+            action: #selector(moreButtonTapped),
+            for: .touchUpInside
+        )
+        button.layer.addShadow(
+            color: UIColor.white.cgColor,
+            offset: CGSize(width: -8, height: .zero),
+            radius: 5,
+            opacity: 1
+        )
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -122,7 +133,7 @@ private extension MediaInfoView {
         
         NSLayoutConstraint.activate([
             moreButton.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
-            moreButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor)
+            moreButton.firstBaselineAnchor.constraint(equalTo: descriptionLabel.lastBaselineAnchor)
         ])
     }
     
