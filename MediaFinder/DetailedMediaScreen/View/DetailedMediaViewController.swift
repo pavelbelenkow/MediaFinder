@@ -70,6 +70,31 @@ private extension DetailedMediaViewController {
     }
 }
 
+// MARK: - UIViewControllerTransitioningDelegate Methods
+
+extension DetailedMediaViewController: UIViewControllerTransitioningDelegate {
+    
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?,
+        source: UIViewController
+    ) -> UIPresentationController? {
+        SheetPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+    
+    func animationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController,
+        source: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        SheetPresentAnimationController()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        SheetDismissAnimationController()
+    }
+}
+
 // MARK: - DetailedMediaViewDelegate Methods
 
 extension DetailedMediaViewController: DetailedMediaViewDelegate {
