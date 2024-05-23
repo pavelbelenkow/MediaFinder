@@ -8,23 +8,19 @@ final class MediaListSearchCell: UICollectionViewCell {
         let view = UIImageView()
         view.tintColor = .black
         view.contentMode = .scaleAspectFill
-        view.clipsToBounds = true
         return view
-    }()
-    
-    private lazy var mediaKindLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.textAlignment = .center
-        return label
     }()
     
     private lazy var mediaNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.textAlignment = .center
-        label.font = .boldSystemFont(ofSize: 17)
-        label.numberOfLines = 2
+        label.font = .systemFont(ofSize: 17, weight: .semibold)
+        return label
+    }()
+    
+    private lazy var mediaKindLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
         return label
     }()
     
@@ -45,16 +41,17 @@ final class MediaListSearchCell: UICollectionViewCell {
     private lazy var mediaHorizontalStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [mediaDurationLabel, mediaPriceLabel])
         view.axis = .horizontal
-        view.distribution = .equalSpacing
+        view.spacing = Const.spacingSmall
         return view
     }()
     
     private lazy var mediaDetailedStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
-            mediaKindLabel, mediaNameLabel, mediaHorizontalStackView
+            mediaNameLabel, mediaKindLabel, mediaHorizontalStackView
         ])
         view.axis = .vertical
-        view.distribution = .fillEqually
+        view.alignment = .leading
+        view.spacing = Const.spacingSmall
         view.isLayoutMarginsRelativeArrangement = true
         view.layoutMargins = .small
         return view
@@ -98,7 +95,7 @@ private extension MediaListSearchCell {
     func setupAppearance() {
         backgroundColor = .lightText
         layer.cornerRadius = Const.collectionCellCornerRadius
-        clipsToBounds = true
+        layer.masksToBounds = true
         
         contentView.addSubview(mediaStackView)
         
@@ -163,8 +160,8 @@ extension MediaListSearchCell {
         
         loadAndSetupImage(from: imageUrl)
         
-        mediaKindLabel.text = kind
         mediaNameLabel.text = name
+        mediaKindLabel.text = kind
         mediaDurationLabel.text = duration.millisecondsToReadableString()
         mediaPriceLabel.text = NumberFormatter.currencyFormatter.string(from: price as NSNumber)
     }
