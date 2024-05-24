@@ -123,6 +123,19 @@ private extension SheetPresentationController {
         presentingViewController.view.transform = translatedTransform
         presentingViewController.view.layer.cornerRadius = 10
     }
+    
+    func updatePresentingViewControllerTransform(for currentHeight: CGFloat) {
+        
+        let heightDifference = largeHeight - mediumHeight
+        let heightRatio = (currentHeight - mediumHeight) / heightDifference
+        
+        let scale = 1 - heightRatio * 0.1
+        let scaledTransform = CGAffineTransform(scaleX: scale, y: scale)
+        
+        updatePresentingViewControllersTransform(
+            transform: scaledTransform,
+            translatedTransform: scaledTransform.translatedBy(x: .zero, y: -26 * heightRatio)
+        )
     }
     
     func animate(to detent: Detent) {
@@ -151,20 +164,6 @@ private extension SheetPresentationController {
         }
     }
     
-    func updatePresentingViewControllerTransform() {
-        guard let presentedView else { return }
-        
-        let currentHeight = presentedView.frame.height - mediumHeight
-        let heightRange = largeHeight - mediumHeight
-        let heightRatio = currentHeight / heightRange
-        
-        let scale = 1 - heightRatio * 0.1
-        let scaledTransform = CGAffineTransform(scaleX: scale, y: scale)
-        
-        presentingViewController.presentingViewController?.view.transform = scaledTransform
-        presentingViewController.view.transform = scaledTransform.translatedBy(x: .zero, y: -26 * heightRatio)
-    }
-    
     @objc
     func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         guard  let containerView, let presentedView else { return }
@@ -182,6 +181,7 @@ private extension SheetPresentationController {
                 presentedView.frame.size.height = mediumHeight
                 currentDetent = .medium
             } else {
+                updatePresentingViewControllerTransform(for: newHeight)
                 presentedView.frame.size.height = newHeight
             }
             presentedView.frame.origin.y = containerView.frame.height - presentedView.frame.height
