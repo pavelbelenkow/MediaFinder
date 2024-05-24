@@ -166,37 +166,34 @@ private extension SheetPresentationController {
     
     @objc
     func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
-        guard  let containerView, let presentedView else { return }
+        guard let containerView, let presentedView else { return }
+        
+        let translation = gestureRecognizer.translation(in: presentedView)
+        let velocity = gestureRecognizer.velocity(in: presentedView)
         
         switch gestureRecognizer.state {
         case .began:
-            startingHeight = presentedView.frame.height
+            initialFrame = presentedView.frame
+            initialTranslation = translation.y
         case .changed:
-            let translation = gestureRecognizer.translation(in: presentedView)
-            let newHeight = startingHeight - translation.y
-            if newHeight >= largeHeight {
-                presentedView.frame.size.height = newHeight
-                currentDetent = .large
-            } else if newHeight <= mediumHeight {
-                presentedView.frame.size.height = mediumHeight
-                currentDetent = .medium
-            } else {
-                updatePresentingViewControllerTransform(for: newHeight)
-                presentedView.frame.size.height = newHeight
-            }
-            presentedView.frame.origin.y = containerView.frame.height - presentedView.frame.height
-            updatePresentingViewControllerTransform()
-        case .ended, .cancelled:
-            let velocity = gestureRecognizer.velocity(in: presentedView)
+            let newHeight = initialFrame.height - (translation.y - initialTranslation)
             
-            if velocity.y > 0 {
-                if currentDetent == .medium {
-                    presentedViewController.dismiss(animated: true)
-                } else {
-                    animate(to: .medium)
-                }
+            if newHeight >= mediumHeight && newHeight <= largeHeight {
+                presentedView.frame.size.height = newHeight
+                presentedView.frame.origin.y = containerView.bounds.height - newHeight
+                updatePresentingViewControllerTransform(for: newHeight)
+            } else if newHeight < mediumHeight {
+                presentedView.frame.size.height = newHeight
+                presentedView.frame.origin.y = containerView.bounds.height - newHeight
+            }
+        case .ended, .cancelled:
+            let currentHeight = presentedView.frame.height
+            let targetDetent: Detent = (velocity.y > 0 || currentHeight < (mediumHeight + largeHeight) / 2) ? .medium : .large
+            
+            if currentHeight < mediumHeight / 2 {
+                presentedViewController.dismiss(animated: true)
             } else {
-                animate(to: .large)
+                animate(to: targetDetent)
             }
         default:
             break
