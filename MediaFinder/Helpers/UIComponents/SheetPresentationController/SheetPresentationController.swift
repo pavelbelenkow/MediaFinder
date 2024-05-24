@@ -92,6 +92,21 @@ final class SheetPresentationController: UIPresentationController {
 
 private extension SheetPresentationController {
     
+    func resetPresentingViewControllers() {
+        var presentingVC = presentingViewController.presentingViewController
+        
+        while let vc = presentingVC {
+            UIView.animate(withDuration: 0.3) {
+                vc.view.transform = .identity
+            }
+            presentingVC = vc.presentingViewController
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.presentingViewController.view.transform = .identity
+            self.presentingViewController.view.layer.cornerRadius = .zero
+        }
+    }
     }
     
     func animate(to detent: Detent) {
