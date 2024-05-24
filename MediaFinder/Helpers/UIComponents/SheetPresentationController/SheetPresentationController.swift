@@ -5,6 +5,13 @@ final class SheetPresentationController: UIPresentationController {
     enum Detent {
         case medium
         case large
+        
+        var heightRatio: CGFloat {
+            switch self {
+                case .medium: 0.5
+                case .large: 0.9
+            }
+        }
     }
     
     // MARK: - Private Properties
