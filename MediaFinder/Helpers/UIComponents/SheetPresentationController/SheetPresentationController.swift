@@ -16,18 +16,11 @@ final class SheetPresentationController: UIPresentationController {
     
     // MARK: - Private Properties
     
-    private let dimmingView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        view.alpha = .zero
-        return view
-    }()
-    
     private let grabberView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray3
-        view.layer.cornerRadius = 2.5
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.bounds.size = CGSize(width: 32, height: 4.5)
+        view.backgroundColor = .systemFill
+        view.layer.cornerRadius = view.frame.height / 2
         return view
     }()
     
@@ -72,19 +65,26 @@ final class SheetPresentationController: UIPresentationController {
     // MARK: - Lifecycle
     
     override func presentationTransitionWillBegin() {
-        guard let containerView else { return }
+        super.presentationTransitionWillBegin()
+        guard let containerView, let presentedView else { return }
         
-        dimmingView.frame = containerView.bounds
+        containerView.addSubview(presentedView)
+        presentedView.addSubview(grabberView)
         
-        containerView.addSubview(dimmingView)
-        containerView.addSubview(presentedViewController.view)
+        grabberView.frame.origin.y = 4
+        grabberView.center.x = presentedView.center.x
         
-        presentedViewController.view.frame = frameOfPresentedViewInContainerView
-        presentedViewController.view.layer.cornerRadius = 10
-        presentedViewController.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        presentedViewController.view.layer.masksToBounds = true
+        presentedView.frame = frameOfPresentedViewInContainerView
+        presentedView.layer.cornerRadius = 10
+        presentedView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        presentedView.layer.masksToBounds = true
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.3
+        containerView.layer.shadowOffset = CGSize(width: 0, height: -4)
+        containerView.layer.shadowRadius = 10
         
-        setupGrabberView()
+        presentedViewController.additionalSafeAreaInsets.top = grabberView.frame.maxY / 2
+    }
     }
 }
 
@@ -92,14 +92,6 @@ final class SheetPresentationController: UIPresentationController {
 
 private extension SheetPresentationController {
     
-    func setupGrabberView() {
-        presentedViewController.view.addSubview(grabberView)
-        NSLayoutConstraint.activate([
-            grabberView.widthAnchor.constraint(equalToConstant: 32),
-            grabberView.heightAnchor.constraint(equalToConstant: 4.5),
-            grabberView.topAnchor.constraint(equalTo: presentedViewController.view.topAnchor, constant: 4),
-            grabberView.centerXAnchor.constraint(equalTo: presentedViewController.view.centerXAnchor)
-        ])
     }
     
     func animate(to detent: Detent) {
