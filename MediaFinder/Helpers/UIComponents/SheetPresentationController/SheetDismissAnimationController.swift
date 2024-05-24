@@ -12,13 +12,15 @@ final class SheetDismissAnimationController: NSObject, UIViewControllerAnimatedT
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let fromView = transitionContext.view(forKey: .from) else { return }
+        
         let containerView = transitionContext.containerView
+        let finalFrame = fromView.frame.offsetBy(dx: .zero, dy: containerView.bounds.height)
         
         UIView.animate(
             withDuration: transitionDuration(using: transitionContext),
             delay: .zero,
             options: .curveEaseOut,
-            animations: { fromView.frame = containerView.frame },
+            animations: { fromView.frame = finalFrame },
             completion: { finished in transitionContext.completeTransition(finished) }
         )
     }
