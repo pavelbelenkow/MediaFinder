@@ -85,6 +85,10 @@ final class SheetPresentationController: UIPresentationController {
         
         presentedViewController.additionalSafeAreaInsets.top = grabberView.frame.maxY / 2
     }
+    
+    override func dismissalTransitionWillBegin() {
+        super.dismissalTransitionWillBegin()
+        resetPresentingViewControllers()
     }
 }
 
