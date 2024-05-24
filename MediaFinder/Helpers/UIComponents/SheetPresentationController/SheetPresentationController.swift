@@ -24,23 +24,23 @@ final class SheetPresentationController: UIPresentationController {
         return view
     }()
     
-    private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
-        let recognizer = UIPanGestureRecognizer()
-        recognizer.addTarget(self, action: #selector(handlePanGesture(_:)))
-        return recognizer
-    }()
+    private lazy var panGestureRecognizer = UIPanGestureRecognizer(
+        target: self,
+        action: #selector(handlePanGesture(_:))
+    )
     
     private var currentDetent: Detent = .medium
-    private var startingHeight: CGFloat = .zero
+    private var initialFrame: CGRect = .zero
+    private var initialTranslation: CGFloat = .zero
     
     private var mediumHeight: CGFloat {
         guard let containerView else { return .zero }
-        return containerView.bounds.height * 0.5
+        return containerView.bounds.height * Detent.medium.heightRatio
     }
     
     private var largeHeight: CGFloat {
         guard let containerView else { return .zero }
-        return containerView.bounds.height * 0.9
+        return containerView.bounds.height * Detent.large.heightRatio
     }
     
     // MARK: - Overridden Properties
