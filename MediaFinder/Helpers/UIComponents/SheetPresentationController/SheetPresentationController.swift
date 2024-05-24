@@ -111,6 +111,18 @@ private extension SheetPresentationController {
             self.presentingViewController.view.layer.cornerRadius = .zero
         }
     }
+    
+    func updatePresentingViewControllersTransform(transform: CGAffineTransform, translatedTransform: CGAffineTransform) {
+        var presentingVC = presentingViewController.presentingViewController
+        
+        while let vc = presentingVC {
+            vc.view.transform = transform
+            presentingVC = vc.presentingViewController
+        }
+        
+        presentingViewController.view.transform = translatedTransform
+        presentingViewController.view.layer.cornerRadius = 10
+    }
     }
     
     func animate(to detent: Detent) {
@@ -134,9 +146,7 @@ private extension SheetPresentationController {
             
             presentedView.frame.size.height = height
             presentedView.frame.origin.y = containerView.frame.height - height
-            presentingViewController.presentingViewController?.view.transform = transform
-            presentingViewController.view.transform = translatedTransform
-            presentingViewController.view.layer.cornerRadius = 10
+            updatePresentingViewControllersTransform(transform: transform, translatedTransform: translatedTransform)
             currentDetent = detent
         }
     }
