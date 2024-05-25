@@ -2,6 +2,12 @@ import UIKit
 
 final class CustomLabel: UILabel {
     
+    // MARK: - Private Properties
+    
+    private var textInsets = UIEdgeInsets.zero {
+        didSet { invalidateIntrinsicContentSize() }
+    }
+    
     // MARK: - Override Properties
     
     override var intrinsicContentSize: CGSize {
@@ -10,12 +16,6 @@ final class CustomLabel: UILabel {
             width: size.width + textInsets.left + textInsets.right,
             height: size.height + textInsets.top + textInsets.bottom
         )
-    }
-    
-    // MARK: - Private Properties
-    
-    private var textInsets = UIEdgeInsets.zero {
-        didSet { invalidateIntrinsicContentSize() }
     }
     
     // MARK: - Override Methods
