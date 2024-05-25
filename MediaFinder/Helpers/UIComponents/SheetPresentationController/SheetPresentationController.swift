@@ -59,7 +59,7 @@ final class SheetPresentationController: UIPresentationController {
         )
     }
     
-    // MARK: - Overridden Initialisers
+    // MARK: - Overridden Initializers
     
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
@@ -145,7 +145,7 @@ private extension SheetPresentationController {
         )
     }
     
-    func animate(to detent: Detent) {
+    func animate(to detent: Detent, duration: TimeInterval) {
         guard let presentedView, let containerView else { return }
         
         let isMediumDetent = detent == .medium
@@ -156,7 +156,7 @@ private extension SheetPresentationController {
         let translatedTransform = isMediumDetent ? .identity : scaledTransform.translatedBy(x: .zero, y: -26)
         
         UIView.animate(
-            withDuration: 0.6,
+            withDuration: duration,
             delay: .zero,
             usingSpringWithDamping: 0.8,
             initialSpringVelocity: 1.0,
