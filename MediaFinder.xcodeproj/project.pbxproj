@@ -36,6 +36,7 @@
 		5949D0B32BC1B9E700A860C8 /* MediaListSearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0B22BC1B9E700A860C8 /* MediaListSearchRequest.swift */; };
 		5949D0B52BC1BA4B00A860C8 /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0B42BC1BA4B00A860C8 /* EntityType.swift */; };
 		5949D0B82BC1BEDA00A860C8 /* MediaListSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5949D0B72BC1BEDA00A860C8 /* MediaListSearchViewModel.swift */; };
+		594EC5212C027FF0009A4572 /* PassthroughTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594EC5202C027FF0009A4572 /* PassthroughTouchView.swift */; };
 		595EFE6E2BC95FF500F7E353 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE6D2BC95FF500F7E353 /* NSAttributedString+Extensions.swift */; };
 		595EFE702BC9603F00F7E353 /* DetailedMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE6F2BC9603F00F7E353 /* DetailedMediaView.swift */; };
 		595EFE722BC960FE00F7E353 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE712BC960FE00F7E353 /* CustomLabel.swift */; };
@@ -112,6 +113,7 @@
 		5949D0B22BC1B9E700A860C8 /* MediaListSearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchRequest.swift; sourceTree = "<group>"; };
 		5949D0B42BC1BA4B00A860C8 /* EntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
 		5949D0B72BC1BEDA00A860C8 /* MediaListSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchViewModel.swift; sourceTree = "<group>"; };
+		594EC5202C027FF0009A4572 /* PassthroughTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughTouchView.swift; sourceTree = "<group>"; };
 		595EFE6D2BC95FF500F7E353 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		595EFE6F2BC9603F00F7E353 /* DetailedMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedMediaView.swift; sourceTree = "<group>"; };
 		595EFE712BC960FE00F7E353 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				595EFE732BC9612E00F7E353 /* CustomTextView.swift */,
 				595EFE752BC9619100F7E353 /* MediaInfoView.swift */,
 				595EFE772BC9629900F7E353 /* ArtistInfoView.swift */,
+				594EC5202C027FF0009A4572 /* PassthroughTouchView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				590D061F2BC80598002D5688 /* ArtistLookupService.swift in Sources */,
 				5991DE0D2BFA9DC100823655 /* WaterfallLayout.swift in Sources */,
 				592A15102BC588B200322135 /* MediaListSearchViewController.swift in Sources */,
+				594EC5212C027FF0009A4572 /* PassthroughTouchView.swift in Sources */,
 				599E72332BF6CB740033C677 /* CAAnimation+Extensions.swift in Sources */,
 				592A15152BC5F1C700322135 /* StatefulStackView.swift in Sources */,
 				599E722D2BF6AAC70033C677 /* NSNumber+Extensions.swift in Sources */,
