@@ -16,7 +16,11 @@ final class SheetPresentationController: UIPresentationController {
     
     // MARK: - Private Properties
     
-    private let grabberView: UIView = {
+    private lazy var passthroughTouchView = PassthroughTouchView(targetViews: [
+        presentingViewController.view
+    ])
+    
+    private lazy var grabberView: UIView = {
         let view = UIView()
         view.bounds.size = CGSize(width: 32, height: 4.5)
         view.backgroundColor = .systemFill
@@ -68,11 +72,13 @@ final class SheetPresentationController: UIPresentationController {
         super.presentationTransitionWillBegin()
         guard let containerView, let presentedView else { return }
         
+        containerView.addSubview(passthroughTouchView)
         containerView.addSubview(presentedView)
         presentedView.addSubview(grabberView)
         
         grabberView.frame.origin.y = 4
         grabberView.center.x = presentedView.center.x
+        passthroughTouchView.frame = containerView.bounds
         
         presentedView.frame = frameOfPresentedViewInContainerView
         presentedView.layer.cornerRadius = 10
