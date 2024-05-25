@@ -171,6 +171,14 @@ private extension SheetPresentationController {
         }
     }
     
+    func calculateAnimationDuration(for velocity: CGFloat) -> TimeInterval {
+        let minimumVelocity: CGFloat = 100
+        let minimumDuration: TimeInterval = 0.3
+        let baseDuration: TimeInterval = 0.6
+        let velocityFactor: TimeInterval = 500 / max(abs(velocity), minimumVelocity)
+        return min(max(baseDuration * velocityFactor, minimumDuration), baseDuration)
+    }
+
     @objc
     func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
         guard let containerView, let presentedView else { return }
