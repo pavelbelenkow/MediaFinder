@@ -71,24 +71,25 @@ final class SheetPresentationController: UIPresentationController {
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
         guard let containerView, let presentedView else { return }
+         
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.3
+        containerView.layer.shadowOffset = CGSize(width: 0, height: -4)
+        containerView.layer.shadowRadius = 10
         
         containerView.addSubview(passthroughTouchView)
         containerView.addSubview(presentedView)
         presentedView.addSubview(grabberView)
         
-        grabberView.frame.origin.y = 4
-        grabberView.center.x = presentedView.center.x
         passthroughTouchView.frame = containerView.bounds
         
         presentedView.frame = frameOfPresentedViewInContainerView
         presentedView.layer.cornerRadius = 10
         presentedView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         presentedView.layer.masksToBounds = true
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowOpacity = 0.3
-        containerView.layer.shadowOffset = CGSize(width: 0, height: -4)
-        containerView.layer.shadowRadius = 10
         
+        grabberView.frame.origin.y = 4
+        grabberView.center.x = presentedView.center.x
         presentedViewController.additionalSafeAreaInsets.top = grabberView.frame.maxY / 2
     }
     
