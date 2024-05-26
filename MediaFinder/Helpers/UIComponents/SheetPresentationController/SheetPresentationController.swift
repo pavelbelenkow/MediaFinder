@@ -72,11 +72,12 @@ final class SheetPresentationController: UIPresentationController {
         super.presentationTransitionWillBegin()
         guard let containerView, let presentedView else { return }
          
+    func setupShadow(to containerView: UIView) {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 0.3
         containerView.layer.shadowOffset = CGSize(width: 0, height: -4)
         containerView.layer.shadowRadius = 10
-        
+    }
         containerView.addSubview(passthroughTouchView)
         containerView.addSubview(presentedView)
         presentedView.addSubview(grabberView)
