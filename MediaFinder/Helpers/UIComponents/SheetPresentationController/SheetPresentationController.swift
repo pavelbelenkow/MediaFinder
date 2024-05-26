@@ -71,7 +71,26 @@ final class SheetPresentationController: UIPresentationController {
     override func presentationTransitionWillBegin() {
         super.presentationTransitionWillBegin()
         guard let containerView, let presentedView else { return }
-         
+        setupAppearance(containerView: containerView, presentedView: presentedView)
+    }
+    
+    override func dismissalTransitionWillBegin() {
+        super.dismissalTransitionWillBegin()
+        resetPresentingViewControllers()
+    }
+}
+
+// MARK: - Setup UI
+
+private extension SheetPresentationController {
+    
+    func setupAppearance(containerView: UIView, presentedView: UIView) {
+        setupShadow(to: containerView)
+        setupPassthroughTouchView(in: containerView)
+        setupPresentedView(presentedView)
+        setupGrabberView(in: presentedView)
+    }
+    
     func setupShadow(to containerView: UIView) {
         containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowOpacity = 0.3
@@ -97,11 +116,6 @@ final class SheetPresentationController: UIPresentationController {
         grabberView.frame.origin.y = 4
         grabberView.center.x = presentedView.center.x
         presentedViewController.additionalSafeAreaInsets.top = grabberView.frame.maxY / 2
-    }
-    
-    override func dismissalTransitionWillBegin() {
-        super.dismissalTransitionWillBegin()
-        resetPresentingViewControllers()
     }
 }
 
