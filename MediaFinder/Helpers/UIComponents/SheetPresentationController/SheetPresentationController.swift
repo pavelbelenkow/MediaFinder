@@ -203,13 +203,14 @@ private extension SheetPresentationController {
             }
         case .ended, .cancelled:
             let currentHeight = presentedView.frame.height
-            let isFastSwipe = abs(velocity.y) > 1000
+            let isFastSwipe = abs(velocity.y) > 2000
             let shouldDismiss = (isFastSwipe && velocity.y > 0) || currentHeight < mediumHeight / 2
             
             if shouldDismiss {
                 presentedViewController.dismiss(animated: true)
             } else {
-                let targetDetent: Detent = velocity.y > 0 ? .medium : .large
+                let targetDetent: Detent = (velocity.y > 0 || currentHeight < (mediumHeight + largeHeight) / 2)
+                ? .medium : .large
                 let animationDuration = calculateAnimationDuration(for: velocity.y)
                 animate(to: targetDetent, duration: animationDuration)
             }
