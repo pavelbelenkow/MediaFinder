@@ -83,11 +83,14 @@ final class SheetPresentationController: UIPresentationController {
         containerView.addSubview(passthroughTouchView)
         passthroughTouchView.frame = containerView.bounds
     }
+    
+    func setupPresentedView(_ presentedView: UIView) {
+        containerView?.addSubview(presentedView)
         presentedView.frame = frameOfPresentedViewInContainerView
         presentedView.layer.cornerRadius = 10
         presentedView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         presentedView.layer.masksToBounds = true
-        
+    }
         grabberView.frame.origin.y = 4
         grabberView.center.x = presentedView.center.x
         presentedViewController.additionalSafeAreaInsets.top = grabberView.frame.maxY / 2
