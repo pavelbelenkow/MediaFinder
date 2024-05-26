@@ -91,6 +91,9 @@ final class SheetPresentationController: UIPresentationController {
         presentedView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         presentedView.layer.masksToBounds = true
     }
+    
+    func setupGrabberView(in presentedView: UIView) {
+        presentedView.addSubview(grabberView)
         grabberView.frame.origin.y = 4
         grabberView.center.x = presentedView.center.x
         presentedViewController.additionalSafeAreaInsets.top = grabberView.frame.maxY / 2
