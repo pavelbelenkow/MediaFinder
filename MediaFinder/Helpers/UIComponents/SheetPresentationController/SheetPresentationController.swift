@@ -78,12 +78,11 @@ final class SheetPresentationController: UIPresentationController {
         containerView.layer.shadowOffset = CGSize(width: 0, height: -4)
         containerView.layer.shadowRadius = 10
     }
+    
+    func setupPassthroughTouchView(in containerView: UIView) {
         containerView.addSubview(passthroughTouchView)
-        containerView.addSubview(presentedView)
-        presentedView.addSubview(grabberView)
-        
         passthroughTouchView.frame = containerView.bounds
-        
+    }
         presentedView.frame = frameOfPresentedViewInContainerView
         presentedView.layer.cornerRadius = 10
         presentedView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
