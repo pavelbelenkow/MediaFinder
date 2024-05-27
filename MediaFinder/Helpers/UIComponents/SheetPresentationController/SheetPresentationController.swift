@@ -198,6 +198,21 @@ private extension SheetPresentationController {
         let velocityFactor: TimeInterval = 500 / max(abs(velocity), minimumVelocity)
         return min(max(baseDuration * velocityFactor, minimumDuration), baseDuration)
     }
+    
+    func handleChangedGesture(
+        for presentedView: UIView,
+        containerView: UIView,
+        with newHeight: CGFloat
+    ) {
+        if newHeight >= mediumHeight && newHeight <= largeHeight {
+            presentedView.frame.size.height = newHeight
+            presentedView.frame.origin.y = containerView.bounds.height - newHeight
+            updatePresentingViewControllerTransform(for: newHeight)
+        } else if newHeight < mediumHeight {
+            presentedView.frame.size.height = newHeight
+            presentedView.frame.origin.y = containerView.bounds.height - newHeight
+        }
+    }
 
     @objc
     func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -212,15 +227,11 @@ private extension SheetPresentationController {
             initialTranslation = translation.y
         case .changed:
             let newHeight = initialFrame.height - (translation.y - initialTranslation)
-            
-            if newHeight >= mediumHeight && newHeight <= largeHeight {
-                presentedView.frame.size.height = newHeight
-                presentedView.frame.origin.y = containerView.bounds.height - newHeight
-                updatePresentingViewControllerTransform(for: newHeight)
-            } else if newHeight < mediumHeight {
-                presentedView.frame.size.height = newHeight
-                presentedView.frame.origin.y = containerView.bounds.height - newHeight
-            }
+            handleChangedGesture(
+                for: presentedView,
+                containerView: containerView,
+                with: newHeight
+            )
         case .ended, .cancelled:
             let currentHeight = presentedView.frame.height
             let isFastSwipe = abs(velocity.y) > 2000
