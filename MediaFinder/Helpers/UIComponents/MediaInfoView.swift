@@ -1,5 +1,9 @@
 import UIKit
 
+protocol MediaInfoViewDelegate: AnyObject {
+    func didTapMoreButton(_ model: DetailedDescription)
+}
+
 final class MediaInfoView: UIStackView {
     
     // MARK: - Private Properties
