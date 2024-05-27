@@ -99,6 +99,8 @@ final class MediaInfoView: UIStackView {
         return view
     }()
     
+    weak var delegate: MediaInfoViewDelegate?
+    
     // MARK: - Initialisers
     
     override init(frame: CGRect) {
@@ -158,7 +160,13 @@ private extension MediaInfoView {
     }
     
     @objc func moreButtonTapped() {
-        descriptionLabel.animateLabelExpansion(with: moreButton)
+        guard
+            let name = nameLabel.text,
+            let description = descriptionLabel.attributedText
+        else { return }
+        
+        let model = DetailedDescription(mediaName: name, attributedDescription: description)
+        delegate?.didTapMoreButton(model)
     }
 }
 
