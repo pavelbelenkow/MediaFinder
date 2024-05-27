@@ -213,6 +213,11 @@ private extension SheetPresentationController {
             presentedView.frame.origin.y = containerView.bounds.height - newHeight
         }
     }
+    
+    func shouldDismissView(for velocity: CGFloat, currentHeight: CGFloat) -> Bool{
+        let isFastSwipe = abs(velocity) > 2000
+        return (isFastSwipe && velocity > 0) || currentHeight < mediumHeight / 2
+    }
 
     @objc
     func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -234,8 +239,6 @@ private extension SheetPresentationController {
             )
         case .ended, .cancelled:
             let currentHeight = presentedView.frame.height
-            let isFastSwipe = abs(velocity.y) > 2000
-            let shouldDismiss = (isFastSwipe && velocity.y > 0) || currentHeight < mediumHeight / 2
             
             if shouldDismiss {
                 presentedViewController.dismiss(animated: true)
