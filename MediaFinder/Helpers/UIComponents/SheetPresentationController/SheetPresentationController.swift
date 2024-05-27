@@ -223,6 +223,20 @@ private extension SheetPresentationController {
         let midHeight = (mediumHeight + largeHeight) / 2
         return (velocity > 0 || currentHeight < midHeight) ? .medium : .large
     }
+    
+    func handleEndedGesture(for presentedView: UIView, velocity: CGPoint) {
+        let currentHeight = presentedView.frame.height
+        let shouldDismiss = shouldDismissView(for: velocity.y, currentHeight: currentHeight)
+        
+        
+        if shouldDismiss {
+            presentedViewController.dismiss(animated: true)
+        } else {
+            let targetDetent = determineTargetDetent(for: velocity.y, currentHeight: currentHeight)
+            let animationDuration = calculateAnimationDuration(for: velocity.y)
+            animate(to: targetDetent, duration: animationDuration)
+        }
+    }
 
     @objc
     func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -243,14 +257,7 @@ private extension SheetPresentationController {
                 with: newHeight
             )
         case .ended, .cancelled:
-            let currentHeight = presentedView.frame.height
-            
-            if shouldDismiss {
-                presentedViewController.dismiss(animated: true)
-            } else {
-                let animationDuration = calculateAnimationDuration(for: velocity.y)
-                animate(to: targetDetent, duration: animationDuration)
-            }
+            handleEndedGesture(for: presentedView, velocity: velocity)
         default:
             break
         }
