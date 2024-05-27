@@ -31,6 +31,7 @@ final class DetailedMediaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         bindViewModel()
     }
 }
@@ -38,6 +39,10 @@ final class DetailedMediaViewController: UIViewController {
 // MARK: - Private Methods
 
 private extension DetailedMediaViewController {
+    
+    func setupNavigationBar() {
+        navigationController?.navigationBar.isHidden = true
+    }
     
     func bindViewModel() {
         viewModel.stateSubject
