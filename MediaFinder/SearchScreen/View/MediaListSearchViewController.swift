@@ -172,7 +172,8 @@ private extension MediaListSearchViewController {
     func presentDetailedMediaViewController(with selectedMedia: Media) {
         let viewModel = DetailedMediaViewModel(mediaModel: selectedMedia)
         let viewController = DetailedMediaViewController(viewModel: viewModel)
-        present(viewController, animated: true)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        present(navigationController, animated: true)
     }
     
     @objc func limitButtonTapped(_ sender: UICommand) {
