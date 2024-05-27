@@ -12,7 +12,12 @@ final class DetailedMediaView: UIScrollView {
     
     // MARK: - Private Properties
     
-    private lazy var mediaInfoView = MediaInfoView()
+    private lazy var mediaInfoView: MediaInfoView = {
+        let view = MediaInfoView()
+        view.delegate = self
+        return view
+    }()
+    
     private lazy var artistInfoView = ArtistInfoView()
     
     private lazy var artistCollectionView: ArtistCollectionCollectionView = {
@@ -126,6 +131,15 @@ extension DetailedMediaView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         offsetY <= .zero ? mediaInfoView.updateImageViewFrame(for: offsetY) : nil
+    }
+}
+
+// MARK: - MediaInfoViewDelegate Methods
+
+extension DetailedMediaView: MediaInfoViewDelegate {
+    
+    func didTapMoreButton(_ model: DetailedDescription) {
+        interactionDelegate?.didTapMoreButton(model)
     }
 }
 
