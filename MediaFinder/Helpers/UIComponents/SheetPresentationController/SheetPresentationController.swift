@@ -218,6 +218,11 @@ private extension SheetPresentationController {
         let isFastSwipe = abs(velocity) > 2000
         return (isFastSwipe && velocity > 0) || currentHeight < mediumHeight / 2
     }
+    
+    func determineTargetDetent(for velocity: CGFloat, currentHeight: CGFloat) -> Detent {
+        let midHeight = (mediumHeight + largeHeight) / 2
+        return (velocity > 0 || currentHeight < midHeight) ? .medium : .large
+    }
 
     @objc
     func handlePanGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -243,8 +248,6 @@ private extension SheetPresentationController {
             if shouldDismiss {
                 presentedViewController.dismiss(animated: true)
             } else {
-                let targetDetent: Detent = (velocity.y > 0 || currentHeight < (mediumHeight + largeHeight) / 2)
-                ? .medium : .large
                 let animationDuration = calculateAnimationDuration(for: velocity.y)
                 animate(to: targetDetent, duration: animationDuration)
             }
