@@ -99,6 +99,16 @@ extension DetailedMediaViewController: UIViewControllerTransitioningDelegate {
 
 extension DetailedMediaViewController: DetailedMediaViewDelegate {
     
+    func didTapMoreButton(_ model: DetailedDescription) {
+        let viewModel = DetailedDescriptionViewModel(model: model)
+        let viewController = DetailedDescriptionViewController(viewModel: viewModel)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
+        navigationController.modalPresentationStyle = .custom
+        navigationController.transitioningDelegate = self
+        present(navigationController, animated: true)
+    }
+    
     func didTapArtistCollectionItem(at index: Int) {
         guard
             let urlString = viewModel.artistCollectionSubject.value[index].collectionView,
