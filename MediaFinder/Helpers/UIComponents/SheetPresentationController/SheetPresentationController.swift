@@ -123,32 +123,30 @@ private extension SheetPresentationController {
 
 private extension SheetPresentationController {
     
-    func resetPresentingViewControllers() {
+    func updatePresentingViews(
+        with transform: CGAffineTransform,
+        translatedTransform: CGAffineTransform = .identity,
+        animated: Bool = false
+    ) {
         var presentingVC = presentingViewController.presentingViewController
         
-        while let vc = presentingVC {
-            UIView.animate(withDuration: 0.3) {
-                vc.view.transform = .identity
+        let updateBlock = { [weak self] in
+            guard let self else { return }
+            
+            while let vc = presentingVC {
+                vc.view.transform = transform
+                presentingVC = vc.presentingViewController
             }
-            presentingVC = vc.presentingViewController
+            
+            presentingViewController.view.transform = translatedTransform.isIdentity ? .identity : translatedTransform
+            presentingViewController.view.layer.cornerRadius = transform.isIdentity ? 0 : 10
         }
         
-        UIView.animate(withDuration: 0.3) {
-            self.presentingViewController.view.transform = .identity
-            self.presentingViewController.view.layer.cornerRadius = .zero
+        if animated && transform.isIdentity {
+            UIView.animate(withDuration: 0.3, animations: updateBlock)
+        } else {
+            updateBlock()
         }
-    }
-    
-    func updatePresentingViewControllersTransform(transform: CGAffineTransform, translatedTransform: CGAffineTransform) {
-        var presentingVC = presentingViewController.presentingViewController
-        
-        while let vc = presentingVC {
-            vc.view.transform = transform
-            presentingVC = vc.presentingViewController
-        }
-        
-        presentingViewController.view.transform = translatedTransform
-        presentingViewController.view.layer.cornerRadius = 10
     }
     
     func updatePresentingViewControllerTransform(for currentHeight: CGFloat) {
