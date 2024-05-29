@@ -4,7 +4,12 @@ final class DetailedDescriptionViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let detailedDescriptionView = DetailedDescriptionView()
+    private lazy var detailedDescriptionView: DetailedDescriptionView = {
+        let view = DetailedDescriptionView()
+        view.delegate = self
+        return view
+    }()
+    
     private let viewModel: any DetailedDescriptionViewModelProtocol
     
     // MARK: - Initializers
@@ -77,5 +82,21 @@ private extension DetailedDescriptionViewController {
     func updateUI(with model: DetailedDescription) {
         title = model.mediaName
         detailedDescriptionView.updateDescriptionLabel(with: model.attributedDescription)
+    }
+}
+
+// MARK: - UIScrollViewDelegate Methods
+
+extension DetailedDescriptionViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let navigationController else { return }
+        
+        let offsetY = scrollView.contentOffset.y
+        
+        if offsetY > .zero && !navigationController.isNavigationBarHidden {
+            navigationController.setNavigationBarHidden(true, animated: true)
+        } else if offsetY < .zero && navigationController.isNavigationBarHidden {
+            navigationController.setNavigationBarHidden(false, animated: true)
+        }
     }
 }
