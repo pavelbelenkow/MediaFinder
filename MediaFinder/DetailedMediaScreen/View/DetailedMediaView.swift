@@ -101,9 +101,7 @@ extension DetailedMediaView {
     
     func updateUI(for state: State) {
         statefulStackView.update(for: state, isEmptyResults: false)
-        [
-            detailedMediaStackView, artistCollectionView
-        ].forEach { $0.isHidden = !(state == .loaded) }
+        detailedMediaStackView.isHidden = !(state == .loaded)
     }
     
     func updateUI(for media: Media?) {
