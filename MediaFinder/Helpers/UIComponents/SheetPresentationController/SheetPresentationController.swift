@@ -76,7 +76,7 @@ final class SheetPresentationController: UIPresentationController {
     
     override func dismissalTransitionWillBegin() {
         super.dismissalTransitionWillBegin()
-        resetPresentingViewControllers()
+        updatePresentingViews(with: .identity, animated: true)
     }
 }
 
@@ -184,7 +184,7 @@ private extension SheetPresentationController {
             
             presentedView.frame.size.height = height
             presentedView.frame.origin.y = containerView.frame.height - height
-            updatePresentingViewControllersTransform(transform: transform, translatedTransform: translatedTransform)
+            updatePresentingViews(with: transform, translatedTransform: translatedTransform)
             currentDetent = detent
         }
     }
@@ -205,14 +205,14 @@ private extension SheetPresentationController {
         if newHeight >= mediumHeight && newHeight <= largeHeight {
             presentedView.frame.size.height = newHeight
             presentedView.frame.origin.y = containerView.bounds.height - newHeight
-            updatePresentingViewControllerTransform(for: newHeight)
+            updatePresentingViews(for: newHeight)
         } else if newHeight < mediumHeight {
             presentedView.frame.size.height = newHeight
             presentedView.frame.origin.y = containerView.bounds.height - newHeight
         }
     }
     
-    func shouldDismissView(for velocity: CGFloat, currentHeight: CGFloat) -> Bool{
+    func shouldDismissView(for velocity: CGFloat, currentHeight: CGFloat) -> Bool {
         let isFastSwipe = abs(velocity) > 2000
         return (isFastSwipe && velocity > 0) || currentHeight < mediumHeight / 2
     }
@@ -225,7 +225,6 @@ private extension SheetPresentationController {
     func handleEndedGesture(for presentedView: UIView, velocity: CGPoint) {
         let currentHeight = presentedView.frame.height
         let shouldDismiss = shouldDismissView(for: velocity.y, currentHeight: currentHeight)
-        
         
         if shouldDismiss {
             presentedViewController.dismiss(animated: true)
