@@ -149,17 +149,17 @@ private extension SheetPresentationController {
         }
     }
     
-    func updatePresentingViewControllerTransform(for currentHeight: CGFloat) {
-        
+    func updatePresentingViews(for currentHeight: CGFloat) {
         let heightDifference = largeHeight - mediumHeight
         let heightRatio = (currentHeight - mediumHeight) / heightDifference
         
         let scale = 1 - heightRatio * 0.1
-        let scaledTransform = CGAffineTransform(scaleX: scale, y: scale)
+        let transform = CGAffineTransform(scaleX: scale, y: scale)
+        let translatedTransform = transform.translatedBy(x: .zero, y: -26 * heightRatio)
         
-        updatePresentingViewControllersTransform(
-            transform: scaledTransform,
-            translatedTransform: scaledTransform.translatedBy(x: .zero, y: -26 * heightRatio)
+        updatePresentingViews(
+            with: transform,
+            translatedTransform: translatedTransform
         )
     }
     
