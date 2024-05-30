@@ -109,13 +109,9 @@ final class MediaInfoView: UIStackView {
 private extension MediaInfoView {
     
     func setupAppearance() {
-        axis = .vertical
-        spacing = Const.spacingMedium
+        isLayoutMarginsRelativeArrangement = true
+        layoutMargins = .medium
         
-        NSLayoutConstraint.activate([
-            mediaStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Const.spacingMedium),
-            mediaStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Const.spacingMedium)
-        ])
         addArrangedSubview(mediaStackView)
     }
     
