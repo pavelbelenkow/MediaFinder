@@ -174,7 +174,14 @@ extension DetailedMediaView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
-        offsetY <= .zero ? mediaInfoView.updateImageViewFrame(for: offsetY) : nil
+        let imageViewHeight = mediaImageView.bounds.height
+        
+        if offsetY < .zero {
+            mediaImageView.transform = CGAffineTransform(translationX: .zero, y: offsetY)
+                .scaledBy(x: 1 + (-offsetY / imageViewHeight), y: 1 + (-offsetY / imageViewHeight))
+        } else if offsetY > .zero {
+            mediaImageView.transform = CGAffineTransform(translationX: .zero, y: offsetY / 2)
+        }
     }
 }
 
