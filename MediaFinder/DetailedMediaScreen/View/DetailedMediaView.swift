@@ -114,6 +114,23 @@ private extension DetailedMediaView {
                                                         constant: -Const.spacingOneHundred)
         ])
     }
+    
+    func loadAndSetupImage(from urlString: String) {
+        mediaImageView.addShimmerAnimation()
+        
+        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
+            guard let self, let image else { return }
+            let aspectRatio = image.size.width / image.size.height
+            
+            mediaImageView.image = image
+            mediaImageView.widthAnchor.constraint(
+                equalTo: mediaImageView.heightAnchor,
+                multiplier: aspectRatio
+            ).isActive = true
+            
+            mediaImageView.removeShimmerAnimation()
+        }
+    }
 }
 
 // MARK: - Methods
@@ -126,8 +143,13 @@ extension DetailedMediaView {
     }
     
     func updateUI(for media: Media?) {
-        guard let media else { return }
+        guard 
+            let media,
+            let imageUrl = media.setImageQuality(to: Const.fiveHundredSize)
+        else { return }
+        
         mediaInfoView.update(for: media)
+        loadAndSetupImage(from: imageUrl)
     }
     
     func updateUI(for artist: Artist?) {

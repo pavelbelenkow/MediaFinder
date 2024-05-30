@@ -124,23 +124,6 @@ private extension MediaInfoView {
         ])
     }
     
-    func loadAndSetupImage(from urlString: String) {
-        imageView.addShimmerAnimation()
-        
-        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
-            guard let self, let image else { return }
-            let aspectRatio = image.size.width / image.size.height
-            
-            imageView.image = image
-            imageView.widthAnchor.constraint(
-                equalTo: imageView.heightAnchor,
-                multiplier: aspectRatio
-            ).isActive = true
-            
-            imageView.removeShimmerAnimation()
-        }
-    }
-    
     @objc func moreButtonTapped() {
         guard
             let name = nameLabel.text,
@@ -158,14 +141,11 @@ extension MediaInfoView {
     
     func update(for media: Media) {
         guard
-            let imageUrl = media.setImageQuality(to: Const.fiveHundredSize),
             let kind = media.kind,
             let name = media.name,
             let artist = media.artist,
             let _ = media.trackView
         else { return }
-        
-        loadAndSetupImage(from: imageUrl)
         
         kindLabel.text = kind
         nameLabel.text = name
