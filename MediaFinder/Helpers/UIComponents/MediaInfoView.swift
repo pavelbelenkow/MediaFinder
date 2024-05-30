@@ -8,15 +8,6 @@ final class MediaInfoView: UIStackView {
     
     // MARK: - Private Properties
     
-    private lazy var imageView: UIImageView = {
-        let view = UIImageView()
-        view.tintColor = .black
-        view.contentMode = .scaleAspectFit
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private lazy var kindLabel: CustomLabel = {
         let label = CustomLabel()
         label.configure(
@@ -121,16 +112,11 @@ private extension MediaInfoView {
         axis = .vertical
         spacing = Const.spacingMedium
         
-        [imageView, mediaStackView].forEach { addArrangedSubview($0) }
-        
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
-            
             mediaStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Const.spacingMedium),
             mediaStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Const.spacingMedium)
         ])
+        addArrangedSubview(mediaStackView)
     }
     
     func setupMoreButton() {

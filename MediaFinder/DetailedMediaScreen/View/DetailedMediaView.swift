@@ -12,6 +12,15 @@ final class DetailedMediaView: UIScrollView {
     
     // MARK: - Private Properties
     
+    private lazy var mediaImageView: UIImageView = {
+        let view = UIImageView()
+        view.tintColor = .black
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var mediaInfoView: MediaInfoView = {
         let view = MediaInfoView()
         view.delegate = self
@@ -68,15 +77,27 @@ private extension DetailedMediaView {
         showsVerticalScrollIndicator = false
         delegate = self
         
+        setupMediaImageView()
         setupDetailedMediaStackView()
         setupStatefulStackView()
+    }
+    
+    func setupMediaImageView() {
+        addSubview(mediaImageView)
+        
+        NSLayoutConstraint.activate([
+            mediaImageView.topAnchor.constraint(equalTo: topAnchor),
+            mediaImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            mediaImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            mediaImageView.widthAnchor.constraint(equalTo: mediaImageView.heightAnchor)
+        ])
     }
     
     func setupDetailedMediaStackView() {
         addSubview(detailedMediaStackView)
         
         NSLayoutConstraint.activate([
-            detailedMediaStackView.topAnchor.constraint(equalTo: topAnchor),
+            detailedMediaStackView.topAnchor.constraint(equalTo: mediaImageView.bottomAnchor, constant: -Const.spacingMedium),
             detailedMediaStackView.widthAnchor.constraint(equalTo: widthAnchor),
             detailedMediaStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Const.spacingMedium)
         ])
