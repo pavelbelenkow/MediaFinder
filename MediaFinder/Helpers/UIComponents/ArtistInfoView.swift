@@ -79,10 +79,7 @@ private extension ArtistInfoView {
         spacing = Const.spacingMedium
         isHidden = true
         isLayoutMarginsRelativeArrangement = true
-        layoutMargins = UIEdgeInsets(
-            top: Const.spacingMedium, left: Const.spacingMedium,
-            bottom: .zero, right: Const.spacingMedium
-        )
+        layoutMargins = .medium
         
         [
             titleLabel, artistInfoStackView, moreFromArtistLabel
