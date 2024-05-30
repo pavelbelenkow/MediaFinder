@@ -41,7 +41,10 @@ final class DetailedMediaView: UIScrollView {
             mediaInfoView, artistInfoView, artistCollectionView
         ])
         view.axis = .vertical
-        view.spacing = Const.spacingMedium
+        view.backgroundColor = .mediaBackground
+        view.layer.cornerRadius = Const.repeatButtonCornerRadius
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
