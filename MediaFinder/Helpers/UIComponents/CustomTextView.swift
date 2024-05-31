@@ -6,7 +6,6 @@ final class CustomTextView: UITextView {
     
     func configure() {
         backgroundColor = .clear
-        tintColor = .black
         dataDetectorTypes = .link
         isEditable = false
         isScrollEnabled = false
