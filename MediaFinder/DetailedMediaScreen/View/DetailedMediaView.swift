@@ -181,6 +181,8 @@ extension DetailedMediaView: UIScrollViewDelegate {
                 .scaledBy(x: 1 + (-offsetY / imageViewHeight), y: 1 + (-offsetY / imageViewHeight))
         } else if offsetY > .zero {
             mediaImageView.transform = CGAffineTransform(translationX: .zero, y: offsetY / 2)
+        } else {
+            mediaImageView.transform = .identity
         }
     }
 }
