@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol MediaTypeCollectionViewDelegate: AnyObject {
+    func didScrollHorizontallyCollectionView(with offset: CGFloat)
     func didScrollHorizontallyCollectionView(to index: Int)
     func didScrollToBottomMediaTypeCell()
     func didTapInnerContentMediaTypeCell(at index: Int)
