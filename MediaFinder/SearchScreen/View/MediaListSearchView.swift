@@ -137,11 +137,11 @@ extension MediaListSearchView {
     }
 }
 
-// MARK: - MediaTypePageControlDelegate Methods
+// MARK: - MediaTypeMenuBarDelegate Methods
 
-extension MediaListSearchView: MediaTypePageControlDelegate {
+extension MediaListSearchView: MediaTypeMenuBarDelegate {
     
-    func change(to index: Int) {
+    func didSelectMediaTypeMenuItem(at index: Int) {
         let indexPath = IndexPath(item: index, section: .zero)
         delegate?.didSelectMediaType(for: index)
         mediaTypeCollectionView.scrollToItem(
