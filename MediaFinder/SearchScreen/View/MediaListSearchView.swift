@@ -156,8 +156,12 @@ extension MediaListSearchView: MediaTypeMenuBarDelegate {
 
 extension MediaListSearchView: MediaTypeCollectionViewDelegate {
     
+    func didScrollHorizontallyCollectionView(with offset: CGFloat) {
+        mediaTypeMenuBar.moveSelectorView(to: offset)
+    }
+    
     func didScrollHorizontallyCollectionView(to index: Int) {
-        mediaTypePageControl.handleSelectionChange(to: index)
+        mediaTypeMenuBar.selectMediaTypeMenuItem(at: index)
     }
     
     func didScrollToBottomMediaTypeCell() {
