@@ -21,7 +21,7 @@
 		592A15102BC588B200322135 /* MediaListSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A150F2BC588B200322135 /* MediaListSearchViewController.swift */; };
 		592A15122BC5B80500322135 /* MediaListSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15112BC5B80500322135 /* MediaListSearchView.swift */; };
 		592A15152BC5F1C700322135 /* StatefulStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15142BC5F1C700322135 /* StatefulStackView.swift */; };
-		592A15172BC5F42F00322135 /* MediaTypePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15162BC5F42F00322135 /* MediaTypePageControl.swift */; };
+		592A15172BC5F42F00322135 /* MediaTypeMenuBar in Sources */ = {isa = PBXBuildFile; fileRef = 592A15162BC5F42F00322135 /* MediaTypeMenuBar */; };
 		592A15192BC5F52E00322135 /* MediaListSearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15182BC5F52E00322135 /* MediaListSearchCollectionView.swift */; };
 		592A151C2BC5F5DC00322135 /* MediaListSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A151B2BC5F5DC00322135 /* MediaListSearchCell.swift */; };
 		592A151F2BC5F7B300322135 /* MediaListRecentSearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A151E2BC5F7B300322135 /* MediaListRecentSearchTableView.swift */; };
@@ -102,7 +102,7 @@
 		592A150F2BC588B200322135 /* MediaListSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchViewController.swift; sourceTree = "<group>"; };
 		592A15112BC5B80500322135 /* MediaListSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchView.swift; sourceTree = "<group>"; };
 		592A15142BC5F1C700322135 /* StatefulStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulStackView.swift; sourceTree = "<group>"; };
-		592A15162BC5F42F00322135 /* MediaTypePageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTypePageControl.swift; sourceTree = "<group>"; };
+		592A15162BC5F42F00322135 /* MediaTypeMenuBar */ = {isa = PBXFileReference; lastKnownFileType = text; path = MediaTypeMenuBar; sourceTree = "<group>"; };
 		592A15182BC5F52E00322135 /* MediaListSearchCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchCollectionView.swift; sourceTree = "<group>"; };
 		592A151B2BC5F5DC00322135 /* MediaListSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchCell.swift; sourceTree = "<group>"; };
 		592A151E2BC5F7B300322135 /* MediaListRecentSearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListRecentSearchTableView.swift; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 				592A151A2BC5F5AF00322135 /* MediaListSearchCollectionView */,
 				592A151D2BC5F79800322135 /* MediaListRecentSearchTableView */,
 				59C813E62BD97EB1003D405D /* ArtistCollectionCollectionView */,
-				592A15162BC5F42F00322135 /* MediaTypePageControl.swift */,
+				59CBBB822C0F93A4007EE1A5 /* MediaTypeMenuBar */,
 				592A15142BC5F1C700322135 /* StatefulStackView.swift */,
 				595EFE712BC960FE00F7E353 /* CustomLabel.swift */,
 				595EFE732BC9612E00F7E353 /* CustomTextView.swift */,
@@ -635,7 +635,7 @@
 				591E3D2D2C03C71500FF7FB1 /* DetailedDescriptionView.swift in Sources */,
 				595EFE7A2BC9743200F7E353 /* ArtistMapper.swift in Sources */,
 				599E72272BF6988F0033C677 /* UILabel+Extensions.swift in Sources */,
-				592A15172BC5F42F00322135 /* MediaTypePageControl.swift in Sources */,
+				592A15172BC5F42F00322135 /* MediaTypeMenuBar in Sources */,
 				592A15192BC5F52E00322135 /* MediaListSearchCollectionView.swift in Sources */,
 				596F0CDE2BFE8A7F00BC475F /* SheetPresentAnimationController.swift in Sources */,
 				5949D0AF2BC1B63F00A860C8 /* SearchServiceError.swift in Sources */,
