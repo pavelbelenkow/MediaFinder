@@ -51,6 +51,16 @@ private extension MediaTypeMenuCollectionView {
     }
 }
 
+// MARK: - Methods
+
+extension MediaTypeMenuCollectionView {
+    
+    func selectMediaTypeMenu(at index: Int) {
+        let indexPath = IndexPath(item: index, section: .zero)
+        selectItem(at: indexPath, animated: true, scrollPosition: .left)
+    }
+}
+
 // MARK: - DataSource Methods
 
 extension MediaTypeMenuCollectionView: UICollectionViewDataSource {
