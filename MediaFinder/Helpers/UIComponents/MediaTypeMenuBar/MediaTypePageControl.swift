@@ -6,36 +6,41 @@ protocol MediaTypeMenuBarDelegate: AnyObject {
     func didSelectMediaTypeMenuItem(at index: Int)
 }
 
-final class MediaTypePageControl: UIView {
+final class MediaTypeMenuBar: UIView {
     
     // MARK: - Private Properties
     
-    private var buttonTitles = Const.mediaTypeButtonTitles
-    private var buttons: [UIButton] = []
-    private var selectorView: UIView = UIView()
+    private lazy var collectionView: MediaTypeMenuCollectionView = {
+        let view = MediaTypeMenuCollectionView()
+        view.interactionDelegate = self
+        return view
+    }()
     
-    private var selectedIndex: Int = 0
+    private lazy var selectorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.layer.cornerRadius = Const.selectorViewCornerRadius
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var selectorViewLeadingConstraint: NSLayoutConstraint?
     
     // MARK: - Properties
     
-    weak var delegate: MediaTypePageControlDelegate?
+    weak var delegate: MediaTypeMenuBarDelegate?
     
-    // MARK: - Initialisers
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        updateView()
+        setupAppearance()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Lifecycle
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        updateView()
     }
 }
 
