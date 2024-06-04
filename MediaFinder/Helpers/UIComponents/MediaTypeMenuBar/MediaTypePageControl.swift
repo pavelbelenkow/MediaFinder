@@ -46,46 +46,37 @@ final class MediaTypeMenuBar: UIView {
 
 // MARK: - Setup UI
 
-private extension MediaTypePageControl {
+private extension MediaTypeMenuBar {
     
-    func updateView() {
+    func setupAppearance() {
         translatesAutoresizingMaskIntoConstraints = false
-        createButton()
+        
+        setupCollectionView()
         setupSelectorView()
-        setupStackView()
+    }
+    
+    func setupCollectionView() {
+        addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
     }
     
     func setupSelectorView() {
-        let selectorWidth = frame.width / CGFloat(buttonTitles.count)
-        selectorView = UIView(frame: CGRect(x: 0, y: frame.height, width: selectorWidth, height: 4))
-        selectorView.backgroundColor = .black
         addSubview(selectorView)
-    }
-    
-    func setupStackView() {
-        let stack = UIStackView(arrangedSubviews: buttons)
-        stack.axis = .horizontal
-        stack.spacing = Const.spacingSmall
-        stack.distribution = .fillEqually
-        addSubview(stack)
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        stack.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        stack.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        stack.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-    }
-    
-    func createButton() {
-        buttons.removeAll()
-        subviews.forEach { $0.removeFromSuperview() }
-        buttonTitles.enumerated().forEach { index, buttonTitle in
-            let button = UIButton(type: .custom)
-            button.setTitle(buttonTitle, for: .normal)
-            button.titleLabel?.font = .boldSystemFont(ofSize: 19)
-            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-            button.setTitleColor(index == selectedIndex ? .white : .lightText, for: .normal)
-            buttons.append(button)
-        }
+        
+        selectorViewLeadingConstraint = selectorView.leadingAnchor.constraint(equalTo: leadingAnchor)
+        selectorViewLeadingConstraint?.isActive = true
+        
+        NSLayoutConstraint.activate([
+            selectorView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            selectorView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: Const.oneFifthMultiplier),
+            selectorView.heightAnchor.constraint(equalToConstant: Const.selectorViewHeight)
+        ])
     }
 }
 
