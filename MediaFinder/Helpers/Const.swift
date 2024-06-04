@@ -93,6 +93,7 @@ enum Const {
     static let oneFifthMultiplier: CGFloat = 1 / 5
     static let selectorViewHeight: CGFloat = 5
     static let selectorViewCornerRadius: CGFloat = selectorViewHeight / 2
+    static let mediaTypeMenuBarHeight: CGFloat = 40
     
     // MARK: - DetailedMedia Screen Constants
     
