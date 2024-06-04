@@ -21,7 +21,7 @@
 		592A15102BC588B200322135 /* MediaListSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A150F2BC588B200322135 /* MediaListSearchViewController.swift */; };
 		592A15122BC5B80500322135 /* MediaListSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15112BC5B80500322135 /* MediaListSearchView.swift */; };
 		592A15152BC5F1C700322135 /* StatefulStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15142BC5F1C700322135 /* StatefulStackView.swift */; };
-		592A15172BC5F42F00322135 /* MediaTypeMenuBar in Sources */ = {isa = PBXBuildFile; fileRef = 592A15162BC5F42F00322135 /* MediaTypeMenuBar */; };
+		592A15172BC5F42F00322135 /* MediaTypeMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15162BC5F42F00322135 /* MediaTypeMenuBar.swift */; };
 		592A15192BC5F52E00322135 /* MediaListSearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A15182BC5F52E00322135 /* MediaListSearchCollectionView.swift */; };
 		592A151C2BC5F5DC00322135 /* MediaListSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A151B2BC5F5DC00322135 /* MediaListSearchCell.swift */; };
 		592A151F2BC5F7B300322135 /* MediaListRecentSearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592A151E2BC5F7B300322135 /* MediaListRecentSearchTableView.swift */; };
@@ -74,6 +74,8 @@
 		59B6E0B42BDAEF2C002F0516 /* ArtistCollectionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B6E0B32BDAEF2C002F0516 /* ArtistCollectionMapper.swift */; };
 		59B6E0B62BDAF2D7002F0516 /* ArtistCollectionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B6E0B52BDAF2D7002F0516 /* ArtistCollectionCollectionView.swift */; };
 		59C813E82BD97F04003D405D /* ArtistCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C813E72BD97F04003D405D /* ArtistCollectionCell.swift */; };
+		59CBBB842C0F93C1007EE1A5 /* MediaTypeMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBBB832C0F93C1007EE1A5 /* MediaTypeMenuCell.swift */; };
+		59CBBB862C0F93EC007EE1A5 /* MediaTypeMenuCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBBB852C0F93EC007EE1A5 /* MediaTypeMenuCollectionView.swift */; };
 		59F740162BD5B432000031BE /* MediaListSearchFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,7 +104,7 @@
 		592A150F2BC588B200322135 /* MediaListSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchViewController.swift; sourceTree = "<group>"; };
 		592A15112BC5B80500322135 /* MediaListSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchView.swift; sourceTree = "<group>"; };
 		592A15142BC5F1C700322135 /* StatefulStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulStackView.swift; sourceTree = "<group>"; };
-		592A15162BC5F42F00322135 /* MediaTypeMenuBar */ = {isa = PBXFileReference; lastKnownFileType = text; path = MediaTypeMenuBar; sourceTree = "<group>"; };
+		592A15162BC5F42F00322135 /* MediaTypeMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTypeMenuBar.swift; sourceTree = "<group>"; };
 		592A15182BC5F52E00322135 /* MediaListSearchCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchCollectionView.swift; sourceTree = "<group>"; };
 		592A151B2BC5F5DC00322135 /* MediaListSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchCell.swift; sourceTree = "<group>"; };
 		592A151E2BC5F7B300322135 /* MediaListRecentSearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListRecentSearchTableView.swift; sourceTree = "<group>"; };
@@ -158,6 +160,8 @@
 		59B6E0B32BDAEF2C002F0516 /* ArtistCollectionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionMapper.swift; sourceTree = "<group>"; };
 		59B6E0B52BDAF2D7002F0516 /* ArtistCollectionCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionCollectionView.swift; sourceTree = "<group>"; };
 		59C813E72BD97F04003D405D /* ArtistCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionCell.swift; sourceTree = "<group>"; };
+		59CBBB832C0F93C1007EE1A5 /* MediaTypeMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTypeMenuCell.swift; sourceTree = "<group>"; };
+		59CBBB852C0F93EC007EE1A5 /* MediaTypeMenuCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTypeMenuCollectionView.swift; sourceTree = "<group>"; };
 		59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -520,6 +524,24 @@
 			path = ArtistCollectionCollectionView;
 			sourceTree = "<group>";
 		};
+		59CBBB822C0F93A4007EE1A5 /* MediaTypeMenuBar */ = {
+			isa = PBXGroup;
+			children = (
+				592A15162BC5F42F00322135 /* MediaTypeMenuBar.swift */,
+				59CBBB872C0F93F6007EE1A5 /* MediaTypeMenuCollectionView */,
+			);
+			path = MediaTypeMenuBar;
+			sourceTree = "<group>";
+		};
+		59CBBB872C0F93F6007EE1A5 /* MediaTypeMenuCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				59CBBB852C0F93EC007EE1A5 /* MediaTypeMenuCollectionView.swift */,
+				59CBBB832C0F93C1007EE1A5 /* MediaTypeMenuCell.swift */,
+			);
+			path = MediaTypeMenuCollectionView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -629,13 +651,14 @@
 				599E722F2BF6AB130033C677 /* CFTimeInterval+Extensions.swift in Sources */,
 				5946FEAC2BD7004400E53591 /* MediaTypeCollectionView.swift in Sources */,
 				59A0E3FA2BCB7B9C0012C628 /* State.swift in Sources */,
+				59CBBB842C0F93C1007EE1A5 /* MediaTypeMenuCell.swift in Sources */,
 				592A151F2BC5F7B300322135 /* MediaListRecentSearchTableView.swift in Sources */,
 				591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */,
 				595EFE722BC960FE00F7E353 /* CustomLabel.swift in Sources */,
 				591E3D2D2C03C71500FF7FB1 /* DetailedDescriptionView.swift in Sources */,
 				595EFE7A2BC9743200F7E353 /* ArtistMapper.swift in Sources */,
 				599E72272BF6988F0033C677 /* UILabel+Extensions.swift in Sources */,
-				592A15172BC5F42F00322135 /* MediaTypeMenuBar in Sources */,
+				592A15172BC5F42F00322135 /* MediaTypeMenuBar.swift in Sources */,
 				592A15192BC5F52E00322135 /* MediaListSearchCollectionView.swift in Sources */,
 				596F0CDE2BFE8A7F00BC475F /* SheetPresentAnimationController.swift in Sources */,
 				5949D0AF2BC1B63F00A860C8 /* SearchServiceError.swift in Sources */,
@@ -664,6 +687,7 @@
 				598E78B22C03B9AE00120041 /* DetailedDescriptionViewController.swift in Sources */,
 				594EC5212C027FF0009A4572 /* PassthroughTouchView.swift in Sources */,
 				599E72332BF6CB740033C677 /* CAAnimation+Extensions.swift in Sources */,
+				59CBBB862C0F93EC007EE1A5 /* MediaTypeMenuCollectionView.swift in Sources */,
 				592A15152BC5F1C700322135 /* StatefulStackView.swift in Sources */,
 				599E722D2BF6AAC70033C677 /* NSNumber+Extensions.swift in Sources */,
 				599E722B2BF6AA6D0033C677 /* CGPoint+Extensions.swift in Sources */,
