@@ -90,6 +90,9 @@ enum Const {
     static let mediaImageViewHeight: CGFloat = 80
     static let repeatButtonBorderWidth: CGFloat = 1
     static let repeatButtonCornerRadius: CGFloat = 10
+    static let oneFifthMultiplier: CGFloat = 1 / 5
+    static let selectorViewHeight: CGFloat = 5
+    static let selectorViewCornerRadius: CGFloat = selectorViewHeight / 2
     
     // MARK: - DetailedMedia Screen Constants
     
