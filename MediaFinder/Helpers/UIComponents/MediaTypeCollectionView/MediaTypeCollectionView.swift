@@ -121,6 +121,16 @@ extension MediaTypeCollectionView: UICollectionViewDataSource {
 
 extension MediaTypeCollectionView: UICollectionViewDelegateFlowLayout {
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentWidth = scrollView.frame.width * 2
+        var offset = scrollView.contentOffset.x
+        
+        if offset >= .zero && offset <= contentWidth {
+            offset /= 5.4
+            interactionDelegate?.didScrollHorizontallyCollectionView(with: offset)
+        }
+    }
+    
     func scrollViewWillEndDragging(
         _ scrollView: UIScrollView,
         withVelocity velocity: CGPoint,
