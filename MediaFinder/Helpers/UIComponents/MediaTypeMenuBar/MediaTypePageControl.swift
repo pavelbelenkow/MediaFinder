@@ -80,55 +80,16 @@ private extension MediaTypeMenuBar {
     }
 }
 
-// MARK: - Private Methods
-
-private extension MediaTypePageControl {
-    
-    @objc func buttonAction(sender: UIButton) {
-        guard let tappedButtonIndex = buttons.firstIndex(of: sender) else { return }
-        handleSelectionChange(to: tappedButtonIndex)
-    }
-    
-    func animateSelectionChange(to newIndex: Int) {
-        buttons[newIndex].animateSelection {
-            self.selectedIndex = newIndex
-            self.delegate?.change(to: newIndex)
-        }
-    }
-    
-    func updateSelectorPosition(to newIndex: Int) {
-        let selectorPosition = frame.width / CGFloat(buttonTitles.count) * CGFloat(newIndex)
-        UIView.animate(withDuration: 0.25) {
-            self.selectorView.frame.origin.x = selectorPosition
-            self.selectorView.alpha = 0.6
-            self.selectorView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        } completion: { _ in
-            UIView.animate(withDuration: 0.25) {
-                self.selectorView.alpha = 1.0
-                self.selectorView.transform = .identity
-            }
-        }
-    }
-    
-    func updateButtonAppearance(for newIndex: Int) {
-        buttons.enumerated().forEach { index, button in
-            UIView.animate(withDuration: 0.25) {
-                let isSelected = index == newIndex
-                button.setTitleColor(isSelected ? .white : .lightText, for: .normal)
-                button.transform = isSelected ? CGAffineTransform(scaleX: 0.8, y: 0.8) : .identity
-            }
-        }
-    }
-}
-
 // MARK: - Methods
 
-extension MediaTypePageControl {
+extension MediaTypeMenuBar {
     
-    func handleSelectionChange(to newIndex: Int) {
-        guard newIndex != selectedIndex else { return }
-        animateSelectionChange(to: newIndex)
-        updateSelectorPosition(to: newIndex)
-        updateButtonAppearance(for: newIndex)
+    func selectMediaTypeMenuItem(at index: Int) {
+        collectionView.selectMediaTypeMenu(at: index)
+        delegate?.didSelectMediaTypeMenuItem(at: index)
+    }
+    
+    func moveSelectorView(to offset: CGFloat) {
+        selectorViewLeadingConstraint?.constant = offset
     }
 }
