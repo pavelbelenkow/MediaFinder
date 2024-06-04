@@ -15,10 +15,10 @@ final class MediaListSearchView: UIView {
     
     // MARK: - Private Properties
     
-    private lazy var mediaTypePageControl: MediaTypePageControl = {
-        let control = MediaTypePageControl()
-        control.delegate = self
-        return control
+    private lazy var mediaTypeMenuBar: MediaTypeMenuBar = {
+        let bar = MediaTypeMenuBar()
+        bar.delegate = self
+        return bar
     }()
     
     private lazy var mediaTypeCollectionView: MediaTypeCollectionView = {
@@ -56,7 +56,7 @@ private extension MediaListSearchView {
     
     func setupAppearance() {
         setupBackgroundColor()
-        setupMediaTypePageControl()
+        setupMediaTypeMenuBar()
         setupMediaTypeCollectionView()
         setupRecentSearchTableView()
     }
@@ -65,14 +65,16 @@ private extension MediaListSearchView {
         backgroundColor = .mediaBackground
     }
     
-    func setupMediaTypePageControl() {
-        addSubview(mediaTypePageControl)
+    func setupMediaTypeMenuBar() {
+        addSubview(mediaTypeMenuBar)
         
         NSLayoutConstraint.activate([
-            mediaTypePageControl.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, 
-                                                         constant: Const.spacingThirty),
-            mediaTypePageControl.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
-                                                          constant: Const.spacingMedium)
+            mediaTypeMenuBar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            mediaTypeMenuBar.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
+                                                          constant: Const.spacingMedium),
+            mediaTypeMenuBar.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
+                                                          constant: -Const.spacingMedium),
+            mediaTypeMenuBar.heightAnchor.constraint(equalToConstant: Const.mediaTypeMenuBarHeight)
         ])
     }
     
@@ -80,8 +82,7 @@ private extension MediaListSearchView {
         addSubview(mediaTypeCollectionView)
         
         NSLayoutConstraint.activate([
-            mediaTypeCollectionView.topAnchor.constraint(equalTo: mediaTypePageControl.bottomAnchor,
-                                                         constant: Const.spacingExtraSmall),
+            mediaTypeCollectionView.topAnchor.constraint(equalTo: mediaTypeMenuBar.bottomAnchor),
             mediaTypeCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             mediaTypeCollectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             mediaTypeCollectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
