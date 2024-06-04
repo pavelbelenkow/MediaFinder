@@ -2,8 +2,8 @@ import UIKit
 
 // MARK: - Delegates
 
-protocol MediaTypePageControlDelegate: AnyObject {
-    func change(to index: Int)
+protocol MediaTypeMenuBarDelegate: AnyObject {
+    func didSelectMediaTypeMenuItem(at index: Int)
 }
 
 final class MediaTypePageControl: UIView {
