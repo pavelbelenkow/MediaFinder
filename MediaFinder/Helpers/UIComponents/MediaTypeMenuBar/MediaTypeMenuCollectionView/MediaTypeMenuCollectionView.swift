@@ -86,3 +86,23 @@ extension MediaTypeMenuCollectionView: UICollectionViewDataSource {
         return cell
     }
 }
+
+// MARK: - Delegate Methods
+
+extension MediaTypeMenuCollectionView: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        CGSizeMake(frame.width / 5, frame.height)
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        interactionDelegate?.didSelectMediaTypeMenu(at: indexPath.item)
+    }
+}
