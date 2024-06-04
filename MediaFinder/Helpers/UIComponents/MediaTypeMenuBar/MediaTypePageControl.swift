@@ -93,3 +93,12 @@ extension MediaTypeMenuBar {
         selectorViewLeadingConstraint?.constant = offset
     }
 }
+
+// MARK: - MediaTypeMenuCollectionViewDelegate Methods
+
+extension MediaTypeMenuBar: MediaTypeMenuCollectionViewDelegate {
+    
+    func didSelectMediaTypeMenu(at index: Int) {
+        delegate?.didSelectMediaTypeMenuItem(at: index)
+    }
+}
