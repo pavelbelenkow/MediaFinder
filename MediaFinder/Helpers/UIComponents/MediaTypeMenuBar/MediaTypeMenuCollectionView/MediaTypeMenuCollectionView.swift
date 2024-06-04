@@ -50,3 +50,39 @@ private extension MediaTypeMenuCollectionView {
         delegate = self
     }
 }
+
+// MARK: - DataSource Methods
+
+extension MediaTypeMenuCollectionView: UICollectionViewDataSource {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        Const.mediaTypeButtonTitles.count
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        
+        guard
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: Const.mediaTypeMenuCellReuseIdentifier,
+                for: indexPath) as? MediaTypeMenuCell
+        else { return UICollectionViewCell() }
+        
+        let firstItem = IndexPath(item: .zero, section: .zero)
+        collectionView.selectItem(
+            at: firstItem,
+            animated: false,
+            scrollPosition: .left
+        )
+        
+        let title = Const.mediaTypeButtonTitles[indexPath.item]
+        cell.configure(with: title)
+        
+        return cell
+    }
+}
