@@ -80,4 +80,12 @@ private extension Double {
         let newBlue = min(max(blue + adjustment, .zero), 255)
         return Double(newRed * .redGamut + newGreen * .greenGamut + newBlue)
     }
+    
+    func lighter(by percentage: CGFloat = 20.0) -> Double {
+        adjustBrightness(by: abs(percentage))
+    }
+    
+    func darker(by percentage: CGFloat = 20.0) -> Double {
+        adjustBrightness(by: -abs(percentage))
+    }
 }
