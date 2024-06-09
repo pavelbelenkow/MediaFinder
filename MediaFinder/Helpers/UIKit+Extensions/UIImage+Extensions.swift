@@ -65,6 +65,13 @@ private extension UIImage {
         
         return sortedColors
     }
+    
+    func findPrimaryColor(from colors: [UIImageColorsCounter], baseColor: Double) -> Double {
+        for color in colors where color.color.isSuitableAccent(for: baseColor) {
+            return color.color
+        }
+        return baseColor.isDarkColor ? baseColor.lighter() : baseColor.darker()
+    }
 }
 
 private extension Double {
