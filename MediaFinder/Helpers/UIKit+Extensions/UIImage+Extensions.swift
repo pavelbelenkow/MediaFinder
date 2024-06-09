@@ -68,4 +68,8 @@ private extension Double {
         let blueDiff = fabs(blue - color.blue)
         return redDiff > .distinctThreshold || greenDiff > .distinctThreshold || blueDiff > .distinctThreshold
     }
+    
+    func isSuitableAccent(for baseColor: Double) -> Bool {
+        isDistinct(from: baseColor) && !isBlackOrWhite && isVibrant
+    }
 }
