@@ -32,4 +32,13 @@ private extension Double {
     var red: Double { floor(self / .redGamut) }
     var green: Double { floor((self / .greenGamut).truncatingRemainder(dividingBy: .greenGamut)) }
     var blue: Double { floor(truncatingRemainder(dividingBy: .blueGamut)) }
+    
+    var color: UIColor {
+        UIColor(
+            red: CGFloat(red / 255),
+            green: CGFloat(green / 255),
+            blue: CGFloat(blue / 255),
+            alpha: 1.0
+        )
+    }
 }
