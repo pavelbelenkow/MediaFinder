@@ -7,6 +7,20 @@ struct ImageColors {
     let detail: UIColor
 }
 
+extension UIImage {
+
+    // MARK: - Methods
+    
+    func getColors(_ completion: @escaping (ImageColors?) -> Void) {
+        DispatchQueue.global().async {
+            let result = self.getColors()
+            DispatchQueue.main.async {
+                completion(result)
+            }
+        }
+    }
+}
+
 private extension UIImage {
     
     struct UIImageColorsCounter {
