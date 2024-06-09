@@ -18,6 +18,15 @@ private extension UIImage {
         static let sizeOneHundred: CGSize = CGSize(width: 100, height: 100)
         static let thresholdPercentage: CGFloat = 0.01
     }
+    
+    // MARK: - Methods
+    
+    func resizeImage(to newSize: CGSize = Const.sizeOneHundred) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, .zero)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(origin: .zero, size: newSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
 }
 
 private extension Double {
