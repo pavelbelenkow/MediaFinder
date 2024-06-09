@@ -72,4 +72,12 @@ private extension Double {
     func isSuitableAccent(for baseColor: Double) -> Bool {
         isDistinct(from: baseColor) && !isBlackOrWhite && isVibrant
     }
+    
+    func adjustBrightness(by percentage: CGFloat) -> Double {
+        let adjustment = percentage / 100 * 255
+        let newRed = min(max(red + adjustment, .zero), 255)
+        let newGreen = min(max(green + adjustment, .zero), 255)
+        let newBlue = min(max(blue + adjustment, .zero), 255)
+        return Double(newRed * .redGamut + newGreen * .greenGamut + newBlue)
+    }
 }
