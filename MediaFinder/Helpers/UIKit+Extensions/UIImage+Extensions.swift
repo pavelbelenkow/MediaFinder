@@ -52,6 +52,14 @@ private extension Double {
         return luminance < .darkColorThreshold
     }
     
+    var saturation: Double {
+        let maxVal = max(red, max(green, blue))
+        let minVal = min(red, min(green, blue))
+        return maxVal == .zero ? .zero : (maxVal - minVal) / maxVal
+    }
+    
+    var isVibrant: Bool { saturation >= .minSaturation }
+    
     // MARK: - Methods
     
     func isDistinct(from color: Double) -> Bool {
