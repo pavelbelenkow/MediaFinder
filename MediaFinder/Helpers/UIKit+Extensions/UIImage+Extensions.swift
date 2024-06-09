@@ -13,6 +13,11 @@ private extension UIImage {
         let color: Double
         let count: Int
     }
+    
+    struct Const {
+        static let sizeOneHundred: CGSize = CGSize(width: 100, height: 100)
+        static let thresholdPercentage: CGFloat = 0.01
+    }
 }
 
 private extension Double {
