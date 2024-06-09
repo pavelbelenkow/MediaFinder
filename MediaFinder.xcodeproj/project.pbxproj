@@ -76,6 +76,7 @@
 		59C813E82BD97F04003D405D /* ArtistCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C813E72BD97F04003D405D /* ArtistCollectionCell.swift */; };
 		59CBBB842C0F93C1007EE1A5 /* MediaTypeMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBBB832C0F93C1007EE1A5 /* MediaTypeMenuCell.swift */; };
 		59CBBB862C0F93EC007EE1A5 /* MediaTypeMenuCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CBBB852C0F93EC007EE1A5 /* MediaTypeMenuCollectionView.swift */; };
+		59F49E3F2C16323400335E64 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F49E3E2C16323400335E64 /* UIImage+Extensions.swift */; };
 		59F740162BD5B432000031BE /* MediaListSearchFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +163,7 @@
 		59C813E72BD97F04003D405D /* ArtistCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionCell.swift; sourceTree = "<group>"; };
 		59CBBB832C0F93C1007EE1A5 /* MediaTypeMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTypeMenuCell.swift; sourceTree = "<group>"; };
 		59CBBB852C0F93EC007EE1A5 /* MediaTypeMenuCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTypeMenuCollectionView.swift; sourceTree = "<group>"; };
+		59F49E3E2C16323400335E64 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		59F740152BD5B432000031BE /* MediaListSearchFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaListSearchFooterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -445,6 +447,7 @@
 			children = (
 				599E72222BF681230033C677 /* UIColor+Extensions.swift */,
 				599E72242BF695CB0033C677 /* UIView+Extensions.swift */,
+				59F49E3E2C16323400335E64 /* UIImage+Extensions.swift */,
 				599E72262BF6988F0033C677 /* UILabel+Extensions.swift */,
 				598B95F22BF7AC4000865B1C /* UIEdgeInsets+Extensions.swift */,
 				595EFE6D2BC95FF500F7E353 /* NSAttributedString+Extensions.swift */,
@@ -703,6 +706,7 @@
 				592A151C2BC5F5DC00322135 /* MediaListSearchCell.swift in Sources */,
 				59B6E0B62BDAF2D7002F0516 /* ArtistCollectionCollectionView.swift in Sources */,
 				593477132BC08644004BE3AF /* Const.swift in Sources */,
+				59F49E3F2C16323400335E64 /* UIImage+Extensions.swift in Sources */,
 				59F740162BD5B432000031BE /* MediaListSearchFooterView.swift in Sources */,
 				590D06232BC810F6002D5688 /* DetailedMediaViewController.swift in Sources */,
 			);
