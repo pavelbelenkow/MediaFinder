@@ -94,6 +94,26 @@ private extension UIImage {
         }
         return baseColor.isDarkColor ? baseColor.lighter(by: 60) : baseColor.darker(by: 60)
     }
+    
+    func getColors() -> ImageColors? {
+        let sortedColors = extractColors()
+        var proposed: [Double] = Array(repeating: -1, count: 4)
+        
+        if let mostFrequentColor = sortedColors.first {
+            proposed[0] = mostFrequentColor.color
+        }
+        
+        proposed[1] = findPrimaryColor(from: sortedColors, baseColor: proposed[0])
+        proposed[2] = findSecondaryColor(from: sortedColors, baseColor: proposed[0], primaryColor: proposed[1])
+        proposed[3] = findDetailColor(from: sortedColors, baseColor: proposed[1], secondaryColor: proposed[2])
+        
+        return ImageColors(
+            background: proposed[0].color,
+            primary: proposed[1].color,
+            secondary: proposed[2].color,
+            detail: proposed[3].color
+        )
+    }
 }
 
 private extension Double {
