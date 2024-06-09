@@ -26,4 +26,10 @@ private extension Double {
     static let distinctThreshold: Double = 255 * (25 / 100)
     
     static let minSaturation: Double = 0.15
+    
+    // MARK: - Properties
+    
+    var red: Double { floor(self / .redGamut) }
+    var green: Double { floor((self / .greenGamut).truncatingRemainder(dividingBy: .greenGamut)) }
+    var blue: Double { floor(truncatingRemainder(dividingBy: .blueGamut)) }
 }
