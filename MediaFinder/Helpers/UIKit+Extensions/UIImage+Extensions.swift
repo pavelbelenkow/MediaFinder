@@ -83,6 +83,17 @@ private extension UIImage {
         }
         return primaryColor.isDarkColor ? primaryColor.lighter(by: 40) : primaryColor.darker(by: 40)
     }
+    
+    func findDetailColor(
+        from colors: [UIImageColorsCounter],
+        baseColor: Double,
+        secondaryColor: Double
+    ) -> Double {
+        for color in colors where color.color.isSuitableAccent(for: baseColor) && secondaryColor.isDistinct(from: color.color) {
+            return color.color
+        }
+        return baseColor.isDarkColor ? baseColor.lighter(by: 60) : baseColor.darker(by: 60)
+    }
 }
 
 private extension Double {
