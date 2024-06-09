@@ -51,4 +51,13 @@ private extension Double {
         let luminance = red * .redMultiplier + green * .greenMultiplier + blue * .blueMultiplier
         return luminance < .darkColorThreshold
     }
+    
+    // MARK: - Methods
+    
+    func isDistinct(from color: Double) -> Bool {
+        let redDiff = fabs(red - color.red)
+        let greenDiff = fabs(green - color.green)
+        let blueDiff = fabs(blue - color.blue)
+        return redDiff > .distinctThreshold || greenDiff > .distinctThreshold || blueDiff > .distinctThreshold
+    }
 }
