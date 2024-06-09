@@ -27,6 +27,44 @@ private extension UIImage {
         draw(in: CGRect(origin: .zero, size: newSize))
         return UIGraphicsGetImageFromCurrentImageContext()
     }
+    
+    func extractColors() -> [UIImageColorsCounter] {
+        
+        guard
+            let resizedImage = resizeImage(),
+            let cgImage = resizedImage.cgImage,
+            let data = CFDataGetBytePtr(cgImage.dataProvider?.data)
+        else { return [] }
+        
+        let width = cgImage.width
+        let height = cgImage.height
+        let threshold = Int(CGFloat(height) * Const.thresholdPercentage)
+        let imageColors = NSCountedSet(capacity: width * height)
+        
+        for y in stride(from: .zero, to: height, by: 2) {
+            for x in stride(from: .zero, to: width, by: 2) {
+                let pixel = (y * cgImage.bytesPerRow) + (x * 4)
+                let alpha = data[pixel + 3]
+                
+                guard alpha >= 127 else { continue }
+                
+                let red = Double(data[pixel + 2]) * .redGamut
+                let green = Double(data[pixel + 1]) * .greenGamut
+                let blue = Double(data[pixel])
+                let color = red + green + blue
+                
+                imageColors.add(color)
+            }
+        }
+        
+        let sortedColors: [UIImageColorsCounter] = imageColors
+            .compactMap { $0 as? Double }
+            .map { UIImageColorsCounter(color: $0, count: imageColors.count(for: $0)) }
+            .filter { $0.count > threshold && !$0.color.isBlackOrWhite }
+            .sorted { $0.count > $1.count }
+        
+        return sortedColors
+    }
 }
 
 private extension Double {
