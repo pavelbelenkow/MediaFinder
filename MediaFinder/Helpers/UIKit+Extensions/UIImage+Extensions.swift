@@ -41,4 +41,14 @@ private extension Double {
             alpha: 1.0
         )
     }
+    
+    var isBlackOrWhite: Bool {
+        (red > .whiteThreshold && green > .whiteThreshold && blue > .whiteThreshold) ||
+        (red < .blackThreshold && green < .blackThreshold && blue < .blackThreshold)
+    }
+    
+    var isDarkColor: Bool {
+        let luminance = red * .redMultiplier + green * .greenMultiplier + blue * .blueMultiplier
+        return luminance < .darkColorThreshold
+    }
 }
