@@ -7,6 +7,14 @@ struct ImageColors {
     let detail: UIColor
 }
 
+private extension UIImage {
+    
+    struct UIImageColorsCounter {
+        let color: Double
+        let count: Int
+    }
+}
+
 private extension Double {
     
     // MARK: - Static Properties
