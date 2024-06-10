@@ -92,7 +92,7 @@ private extension UIImage {
         baseColor: Double,
         primaryColor: Double
     ) -> Double {
-        for color in colors where color.color.isSuitableAccent(for: baseColor) && color.color.isSuitableAccent(for: primaryColor) {
+        for color in colors where color.color.isSuitableAccent(for: baseColor) && color.color.isDistinct(from: primaryColor) {
             return color.color
         }
         return primaryColor.isDarkColor ? primaryColor.lighter(by: 40) : primaryColor.darker(by: 40)
@@ -103,7 +103,7 @@ private extension UIImage {
         baseColor: Double,
         secondaryColor: Double
     ) -> Double {
-        for color in colors where color.color.isSuitableAccent(for: baseColor) && secondaryColor.isDistinct(from: color.color) {
+        for color in colors where color.color.isDistinct(from: baseColor) && secondaryColor.isDistinct(from: color.color) {
             return color.color
         }
         return baseColor.isDarkColor ? baseColor.lighter(by: 60) : baseColor.darker(by: 60)
