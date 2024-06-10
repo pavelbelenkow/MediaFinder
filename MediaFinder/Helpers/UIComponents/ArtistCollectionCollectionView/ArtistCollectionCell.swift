@@ -153,4 +153,11 @@ extension ArtistCollectionCell {
         collectionGenreLabel.text = genre
         collectionPriceLabel.text = NumberFormatter.currencyFormatter.string(from: price as NSNumber)
     }
+    
+    func applyColors(_ colors: ImageColors) {
+        backgroundColor = colors.primary
+        collectionNameLabel.textColor = colors.secondary
+        collectionGenreLabel.textColor = colors.detail
+        collectionPriceLabel.textColor = colors.secondary
+    }
 }
