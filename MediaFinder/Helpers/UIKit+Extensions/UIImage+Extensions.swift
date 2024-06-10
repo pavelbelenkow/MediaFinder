@@ -11,9 +11,10 @@ extension UIImage {
 
     // MARK: - Methods
     
-    func getColors(_ completion: @escaping (ImageColors?) -> Void) {
+    func getColors(_ completion: @escaping (ImageColors) -> Void) {
         DispatchQueue.global().async {
             let result = self.getColors()
+            
             DispatchQueue.main.async {
                 completion(result)
             }
@@ -109,7 +110,7 @@ private extension UIImage {
         return baseColor.isDarkColor ? baseColor.lighter(by: 60) : baseColor.darker(by: 60)
     }
     
-    func getColors() -> ImageColors? {
+    func getColors() -> ImageColors {
         let sortedColors = extractColors()
         var proposed: [Double] = Array(repeating: -1, count: 4)
         
