@@ -108,4 +108,13 @@ extension ArtistInfoView {
     func showMoreFromArtistLabel() {
         moreFromArtistLabel.isHidden = false
     }
+    
+    func applyColors(_ colors: ImageColors) {
+        artistInfoStackView.backgroundColor = colors.primary
+        titleLabel.textColor = colors.secondary
+        nameLabel.textColor = colors.secondary
+        genreLabel.textColor = colors.detail
+        linkTextView.tintColor = colors.secondary
+        moreFromArtistLabel.textColor = colors.secondary
+    }
 }
