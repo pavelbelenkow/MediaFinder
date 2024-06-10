@@ -74,7 +74,7 @@ private extension UIImage {
         let sortedColors: [UIImageColorsCounter] = imageColors
             .compactMap { $0 as? Double }
             .map { UIImageColorsCounter(color: $0, count: imageColors.count(for: $0)) }
-            .filter { $0.count > threshold && !$0.color.isBlackOrWhite }
+            .filter { $0.count > threshold }
             .sorted { $0.count > $1.count }
         
         return sortedColors
