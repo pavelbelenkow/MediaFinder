@@ -55,8 +55,8 @@ private extension UIImage {
         let threshold = Int(CGFloat(height) * Const.thresholdPercentage)
         let imageColors = NSCountedSet(capacity: width * height)
         
-        for y in stride(from: .zero, to: height, by: 2) {
-            for x in stride(from: .zero, to: width, by: 2) {
+        for y in stride(from: .zero, to: height, by: 1) {
+            for x in stride(from: .zero, to: width, by: 1) {
                 let pixel = (y * cgImage.bytesPerRow) + (x * 4)
                 let alpha = data[pixel + 3]
                 
