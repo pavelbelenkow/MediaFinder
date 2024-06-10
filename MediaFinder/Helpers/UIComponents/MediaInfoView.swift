@@ -159,4 +159,16 @@ extension MediaInfoView {
         linkTextView.attributedText = media.attributedLinkText()
     }
     
+    func applyColors(_ colors: ImageColors) {
+        mediaStackView.backgroundColor = colors.primary
+        kindLabel.textColor = colors.secondary
+        nameLabel.backgroundColor = colors.background
+        nameLabel.textColor = colors.primary
+        artistNameLabel.textColor = colors.secondary
+        descriptionLabel.textColor = colors.detail
+        moreButton.backgroundColor = colors.primary
+        moreButton.layer.shadowColor = colors.primary.cgColor
+        moreButton.setTitleColor(colors.secondary, for: .normal)
+        linkTextView.tintColor = colors.secondary
+    }
 }
