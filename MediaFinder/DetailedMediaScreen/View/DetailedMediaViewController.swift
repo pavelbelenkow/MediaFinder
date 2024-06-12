@@ -124,6 +124,6 @@ extension DetailedMediaViewController: DetailedMediaViewDelegate {
     }
     
     func didTapRepeatButton() {
-        viewModel.fetchArtist()
+        viewModel.fetchArtistAndCollection()
     }
 }

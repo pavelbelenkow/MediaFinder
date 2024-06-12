@@ -10,8 +10,7 @@ protocol DetailedMediaViewModelProtocol: ObservableObject {
     
     var cancellables: Set<AnyCancellable> { get set }
     
-    func fetchArtist()
-    func fetchArtistCollection()
+    func fetchArtistAndCollection()
 }
 
 final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
@@ -39,8 +38,7 @@ final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
     ) {
         self.mediaSubject.send(mediaModel)
         self.artistLookupService = artistLookupService
-        fetchArtist()
-        fetchArtistCollection()
+        fetchArtistAndCollection()
     }
     
     // MARK: - Deinitialisers
@@ -54,7 +52,7 @@ final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
 
 extension DetailedMediaViewModel {
     
-    func fetchArtist() {
+    func fetchArtistAndCollection() {
         stateSubject.send(.loading)
         
         guard
