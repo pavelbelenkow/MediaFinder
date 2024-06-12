@@ -66,54 +66,25 @@ extension DetailedMediaViewModel {
             return
         }
         
-        artistLookupService
+        let artistPublisher = artistLookupService
             .fetchArtist(by: artistId)
-            .sink(
-                receiveCompletion: { [weak self] completion in
-                    guard let self else { return }
-                    
-                    switch completion {
-                    case .failure(let failure):
-                        stateSubject.send(.error(failure.localizedDescription))
-                    case .finished:
-                        stateSubject.send(.loaded)
-                    }
-                },
-                receiveValue: { artist in
-                    self.artistSubject.send(artist)
-                })
-            .store(in: &cancellables)
-    }
-    
-    func fetchArtistCollection() {
-        let artistId: Int
+            .handleEvents(receiveOutput: { self.artistSubject.send($0) })
         
-        if let id = mediaSubject.value?.artistId {
-            artistId = id
-        } else if let id = mediaSubject.value?.collectionArtistId {
-            artistId = id
-        } else {
-            artistSubject.send([])
-            stateSubject.send(.loaded)
-            return
-        }
-        
-        artistLookupService
+        let artistCollectionPublisher = artistLookupService
             .fetchArtistCollection(by: artistId)
-            .sink(
-                receiveCompletion: { [weak self] completion in
-                    guard let self else { return }
-                    
-                    switch completion {
-                    case .failure(let failure):
-                        stateSubject.send(.error(failure.localizedDescription))
-                    case .finished:
-                        stateSubject.send(.loaded)
-                    }
-                },
-                receiveValue: { collection in
-                    self.artistCollectionSubject.send(collection)
-                })
+            .handleEvents(receiveOutput: { self.artistCollectionSubject.send($0) })
+        
+        Publishers.Zip(artistPublisher, artistCollectionPublisher)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self else { return }
+                
+                switch completion {
+                case .failure(let failure):
+                    stateSubject.send(.error(failure.localizedDescription))
+                case .finished:
+                    stateSubject.send(.loaded)
+                }
+            }, receiveValue: { _ in })
             .store(in: &cancellables)
     }
 }
