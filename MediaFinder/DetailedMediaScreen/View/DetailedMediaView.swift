@@ -155,7 +155,7 @@ extension DetailedMediaView {
         loadAndSetupImage(from: imageUrl)
     }
     
-    func updateUI(for artist: Artist?) {
+    func updateArtistInfoView(for artist: Artist?) {
         guard let artist else { return }
         artistInfoView.update(for: artist)
     }
