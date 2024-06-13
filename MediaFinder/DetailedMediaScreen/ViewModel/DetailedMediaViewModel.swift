@@ -64,13 +64,8 @@ extension DetailedMediaViewModel {
             return
         }
         
-        let artistPublisher = artistLookupService
-            .fetchArtist(by: artistId)
-            .handleEvents(receiveOutput: { self.artistSubject.send($0) })
-        
-        let artistCollectionPublisher = artistLookupService
-            .fetchArtistCollection(by: artistId)
-            .handleEvents(receiveOutput: { self.artistCollectionSubject.send($0) })
+        let artistPublisher = artistLookupService.fetchArtist(by: artistId)
+        let artistCollectionPublisher = artistLookupService.fetchArtistCollection(by: artistId)
         
         Publishers.Zip(artistPublisher, artistCollectionPublisher)
             .sink(receiveCompletion: { [weak self] completion in
@@ -82,7 +77,13 @@ extension DetailedMediaViewModel {
                 case .finished:
                     stateSubject.send(.loaded)
                 }
-            }, receiveValue: { _ in })
+            }, receiveValue: { [weak self] artist, collection in
+                guard let self else { return }
+                
+                mediaSubject.send(mediaModel)
+                artistSubject.send(artist)
+                artistCollectionSubject.send(collection)
+            })
             .store(in: &cancellables)
     }
 }
