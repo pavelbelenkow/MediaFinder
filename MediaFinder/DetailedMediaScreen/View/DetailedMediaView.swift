@@ -178,27 +178,25 @@ extension DetailedMediaView {
         detailedMediaStackView.isHidden = !(state == .loaded)
     }
     
-    func updateUI(for media: Media?) {
-        guard 
+    func updateUI(
+        for media: Media?,
+        artist: Artist?,
+        collection: [Media]
+    ) {
+        guard
             let media,
             let imageUrl = media.setImageQuality(to: Const.fiveHundredSize)
         else { return }
         
         mediaInfoView.update(for: media)
-        loadAndSetupImage(from: imageUrl)
-    }
-    
-    func updateArtistInfoView(for artist: Artist?) {
-        guard let artist else { return }
-        artistInfoView.update(for: artist)
-    }
-    
-    func updateArtistCollectionView(for collection: [Media], with colors: ImageColors) {
-        guard !collection.isEmpty else { return }
+        updateArtistInfoView(for: artist)
         
-        artistInfoView.showMoreFromArtistLabel()
-        artistCollectionView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
-        artistCollectionView.applySnapshot(for: collection, with: colors)
+        loadAndSetupImage(from: imageUrl) { [weak self] image in
+            
+            self?.extractAndApplyColors(from: image) { [weak self] colors in
+                self?.updateArtistCollectionView(for: collection, with: colors)
+            }
+        }
     }
 }
 
