@@ -132,6 +132,20 @@ private extension DetailedMediaView {
             ).isActive = true
             
             mediaImageView.removeShimmerAnimation()
+// MARK: - Private Methods
+
+private extension DetailedMediaView {
+    
+    func extractAndApplyColors(from image: UIImage, _ completion: @escaping (ImageColors) -> ()) {
+        image.getColors { [weak self] colors in
+            guard let self else { return }
+            
+            backgroundColor = colors.background
+            detailedMediaStackView.backgroundColor = colors.background
+            mediaInfoView.applyColors(colors)
+            artistInfoView.applyColors(colors)
+            
+            completion(colors)
         }
     }
 }
