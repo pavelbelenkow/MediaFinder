@@ -24,6 +24,7 @@ final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
     
     // MARK: - Private Properties
     
+    private let mediaModel: Media
     private let artistLookupService: ArtistLookupServiceProtocol
     
     // MARK: - Properties
@@ -36,7 +37,7 @@ final class DetailedMediaViewModel: DetailedMediaViewModelProtocol {
         mediaModel: Media,
         artistLookupService: ArtistLookupServiceProtocol = ArtistLookupService()
     ) {
-        self.mediaSubject.send(mediaModel)
+        self.mediaModel = mediaModel
         self.artistLookupService = artistLookupService
         fetchArtistAndCollection()
     }
