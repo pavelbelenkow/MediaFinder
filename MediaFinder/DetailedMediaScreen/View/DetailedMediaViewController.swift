@@ -53,23 +53,15 @@ private extension DetailedMediaViewController {
             .store(in: &viewModel.cancellables)
         
         viewModel.mediaSubject
+            .zip(viewModel.artistSubject, viewModel.artistCollectionSubject)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] media in
-                self?.detailedMediaView.updateUI(for: media)
-            }
-            .store(in: &viewModel.cancellables)
-        
-        viewModel.artistSubject
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] artist in
-                self?.detailedMediaView.updateUI(for: artist.first)
-            }
-            .store(in: &viewModel.cancellables)
-        
-        viewModel.artistCollectionSubject
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] collection in
-                self?.detailedMediaView.updateUI(for: collection)
+            .sink { [weak self] media, artist, collection in
+                
+                self?.detailedMediaView.updateUI(
+                    for: media,
+                    artist: artist.first,
+                    collection: collection
+                )
             }
             .store(in: &viewModel.cancellables)
     }
