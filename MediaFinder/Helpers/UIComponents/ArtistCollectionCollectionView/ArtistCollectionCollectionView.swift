@@ -76,6 +76,17 @@ private extension ArtistCollectionCollectionView {
             }
         )
     }
+    
+    func applyColors(for snapshot: Snapshot, with colors: ImageColors) {
+        snapshot.itemIdentifiers.forEach { item in
+            guard
+                let indexPath = diffableDataSource?.indexPath(for: item),
+                let cell = cellForItem(at: indexPath) as? ArtistCollectionCell
+            else { return }
+            
+            cell.applyColors(colors)
+        }
+    }
 }
 
 // MARK: - Methods
