@@ -117,21 +117,8 @@ private extension DetailedMediaView {
                                                         constant: -Const.spacingOneHundred)
         ])
     }
-    
-    func loadAndSetupImage(from urlString: String) {
-        mediaImageView.addShimmerAnimation()
-        
-        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
-            guard let self, let image else { return }
-            let aspectRatio = image.size.width / image.size.height
-            
-            mediaImageView.image = image
-            mediaImageView.widthAnchor.constraint(
-                equalTo: mediaImageView.heightAnchor,
-                multiplier: aspectRatio
-            ).isActive = true
-            
-            mediaImageView.removeShimmerAnimation()
+}
+
 // MARK: - Private Methods
 
 private extension DetailedMediaView {
@@ -147,6 +134,38 @@ private extension DetailedMediaView {
             
             completion(colors)
         }
+    }
+    
+    func loadAndSetupImage(from urlString: String, _ completion: @escaping (UIImage) -> ()) {
+        mediaImageView.addShimmerAnimation()
+        
+        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
+            guard let self, let image else { return }
+            let aspectRatio = image.size.width / image.size.height
+            
+            mediaImageView.image = image
+            mediaImageView.widthAnchor.constraint(
+                equalTo: mediaImageView.heightAnchor,
+                multiplier: aspectRatio
+            ).isActive = true
+            
+            mediaImageView.removeShimmerAnimation()
+            
+            completion(image)
+        }
+    }
+    
+    func updateArtistInfoView(for artist: Artist?) {
+        guard let artist else { return }
+        artistInfoView.update(for: artist)
+    }
+    
+    func updateArtistCollectionView(for collection: [Media], with colors: ImageColors) {
+        guard !collection.isEmpty else { return }
+        
+        artistInfoView.showMoreFromArtistLabel()
+        artistCollectionView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
+        artistCollectionView.applySnapshot(for: collection, with: colors)
     }
 }
 
