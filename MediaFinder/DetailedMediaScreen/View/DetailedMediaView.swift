@@ -160,11 +160,12 @@ extension DetailedMediaView {
         artistInfoView.update(for: artist)
     }
     
-    func updateUI(for collection: [Media]) {
+    func updateArtistCollectionView(for collection: [Media], with colors: ImageColors) {
         guard !collection.isEmpty else { return }
+        
         artistInfoView.showMoreFromArtistLabel()
         artistCollectionView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
-        artistCollectionView.applySnapshot(for: collection)
+        artistCollectionView.applySnapshot(for: collection, with: colors)
     }
 }
 
