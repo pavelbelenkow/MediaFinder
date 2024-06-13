@@ -56,11 +56,10 @@ extension DetailedMediaViewModel {
     func fetchArtistAndCollection() {
         stateSubject.send(.loading)
         
-        guard
-            let media = mediaSubject.value,
-            let artistId = media.artistId ?? media.collectionArtistId
-        else {
+        guard let artistId = mediaModel.artistId ?? mediaModel.collectionArtistId else {
+            mediaSubject.send(mediaModel)
             artistSubject.send([])
+            artistCollectionSubject.send([])
             stateSubject.send(.loaded)
             return
         }
