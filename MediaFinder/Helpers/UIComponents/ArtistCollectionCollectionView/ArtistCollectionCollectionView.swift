@@ -93,11 +93,12 @@ private extension ArtistCollectionCollectionView {
 
 extension ArtistCollectionCollectionView {
     
-    func applySnapshot(for collection: [Media]) {
+    func applySnapshot(for collection: [Media], with colors: ImageColors) {
         var snapshot = Snapshot()
         snapshot.appendSections([.zero])
         snapshot.appendItems(collection)
         diffableDataSource?.apply(snapshot, animatingDifferences: true)
+        applyColors(for: snapshot, with: colors)
     }
 }
 
