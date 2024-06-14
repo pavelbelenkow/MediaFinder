@@ -68,16 +68,12 @@ final class MediaInfoView: UIStackView {
         return button
     }()
     
-    private lazy var linkTextView: CustomTextView = {
-        let textView = CustomTextView()
-        textView.configure()
-        return textView
-    }()
+    private lazy var linkButton = CustomButton()
     
     private lazy var mediaStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
             kindLabel, nameLabel, artistNameLabel,
-            descriptionLabel, linkTextView
+            descriptionLabel, linkButton
         ])
         view.backgroundColor = .white
         view.layer.cornerRadius = Const.repeatButtonCornerRadius
@@ -144,7 +140,7 @@ extension MediaInfoView {
             let kind = media.kind,
             let name = media.name,
             let artist = media.artist,
-            let _ = media.trackView
+            let link = media.trackView
         else { return }
         
         kindLabel.text = kind
@@ -156,7 +152,7 @@ extension MediaInfoView {
             description.count > 140 ? setupMoreButton() : nil
         }
         
-        linkTextView.attributedText = media.attributedLinkText()
+        linkButton.configure(urlString: link, with: media.underlinedLinkText())
     }
     
     func applyColors(_ colors: ImageColors) {
@@ -169,6 +165,6 @@ extension MediaInfoView {
         moreButton.backgroundColor = colors.primary
         moreButton.layer.shadowColor = colors.primary.cgColor
         moreButton.setTitleColor(colors.secondary, for: .normal)
-        linkTextView.tintColor = colors.secondary
+        linkButton.setTitleColor(colors.secondary, for: .normal)
     }
 }
