@@ -41,7 +41,7 @@
 		595EFE6E2BC95FF500F7E353 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE6D2BC95FF500F7E353 /* NSAttributedString+Extensions.swift */; };
 		595EFE702BC9603F00F7E353 /* DetailedMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE6F2BC9603F00F7E353 /* DetailedMediaView.swift */; };
 		595EFE722BC960FE00F7E353 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE712BC960FE00F7E353 /* CustomLabel.swift */; };
-		595EFE742BC9612E00F7E353 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE732BC9612E00F7E353 /* CustomTextView.swift */; };
+		595EFE742BC9612E00F7E353 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE732BC9612E00F7E353 /* CustomButton.swift */; };
 		595EFE762BC9619100F7E353 /* MediaInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE752BC9619100F7E353 /* MediaInfoView.swift */; };
 		595EFE782BC9629900F7E353 /* ArtistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE772BC9629900F7E353 /* ArtistInfoView.swift */; };
 		595EFE7A2BC9743200F7E353 /* ArtistMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE792BC9743200F7E353 /* ArtistMapper.swift */; };
@@ -125,7 +125,7 @@
 		595EFE6D2BC95FF500F7E353 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		595EFE6F2BC9603F00F7E353 /* DetailedMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedMediaView.swift; sourceTree = "<group>"; };
 		595EFE712BC960FE00F7E353 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
-		595EFE732BC9612E00F7E353 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
+		595EFE732BC9612E00F7E353 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		595EFE752BC9619100F7E353 /* MediaInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaInfoView.swift; sourceTree = "<group>"; };
 		595EFE772BC9629900F7E353 /* ArtistInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistInfoView.swift; sourceTree = "<group>"; };
 		595EFE792BC9743200F7E353 /* ArtistMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMapper.swift; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 				59CBBB822C0F93A4007EE1A5 /* MediaTypeMenuBar */,
 				592A15142BC5F1C700322135 /* StatefulStackView.swift */,
 				595EFE712BC960FE00F7E353 /* CustomLabel.swift */,
-				595EFE732BC9612E00F7E353 /* CustomTextView.swift */,
+				595EFE732BC9612E00F7E353 /* CustomButton.swift */,
 				595EFE752BC9619100F7E353 /* MediaInfoView.swift */,
 				595EFE772BC9629900F7E353 /* ArtistInfoView.swift */,
 				594EC5202C027FF0009A4572 /* PassthroughTouchView.swift */,
@@ -650,7 +650,7 @@
 				5949D0B52BC1BA4B00A860C8 /* EntityType.swift in Sources */,
 				592A15092BC57F0E00322135 /* NumberFormatter+Extensions.swift in Sources */,
 				5976B1AD2BBF546100DB8CBA /* AppDelegate.swift in Sources */,
-				595EFE742BC9612E00F7E353 /* CustomTextView.swift in Sources */,
+				595EFE742BC9612E00F7E353 /* CustomButton.swift in Sources */,
 				599E722F2BF6AB130033C677 /* CFTimeInterval+Extensions.swift in Sources */,
 				5946FEAC2BD7004400E53591 /* MediaTypeCollectionView.swift in Sources */,
 				59A0E3FA2BCB7B9C0012C628 /* State.swift in Sources */,
