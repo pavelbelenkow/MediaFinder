@@ -130,7 +130,7 @@ extension MediaListSearchCollectionView: WaterfallLayoutDelegate {
             let media = diffableDataSource?.itemIdentifier(for: indexPath)
         else { return .zero }
         
-        return width / media.ratio + Const.spacingOneHundred
+        return width / media.imageRatio() + Const.spacingOneHundred
     }
 }
 
