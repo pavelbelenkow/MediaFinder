@@ -73,7 +73,7 @@ extension Media {
         return NSAttributedString.underlinedText(text)
     }
     
-    func attributedDescription(with spacing: CGFloat) -> NSAttributedString {
+    func attributedDescription(with spacing: CGFloat = Const.spacingExtraSmall) -> NSAttributedString {
         NSAttributedString.attributedTextWithLineSpacing(text: description ?? "", spacing: spacing)
     }
     func readableDuration() -> String? {
