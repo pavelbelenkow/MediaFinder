@@ -152,8 +152,8 @@ extension MediaListSearchCell {
             let imageUrl = media.setImageQuality(to: Const.twoHundredAndFiftySize),
             let kind = media.kind,
             let name = media.name,
-            let duration = media.duration,
-            let price = media.price
+            let duration = media.readableDuration(),
+            let price = media.priceWithCurrency()
         else {
             return
         }
@@ -162,7 +162,7 @@ extension MediaListSearchCell {
         
         mediaNameLabel.text = name
         mediaKindLabel.text = kind
-        mediaDurationLabel.text = duration.millisecondsToReadableString()
-        mediaPriceLabel.text = NumberFormatter.currencyFormatter.string(from: price as NSNumber)
+        mediaDurationLabel.text = duration
+        mediaPriceLabel.text = price
     }
 }
