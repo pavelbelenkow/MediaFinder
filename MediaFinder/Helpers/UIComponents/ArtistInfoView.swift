@@ -29,15 +29,11 @@ final class ArtistInfoView: UIStackView {
         return label
     }()
     
-    private lazy var linkTextView: CustomTextView = {
-        let textView = CustomTextView()
-        textView.configure()
-        return textView
-    }()
+    private lazy var linkButton = CustomButton()
     
     private lazy var artistInfoStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
-            nameLabel, genreLabel, linkTextView
+            nameLabel, genreLabel, linkButton
         ])
         view.backgroundColor = .white
         view.axis = .vertical
@@ -101,7 +97,7 @@ extension ArtistInfoView {
             genreLabel.text = Const.artistGenre.appending(genre)
         }
         
-        linkTextView.attributedText = artist.attributedLinkText()
+        linkButton.configure(urlString: artist.link, with: artist.underlinedLinkText())
         moreFromArtistLabel.text = artist.moreFromArtistPlaceHolder()
     }
     
@@ -114,7 +110,7 @@ extension ArtistInfoView {
         titleLabel.textColor = colors.secondary
         nameLabel.textColor = colors.secondary
         genreLabel.textColor = colors.detail
-        linkTextView.tintColor = colors.secondary
+        linkButton.setTitleColor(colors.secondary, for: .normal)
         moreFromArtistLabel.textColor = colors.secondary
     }
 }
