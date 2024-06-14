@@ -142,7 +142,7 @@ extension ArtistCollectionCell {
             let imageUrl = item.setImageQuality(to: Const.twoHundredAndFiftySize),
             let name = item.collection,
             let genre = item.genre,
-            let price = item.collectionPrice
+            let price = item.priceWithCurrency()
         else {
             return
         }
@@ -151,7 +151,7 @@ extension ArtistCollectionCell {
         
         collectionNameLabel.text = name
         collectionGenreLabel.text = genre
-        collectionPriceLabel.text = NumberFormatter.currencyFormatter.string(from: price as NSNumber)
+        collectionPriceLabel.text = price
     }
     
     func applyColors(_ colors: ImageColors) {
