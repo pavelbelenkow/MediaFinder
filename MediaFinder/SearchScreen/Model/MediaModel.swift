@@ -76,4 +76,15 @@ extension Media {
     func attributedDescription(with spacing: CGFloat) -> NSAttributedString {
         NSAttributedString.attributedTextWithLineSpacing(text: description ?? "", spacing: spacing)
     }
+    func readableDuration() -> String? {
+        duration?.millisecondsToReadableString()
+    }
+    
+    func priceWithCurrency() -> String? {
+        guard let price = price ?? collectionPrice else { return nil }
+        
+        return NumberFormatter
+            .currencyFormatter
+            .string(from: price as NSNumber)
+    }
 }
