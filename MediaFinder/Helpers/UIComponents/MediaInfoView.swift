@@ -147,10 +147,9 @@ extension MediaInfoView {
         nameLabel.text = name
         artistNameLabel.text = Const.createdBy.appending(artist)
         
-        if let description = media.description {
-            descriptionLabel.attributedText = media.attributedDescription(with: Const.spacingExtraSmall)
-            description.count > 140 ? setupMoreButton() : nil
-        }
+        descriptionLabel.isHidden = media.description == nil
+        descriptionLabel.attributedText = media.attributedDescription()
+        media.attributedDescription().string.count > 140 ? setupMoreButton() : nil
         
         linkButton.configure(urlString: link, with: media.underlinedLinkText())
     }
