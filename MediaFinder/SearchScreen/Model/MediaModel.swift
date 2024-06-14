@@ -23,9 +23,6 @@ struct Media: Decodable {
     let genre: String?
     let description: String?
     let duration: Int?
-    var ratio: CGFloat {
-        isSong() ? 1.0 : 0.665
-    }
     
     private enum CodingKeys: String, CodingKey {
         case kind
@@ -111,13 +108,18 @@ extension Media {
     }
     
     func underlinedLinkText() -> NSAttributedString {
-        let text = isSong() ? Const.listenInAppleMusic : Const.watchOnAppleTV
+        let text = compareKind().linkText
         return NSAttributedString.underlinedText(text)
     }
     
     func attributedDescription(with spacing: CGFloat = Const.spacingExtraSmall) -> NSAttributedString {
         NSAttributedString.attributedTextWithLineSpacing(text: description ?? "", spacing: spacing)
     }
+    
+    func imageRatio() -> CGFloat {
+        compareKind().ratio
+    }
+    
     func readableDuration() -> String? {
         duration?.millisecondsToReadableString()
     }
