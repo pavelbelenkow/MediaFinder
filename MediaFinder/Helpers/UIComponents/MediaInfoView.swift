@@ -52,7 +52,7 @@ final class MediaInfoView: UIStackView {
         let button = UIButton()
         button.backgroundColor = .white
         button.titleLabel?.font = .systemFont(ofSize: 13)
-        button.setTitle(Const.moreButtonText, for: .normal)
+        button.setTitle(Const.moreButtonText.uppercased(), for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(
             self,
