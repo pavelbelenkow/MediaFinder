@@ -47,6 +47,56 @@ struct Media: Decodable {
     }
 }
 
+private extension Media {
+    
+    enum Kind {
+        case song
+        case movie
+        case tvEpisode
+        case podcast
+        case musicVideo
+        case other(String)
+        
+        var ratio: CGFloat {
+            switch self {
+            case .song, .other: 1.0
+            default: 0.665
+            }
+        }
+        
+        var linkText: String {
+            switch self {
+            case .song: Const.listenOnAppleMusic
+            case .movie, .tvEpisode: Const.watchOnAppleTV
+            case .podcast: Const.listenOnApplePodcasts
+            case .musicVideo: Const.watchOnAppleMusic
+            default: Const.viewOnWeb
+            }
+        }
+        
+        init(_ kind: String) {
+            switch kind {
+            case Const.songKind:
+                self = .song
+            case Const.movieKind:
+                self = .movie
+            case Const.tvEpisodeKind:
+                self = .tvEpisode
+            case Const.podcastKind:
+                self = .podcast
+            case Const.musicVideoKind:
+                self = .musicVideo
+            default:
+                self = .other(kind)
+            }
+        }
+    }
+    
+    func compareKind() -> Kind {
+        Kind(kind ?? "")
+    }
+}
+
 extension Media: Hashable {
     
     func hash(into hasher: inout Hasher) {
@@ -55,14 +105,6 @@ extension Media: Hashable {
 }
 
 extension Media {
-    
-    func isSong() -> Bool {
-        kind == Const.songKind
-    }
-    
-    func isMovie() -> Bool {
-        kind == Const.movieKind
-    }
     
     func setImageQuality(to size: String) -> String? {
         artwork100?.replacingOccurrences(of: Const.oneHundredSize, with: size)
