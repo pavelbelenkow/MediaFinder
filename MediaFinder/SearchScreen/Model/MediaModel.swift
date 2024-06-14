@@ -68,9 +68,9 @@ extension Media {
         artwork100?.replacingOccurrences(of: Const.oneHundredSize, with: size)
     }
     
-    func attributedLinkText() -> NSAttributedString {
-        let placeholder = isSong() ? Const.listenInAppleMusic : Const.watchOnAppleTV
-        return NSAttributedString.attributedLinkText(placeholder: placeholder, link: trackView ?? "")
+    func underlinedLinkText() -> NSAttributedString {
+        let text = isSong() ? Const.listenInAppleMusic : Const.watchOnAppleTV
+        return NSAttributedString.underlinedText(text)
     }
     
     func attributedDescription(with spacing: CGFloat) -> NSAttributedString {
