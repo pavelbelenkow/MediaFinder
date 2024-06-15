@@ -107,6 +107,17 @@ extension Media {
         artwork100?.replacingOccurrences(of: Const.oneHundredSize, with: size)
     }
     
+    func artistNamePlaceholder() -> String {
+        let kind = compareKind()
+        
+        switch kind {
+        case .tvEpisode:
+            return Const.fromSeason.appending(collection ?? "")
+        default:
+            return Const.createdBy.appending(artist ?? "")
+        }
+    }
+    
     func underlinedLinkText() -> NSAttributedString {
         let text = compareKind().linkText
         return NSAttributedString.underlinedText(text)
