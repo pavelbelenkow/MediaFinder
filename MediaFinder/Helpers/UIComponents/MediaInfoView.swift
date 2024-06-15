@@ -139,13 +139,13 @@ extension MediaInfoView {
         guard
             let kind = media.kind,
             let name = media.name,
-            let artist = media.artist,
+            let _ = media.artist,
             let link = media.trackView
         else { return }
         
         kindLabel.text = kind
         nameLabel.text = name
-        artistNameLabel.text = Const.createdBy.appending(artist)
+        artistNameLabel.text = media.artistNamePlaceholder()
         
         descriptionLabel.isHidden = media.description == nil
         descriptionLabel.attributedText = media.attributedDescription()
