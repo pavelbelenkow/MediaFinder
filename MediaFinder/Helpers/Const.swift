@@ -112,6 +112,8 @@ enum Const {
     static let artistGenre = "Genre: "
     static let moreAlbums = "Albums By "
     static let moreBundles = "Bundles From "
+    static let moreSeasons = "Seasons From "
+    static let morePodcasts = "Podcasts From "
     static let artistCollectionCellReuseIdentifier = "artistCollectionCell"
     
     static let labelCornerRadius: CGFloat = 6
