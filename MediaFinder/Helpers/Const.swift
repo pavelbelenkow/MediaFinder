@@ -52,6 +52,8 @@ enum Const {
     static let distributedBy = "Distributed by "
     static let moreAboutArtist = "More about the artist"
     static let moreAboutDistributor = "More about the distributor"
+    static let moreAboutTVShow = "More about the TV show"
+    static let moreAboutAuthor = "More about the author"
     static let oneHundredSize = "100x100"
     static let twoHundredSize = "200x200"
     static let twoHundredAndFiftySize = "250x250"
