@@ -71,8 +71,21 @@ extension Artist {
         }
     }
     
-    func moreFromArtistPlaceHolder() -> String {
-        isSongArtist() ? Const.moreAlbums.appending(name) : Const.moreBundles.appending(name)
+    func moreFromArtistPlaceholder() -> String {
+        let kind = compareKind()
+        
+        switch kind {
+        case .songArtist:
+            return Const.moreAlbums.appending(name)
+        case .movieArtist:
+            return Const.moreBundles.appending(name)
+        case .tvShowArtist:
+            return Const.moreSeasons.appending(name)
+        case .podcastArtist:
+            return Const.morePodcasts.appending(name)
+        default:
+            return Const.relatedMedia
+        }
     }
     
     func underlinedLinkText() -> NSAttributedString {
