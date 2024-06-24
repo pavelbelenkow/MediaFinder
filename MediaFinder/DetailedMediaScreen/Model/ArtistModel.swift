@@ -61,7 +61,14 @@ private extension Artist {
 extension Artist {
     
     func namePlaceholder() -> String {
-        isSongArtist() ? Const.productionBy.appending(name) : Const.distributedBy.appending(name)
+        let kind = compareKind()
+        
+        switch kind {
+        case .movieArtist:
+            return Const.distributedBy.appending(name)
+        default:
+            return Const.productionBy.appending(name)
+        }
     }
     
     func moreFromArtistPlaceHolder() -> String {
