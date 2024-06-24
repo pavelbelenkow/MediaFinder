@@ -75,6 +75,11 @@ extension Artist {
         }
     }
     
+    func genrePlaceholder() -> String? {
+        guard let genre else { return nil }
+        return Const.artistGenre.appending(genre)
+    }
+    
     func moreFromArtistPlaceholder() -> String {
         let kind = compareKind()
         

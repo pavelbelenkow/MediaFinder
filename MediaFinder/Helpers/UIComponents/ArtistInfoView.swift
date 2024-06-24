@@ -92,11 +92,7 @@ extension ArtistInfoView {
         
         titleLabel.text = artist.aboutArtistPlaceholder()
         nameLabel.text = artist.namePlaceholder()
-        
-        if let genre = artist.genre {
-            genreLabel.text = Const.artistGenre.appending(genre)
-        }
-        
+        genreLabel.text = artist.genrePlaceholder()
         linkButton.configure(urlString: artist.link, with: artist.underlinedLinkText())
         moreFromArtistLabel.text = artist.moreFromArtistPlaceholder()
     }
