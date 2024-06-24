@@ -16,8 +16,7 @@ struct MediaListMapper {
         case 200:
             do {
                 let mediaModel = try decoder.decode(MediaModel.self, from: data)
-                let songsAndMovies: [Media] = mediaModel.results
-                    .filter { $0.isSong() || $0.isMovie() }
+                let media: [Media] = mediaModel.results
                     .compactMap {
                         guard
                             let _ = $0.kind,
@@ -32,7 +31,7 @@ struct MediaListMapper {
                         return $0
                     }
                 
-                return songsAndMovies
+                return media
             } catch {
                 try mapDecodingError(error)
             }
