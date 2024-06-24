@@ -27,6 +27,16 @@ private extension Artist {
         case podcastArtist
         case other(String)
         
+        var linkText: String {
+            switch self {
+            case .songArtist: Const.moreAboutArtist
+            case .movieArtist: Const.moreAboutDistributor
+            case .tvShowArtist: Const.moreAboutTVShow
+            case .podcastArtist: Const.moreAboutAuthor
+            default: Const.viewOnWeb
+            }
+        }
+        
         init(_ kind: String) {
             switch kind {
             case Const.songArtistKind:
@@ -59,7 +69,7 @@ extension Artist {
     }
     
     func underlinedLinkText() -> NSAttributedString {
-        let text = isSongArtist() ? Const.moreAboutArtist : Const.moreAboutDistributor
+        let text = compareKind().linkText
         return NSAttributedString.underlinedText(text)
     }
 }
