@@ -18,11 +18,37 @@ struct Artist: Decodable, Equatable {
     }
 }
 
-extension Artist {
+private extension Artist {
     
-    func isSongArtist() -> Bool {
-        kind == Const.artistKind
+    enum Kind {
+        case songArtist
+        case movieArtist
+        case tvShowArtist
+        case podcastArtist
+        case other(String)
+        
+        init(_ kind: String) {
+            switch kind {
+            case Const.songArtistKind:
+                self = .songArtist
+            case Const.movieArtistKind:
+                self = .movieArtist
+            case Const.tvShowArtistKind:
+                self = .tvShowArtist
+            case Const.podcastArtistKind:
+                self = .podcastArtist
+            default:
+                self = .other(kind)
+            }
+        }
     }
+    
+    func compareKind() -> Kind {
+        Kind(kind)
+    }
+}
+
+extension Artist {
     
     func namePlaceholder() -> String {
         isSongArtist() ? Const.productionBy.appending(name) : Const.distributedBy.appending(name)
