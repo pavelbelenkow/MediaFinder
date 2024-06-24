@@ -90,7 +90,7 @@ extension ArtistInfoView {
     func update(for artist: Artist) {
         isHidden = false
         
-        titleLabel.text = Const.aboutArtist.appending(artist.kind)
+        titleLabel.text = artist.aboutArtistPlaceholder()
         nameLabel.text = artist.namePlaceholder()
         
         if let genre = artist.genre {
@@ -98,7 +98,7 @@ extension ArtistInfoView {
         }
         
         linkButton.configure(urlString: artist.link, with: artist.underlinedLinkText())
-        moreFromArtistLabel.text = artist.moreFromArtistPlaceHolder()
+        moreFromArtistLabel.text = artist.moreFromArtistPlaceholder()
     }
     
     func showMoreFromArtistLabel() {
