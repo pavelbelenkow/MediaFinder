@@ -60,6 +60,10 @@ private extension Artist {
 
 extension Artist {
     
+    func aboutArtistPlaceholder() -> String {
+        Const.aboutArtist.appending(kind)
+    }
+    
     func namePlaceholder() -> String {
         let kind = compareKind()
         
