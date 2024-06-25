@@ -29,15 +29,11 @@ final class ArtistInfoView: UIStackView {
         return label
     }()
     
-    private lazy var linkTextView: CustomTextView = {
-        let textView = CustomTextView()
-        textView.configure()
-        return textView
-    }()
+    private lazy var linkButton = CustomButton()
     
     private lazy var artistInfoStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
-            nameLabel, genreLabel, linkTextView
+            nameLabel, genreLabel, linkButton
         ])
         view.backgroundColor = .white
         view.axis = .vertical
@@ -79,10 +75,7 @@ private extension ArtistInfoView {
         spacing = Const.spacingMedium
         isHidden = true
         isLayoutMarginsRelativeArrangement = true
-        layoutMargins = UIEdgeInsets(
-            top: Const.spacingMedium, left: Const.spacingMedium,
-            bottom: .zero, right: Const.spacingMedium
-        )
+        layoutMargins = .medium
         
         [
             titleLabel, artistInfoStackView, moreFromArtistLabel
@@ -97,18 +90,23 @@ extension ArtistInfoView {
     func update(for artist: Artist) {
         isHidden = false
         
-        titleLabel.text = Const.aboutArtist.appending(artist.kind)
+        titleLabel.text = artist.aboutArtistPlaceholder()
         nameLabel.text = artist.namePlaceholder()
-        
-        if let genre = artist.genre {
-            genreLabel.text = Const.artistGenre.appending(genre)
-        }
-        
-        linkTextView.attributedText = artist.attributedLinkText()
-        moreFromArtistLabel.text = artist.moreFromArtistPlaceHolder()
+        genreLabel.text = artist.genrePlaceholder()
+        linkButton.configure(urlString: artist.link, with: artist.underlinedLinkText())
+        moreFromArtistLabel.text = artist.moreFromArtistPlaceholder()
     }
     
     func showMoreFromArtistLabel() {
         moreFromArtistLabel.isHidden = false
+    }
+    
+    func applyColors(_ colors: ImageColors) {
+        artistInfoStackView.backgroundColor = colors.primary
+        titleLabel.textColor = colors.secondary
+        nameLabel.textColor = colors.secondary
+        genreLabel.textColor = colors.detail
+        linkButton.setTitleColor(colors.secondary, for: .normal)
+        moreFromArtistLabel.textColor = colors.secondary
     }
 }

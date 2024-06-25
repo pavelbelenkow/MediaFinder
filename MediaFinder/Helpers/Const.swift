@@ -38,14 +38,25 @@ enum Const {
     
     static let songKind = "song"
     static let movieKind = "feature-movie"
+    static let tvEpisodeKind = "tv-episode"
+    static let podcastKind = "podcast"
+    static let musicVideoKind = "music-video"
     static let albumKind = "album"
-    static let artistKind = "Artist"
-    static let listenInAppleMusic = "Listen in Apple Music"
+    static let songArtistKind = "Artist"
+    static let movieArtistKind = "Movie Artist"
+    static let tvShowArtistKind = "TV Show"
+    static let podcastArtistKind = "Podcast Artist"
+    static let listenOnAppleMusic = "Listen on Apple Music"
+    static let watchOnAppleMusic = "Watch on Apple Music"
     static let watchOnAppleTV = "Watch on Apple TV"
+    static let listenOnApplePodcasts = "Listen on Apple Podcasts"
+    static let viewOnWeb = "View on Web"
     static let productionBy = "Production by "
     static let distributedBy = "Distributed by "
     static let moreAboutArtist = "More about the artist"
     static let moreAboutDistributor = "More about the distributor"
+    static let moreAboutTVShow = "More about the TV show"
+    static let moreAboutAuthor = "More about the author"
     static let oneHundredSize = "100x100"
     static let twoHundredSize = "200x200"
     static let twoHundredAndFiftySize = "250x250"
@@ -58,6 +69,7 @@ enum Const {
     static let songsPlaceholder = "Songs"
     static let moviesPlaceholder = "Movies"
     static let mediaTypeButtonTitles = ["All", "Movies", "Songs"]
+    static let mediaTypeMenuCellReuseIdentifier = "mediaTypeMenuCell"
     static let mediaTypeCellReuseIdentifier = "mediaTypeCell"
     static let mediaListSearchCellReuseIdentifier = "mediaCell"
     static let mediaListSearchFooterReuseIdentifier = "mediaListSearchFooterView"
@@ -89,15 +101,23 @@ enum Const {
     static let mediaImageViewHeight: CGFloat = 80
     static let repeatButtonBorderWidth: CGFloat = 1
     static let repeatButtonCornerRadius: CGFloat = 10
+    static let oneFifthMultiplier: CGFloat = 1 / 5
+    static let selectorViewHeight: CGFloat = 5
+    static let selectorViewCornerRadius: CGFloat = selectorViewHeight / 2
+    static let mediaTypeMenuBarHeight: CGFloat = 40
     
     // MARK: - DetailedMedia Screen Constants
     
     static let createdBy = "by\n"
+    static let fromSeason = "from\n"
     static let moreButtonText = "more"
     static let aboutArtist = "About "
     static let artistGenre = "Genre: "
     static let moreAlbums = "Albums By "
     static let moreBundles = "Bundles From "
+    static let moreSeasons = "Seasons From "
+    static let morePodcasts = "Podcasts From "
+    static let relatedMedia = "Related"
     static let artistCollectionCellReuseIdentifier = "artistCollectionCell"
     
     static let labelCornerRadius: CGFloat = 6

@@ -8,7 +8,8 @@ extension CALayer {
         colors: [CGColor],
         startPoint: CGPoint,
         endPoint: CGPoint,
-        locations: [NSNumber]
+        locations: [NSNumber],
+        cornerRadius: CGFloat
     ) -> CAGradientLayer {
         let gradient = CAGradientLayer()
         
@@ -17,6 +18,7 @@ extension CALayer {
         gradient.startPoint = startPoint
         gradient.endPoint = endPoint
         gradient.locations = locations
+        gradient.cornerRadius = cornerRadius
         
         return gradient
     }
@@ -37,5 +39,17 @@ extension CALayer {
                                    isRemovedOnCompletion: isRemovedOnCompletion)
         
         add(animation, forKey: Const.shimmerAnimationKey)
+    }
+    
+    func addShadow(
+        color: CGColor? = nil,
+        offset: CGSize = CGSize(width: 0.0, height: -3.0),
+        radius: CGFloat = 3.0,
+        opacity: Float = .zero
+    ) {
+        shadowColor = color
+        shadowOffset = offset
+        shadowRadius = radius
+        shadowOpacity = opacity
     }
 }

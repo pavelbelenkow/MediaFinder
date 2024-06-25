@@ -15,12 +15,6 @@ final class MediaListSearchCollectionView: UICollectionView {
     
     // MARK: - Private Properties
     
-    private let params = GeometricParams(
-        cellCount: Const.collectionViewCellCount,
-        insets: Const.spacingMedium,
-        cellSpacing: Const.spacingMedium
-    )
-    
     private var diffableDataSource: DataSource?
     
     // MARK: - Properties
@@ -29,8 +23,9 @@ final class MediaListSearchCollectionView: UICollectionView {
     
     // MARK: - Initialisers
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-        super.init(frame: frame, collectionViewLayout: layout)
+    init() {
+        let layout = WaterfallLayout()
+        super.init(frame: .zero, collectionViewLayout: layout)
         setupAppearance()
         makeDataSource()
     }
@@ -61,6 +56,10 @@ private extension MediaListSearchCollectionView {
         allowsMultipleSelection = false
         showsVerticalScrollIndicator = false
         translatesAutoresizingMaskIntoConstraints = false
+        
+        if let layout = collectionViewLayout as? WaterfallLayout {
+            layout.delegate = self
+        }
         
         delegate = self
     }
@@ -109,17 +108,35 @@ extension MediaListSearchCollectionView {
     
     func updateFooterView(for state: State, isEmptyResults: Bool) {
         guard
-            let footerView = visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionFooter)
-                .first as? MediaListSearchFooterView
+            let footerView = visibleSupplementaryViews(
+                ofKind: UICollectionView.elementKindSectionFooter
+            ).first as? MediaListSearchFooterView
         else { return }
         
         footerView.updateStackView(for: state, isEmptyResults: isEmptyResults)
     }
 }
 
+// MARK: - Layout Delegate Methods
+
+extension MediaListSearchCollectionView: WaterfallLayoutDelegate {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        heightForItemAt indexPath: IndexPath,
+        with width: CGFloat
+    ) -> CGFloat {
+        guard
+            let media = diffableDataSource?.itemIdentifier(for: indexPath)
+        else { return .zero }
+        
+        return width / media.imageRatio() + Const.spacingOneHundred
+    }
+}
+
 // MARK: - Delegate Methods
 
-extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
+extension MediaListSearchCollectionView: UICollectionViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
@@ -129,47 +146,6 @@ extension MediaListSearchCollectionView: UICollectionViewDelegateFlowLayout {
         if offsetY > contentHeight - height {
             interactionDelegate?.didScrollToBottomCollectionView()
         }
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-        let availableWidth = collectionView.frame.width - params.paddingWidth
-        let cellWidth = availableWidth / CGFloat(params.cellCount)
-        let cellHeight = Const.collectionViewCellHeight
-        
-        return CGSize(width: cellWidth, height: cellHeight)
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAt section: Int
-    ) -> UIEdgeInsets {
-        UIEdgeInsets(
-            top: params.insets,
-            left: params.insets,
-            bottom: params.insets,
-            right: params.insets
-        )
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        params.insets
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        referenceSizeForFooterInSection section: Int
-    ) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: Const.spacingOneHundred)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

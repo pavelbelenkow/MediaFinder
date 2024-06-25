@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol MediaTypeCollectionViewDelegate: AnyObject {
+    func didScrollHorizontallyCollectionView(with offset: CGFloat)
     func didScrollHorizontallyCollectionView(to index: Int)
     func didScrollToBottomMediaTypeCell()
     func didTapInnerContentMediaTypeCell(at index: Int)
@@ -57,7 +58,6 @@ private extension MediaTypeCollectionView {
         }
         
         backgroundColor = .clear
-        contentInsetAdjustmentBehavior = .never
         
         register(
             MediaTypeCell.self,
@@ -100,7 +100,7 @@ extension MediaTypeCollectionView {
 extension MediaTypeCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        Const.mediaTypeButtonTitles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -120,6 +120,16 @@ extension MediaTypeCollectionView: UICollectionViewDataSource {
 // MARK: - Delegate Methods
 
 extension MediaTypeCollectionView: UICollectionViewDelegateFlowLayout {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentWidth = scrollView.frame.width * 2
+        var offset = scrollView.contentOffset.x
+        
+        if offset >= .zero && offset <= contentWidth {
+            offset /= 5.4
+            interactionDelegate?.didScrollHorizontallyCollectionView(with: offset)
+        }
+    }
     
     func scrollViewWillEndDragging(
         _ scrollView: UIScrollView,

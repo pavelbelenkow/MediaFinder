@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol DetailedMediaViewDelegate: AnyObject {
+    func didTapMoreButton(_ model: DetailedDescription)
     func didTapArtistCollectionItem(at index: Int)
     func didTapRepeatButton()
 }
@@ -11,7 +12,21 @@ final class DetailedMediaView: UIScrollView {
     
     // MARK: - Private Properties
     
-    private lazy var mediaInfoView = MediaInfoView()
+    private lazy var mediaImageView: UIImageView = {
+        let view = UIImageView()
+        view.tintColor = .black
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var mediaInfoView: MediaInfoView = {
+        let view = MediaInfoView()
+        view.delegate = self
+        return view
+    }()
+    
     private lazy var artistInfoView = ArtistInfoView()
     
     private lazy var artistCollectionView: ArtistCollectionCollectionView = {
@@ -26,7 +41,10 @@ final class DetailedMediaView: UIScrollView {
             mediaInfoView, artistInfoView, artistCollectionView
         ])
         view.axis = .vertical
-        view.spacing = Const.spacingMedium
+        view.backgroundColor = .mediaBackground
+        view.layer.cornerRadius = Const.repeatButtonCornerRadius
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -62,15 +80,27 @@ private extension DetailedMediaView {
         showsVerticalScrollIndicator = false
         delegate = self
         
+        setupMediaImageView()
         setupDetailedMediaStackView()
         setupStatefulStackView()
+    }
+    
+    func setupMediaImageView() {
+        addSubview(mediaImageView)
+        
+        NSLayoutConstraint.activate([
+            mediaImageView.topAnchor.constraint(equalTo: topAnchor),
+            mediaImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            mediaImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            mediaImageView.widthAnchor.constraint(equalTo: mediaImageView.heightAnchor)
+        ])
     }
     
     func setupDetailedMediaStackView() {
         addSubview(detailedMediaStackView)
         
         NSLayoutConstraint.activate([
-            detailedMediaStackView.topAnchor.constraint(equalTo: topAnchor),
+            detailedMediaStackView.topAnchor.constraint(equalTo: mediaImageView.bottomAnchor, constant: -Const.spacingMedium),
             detailedMediaStackView.widthAnchor.constraint(equalTo: widthAnchor),
             detailedMediaStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Const.spacingMedium)
         ])
@@ -89,32 +119,84 @@ private extension DetailedMediaView {
     }
 }
 
+// MARK: - Private Methods
+
+private extension DetailedMediaView {
+    
+    func extractAndApplyColors(from image: UIImage, _ completion: @escaping (ImageColors) -> ()) {
+        image.getColors { [weak self] colors in
+            guard let self else { return }
+            
+            backgroundColor = colors.background
+            detailedMediaStackView.backgroundColor = colors.background
+            mediaInfoView.applyColors(colors)
+            artistInfoView.applyColors(colors)
+            
+            completion(colors)
+        }
+    }
+    
+    func loadAndSetupImage(from urlString: String, _ completion: @escaping (UIImage) -> ()) {
+        mediaImageView.addShimmerAnimation()
+        
+        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
+            guard let self, let image else { return }
+            let aspectRatio = image.size.width / image.size.height
+            
+            mediaImageView.image = image
+            mediaImageView.widthAnchor.constraint(
+                equalTo: mediaImageView.heightAnchor,
+                multiplier: aspectRatio
+            ).isActive = true
+            
+            mediaImageView.removeShimmerAnimation()
+            
+            completion(image)
+        }
+    }
+    
+    func updateArtistInfoView(for artist: Artist?) {
+        guard let artist else { return }
+        artistInfoView.update(for: artist)
+    }
+    
+    func updateArtistCollectionView(for collection: [Media], with colors: ImageColors) {
+        guard !collection.isEmpty else { return }
+        
+        artistInfoView.showMoreFromArtistLabel()
+        artistCollectionView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
+        artistCollectionView.applySnapshot(for: collection, with: colors)
+    }
+}
+
 // MARK: - Methods
 
 extension DetailedMediaView {
     
     func updateUI(for state: State) {
         statefulStackView.update(for: state, isEmptyResults: false)
-        [
-            detailedMediaStackView, artistCollectionView
-        ].forEach { $0.isHidden = !(state == .loaded) }
+        detailedMediaStackView.isHidden = !(state == .loaded)
     }
     
-    func updateUI(for media: Media?) {
-        guard let media else { return }
+    func updateUI(
+        for media: Media?,
+        artist: Artist?,
+        collection: [Media]
+    ) {
+        guard
+            let media,
+            let imageUrl = media.setImageQuality(to: Const.fiveHundredSize)
+        else { return }
+        
         mediaInfoView.update(for: media)
-    }
-    
-    func updateUI(for artist: Artist?) {
-        guard let artist else { return }
-        artistInfoView.update(for: artist)
-    }
-    
-    func updateUI(for collection: [Media]) {
-        guard !collection.isEmpty else { return }
-        artistInfoView.showMoreFromArtistLabel()
-        artistCollectionView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).isActive = true
-        artistCollectionView.applySnapshot(for: collection)
+        updateArtistInfoView(for: artist)
+        
+        loadAndSetupImage(from: imageUrl) { [weak self] image in
+            
+            self?.extractAndApplyColors(from: image) { [weak self] colors in
+                self?.updateArtistCollectionView(for: collection, with: colors)
+            }
+        }
     }
 }
 
@@ -124,7 +206,25 @@ extension DetailedMediaView: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
-        offsetY <= .zero ? mediaInfoView.updateImageViewFrame(for: offsetY) : nil
+        let imageViewHeight = mediaImageView.bounds.height
+        
+        if offsetY < .zero {
+            mediaImageView.transform = CGAffineTransform(translationX: .zero, y: offsetY)
+                .scaledBy(x: 1 + (-offsetY / imageViewHeight), y: 1 + (-offsetY / imageViewHeight))
+        } else if offsetY > .zero {
+            mediaImageView.transform = CGAffineTransform(translationX: .zero, y: offsetY / 2)
+        } else {
+            mediaImageView.transform = .identity
+        }
+    }
+}
+
+// MARK: - MediaInfoViewDelegate Methods
+
+extension DetailedMediaView: MediaInfoViewDelegate {
+    
+    func didTapMoreButton(_ model: DetailedDescription) {
+        interactionDelegate?.didTapMoreButton(model)
     }
 }
 

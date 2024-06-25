@@ -31,6 +31,7 @@ final class DetailedMediaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         bindViewModel()
     }
 }
@@ -38,6 +39,10 @@ final class DetailedMediaViewController: UIViewController {
 // MARK: - Private Methods
 
 private extension DetailedMediaViewController {
+    
+    func setupNavigationBar() {
+        navigationController?.navigationBar.isHidden = true
+    }
     
     func bindViewModel() {
         viewModel.stateSubject
@@ -48,31 +53,58 @@ private extension DetailedMediaViewController {
             .store(in: &viewModel.cancellables)
         
         viewModel.mediaSubject
+            .zip(viewModel.artistSubject, viewModel.artistCollectionSubject)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] media in
-                self?.detailedMediaView.updateUI(for: media)
+            .sink { [weak self] media, artist, collection in
+                
+                self?.detailedMediaView.updateUI(
+                    for: media,
+                    artist: artist.first,
+                    collection: collection
+                )
             }
             .store(in: &viewModel.cancellables)
-        
-        viewModel.artistSubject
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] artist in
-                self?.detailedMediaView.updateUI(for: artist.first)
-            }
-            .store(in: &viewModel.cancellables)
-        
-        viewModel.artistCollectionSubject
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] collection in
-                self?.detailedMediaView.updateUI(for: collection)
-            }
-            .store(in: &viewModel.cancellables)
+    }
+}
+
+// MARK: - UIViewControllerTransitioningDelegate Methods
+
+extension DetailedMediaViewController: UIViewControllerTransitioningDelegate {
+    
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?,
+        source: UIViewController
+    ) -> UIPresentationController? {
+        SheetPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+    
+    func animationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController,
+        source: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        SheetPresentAnimationController()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        SheetDismissAnimationController()
     }
 }
 
 // MARK: - DetailedMediaViewDelegate Methods
 
 extension DetailedMediaViewController: DetailedMediaViewDelegate {
+    
+    func didTapMoreButton(_ model: DetailedDescription) {
+        let viewModel = DetailedDescriptionViewModel(model: model)
+        let viewController = DetailedDescriptionViewController(viewModel: viewModel)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
+        navigationController.modalPresentationStyle = .custom
+        navigationController.transitioningDelegate = self
+        present(navigationController, animated: true)
+    }
     
     func didTapArtistCollectionItem(at index: Int) {
         guard
@@ -84,6 +116,6 @@ extension DetailedMediaViewController: DetailedMediaViewDelegate {
     }
     
     func didTapRepeatButton() {
-        viewModel.fetchArtist()
+        viewModel.fetchData()
     }
 }

@@ -1,17 +1,12 @@
 import UIKit
 
+protocol MediaInfoViewDelegate: AnyObject {
+    func didTapMoreButton(_ model: DetailedDescription)
+}
+
 final class MediaInfoView: UIStackView {
     
     // MARK: - Private Properties
-    
-    private lazy var imageView: UIImageView = {
-        let view = UIImageView()
-        view.tintColor = .black
-        view.contentMode = .scaleAspectFit
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
     
     private lazy var kindLabel: CustomLabel = {
         let label = CustomLabel()
@@ -24,8 +19,9 @@ final class MediaInfoView: UIStackView {
     private lazy var nameLabel: CustomLabel = {
         let label = CustomLabel()
         label.configure(
+            textColor: .white,
             font: .systemFont(ofSize: 19, weight: .medium),
-            backgroundColor: .white,
+            backgroundColor: .black,
             cornerRadius: Const.labelCornerRadius,
             textInsets: .small,
             adjustsFontSizeToFitWidth: true
@@ -54,26 +50,32 @@ final class MediaInfoView: UIStackView {
     
     private lazy var moreButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = .white
         button.titleLabel?.font = .systemFont(ofSize: 13)
-        button.setTitle(Const.moreButtonText, for: .normal)
+        button.setTitle(Const.moreButtonText.uppercased(), for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+        button.addTarget(
+            self,
+            action: #selector(moreButtonTapped),
+            for: .touchUpInside
+        )
+        button.layer.addShadow(
+            color: UIColor.white.cgColor,
+            offset: CGSize(width: -8, height: .zero),
+            opacity: 1
+        )
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private lazy var linkTextView: CustomTextView = {
-        let textView = CustomTextView()
-        textView.configure()
-        return textView
-    }()
+    private lazy var linkButton = CustomButton()
     
     private lazy var mediaStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
             kindLabel, nameLabel, artistNameLabel,
-            descriptionLabel, linkTextView
+            descriptionLabel, linkButton
         ])
-        view.backgroundColor = .lightText
+        view.backgroundColor = .white
         view.layer.cornerRadius = Const.repeatButtonCornerRadius
         view.axis = .vertical
         view.alignment = .center
@@ -83,6 +85,8 @@ final class MediaInfoView: UIStackView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    weak var delegate: MediaInfoViewDelegate?
     
     // MARK: - Initialisers
     
@@ -101,19 +105,10 @@ final class MediaInfoView: UIStackView {
 private extension MediaInfoView {
     
     func setupAppearance() {
-        axis = .vertical
-        spacing = Const.spacingMedium
+        isLayoutMarginsRelativeArrangement = true
+        layoutMargins = .medium
         
-        [imageView, mediaStackView].forEach { addArrangedSubview($0) }
-        
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
-            
-            mediaStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Const.spacingMedium),
-            mediaStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Const.spacingMedium)
-        ])
+        addArrangedSubview(mediaStackView)
     }
     
     func setupMoreButton() {
@@ -121,29 +116,18 @@ private extension MediaInfoView {
         
         NSLayoutConstraint.activate([
             moreButton.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
-            moreButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor)
+            moreButton.firstBaselineAnchor.constraint(equalTo: descriptionLabel.lastBaselineAnchor)
         ])
     }
     
-    func loadAndSetupImage(from urlString: String) {
-        imageView.addShimmerAnimation()
-        
-        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
-            guard let self, let image else { return }
-            let aspectRatio = image.size.width / image.size.height
-            
-            imageView.image = image
-            imageView.widthAnchor.constraint(
-                equalTo: imageView.heightAnchor,
-                multiplier: aspectRatio
-            ).isActive = true
-            
-            imageView.removeShimmerAnimation()
-        }
-    }
-    
     @objc func moreButtonTapped() {
-        descriptionLabel.animateLabelExpansion(with: moreButton)
+        guard
+            let name = nameLabel.text,
+            let description = descriptionLabel.attributedText
+        else { return }
+        
+        let model = DetailedDescription(mediaName: name, attributedDescription: description)
+        delegate?.didTapMoreButton(model)
     }
 }
 
@@ -153,28 +137,33 @@ extension MediaInfoView {
     
     func update(for media: Media) {
         guard
-            let imageUrl = media.setImageQuality(to: Const.fiveHundredSize),
             let kind = media.kind,
             let name = media.name,
-            let artist = media.artist,
-            let _ = media.trackView
+            let _ = media.artist,
+            let link = media.trackView
         else { return }
-        
-        loadAndSetupImage(from: imageUrl)
         
         kindLabel.text = kind
         nameLabel.text = name
-        artistNameLabel.text = Const.createdBy.appending(artist)
+        artistNameLabel.text = media.artistNamePlaceholder()
         
-        if let description = media.description {
-            descriptionLabel.text = description
-            setupMoreButton()
-        }
+        descriptionLabel.isHidden = media.description == nil
+        descriptionLabel.attributedText = media.attributedDescription()
+        media.attributedDescription().string.count > 140 ? setupMoreButton() : nil
         
-        linkTextView.attributedText = media.attributedLinkText()
+        linkButton.configure(urlString: link, with: media.underlinedLinkText())
     }
     
-    func updateImageViewFrame(for point: CGFloat) {
-        imageView.frame.origin.y = point
+    func applyColors(_ colors: ImageColors) {
+        mediaStackView.backgroundColor = colors.primary
+        kindLabel.textColor = colors.secondary
+        nameLabel.backgroundColor = colors.background
+        nameLabel.textColor = colors.primary
+        artistNameLabel.textColor = colors.secondary
+        descriptionLabel.textColor = colors.detail
+        moreButton.backgroundColor = colors.primary
+        moreButton.layer.shadowColor = colors.primary.cgColor
+        moreButton.setTitleColor(colors.secondary, for: .normal)
+        linkButton.setTitleColor(colors.secondary, for: .normal)
     }
 }

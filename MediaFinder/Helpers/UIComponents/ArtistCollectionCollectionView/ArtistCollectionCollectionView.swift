@@ -76,17 +76,29 @@ private extension ArtistCollectionCollectionView {
             }
         )
     }
+    
+    func applyColors(for snapshot: Snapshot, with colors: ImageColors) {
+        snapshot.itemIdentifiers.forEach { item in
+            guard
+                let indexPath = diffableDataSource?.indexPath(for: item),
+                let cell = cellForItem(at: indexPath) as? ArtistCollectionCell
+            else { return }
+            
+            cell.applyColors(colors)
+        }
+    }
 }
 
 // MARK: - Methods
 
 extension ArtistCollectionCollectionView {
     
-    func applySnapshot(for collection: [Media]) {
+    func applySnapshot(for collection: [Media], with colors: ImageColors) {
         var snapshot = Snapshot()
         snapshot.appendSections([.zero])
         snapshot.appendItems(collection)
         diffableDataSource?.apply(snapshot, animatingDifferences: true)
+        applyColors(for: snapshot, with: colors)
     }
 }
 
