@@ -20,6 +20,20 @@ final class MediaPlayerView: UIView {
         return view
     }()
     
+    private lazy var playPauseButton: UIButton = {
+        let button = UIButton()
+        let playSymbol = UIImage(systemName: "play.circle")
+        button.setImage(playSymbol, for: .normal)
+        button.tintColor = .white
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(
+            self,
+            action: #selector(didTapPlayPauseButton),
+            for: .touchUpInside
+        )
+        return button
+    }()
+    
     // MARK: - Initializers
     
     override init(frame: CGRect) {
@@ -41,6 +55,7 @@ private extension MediaPlayerView {
         
         setupImageView()
         setupOverlayView()
+        setupPlayPauseButton()
     }
     
     func setupImageView() {
@@ -62,6 +77,15 @@ private extension MediaPlayerView {
             overlayView.leadingAnchor.constraint(equalTo: leadingAnchor),
             overlayView.trailingAnchor.constraint(equalTo: trailingAnchor),
             overlayView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+    
+    func setupPlayPauseButton() {
+        addSubview(playPauseButton)
+        
+        NSLayoutConstraint.activate([
+            playPauseButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            playPauseButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }
@@ -87,6 +111,11 @@ private extension MediaPlayerView {
             
             completion(image)
         }
+    }
+    
+    @objc
+    func didTapPlayPauseButton() {
+        // TODO: add handle of play and pause media preview
     }
 }
 
