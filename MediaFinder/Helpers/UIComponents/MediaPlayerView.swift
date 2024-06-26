@@ -13,6 +13,13 @@ final class MediaPlayerView: UIView {
         return view
     }()
     
+    private let overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black.withAlphaComponent(0.2)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - Initializers
     
     override init(frame: CGRect) {
@@ -33,6 +40,7 @@ private extension MediaPlayerView {
         translatesAutoresizingMaskIntoConstraints = false
         
         setupImageView()
+        setupOverlayView()
     }
     
     func setupImageView() {
@@ -43,6 +51,17 @@ private extension MediaPlayerView {
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+    
+    func setupOverlayView() {
+        addSubview(overlayView)
+        
+        NSLayoutConstraint.activate([
+            overlayView.topAnchor.constraint(equalTo: topAnchor),
+            overlayView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            overlayView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
