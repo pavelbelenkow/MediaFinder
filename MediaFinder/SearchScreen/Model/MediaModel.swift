@@ -15,6 +15,7 @@ struct Media: Decodable {
     let collectionArtistId: Int?
     let collectionView: String?
     let trackView: String?
+    let preview: String?
     let artwork60: String?
     let artwork100: String?
     let collectionPrice: Double?
@@ -33,6 +34,7 @@ struct Media: Decodable {
         case collectionArtistId
         case collectionView = "collectionViewUrl"
         case trackView = "trackViewUrl"
+        case preview = "previewUrl"
         case artwork60 = "artworkUrl60"
         case artwork100 = "artworkUrl100"
         case collectionPrice
