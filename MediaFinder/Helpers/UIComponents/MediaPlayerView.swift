@@ -46,3 +46,40 @@ private extension MediaPlayerView {
         ])
     }
 }
+
+// MARK: - Private Methods
+
+private extension MediaPlayerView {
+    
+    func loadAndSetupImage(from urlString: String, completion: @escaping (UIImage) -> ()) {
+        imageView.addShimmerAnimation()
+        
+        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
+            guard let self, let image else { return }
+            let aspectRatio = image.size.width / image.size.height
+            
+            imageView.image = image
+            imageView.widthAnchor.constraint(
+                equalTo: imageView.heightAnchor,
+                multiplier: aspectRatio
+            ).isActive = true
+            
+            imageView.removeShimmerAnimation()
+            
+            completion(image)
+        }
+    }
+}
+
+// MARK: - Methods
+
+extension MediaPlayerView {
+    
+    func update(
+        with imageUrl: String,
+        preview: String?,
+        _ completion: @escaping (UIImage) -> ()
+    ) {
+        loadAndSetupImage(from: imageUrl, completion: completion)
+    }
+}

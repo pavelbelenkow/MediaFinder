@@ -129,25 +129,6 @@ private extension DetailedMediaView {
         }
     }
     
-    func loadAndSetupImage(from urlString: String, _ completion: @escaping (UIImage) -> ()) {
-        mediaImageView.addShimmerAnimation()
-        
-        ImageLoader.shared.loadImage(from: urlString) { [weak self] image in
-            guard let self, let image else { return }
-            let aspectRatio = image.size.width / image.size.height
-            
-            mediaImageView.image = image
-            mediaImageView.widthAnchor.constraint(
-                equalTo: mediaImageView.heightAnchor,
-                multiplier: aspectRatio
-            ).isActive = true
-            
-            mediaImageView.removeShimmerAnimation()
-            
-            completion(image)
-        }
-    }
-    
     func updateArtistInfoView(for artist: Artist?) {
         guard let artist else { return }
         artistInfoView.update(for: artist)
@@ -184,7 +165,7 @@ extension DetailedMediaView {
         mediaInfoView.update(for: media)
         updateArtistInfoView(for: artist)
         
-        loadAndSetupImage(from: imageUrl) { [weak self] image in
+        mediaPlayerView.update(with: imageUrl, preview: media.preview) { [weak self] image in
             
             self?.extractAndApplyColors(from: image) { [weak self] colors in
                 self?.updateArtistCollectionView(for: collection, with: colors)
