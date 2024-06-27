@@ -213,3 +213,11 @@ private extension Double {
         adjustBrightness(by: -abs(percentage))
     }
 }
+
+extension UIImage {
+    
+    static func configuredSymbol(named name: String, pointSize: CGFloat = 24) -> UIImage? {
+        let configuration = SymbolConfiguration(pointSize: pointSize)
+        return Self.init(systemName: name, withConfiguration: configuration)
+    }
+}
