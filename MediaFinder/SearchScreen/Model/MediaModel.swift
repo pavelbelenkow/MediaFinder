@@ -144,4 +144,20 @@ extension Media {
             .currencyFormatter
             .string(from: price as NSNumber)
     }
+    
+    func previewDetails() -> (url: URL?, isVideo: Bool) {
+        guard
+            let preview,
+            let previewUrl = URL(string: preview)
+        else { return (nil, false) }
+        
+        let kind = compareKind()
+        
+        switch kind {
+        case .movie, .tvEpisode, .musicVideo: 
+            return (previewUrl, true)
+        default:
+            return (previewUrl, false)
+        }
+    }
 }
