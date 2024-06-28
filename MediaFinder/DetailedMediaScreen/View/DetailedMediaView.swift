@@ -165,7 +165,10 @@ extension DetailedMediaView {
         mediaInfoView.update(for: media)
         updateArtistInfoView(for: artist)
         
-        mediaPlayerView.update(with: imageUrl, preview: media.preview) { [weak self] image in
+        mediaPlayerView.update(
+            with: imageUrl,
+            previewDetails: media.previewDetails()
+        ) { [weak self] image in
             
             self?.extractAndApplyColors(from: image) { [weak self] colors in
                 self?.updateArtistCollectionView(for: collection, with: colors)

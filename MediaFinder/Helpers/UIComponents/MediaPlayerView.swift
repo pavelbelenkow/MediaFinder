@@ -125,7 +125,7 @@ extension MediaPlayerView {
     
     func update(
         with imageUrl: String,
-        preview: String?,
+        previewDetails: (url: URL?, isVideo: Bool),
         _ completion: @escaping (UIImage) -> ()
     ) {
         loadAndSetupImage(from: imageUrl, completion: completion)
