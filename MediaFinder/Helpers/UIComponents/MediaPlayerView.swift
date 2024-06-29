@@ -34,10 +34,13 @@ final class MediaPlayerView: UIView {
         return button
     }()
     
+    private let mediaPlayer: MediaPlayerProtocol
+    
     // MARK: - Initializers
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(mediaPlayer: MediaPlayerProtocol = MediaPlayer()) {
+        self.mediaPlayer = mediaPlayer
+        super.init(frame: .zero)
         setupAppearance()
     }
     
