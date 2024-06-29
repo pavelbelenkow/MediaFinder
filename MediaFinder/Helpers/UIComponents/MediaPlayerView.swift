@@ -120,9 +120,25 @@ private extension MediaPlayerView {
         }
     }
     
-    @objc
+    func updatePlayPauseButton(isPlaying: Bool) {
+        let buttonSymbol = UIImage.configuredSymbol(named: isPlaying ? "pause.circle" : "play.circle")
+        playPauseButton.setImage(buttonSymbol, for: .normal)
+    }
+}
+
+@objc
+private extension MediaPlayerView {
+    
     func didTapPlayPauseButton() {
-        // TODO: add handle of play and pause media preview
+        if mediaPlayer.isPlaying {
+            mediaPlayer.pause()
+            updatePlayPauseButton(isPlaying: false)
+        } else {
+            mediaPlayer.play()
+            mediaPlayer.attachLayer(to: imageView)
+            updatePlayPauseButton(isPlaying: true)
+        }
+    }
     }
 }
 
