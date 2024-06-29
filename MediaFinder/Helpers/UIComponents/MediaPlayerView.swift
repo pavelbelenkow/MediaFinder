@@ -135,6 +135,7 @@ extension MediaPlayerView {
             if let previewUrl = previewDetails.url {
                 setupOverlayView()
                 setupPlayPauseButton()
+                mediaPlayer.configure(with: previewUrl, isVideo: previewDetails.isVideo)
             }
         }
     }
