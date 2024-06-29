@@ -47,6 +47,13 @@ final class MediaPlayerView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Overridden Methods
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        mediaPlayer.updateLayerFrame(to: imageView.bounds)
+    }
 }
 
 // MARK: - Setup UI
