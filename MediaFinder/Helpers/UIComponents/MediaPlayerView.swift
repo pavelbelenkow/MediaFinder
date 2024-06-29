@@ -55,10 +55,7 @@ private extension MediaPlayerView {
     
     func setupAppearance() {
         translatesAutoresizingMaskIntoConstraints = false
-        
         setupImageView()
-        setupOverlayView()
-        setupPlayPauseButton()
     }
     
     func setupImageView() {
@@ -131,6 +128,14 @@ extension MediaPlayerView {
         previewDetails: (url: URL?, isVideo: Bool),
         _ completion: @escaping (UIImage) -> ()
     ) {
-        loadAndSetupImage(from: imageUrl, completion: completion)
+        loadAndSetupImage(from: imageUrl) { [weak self] image in
+            guard let self else { return }
+            completion(image)
+            
+            if let previewUrl = previewDetails.url {
+                setupOverlayView()
+                setupPlayPauseButton()
+            }
+        }
     }
 }
