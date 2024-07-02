@@ -126,7 +126,14 @@ private extension MediaInfoView {
             let description = descriptionLabel.attributedText
         else { return }
         
-        let model = DetailedDescription(mediaName: name, attributedDescription: description)
+        let model = DetailedDescription(
+            mediaName: name,
+            attributedDescription: description,
+            mediaTextColor: kindLabel.textColor,
+            descriptionTextColor: descriptionLabel.textColor,
+            backgroundColor: mediaStackView.backgroundColor ?? .white
+        )
+        
         delegate?.didTapMoreButton(model)
     }
 }
