@@ -72,7 +72,8 @@ private extension DetailedDescriptionView {
 
 extension DetailedDescriptionView {
     
-    func updateDescriptionLabel(with attributedText: NSAttributedString) {
+    func updateDescriptionLabel(with attributedText: NSAttributedString, textColor: UIColor) {
         descriptionLabel.attributedText = attributedText
+        descriptionLabel.textColor = textColor
     }
 }
