@@ -81,7 +81,12 @@ private extension DetailedDescriptionViewController {
     
     func updateUI(with model: DetailedDescription) {
         title = model.mediaName
-        detailedDescriptionView.updateDescriptionLabel(with: model.attributedDescription)
+        view.backgroundColor = model.backgroundColor
+        setupNavigationTitleColor(model.mediaTextColor)
+        detailedDescriptionView.updateDescriptionLabel(
+            with: model.attributedDescription,
+            textColor: model.descriptionTextColor
+        )
     }
 }
 
