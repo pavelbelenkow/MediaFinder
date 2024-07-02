@@ -39,13 +39,13 @@ private extension DetailedDescriptionViewController {
     func setupAppearance() {
         view.backgroundColor = .white
         
-        setupNavigationTitle()
+        setupNavigationTitleColor(.black)
         setupDetailedDescriptionView()
     }
     
-    func setupNavigationTitle() {
+    func setupNavigationTitleColor(_ color: UIColor) {
         navigationController?.navigationBar.standardAppearance.titleTextAttributes = [
-            .foregroundColor: UIColor.black
+            .foregroundColor: color
         ]
     }
     
