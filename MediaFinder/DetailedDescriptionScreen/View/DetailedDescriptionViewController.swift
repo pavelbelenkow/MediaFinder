@@ -7,6 +7,7 @@ final class DetailedDescriptionViewController: UIViewController {
     private lazy var detailedDescriptionView: DetailedDescriptionView = {
         let view = DetailedDescriptionView()
         view.delegate = self
+        view.isScrollEnabled = false
         return view
     }()
     
