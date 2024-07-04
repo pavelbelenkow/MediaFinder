@@ -55,10 +55,8 @@ private extension DetailedDescriptionViewController {
         
         NSLayoutConstraint.activate([
             detailedDescriptionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            detailedDescriptionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                                                             constant: Const.spacingThirty),
-            detailedDescriptionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                                              constant: -Const.spacingThirty),
+            detailedDescriptionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            detailedDescriptionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             detailedDescriptionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                                             constant: Const.spacingThirty)
         ])
@@ -94,6 +92,7 @@ private extension DetailedDescriptionViewController {
 // MARK: - UIScrollViewDelegate Methods
 
 extension DetailedDescriptionViewController: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let navigationController else { return }
         
