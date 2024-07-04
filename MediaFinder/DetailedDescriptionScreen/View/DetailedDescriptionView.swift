@@ -61,8 +61,8 @@ private extension DetailedDescriptionView {
         
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.spacingThirty),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Const.spacingThirty),
             descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
