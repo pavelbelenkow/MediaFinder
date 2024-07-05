@@ -55,10 +55,11 @@ private extension DetailedDescriptionViewController {
         
         NSLayoutConstraint.activate([
             detailedDescriptionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            detailedDescriptionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            detailedDescriptionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            detailedDescriptionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                                                            constant: Const.spacingThirty)
+            detailedDescriptionView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                             constant: Const.spacingMedium),
+            detailedDescriptionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, 
+                                                              constant: -Const.spacingMedium),
+            detailedDescriptionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
