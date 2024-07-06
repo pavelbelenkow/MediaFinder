@@ -28,9 +28,10 @@ final class DetailedDescriptionViewController: UIViewController {
     override func loadView() {
         view = detailedDescriptionView
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupAppearance()
+        setupNavigationBar()
         bindViewModel()
     }
     
@@ -44,15 +45,24 @@ final class DetailedDescriptionViewController: UIViewController {
 
 private extension DetailedDescriptionViewController {
     
-    func setupAppearance() {
+    func setupNavigationBar(
+        with titleText: String? = nil,
+        textColor: UIColor = .black,
+        backgroundColor: UIColor = .white
+    ) {
+        let titleLabel = UILabel()
+        titleLabel.text = titleText
+        titleLabel.textColor = textColor
+        titleLabel.font = .boldSystemFont(ofSize: 17)
+        titleLabel.numberOfLines = 2
+        titleLabel.textAlignment = .center
         
-        setupNavigationTitleColor()
-    }
-    
-    func setupNavigationTitleColor(_ color: UIColor = .black) {
-        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [
-            .foregroundColor: color
-        ]
+        navigationItem.titleView = titleLabel
+        
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.standardAppearance.shadowColor = .clear
+            navigationBar.standardAppearance.backgroundColor = backgroundColor
+        }
     }
     
     func updateScrollAbility() {
@@ -77,9 +87,12 @@ private extension DetailedDescriptionViewController {
     }
     
     func updateUI(with model: DetailedDescription) {
-        title = model.mediaName
         view.backgroundColor = model.backgroundColor
-        setupNavigationTitleColor(model.mediaTextColor)
+        setupNavigationBar(
+            with: model.mediaName,
+            textColor: model.mediaTextColor,
+            backgroundColor: model.backgroundColor
+        )
         detailedDescriptionView.updateDescriptionLabel(
             with: model.attributedDescription,
             textColor: model.descriptionTextColor
