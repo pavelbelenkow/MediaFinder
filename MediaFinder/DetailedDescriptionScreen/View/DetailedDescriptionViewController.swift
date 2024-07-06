@@ -87,7 +87,6 @@ private extension DetailedDescriptionViewController {
     }
     
     func updateUI(with model: DetailedDescription) {
-        view.backgroundColor = model.backgroundColor
         setupNavigationBar(
             with: model.mediaName,
             textColor: model.mediaTextColor,
@@ -95,7 +94,8 @@ private extension DetailedDescriptionViewController {
         )
         detailedDescriptionView.updateDescriptionLabel(
             with: model.attributedDescription,
-            textColor: model.descriptionTextColor
+            textColor: model.descriptionTextColor,
+            backgroundColor: model.backgroundColor
         )
     }
 }
