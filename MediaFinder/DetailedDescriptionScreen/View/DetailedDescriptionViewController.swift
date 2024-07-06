@@ -33,6 +33,11 @@ final class DetailedDescriptionViewController: UIViewController {
         setupAppearance()
         bindViewModel()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateScrollAbility()
+    }
 }
 
 // MARK: - Setup UI
@@ -50,6 +55,9 @@ private extension DetailedDescriptionViewController {
         ]
     }
     
+    func updateScrollAbility() {
+        let isFullHeight = view.frame.height >= UIScreen.main.bounds.height * 0.8
+        detailedDescriptionView.isScrollEnabled = isFullHeight
     }
 }
 
