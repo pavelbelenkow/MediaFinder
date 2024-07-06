@@ -25,6 +25,9 @@ final class DetailedDescriptionViewController: UIViewController {
     
     // MARK: - Lifecycle
     
+    override func loadView() {
+        view = detailedDescriptionView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAppearance()
@@ -37,10 +40,8 @@ final class DetailedDescriptionViewController: UIViewController {
 private extension DetailedDescriptionViewController {
     
     func setupAppearance() {
-        view.backgroundColor = .white
         
         setupNavigationTitleColor()
-        setupDetailedDescriptionView()
     }
     
     func setupNavigationTitleColor(_ color: UIColor = .black) {
@@ -49,17 +50,6 @@ private extension DetailedDescriptionViewController {
         ]
     }
     
-    func setupDetailedDescriptionView() {
-        view.addSubview(detailedDescriptionView)
-        
-        NSLayoutConstraint.activate([
-            detailedDescriptionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            detailedDescriptionView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                             constant: Const.spacingMedium),
-            detailedDescriptionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, 
-                                                              constant: -Const.spacingMedium),
-            detailedDescriptionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
     }
 }
 

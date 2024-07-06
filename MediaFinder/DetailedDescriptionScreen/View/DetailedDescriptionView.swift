@@ -38,7 +38,7 @@ final class DetailedDescriptionView: UIScrollView {
 private extension DetailedDescriptionView {
     
     func setupAppearance() {
-        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .white
         isScrollEnabled = false
         
         setupContentView()
