@@ -40,6 +40,7 @@ private extension DetailedDescriptionView {
     func setupAppearance() {
         backgroundColor = .white
         isScrollEnabled = false
+        panGestureRecognizer.delegate = self
         
         setupContentView()
         setupDescriptionLabel()
@@ -83,5 +84,15 @@ extension DetailedDescriptionView {
         self.backgroundColor = backgroundColor
     }
 }
+
+// MARK: - UIGestureRecognizerDelegate Methods
+
+extension DetailedDescriptionView: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(
+        _ gestureRecognizer: UIGestureRecognizer,
+        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+    ) -> Bool {
+        contentOffset.y <= .zero
     }
 }
