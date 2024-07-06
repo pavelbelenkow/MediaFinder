@@ -39,6 +39,7 @@ private extension DetailedDescriptionView {
     
     func setupAppearance() {
         translatesAutoresizingMaskIntoConstraints = false
+        isScrollEnabled = false
         
         setupContentView()
         setupDescriptionLabel()
