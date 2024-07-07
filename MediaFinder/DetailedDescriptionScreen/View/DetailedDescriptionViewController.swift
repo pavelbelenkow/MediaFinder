@@ -105,14 +105,13 @@ private extension DetailedDescriptionViewController {
 extension DetailedDescriptionViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        adjustNavigationBarVisibility(scrollOffsetY: scrollView.contentOffset.y)
+    }
+    
+    private func adjustNavigationBarVisibility(scrollOffsetY: CGFloat) {
         guard let navigationController else { return }
         
-        let offsetY = scrollView.contentOffset.y
-        
-        if offsetY > .zero && !navigationController.isNavigationBarHidden {
-            navigationController.setNavigationBarHidden(true, animated: true)
-        } else if offsetY < .zero && navigationController.isNavigationBarHidden {
-            navigationController.setNavigationBarHidden(false, animated: true)
-        }
+        let shouldHideNavigationBar = scrollOffsetY > .zero
+        navigationController.setNavigationBarHidden(shouldHideNavigationBar, animated: true)
     }
 }
