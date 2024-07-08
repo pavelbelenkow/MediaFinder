@@ -34,6 +34,19 @@ final class MediaPlayerView: UIView {
         return button
     }()
     
+    private lazy var backwardButton: UIButton = {
+        let button = UIButton()
+        let backwardSymbol = UIImage.configuredSymbol(named: "gobackward.5")
+        button.setImage(backwardSymbol, for: .normal)
+        button.tintColor = .white
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(
+            self,
+            action: #selector(didTapBackwardButton),
+            for: .touchUpInside
+        )
+        return button
+    }()
     private let mediaPlayer: MediaPlayerProtocol
     
     // MARK: - Initializers
@@ -95,6 +108,15 @@ private extension MediaPlayerView {
             playPauseButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
+    
+    func setupBackwardButton() {
+        addSubview(backwardButton)
+        
+        NSLayoutConstraint.activate([
+            backwardButton.trailingAnchor.constraint(equalTo: playPauseButton.leadingAnchor, constant: -Const.spacingThirty),
+            backwardButton.centerYAnchor.constraint(equalTo: playPauseButton.centerYAnchor)
+        ])
+    }
 }
 
 // MARK: - Private Methods
@@ -139,6 +161,10 @@ private extension MediaPlayerView {
             updatePlayPauseButton(isPlaying: true)
         }
     }
+    
+    func didTapBackwardButton() {
+        // TODO: handling backward rewind
+    }
     }
 }
 
@@ -158,6 +184,7 @@ extension MediaPlayerView {
             if let previewUrl = previewDetails.url {
                 setupOverlayView()
                 setupPlayPauseButton()
+                setupBackwardButton()
                 mediaPlayer.configure(with: previewUrl, isVideo: previewDetails.isVideo)
             }
         }
