@@ -22,7 +22,7 @@ final class MediaPlayerView: UIView {
     
     private lazy var playPauseButton: UIButton = {
         let button = UIButton()
-        let playSymbol = UIImage.configuredSymbol(named: "play.circle")
+        let playSymbol = UIImage.configuredSymbol(named: "play.fill", pointSize: 50)
         button.setImage(playSymbol, for: .normal)
         button.tintColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -166,7 +166,7 @@ private extension MediaPlayerView {
     }
     
     func updatePlayPauseButton(isPlaying: Bool) {
-        let buttonSymbol = UIImage.configuredSymbol(named: isPlaying ? "pause.circle" : "play.circle")
+        let buttonSymbol = UIImage.configuredSymbol(named: isPlaying ? "pause.fill" : "play.fill", pointSize: 50)
         playPauseButton.setImage(buttonSymbol, for: .normal)
     }
 }
