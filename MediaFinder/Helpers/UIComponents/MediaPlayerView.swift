@@ -36,7 +36,7 @@ final class MediaPlayerView: UIView {
     
     private lazy var backwardButton: UIButton = {
         let button = UIButton()
-        let backwardSymbol = UIImage.configuredSymbol(named: "gobackward.5")
+        let backwardSymbol = UIImage.configuredSymbol(named: "gobackward.10")
         button.setImage(backwardSymbol, for: .normal)
         button.tintColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ final class MediaPlayerView: UIView {
     
     private lazy var forwardButton: UIButton = {
         let button = UIButton()
-        let forwardSymbol = UIImage.configuredSymbol(named: "goforward.5")
+        let forwardSymbol = UIImage.configuredSymbol(named: "goforward.10")
         button.setImage(forwardSymbol, for: .normal)
         button.tintColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -127,7 +127,7 @@ private extension MediaPlayerView {
         addSubview(backwardButton)
         
         NSLayoutConstraint.activate([
-            backwardButton.trailingAnchor.constraint(equalTo: playPauseButton.leadingAnchor, constant: -Const.spacingThirty),
+            backwardButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Const.spacingOneHundred),
             backwardButton.centerYAnchor.constraint(equalTo: playPauseButton.centerYAnchor)
         ])
     }
@@ -136,7 +136,7 @@ private extension MediaPlayerView {
         addSubview(forwardButton)
         
         NSLayoutConstraint.activate([
-            forwardButton.leadingAnchor.constraint(equalTo: playPauseButton.trailingAnchor, constant: Const.spacingThirty),
+            forwardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Const.spacingOneHundred),
             forwardButton.centerYAnchor.constraint(equalTo: playPauseButton.centerYAnchor)
         ])
     }
