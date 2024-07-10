@@ -83,6 +83,12 @@ final class MediaPlayer: MediaPlayerProtocol {
             }
         }
     }
+    
+    private func detachLayer() {
+        playerLayer?.removeFromSuperlayer()
+        playerLayer = nil
+    }
+    
     @objc
     private func playerDidFinishPlaying() {
     }
