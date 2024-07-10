@@ -12,6 +12,7 @@ protocol MediaPlayerProtocol {
     func attachLayer(to view: UIView)
     func updateLayerFrame(to frame: CGRect)
     func addObserver()
+    func removeObserver()
 }
 
 final class MediaPlayer: MediaPlayerProtocol {
@@ -82,6 +83,18 @@ final class MediaPlayer: MediaPlayerProtocol {
                 )
             }
         }
+    }
+    
+    func removeObserver() {
+        guard let currentItem else { return }
+        
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: currentItem
+        )
+        
+        playerItemObserver?.invalidate()
     }
     
     private func detachLayer() {
