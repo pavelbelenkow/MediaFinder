@@ -91,5 +91,9 @@ final class MediaPlayer: MediaPlayerProtocol {
     
     @objc
     private func playerDidFinishPlaying() {
+        pause()
+        detachLayer()
+        player?.seek(to: .zero)
+        removeObserver()
     }
 }
