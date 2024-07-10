@@ -29,8 +29,9 @@ final class MediaPlayer: MediaPlayerProtocol {
     // MARK: - Methods
     
     func configure(with url: URL, isVideo: Bool) {
+        let playerItem = AVPlayerItem(url: url)
+        player = AVPlayer(playerItem: playerItem)
         isVideoContent = isVideo
-        player = AVPlayer(url: url)
     }
     
     func play() {
