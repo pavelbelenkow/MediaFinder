@@ -5,6 +5,7 @@ import UIKit
 
 protocol MediaPlayerProtocol {
     var isPlaying: Bool { get }
+    var currentItem: AVPlayerItem? { get }
     func configure(with url: URL, isVideo: Bool)
     func play()
     func pause()
@@ -23,6 +24,7 @@ final class MediaPlayer: MediaPlayerProtocol {
     // MARK: - Properties
     
     var isPlaying: Bool { player?.rate != .zero }
+    var currentItem: AVPlayerItem? { player?.currentItem }
     
     // MARK: - Methods
     
