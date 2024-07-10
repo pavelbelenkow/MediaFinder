@@ -181,6 +181,7 @@ private extension MediaPlayerView {
         } else {
             mediaPlayer.play()
             mediaPlayer.attachLayer(to: imageView)
+            mediaPlayer.addObserver()
             updatePlayPauseButton(isPlaying: true)
         }
     }
