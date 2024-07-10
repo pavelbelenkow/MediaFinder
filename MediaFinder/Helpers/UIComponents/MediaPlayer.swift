@@ -19,6 +19,7 @@ final class MediaPlayer: MediaPlayerProtocol {
     
     private var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
+    private var playerItemObserver: NSKeyValueObservation?
     private var isVideoContent = false
     
     // MARK: - Properties
