@@ -11,6 +11,7 @@ protocol MediaPlayerProtocol {
     func pause()
     func attachLayer(to view: UIView)
     func updateLayerFrame(to frame: CGRect)
+    func addObserver()
 }
 
 final class MediaPlayer: MediaPlayerProtocol {
@@ -59,5 +60,30 @@ final class MediaPlayer: MediaPlayerProtocol {
     
     func updateLayerFrame(to frame: CGRect) {
         playerLayer?.frame = frame
+    }
+    
+    func addObserver() {
+        guard let currentItem else { return }
+        
+        playerItemObserver?.invalidate()
+        
+        playerItemObserver = currentItem.observe(
+            \.status,
+             options: [.new, .initial]
+        ) { [weak self] item, _ in
+            guard let self else { return }
+            
+            if item.status == .readyToPlay {
+                NotificationCenter.default.addObserver(
+                    self,
+                    selector: #selector(playerDidFinishPlaying),
+                    name: .AVPlayerItemDidPlayToEndTime,
+                    object: currentItem
+                )
+            }
+        }
+    }
+    @objc
+    private func playerDidFinishPlaying() {
     }
 }
