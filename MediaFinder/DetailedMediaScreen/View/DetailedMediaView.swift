@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol DetailedMediaViewDelegate: AnyObject {
+    func mediaPlayerDidTapPlayPauseButton()
     func didTapMoreButton(_ model: DetailedDescription)
     func didTapArtistCollectionItem(at index: Int)
     func didTapRepeatButton()
@@ -12,7 +13,11 @@ final class DetailedMediaView: UIScrollView {
     
     // MARK: - Private Properties
     
-    private let mediaPlayerView = MediaPlayerView()
+    private lazy var mediaPlayerView: MediaPlayerView = {
+        let view = MediaPlayerView()
+        view.delegate = self
+        return view
+    }()
     
     private lazy var mediaInfoView: MediaInfoView = {
         let view = MediaInfoView()
@@ -193,6 +198,15 @@ extension DetailedMediaView: UIScrollViewDelegate {
         } else {
             mediaPlayerView.transform = .identity
         }
+    }
+}
+
+// MARK: - MediaPlayerViewDelegate Methods
+
+extension DetailedMediaView: MediaPlayerViewDelegate {
+    
+    func didTapPlayPauseButton() {
+        interactionDelegate?.mediaPlayerDidTapPlayPauseButton()
     }
 }
 

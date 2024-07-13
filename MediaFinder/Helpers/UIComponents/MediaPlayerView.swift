@@ -69,6 +69,8 @@ final class MediaPlayerView: UIView {
     }()
     private let mediaPlayer: MediaPlayerProtocol
     
+    weak var delegate: MediaPlayerViewDelegate?
+    
     // MARK: - Initializers
     
     init(mediaPlayer: MediaPlayerProtocol = MediaPlayer()) {
