@@ -132,7 +132,7 @@ extension ArtistCollectionCollectionView: UICollectionViewDelegateFlowLayout {
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
         UIEdgeInsets(
-            top: params.insets,
+            top: .zero,
             left: collectionView.frame.width / 3.5,
             bottom: params.insets,
             right: params.insets
