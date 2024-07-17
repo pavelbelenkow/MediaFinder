@@ -47,5 +47,14 @@ final class MediaPlayerViewModel: MediaPlayerViewModelProtocol {
 
 extension MediaPlayerViewModel {
     
-    func togglePlayPause() {}
+    func togglePlayPause() {
+        if isPlayingSubject.value.isPlaying {
+            mediaPlayer.pause()
+            isPlayingSubject.send((false, mediaPlayer))
+        } else {
+            mediaPlayer.play()
+            mediaPlayer.addObserver()
+            isPlayingSubject.send((true, mediaPlayer))
+        }
+    }
 }
