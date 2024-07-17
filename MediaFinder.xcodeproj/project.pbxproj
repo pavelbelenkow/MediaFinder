@@ -46,7 +46,7 @@
 		595EFE762BC9619100F7E353 /* MediaInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE752BC9619100F7E353 /* MediaInfoView.swift */; };
 		595EFE782BC9629900F7E353 /* ArtistInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE772BC9629900F7E353 /* ArtistInfoView.swift */; };
 		595EFE7A2BC9743200F7E353 /* ArtistMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595EFE792BC9743200F7E353 /* ArtistMapper.swift */; };
-		596C9C2A2C47145C0072539C /* MediaPlayerViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C9C292C47145C0072539C /* MediaPlayerViewModelProtocol.swift */; };
+		596C9C2A2C47145C0072539C /* MediaPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C9C292C47145C0072539C /* MediaPlayerViewModel.swift */; };
 		596F0CDA2BFE873800BC475F /* SheetPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F0CD92BFE873800BC475F /* SheetPresentationController.swift */; };
 		596F0CDC2BFE8A3F00BC475F /* SheetDismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F0CDB2BFE8A3F00BC475F /* SheetDismissAnimationController.swift */; };
 		596F0CDE2BFE8A7F00BC475F /* SheetPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596F0CDD2BFE8A7F00BC475F /* SheetPresentAnimationController.swift */; };
@@ -133,7 +133,7 @@
 		595EFE752BC9619100F7E353 /* MediaInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaInfoView.swift; sourceTree = "<group>"; };
 		595EFE772BC9629900F7E353 /* ArtistInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistInfoView.swift; sourceTree = "<group>"; };
 		595EFE792BC9743200F7E353 /* ArtistMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMapper.swift; sourceTree = "<group>"; };
-		596C9C292C47145C0072539C /* MediaPlayerViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerViewModelProtocol.swift; sourceTree = "<group>"; };
+		596C9C292C47145C0072539C /* MediaPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerViewModel.swift; sourceTree = "<group>"; };
 		596F0CD92BFE873800BC475F /* SheetPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetPresentationController.swift; sourceTree = "<group>"; };
 		596F0CDB2BFE8A3F00BC475F /* SheetDismissAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetDismissAnimationController.swift; sourceTree = "<group>"; };
 		596F0CDD2BFE8A7F00BC475F /* SheetPresentAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetPresentAnimationController.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				590D06162BC7EE02002D5688 /* DetailedMediaViewModel.swift */,
-				596C9C292C47145C0072539C /* MediaPlayerViewModelProtocol.swift */,
+				596C9C292C47145C0072539C /* MediaPlayerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -665,7 +665,7 @@
 				5946FEAC2BD7004400E53591 /* MediaTypeCollectionView.swift in Sources */,
 				59A0E3FA2BCB7B9C0012C628 /* State.swift in Sources */,
 				59CBBB842C0F93C1007EE1A5 /* MediaTypeMenuCell.swift in Sources */,
-				596C9C2A2C47145C0072539C /* MediaPlayerViewModelProtocol.swift in Sources */,
+				596C9C2A2C47145C0072539C /* MediaPlayerViewModel.swift in Sources */,
 				592A151F2BC5F7B300322135 /* MediaListRecentSearchTableView.swift in Sources */,
 				591A086E2BC0032C009B1741 /* MediaModel.swift in Sources */,
 				595EFE722BC960FE00F7E353 /* CustomLabel.swift in Sources */,
