@@ -171,7 +171,8 @@ private extension MediaListSearchViewController {
     
     func presentDetailedMediaViewController(with selectedMedia: Media) {
         let viewModel = DetailedMediaViewModel(mediaModel: selectedMedia)
-        let viewController = DetailedMediaViewController(viewModel: viewModel)
+        let playerViewModel = MediaPlayerViewModel(model: selectedMedia)
+        let viewController = DetailedMediaViewController(viewModel: viewModel, playerViewModel: playerViewModel)
         let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true)
     }
