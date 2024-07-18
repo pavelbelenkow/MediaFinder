@@ -11,11 +11,16 @@ final class DetailedMediaViewController: UIViewController {
     }()
     
     private let viewModel: any DetailedMediaViewModelProtocol
+    private let playerViewModel: any MediaPlayerViewModelProtocol
     
     // MARK: - Initialisers
     
-    init(viewModel: any DetailedMediaViewModelProtocol) {
+    init(
+        viewModel: any DetailedMediaViewModelProtocol,
+        playerViewModel: any MediaPlayerViewModelProtocol
+    ) {
         self.viewModel = viewModel
+        self.playerViewModel = playerViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
