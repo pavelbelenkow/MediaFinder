@@ -1,3 +1,4 @@
+import Foundation
 import Combine
 
 // MARK: - Protocols
@@ -40,6 +41,21 @@ final class MediaPlayerViewModel: MediaPlayerViewModelProtocol {
     
     deinit {
         cancellables.forEach { $0.cancel() }
+    }
+}
+
+// MARK: - Private Methods
+
+private extension MediaPlayerViewModel {
+    
+    func setupBindings() {
+        NotificationCenter
+            .default
+            .publisher(for: .AVPlayerItemDidPlayToEndTime, object: mediaPlayer.currentItem)
+            .sink { [weak self] _ in
+                self?.videoFinishedSubject.send()
+            }
+            .store(in: &cancellables)
     }
 }
 
