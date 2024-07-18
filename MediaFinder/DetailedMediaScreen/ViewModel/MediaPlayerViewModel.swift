@@ -35,6 +35,7 @@ final class MediaPlayerViewModel: MediaPlayerViewModelProtocol {
     ) {
         self.model = model
         self.mediaPlayer = mediaPlayer
+        configure()
     }
     
     // MARK: - Deinitializers
@@ -47,6 +48,14 @@ final class MediaPlayerViewModel: MediaPlayerViewModelProtocol {
 // MARK: - Private Methods
 
 private extension MediaPlayerViewModel {
+    
+    func configure() {
+        let preview = model.previewDetails()
+        if let url = preview.url {
+            mediaPlayer.configure(with: url, isVideo: preview.isVideo)
+            setupBindings()
+        }
+    }
     
     func setupBindings() {
         NotificationCenter
