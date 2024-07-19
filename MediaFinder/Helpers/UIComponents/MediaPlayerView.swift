@@ -180,6 +180,7 @@ private extension MediaPlayerView {
 private extension MediaPlayerView {
     
     func didTapPlayPauseButton() {
+        delegate?.didTapPlayPauseButton()
     }
     
     func didTapBackwardButton() {
