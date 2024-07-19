@@ -67,15 +67,13 @@ final class MediaPlayerView: UIView {
         )
         return button
     }()
-    private let mediaPlayer: MediaPlayerProtocol
     
     weak var delegate: MediaPlayerViewDelegate?
     
     // MARK: - Initializers
     
-    init(mediaPlayer: MediaPlayerProtocol = MediaPlayer()) {
-        self.mediaPlayer = mediaPlayer
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupAppearance()
     }
     
@@ -87,7 +85,6 @@ final class MediaPlayerView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        mediaPlayer.updateLayerFrame(to: imageView.bounds)
     }
 }
 
@@ -183,15 +180,6 @@ private extension MediaPlayerView {
 private extension MediaPlayerView {
     
     func didTapPlayPauseButton() {
-        if mediaPlayer.isPlaying {
-            mediaPlayer.pause()
-            updatePlayPauseButton(isPlaying: false)
-        } else {
-            mediaPlayer.play()
-            mediaPlayer.attachLayer(to: imageView)
-            mediaPlayer.addObserver()
-            updatePlayPauseButton(isPlaying: true)
-        }
     }
     
     func didTapBackwardButton() {
@@ -222,7 +210,6 @@ extension MediaPlayerView {
                 setupPlayPauseButton()
                 setupBackwardButton()
                 setupForwardButton()
-                mediaPlayer.configure(with: previewUrl, isVideo: previewDetails.isVideo)
             }
         }
     }
