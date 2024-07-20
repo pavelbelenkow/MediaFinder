@@ -206,7 +206,7 @@ extension MediaPlayerView {
             guard let self else { return }
             completion(image)
             
-            if let previewUrl = previewDetails.url {
+            if let _ = previewDetails.url {
                 setupOverlayView()
                 setupPlayPauseButton()
                 setupBackwardButton()
