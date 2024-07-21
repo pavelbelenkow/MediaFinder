@@ -71,13 +71,17 @@ private extension MediaPlayerViewModel {
 extension MediaPlayerViewModel {
     
     func togglePlayPause() {
-        if isPlayingSubject.value.isPlaying {
-            mediaPlayer.pause()
-            isPlayingSubject.send((false, mediaPlayer))
-        } else {
+        switch stateSubject.value.state {
+        case .idle, .finished:
+            mediaPlayer.backToBeginning()
             mediaPlayer.play()
-            mediaPlayer.addObserver()
-            isPlayingSubject.send((true, mediaPlayer))
+            stateSubject.send((.playing(mediaPlayer), true))
+        case .playing:
+            mediaPlayer.pause()
+            stateSubject.send((.paused(mediaPlayer), true))
+        case .paused:
+            mediaPlayer.play()
+            stateSubject.send((.playing(mediaPlayer), true))
         }
     }
 }
