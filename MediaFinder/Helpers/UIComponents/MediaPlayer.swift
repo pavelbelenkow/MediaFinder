@@ -9,6 +9,7 @@ protocol MediaPlayerProtocol {
     func configure(with url: URL, isVideo: Bool)
     func play()
     func pause()
+    func backToBeginning()
     func attachLayer(to view: UIView)
     func updateLayerFrame(to frame: CGRect)
     func addObserver()
@@ -43,6 +44,10 @@ final class MediaPlayer: MediaPlayerProtocol {
     
     func pause() {
         player?.pause()
+    }
+    
+    func backToBeginning() {
+        player?.seek(to: .zero)
     }
     
     func attachLayer(to view: UIView) {
