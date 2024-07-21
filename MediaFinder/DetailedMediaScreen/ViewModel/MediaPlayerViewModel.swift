@@ -60,7 +60,7 @@ private extension MediaPlayerViewModel {
             .default
             .publisher(for: .AVPlayerItemDidPlayToEndTime, object: mediaPlayer.currentItem)
             .sink { [weak self] _ in
-                self?.videoFinishedSubject.send()
+                self?.stateSubject.send((.finished, true))
             }
             .store(in: &cancellables)
     }
