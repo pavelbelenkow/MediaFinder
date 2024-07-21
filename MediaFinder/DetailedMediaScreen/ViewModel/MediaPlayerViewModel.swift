@@ -4,8 +4,7 @@ import Combine
 // MARK: - Protocols
 
 protocol MediaPlayerViewModelProtocol: ObservableObject {
-    var isPlayingSubject: CurrentValueSubject<(isPlaying: Bool, player: MediaPlayerProtocol?), Never> { get }
-    var videoFinishedSubject: PassthroughSubject<Void, Never> { get }
+    var stateSubject: CurrentValueSubject<(state: MediaPlayerState, controlsVisible: Bool), Never> { get }
     var cancellables: Set<AnyCancellable> { get set }
     
     func togglePlayPause()
@@ -15,8 +14,7 @@ final class MediaPlayerViewModel: MediaPlayerViewModelProtocol {
     
     // MARK: - Subject Properties
     
-    private(set) var isPlayingSubject = CurrentValueSubject<(isPlaying: Bool, player: MediaPlayerProtocol?), Never>((false, nil))
-    private(set) var videoFinishedSubject = PassthroughSubject<Void, Never>()
+    private(set) var stateSubject = CurrentValueSubject<(state: MediaPlayerState, controlsVisible: Bool), Never>((.idle, true))
     
     // MARK: - Private Properties
     
