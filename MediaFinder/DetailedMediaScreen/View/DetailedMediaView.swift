@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol DetailedMediaViewDelegate: AnyObject {
+    func didTapMediaPlayerView()
     func mediaPlayerDidTapPlayPauseButton()
     func didTapMoreButton(_ model: DetailedDescription)
     func didTapArtistCollectionItem(at index: Int)
