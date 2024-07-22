@@ -199,6 +199,7 @@ private extension MediaPlayerView {
     }
     
     func didTapMediaPlayerView() {
+        delegate?.didTapMediaPlayerView()
     }
 }
 
