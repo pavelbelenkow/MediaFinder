@@ -3,6 +3,7 @@ import UIKit
 // MARK: - Delegates
 
 protocol MediaPlayerViewDelegate: AnyObject {
+    func didTapMediaPlayerView()
     func didTapPlayPauseButton()
 }
 
