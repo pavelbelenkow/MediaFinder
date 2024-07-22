@@ -206,6 +206,10 @@ extension DetailedMediaView: UIScrollViewDelegate {
 
 extension DetailedMediaView: MediaPlayerViewDelegate {
     
+    func didTapMediaPlayerView() {
+        interactionDelegate?.didTapMediaPlayerView()
+    }
+    
     func didTapPlayPauseButton() {
         interactionDelegate?.mediaPlayerDidTapPlayPauseButton()
     }
