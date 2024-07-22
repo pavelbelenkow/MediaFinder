@@ -68,6 +68,12 @@ final class MediaPlayerView: UIView {
         return button
     }()
     
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer()
+        gesture.addTarget(self, action: #selector(didTapMediaPlayerView))
+        return gesture
+    }()
+    
     weak var delegate: MediaPlayerViewDelegate?
     
     // MARK: - Initializers
@@ -190,6 +196,8 @@ private extension MediaPlayerView {
     func didTapForwardButton() {
         // TODO: handling fast forward
     }
+    
+    func didTapMediaPlayerView() {
     }
 }
 
@@ -211,6 +219,7 @@ extension MediaPlayerView {
                 setupPlayPauseButton()
                 setupBackwardButton()
                 setupForwardButton()
+                addGestureRecognizer(tapGesture)
             }
         }
     }
