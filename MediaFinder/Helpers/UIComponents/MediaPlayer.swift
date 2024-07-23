@@ -10,6 +10,7 @@ protocol MediaPlayerProtocol {
     func pause()
     func backToBeginning()
     func attachLayer(to view: UIView)
+    func detachLayer()
 }
 
 final class MediaPlayer: MediaPlayerProtocol {
@@ -53,21 +54,18 @@ final class MediaPlayer: MediaPlayerProtocol {
         playerLayer?.frame = view.bounds
         playerLayer?.videoGravity = .resizeAspectFill
         
-        if let playerLayer , playerLayer.superlayer == nil {
+        if let playerLayer, playerLayer.superlayer == nil {
             view.layer.addSublayer(playerLayer)
         }
     }
     
+    func detachLayer() {
+        playerLayer?.removeFromSuperlayer()
+        playerLayer = nil
     }
     
         
         }
-    }
-    
-    
-    private func detachLayer() {
-        playerLayer?.removeFromSuperlayer()
-        playerLayer = nil
     }
     
     }
