@@ -4,16 +4,12 @@ import UIKit
 // MARK: - Protocols
 
 protocol MediaPlayerProtocol {
-    var isPlaying: Bool { get }
     var currentItem: AVPlayerItem? { get }
     func configure(with url: URL, isVideo: Bool)
     func play()
     func pause()
     func backToBeginning()
     func attachLayer(to view: UIView)
-    func updateLayerFrame(to frame: CGRect)
-    func addObserver()
-    func removeObserver()
 }
 
 final class MediaPlayer: MediaPlayerProtocol {
@@ -22,12 +18,10 @@ final class MediaPlayer: MediaPlayerProtocol {
     
     private var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
-    private var playerItemObserver: NSKeyValueObservation?
     private var isVideoContent = false
     
     // MARK: - Properties
     
-    var isPlaying: Bool { player?.rate != .zero }
     var currentItem: AVPlayerItem? { player?.currentItem }
     
     // MARK: - Methods
@@ -64,54 +58,17 @@ final class MediaPlayer: MediaPlayerProtocol {
         }
     }
     
-    func updateLayerFrame(to frame: CGRect) {
-        playerLayer?.frame = frame
     }
     
-    func addObserver() {
-        guard let currentItem else { return }
         
-        playerItemObserver?.invalidate()
-        
-        playerItemObserver = currentItem.observe(
-            \.status,
-             options: [.new, .initial]
-        ) { [weak self] item, _ in
-            guard let self else { return }
-            
-            if item.status == .readyToPlay {
-                NotificationCenter.default.addObserver(
-                    self,
-                    selector: #selector(playerDidFinishPlaying),
-                    name: .AVPlayerItemDidPlayToEndTime,
-                    object: currentItem
-                )
-            }
         }
     }
     
-    func removeObserver() {
-        guard let currentItem else { return }
-        
-        NotificationCenter.default.removeObserver(
-            self,
-            name: .AVPlayerItemDidPlayToEndTime,
-            object: currentItem
-        )
-        
-        playerItemObserver?.invalidate()
-    }
     
     private func detachLayer() {
         playerLayer?.removeFromSuperlayer()
         playerLayer = nil
     }
     
-    @objc
-    private func playerDidFinishPlaying() {
-        pause()
-        detachLayer()
-        player?.seek(to: .zero)
-        removeObserver()
     }
 }
