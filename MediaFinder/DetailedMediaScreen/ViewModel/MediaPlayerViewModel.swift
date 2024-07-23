@@ -60,7 +60,8 @@ private extension MediaPlayerViewModel {
             .default
             .publisher(for: .AVPlayerItemDidPlayToEndTime, object: mediaPlayer.currentItem)
             .sink { [weak self] _ in
-                self?.stateSubject.send((.finished, true))
+                guard let self else { return }
+                stateSubject.send((.finished(mediaPlayer), true))
             }
             .store(in: &cancellables)
     }
@@ -78,7 +79,7 @@ extension MediaPlayerViewModel {
             stateSubject.send((.playing(mediaPlayer), true))
         case .playing:
             mediaPlayer.pause()
-            stateSubject.send((.paused(mediaPlayer), true))
+            stateSubject.send((.paused, true))
         case .paused:
             mediaPlayer.play()
             stateSubject.send((.playing(mediaPlayer), true))
