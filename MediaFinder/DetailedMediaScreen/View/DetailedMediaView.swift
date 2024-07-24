@@ -214,6 +214,10 @@ extension DetailedMediaView: MediaPlayerViewDelegate {
     func didTapPlayPauseButton() {
         interactionDelegate?.mediaPlayerDidTapPlayPauseButton()
     }
+    
+    func didTapFullscreenButton() {
+        interactionDelegate?.didTapFullscreenButton()
+    }
 }
 
 // MARK: - MediaInfoViewDelegate Methods
