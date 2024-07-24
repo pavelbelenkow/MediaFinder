@@ -47,6 +47,7 @@ final class MediaPlayerView: UIView {
         let backwardSymbol = UIImage.configuredSymbol(named: "gobackward.10")
         button.setImage(backwardSymbol, for: .normal)
         button.tintColor = .white
+        button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(
             self,
@@ -61,6 +62,7 @@ final class MediaPlayerView: UIView {
         let forwardSymbol = UIImage.configuredSymbol(named: "goforward.10")
         button.setImage(forwardSymbol, for: .normal)
         button.tintColor = .white
+        button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(
             self,
