@@ -4,7 +4,7 @@ import UIKit
 
 protocol DetailedMediaViewDelegate: AnyObject {
     func didTapMediaPlayerView()
-    func mediaPlayerDidTapPlayPauseButton()
+    func didTapPlayPauseButton()
     func didTapFullscreenButton()
     func didTapMoreButton(_ model: DetailedDescription)
     func didTapArtistCollectionItem(at index: Int)
@@ -212,7 +212,7 @@ extension DetailedMediaView: MediaPlayerViewDelegate {
     }
     
     func didTapPlayPauseButton() {
-        interactionDelegate?.mediaPlayerDidTapPlayPauseButton()
+        interactionDelegate?.didTapPlayPauseButton()
     }
     
     func didTapFullscreenButton() {
