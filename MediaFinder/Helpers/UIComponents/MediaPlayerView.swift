@@ -5,6 +5,7 @@ import UIKit
 protocol MediaPlayerViewDelegate: AnyObject {
     func didTapMediaPlayerView()
     func didTapPlayPauseButton()
+    func didTapFullscreenButton()
 }
 
 final class MediaPlayerView: UIView {
