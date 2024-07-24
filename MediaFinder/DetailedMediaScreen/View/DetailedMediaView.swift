@@ -5,6 +5,7 @@ import UIKit
 protocol DetailedMediaViewDelegate: AnyObject {
     func didTapMediaPlayerView()
     func mediaPlayerDidTapPlayPauseButton()
+    func didTapFullscreenButton()
     func didTapMoreButton(_ model: DetailedDescription)
     func didTapArtistCollectionItem(at index: Int)
     func didTapRepeatButton()
