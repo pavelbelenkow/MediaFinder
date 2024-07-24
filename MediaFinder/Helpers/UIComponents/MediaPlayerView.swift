@@ -218,6 +218,7 @@ private extension MediaPlayerView {
     }
     
     func didTapFullscreenButton() {
+        delegate?.didTapFullscreenButton()
     }
     
     func didTapMediaPlayerView() {
