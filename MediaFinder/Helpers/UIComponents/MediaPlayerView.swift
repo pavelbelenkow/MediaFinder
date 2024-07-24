@@ -69,6 +69,21 @@ final class MediaPlayerView: UIView {
         return button
     }()
     
+    private lazy var fullscreenButton: UIButton = {
+        let button = UIButton()
+        let fullscreenSymbol = UIImage.configuredSymbol(named: "arrow.up.left.and.arrow.down.right", pointSize: 24)
+        button.setImage(fullscreenSymbol, for: .normal)
+        button.tintColor = .white
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
+        button.addTarget(
+            self,
+            action: #selector(didTapFullscreenButton),
+            for: .touchUpInside
+        )
+        return button
+    }()
+    
     private lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer()
         gesture.addTarget(self, action: #selector(didTapMediaPlayerView))
@@ -146,6 +161,15 @@ private extension MediaPlayerView {
             forwardButton.centerYAnchor.constraint(equalTo: playPauseButton.centerYAnchor)
         ])
     }
+    
+    func setupFullscreenButton() {
+        addSubview(fullscreenButton)
+        
+        NSLayoutConstraint.activate([
+            fullscreenButton.topAnchor.constraint(equalTo: topAnchor, constant: Const.spacingMedium),
+            fullscreenButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Const.spacingMedium)
+        ])
+    }
 }
 
 // MARK: - Private Methods
@@ -192,6 +216,9 @@ private extension MediaPlayerView {
         // TODO: handling fast forward
     }
     
+    func didTapFullscreenButton() {
+    }
+    
     func didTapMediaPlayerView() {
         delegate?.didTapMediaPlayerView()
     }
@@ -215,6 +242,7 @@ extension MediaPlayerView {
                 setupPlayPauseButton()
                 setupBackwardButton()
                 setupForwardButton()
+                setupFullscreenButton()
                 addGestureRecognizer(tapGesture)
             }
         }
