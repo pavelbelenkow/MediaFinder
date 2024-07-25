@@ -9,6 +9,7 @@ protocol MediaPlayerProtocol {
     func play()
     func pause()
     func backToBeginning()
+    func seek(by seconds: Int)
     func attachLayer(to view: UIView)
     func detachLayer()
 }
@@ -45,6 +46,22 @@ final class MediaPlayer: MediaPlayerProtocol {
         player?.seek(to: .zero)
     }
     
+    func seek(by seconds: Int) {
+        guard let player, let currentItem else { return }
+        let currentTime = player.currentTime()
+        let duration = currentItem.duration
+        let timescale = duration.timescale
+        let seekTime = CMTimeAdd(currentTime, CMTime(seconds: Double(seconds), preferredTimescale: timescale))
+        
+        if seekTime >= duration {
+            player.seek(to: duration, toleranceBefore: .zero, toleranceAfter: .zero)
+        } else if seekTime < .zero {
+            player.seek(to: .zero, toleranceBefore: .zero, toleranceAfter: .zero)
+        } else {
+            player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
+        }
+    }
+    
     func attachLayer(to view: UIView) {
         guard let player, isVideoContent else { return }
         
@@ -64,8 +81,6 @@ final class MediaPlayer: MediaPlayerProtocol {
         playerLayer = nil
     }
     
-        
-        }
     }
     
     }
