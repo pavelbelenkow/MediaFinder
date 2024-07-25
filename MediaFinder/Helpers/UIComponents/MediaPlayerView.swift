@@ -214,11 +214,11 @@ private extension MediaPlayerView {
     }
     
     func didTapBackwardButton() {
-        // TODO: handling backward rewind
+        delegate?.didTapBackwardButton()
     }
     
     func didTapForwardButton() {
-        // TODO: handling fast forward
+        delegate?.didTapForwardButton()
     }
     
     func didTapFullscreenButton() {
