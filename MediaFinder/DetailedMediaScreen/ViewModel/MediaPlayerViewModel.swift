@@ -8,6 +8,8 @@ protocol MediaPlayerViewModelProtocol: ObservableObject {
     var cancellables: Set<AnyCancellable> { get set }
     
     func togglePlayPause()
+    func seekBackward()
+    func seekForward()
 }
 
 final class MediaPlayerViewModel: MediaPlayerViewModelProtocol {
@@ -84,5 +86,13 @@ extension MediaPlayerViewModel {
             mediaPlayer.play()
             stateSubject.send((.playing(mediaPlayer), true))
         }
+    }
+    
+    func seekBackward() {
+        mediaPlayer.seek(by: -10)
+    }
+    
+    func seekForward() {
+        mediaPlayer.seek(by: 10)
     }
 }
