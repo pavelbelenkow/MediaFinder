@@ -10,6 +10,7 @@ protocol MediaPlayerViewModelProtocol: ObservableObject {
     func togglePlayPause()
     func seekBackward()
     func seekForward()
+    func toggleControlsVisibility()
 }
 
 final class MediaPlayerViewModel: MediaPlayerViewModelProtocol {
@@ -94,5 +95,10 @@ extension MediaPlayerViewModel {
     
     func seekForward() {
         mediaPlayer.seek(by: 10)
+    }
+    
+    func toggleControlsVisibility() {
+        let currentValue = stateSubject.value
+        stateSubject.send((currentValue.state, !currentValue.controlsVisible))
     }
 }
