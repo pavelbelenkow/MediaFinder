@@ -109,6 +109,10 @@ extension DetailedMediaViewController: DetailedMediaViewDelegate {
         playerViewModel.togglePlayPause()
     }
     
+    func didTapBackwardButton() {
+        playerViewModel.seekBackward()
+    }
+    
     func didTapMoreButton(_ model: DetailedDescription) {
         let viewModel = DetailedDescriptionViewModel(model: model)
         let viewController = DetailedDescriptionViewController(viewModel: viewModel)
