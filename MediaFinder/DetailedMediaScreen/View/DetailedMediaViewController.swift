@@ -105,6 +105,10 @@ extension DetailedMediaViewController: DetailedMediaViewDelegate {
         playerViewModel.toggleControlsVisibility()
     }
     
+    func didTapPlayPauseButton() {
+        playerViewModel.togglePlayPause()
+    }
+    
     func didTapMoreButton(_ model: DetailedDescription) {
         let viewModel = DetailedDescriptionViewModel(model: model)
         let viewController = DetailedDescriptionViewController(viewModel: viewModel)
