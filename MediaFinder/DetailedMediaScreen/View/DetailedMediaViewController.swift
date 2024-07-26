@@ -113,6 +113,10 @@ extension DetailedMediaViewController: DetailedMediaViewDelegate {
         playerViewModel.seekBackward()
     }
     
+    func didTapForwardButton() {
+        playerViewModel.seekForward()
+    }
+    
     func didTapMoreButton(_ model: DetailedDescription) {
         let viewModel = DetailedDescriptionViewModel(model: model)
         let viewController = DetailedDescriptionViewController(viewModel: viewModel)
