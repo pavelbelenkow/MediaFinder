@@ -101,6 +101,10 @@ extension DetailedMediaViewController: UIViewControllerTransitioningDelegate {
 
 extension DetailedMediaViewController: DetailedMediaViewDelegate {
     
+    func didTapMediaPlayerView() {
+        playerViewModel.toggleControlsVisibility()
+    }
+    
     func didTapMoreButton(_ model: DetailedDescription) {
         let viewModel = DetailedDescriptionViewModel(model: model)
         let viewController = DetailedDescriptionViewController(viewModel: viewModel)
