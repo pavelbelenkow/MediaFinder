@@ -89,6 +89,23 @@ final class MediaPlayerView: UIView {
         return button
     }()
     
+    private let currentTimeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .monospacedDigitSystemFont(ofSize: 12, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        return label
+    }()
+    
+    private let remainingTimeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .monospacedDigitSystemFont(ofSize: 12, weight: .regular)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        return label
+    }()
     private lazy var tapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer()
         gesture.addTarget(self, action: #selector(didTapMediaPlayerView))
