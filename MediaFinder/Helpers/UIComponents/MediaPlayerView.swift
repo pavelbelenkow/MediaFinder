@@ -221,6 +221,12 @@ private extension MediaPlayerView {
         let buttonSymbol = UIImage.configuredSymbol(named: isPlaying ? "pause.fill" : "play.fill", pointSize: 50)
         playPauseButton.setImage(buttonSymbol, for: .normal)
     }
+    
+    func showPlayerControls(_ isShowing: Bool) {
+        [
+            forwardButton, backwardButton, fullscreenButton
+        ].forEach { $0.isHidden = !isShowing }
+    }
 }
 
 @objc
