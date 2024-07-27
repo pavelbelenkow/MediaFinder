@@ -276,4 +276,26 @@ extension MediaPlayerView {
             }
         }
     }
+    
+    func updateUI(for state: MediaPlayerState, controlsVisible: Bool) {
+        switch state {
+        case .idle:
+            updatePlayPauseButton(isPlaying: false)
+            showPlayerControls(false)
+        case .playing(let player):
+            player.attachLayer(to: imageView)
+            updatePlayPauseButton(isPlaying: true)
+            showPlayerControls(controlsVisible)
+        case .paused:
+            updatePlayPauseButton(isPlaying: false)
+            showPlayerControls(controlsVisible)
+        case .finished(let player):
+            player.detachLayer()
+            updatePlayPauseButton(isPlaying: false)
+            showPlayerControls(false)
+        }
+        
+        overlayView.isHidden = !controlsVisible
+        playPauseButton.isHidden = !controlsVisible
+    }
 }
