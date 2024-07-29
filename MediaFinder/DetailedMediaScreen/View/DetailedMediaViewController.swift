@@ -38,6 +38,7 @@ final class DetailedMediaViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         bindViewModel()
+        bindPlayerViewModel()
     }
 }
 
@@ -69,6 +70,15 @@ private extension DetailedMediaViewController {
                 )
             }
             .store(in: &viewModel.cancellables)
+    }
+    
+    func bindPlayerViewModel() {
+        playerViewModel.stateSubject
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state, controlsVisible in
+                self?.detailedMediaView.updateMediaPlayerView(for: state, controlsVisible: controlsVisible)
+            }
+            .store(in: &playerViewModel.cancellables)
     }
 }
 
