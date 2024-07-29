@@ -184,6 +184,10 @@ extension DetailedMediaView {
             }
         }
     }
+    
+    func updateMediaPlayerView(for state: MediaPlayerState, controlsVisible: Bool) {
+        mediaPlayerView.updateUI(for: state, controlsVisible: controlsVisible)
+    }
 }
 
 // MARK: - Delegate Methods
